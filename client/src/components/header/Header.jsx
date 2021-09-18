@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 import {AppBar,Toolbar,makeStyles,Typography,Box} from '@material-ui/core'
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -29,7 +29,7 @@ const useStyle=makeStyles(
             fontFamily:'Montserrat',
             fontWeight:'bold',
             fontSize:'17px',
-
+            textDecoration:'none',
 
         },
 
@@ -57,30 +57,30 @@ const Header= () => {
                 <img src={logoURL} alt="icon" className={classes.logo}/>
 
                 <Box className={classes.container}>
-                    <Typography className={classes.txt}>
+                    <Link to='/' className={classes.txt}>
                         Home
-                    </Typography>
+                    </Link>
                     
 
-                    <Typography className={classes.txt}>
+                    <Link to='/' className={classes.txt}>
                         Demo
-                    </Typography>
-                    <Typography className={classes.txt}>
+                    </Link>
+                    <Link to='/contact' className={classes.txt}>
                         Contact
-                    </Typography>
-                    <Typography className={classes.txt}>
+                    </Link>
+                    <Link to='/about' className={classes.txt}>
                         About Us
-                    </Typography>
+                    </Link>
                     
                 </Box>
 
                 <Box className={classes.endcontainer}>
-                    <PersonOutlineIcon className={classes.endicons}/>
+                    <Link to='/login'><PersonOutlineIcon className={classes.endicons}/></Link>
 
                    
-                    <FavoriteBorderIcon className={classes.endicons}/>
+                    <Link to='/favourites'><FavoriteBorderIcon className={classes.endicons}/></Link>
 
-                    <ShoppingCartOutlinedIcon className={classes.endicons}/>
+                    <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons}/></Link>
 
                </Box>
                 
