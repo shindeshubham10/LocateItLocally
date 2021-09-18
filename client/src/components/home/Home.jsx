@@ -1,7 +1,7 @@
 import HomeSearchBar  from './SearchBar';
 import React from 'react';
 import Banner from './Banner';
-
+import Headings from './Headings'
 const Home=()=>{
 
 
@@ -9,6 +9,7 @@ const Home=()=>{
         <div>
              <HomeSearchBar />
              <Banner/>
+             <Headings/>
         </div>
           
         
