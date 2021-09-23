@@ -34,7 +34,8 @@ function App() {
     
     <Router>
     
-    
+      
+      <Header/>
 
       <Switch>
         <Route exact path="/" component={Home} />
@@ -45,6 +46,8 @@ function App() {
         <Route exact path="/favourites" component={Favourites} />
 
       </Switch>
+
+      <Footer/>
     </Router>
 
 
