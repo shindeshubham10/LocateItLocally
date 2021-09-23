@@ -8,3 +8,18 @@ export const bannerData = [
     'https://cdn.shopify.com/s/files/1/0067/6429/8297/files/h5_s3.jpg?v=1527560578',
 
 ];
+
+export const card = [
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+
+
+];
+
+

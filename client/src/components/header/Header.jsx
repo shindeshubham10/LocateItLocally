@@ -1,25 +1,29 @@
 
-import {AppBar,Toolbar,makeStyles,Typography,Box} from '@material-ui/core'
+import {AppBar,Toolbar,makeStyles,Typography,Box,Button, IconButton} from '@material-ui/core'
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
-const useStyle=makeStyles(
+const useStyle=makeStyles(theme=>(
+
     {
         header:{
             background:'#F7F8F9',
             height:'90px',
             
         },
+        
 
         logo :{
-            height:'150px'
+            height:'150px',
+           
         },
         container:{
             display:'flex',
-            marginLeft:'400px',
+            marginLeft: 350,
             justifyContent:'space-between',
             gap:'20px',
+           
             
 
         },
@@ -31,6 +35,7 @@ const useStyle=makeStyles(
             fontSize:'17px',
 
 
+
         },
 
         endicons:{
@@ -39,11 +44,15 @@ const useStyle=makeStyles(
 
         endcontainer:{
             display:'flex',
-            marginLeft:500,
+            marginLeft:400,
             gap:15,
+           
 
         },
     }
+
+)
+    
 )
 
 const Header= () => {
@@ -54,33 +63,47 @@ const Header= () => {
     return(
         <AppBar className={classes.header}>
             <Toolbar>
+                
                 <img src={logoURL} alt="icon" className={classes.logo}/>
+                
+               
 
                 <Box className={classes.container}>
-                    <Typography className={classes.txt}>
+                    <Button className={classes.txt}>
                         Home
-                    </Typography>
+                    </Button>
                     
 
-                    <Typography className={classes.txt}>
+                    <Button className={classes.txt}>
                         Demo
-                    </Typography>
-                    <Typography className={classes.txt}>
+                    </Button>
+                    <Button className={classes.txt}>
                         Contact
-                    </Typography>
-                    <Typography className={classes.txt}>
+                    </Button>
+                    <Button className={classes.txt}>
                         About Us
-                    </Typography>
+                    </Button>
                     
                 </Box>
 
                 <Box className={classes.endcontainer}>
-                    <PersonOutlineIcon className={classes.endicons}/>
+                    <IconButton>
+                        <PersonOutlineIcon className={classes.endicons}/>
+                    </IconButton>
+
+                    <IconButton>
+                        <FavoriteBorderIcon className={classes.endicons}/>
+                    </IconButton>
+
+                    <IconButton>
+                        <ShoppingCartOutlinedIcon className={classes.endicons}/>
+                    </IconButton>
+                    
 
                    
-                    <FavoriteBorderIcon className={classes.endicons}/>
+                    
 
-                    <ShoppingCartOutlinedIcon className={classes.endicons}/>
+         
 
                </Box>
                 

@@ -11,7 +11,7 @@ const useStyles=makeStyles(
     }
 )
 
-const Headings=()=>{
+const Headings=(props)=>{
 
     
     const classes=useStyles()
@@ -19,8 +19,8 @@ const Headings=()=>{
 
     
            
-            <DividerWithText className={classes.root}>
-            
+            <DividerWithText className={classes.root} name={props.name}>
+                
             </DividerWithText>
       
         

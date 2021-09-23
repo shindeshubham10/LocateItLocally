@@ -1,38 +1,50 @@
 import React from "react";
-import { makeStyles,Chip } from "@material-ui/core";
-import './Headings.css';
+import { makeStyles,Box, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: "flex",
-    alignItems: "center",
-    marginLeft: 350,
-    marginRight: 350,
+    
+    
+    display:'flex',
+    alignItems:'center',
+    marginLeft: 300,
+    marginRight: 300,
   },
   border: {
     borderBottom: "2px solid grey",
     width: "100%"
   },
-  content: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    paddingRight: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    fontWeight: 500,
-    fontSize: 22,
-    color: "black"
+
+  chip : {
+      display :'flex',
+      gap:5,
+      backgroundColor : "#8FD1D1",
+      borderRadius:25,
+      paddingLeft: 10,
+      paddingRight: 35,
+      marginLeft : 19,
+      fontSize:20,
+      fontWeight :'bold',
+
+
   },
  
 }));
 
-const DividerWithText = ({ children }) => {
+const DividerWithText = (props) => {
  const classes = useStyles();
  return (
   <div className={classes.container}>
     
-    <div class="chip">
-        New Arrivals
-    </div>
+    <Box className={classes.chip}>
+        <Box>
+           {props.name.split(" ")[0]}
+        </Box>
+        
+        <Box>
+          {props.name.split(" ")[1]}
+        </Box>
+    </Box>
     <div className={classes.border} />
   </div>
  );
