@@ -1,5 +1,6 @@
 import React from "react";
-import { makeStyles,Box, Typography } from "@material-ui/core";
+import { makeStyles,Box, Typography ,Button} from "@material-ui/core";
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -8,11 +9,39 @@ const useStyles = makeStyles(theme => ({
     display:'flex',
     alignItems:'center',
     marginLeft: 300,
-    marginRight: 300,
+    marginRight: 250,
+    
+    
   },
+
+  btn:{
+    height: 50,
+    borderRadius: 25,
+    width: 250,
+    backgroundColor:"#E5E5E5",
+    fontFamily:'Montserrat',
+    fontWeight:'bold',
+    
+
+    
+    
+  },
+
+  txt:{
+
+    display:'none',
+    [theme.breakpoints.down("sm")]: {
+      display:"block",
+      marginLeft: 5,
+      fontWeight:'bold',
+      fontSize:20,
+    },
+  },
+
   border: {
     borderBottom: "2px solid grey",
-    width: "100%"
+    width: "100%",
+    
   },
 
   chip : {
@@ -25,6 +54,10 @@ const useStyles = makeStyles(theme => ({
       marginLeft : 19,
       fontSize:20,
       fontWeight :'bold',
+      [theme.breakpoints.down("sm")]: {
+        display:"none",
+    },
+
 
 
   },
@@ -46,6 +79,14 @@ const DividerWithText = (props) => {
         </Box>
     </Box>
     <div className={classes.border} />
+
+    <Typography className={classes.txt}>
+        {props.name}
+    </Typography>
+    <Button variant="contained" endIcon={<ArrowRightIcon />} className={classes.btn} >
+                    Shop More
+     </Button>
+
   </div>
  );
 };

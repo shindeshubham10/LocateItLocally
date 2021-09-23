@@ -4,13 +4,15 @@ import Banner from './Banner';
 import Headings from './Headings'
 import Cards from './Cards';
 
+
+
 import MultiSlider from './MultiSlider';
 
 const Home=()=>{
 
 
     return (
-        <div>
+        <div >
              <HomeSearchBar />
              <Banner/>
              <Headings name="NEW ARRIVALS"/>

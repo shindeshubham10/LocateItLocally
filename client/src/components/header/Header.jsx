@@ -4,6 +4,8 @@ import {AppBar,Toolbar,makeStyles,Typography,Box,Button, IconButton} from '@mate
 
 import {Link} from 'react-router-dom';
 
+import {AiOutlineMenu} from 'react-icons/ai/'
+
 
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -16,11 +18,14 @@ const useStyle=makeStyles(theme=>(
             background:'#F7F8F9',
             height:'90px',
             
+            
+            
         },
         
 
         logo :{
             height:'150px',
+            
            
         },
         container:{
@@ -28,6 +33,9 @@ const useStyle=makeStyles(theme=>(
             marginLeft: 350,
             justifyContent:'space-between',
             gap:'20px',
+            [theme.breakpoints.down("sm")]: {
+                display: 'none',
+            },
            
             
 
@@ -45,13 +53,28 @@ const useStyle=makeStyles(theme=>(
 
         endicons:{
             color:'black',
+            
         },
 
         endcontainer:{
             display:'flex',
             marginLeft:400,
             gap:15,
+            [theme.breakpoints.down("sm")]: {
+                display: 'none',
+            },
+            
            
+
+        },
+        menuicon:{
+            display:"none",
+            [theme.breakpoints.down("sm")]: {
+                display:'block',
+                
+               
+            },
+
 
         },
     }
@@ -67,10 +90,10 @@ const Header= () => {
 
     return(
         <AppBar className={classes.header}>
-            <Toolbar>
+            <Toolbar className={classes.toolbar}>
                 
+               
                 <img src={logoURL} alt="icon" className={classes.logo}/>
-                
                
 
                 <Box className={classes.container}>
@@ -100,12 +123,23 @@ const Header= () => {
                     <Link to='/favourites'><FavoriteBorderIcon className={classes.endicons}/></Link>
 
                     <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons}/></Link>
+                   
+                    
+                 
 
 
                </Box>
+
+               
+               
+
+               
                 
             </Toolbar>
+            
         </AppBar>
+
+            
     );
 
 }

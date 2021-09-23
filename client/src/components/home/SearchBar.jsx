@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius:30,
     borderBottomRightRadius:30,
     width:180,
+    backgroundColor:'white',
     
 
         

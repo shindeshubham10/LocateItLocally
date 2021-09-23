@@ -1,14 +1,19 @@
-import {Box,makeStyles,Divider,Chip} from '@material-ui/core';
+import {Box,makeStyles,Divider,Chip, Button} from '@material-ui/core';
 import { useState } from 'react';
 import DividerWithText from './DividerwithText';
 
 
 
-const useStyles=makeStyles(
+const useStyles=makeStyles(theme=>(
     {
-       
+        root:{
+
+            
+        }
 
     }
+)
+    
 )
 
 const Headings=(props)=>{
@@ -18,10 +23,14 @@ const Headings=(props)=>{
     return(
 
     
-           
-            <DividerWithText className={classes.root} name={props.name}>
+           <Box>
+               <DividerWithText className={classes.root} name={props.name}>
                 
-            </DividerWithText>
+                </DividerWithText>
+                
+
+           </Box>
+            
       
         
      

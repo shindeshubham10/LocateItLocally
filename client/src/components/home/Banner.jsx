@@ -3,7 +3,9 @@ import Carousel from "react-material-ui-carousel";
 import { mergeClasses } from "@material-ui/styles";
 import {AppBar,Toolbar,makeStyles,Typography,Box, Button} from '@material-ui/core'
 
-const useStyles=makeStyles(
+const useStyles=makeStyles(theme=>(
+
+
     {
         
         ban:
@@ -11,6 +13,10 @@ const useStyles=makeStyles(
             marginTop:20,
             marginLeft:100,
             marginRight:100,
+            [theme.breakpoints.down('sm')]: {
+                marginLeft:0,
+                marginRight:0,
+            }
             
 
             
@@ -20,6 +26,10 @@ const useStyles=makeStyles(
         image:{
            width:"100%",
            height:"100%",
+           [theme.breakpoints.down('sm')]: {
+            objectFit: 'cover',
+            
+        }
         
             
            
@@ -27,6 +37,8 @@ const useStyles=makeStyles(
 
         }
     }
+)
+    
 );
 
 
