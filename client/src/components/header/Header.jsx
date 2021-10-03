@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {AppBar,Toolbar,makeStyles,Typography,Box,Button, IconButton} from '@material-ui/core';
+import {AppBar,Toolbar,makeStyles,Typography,Box,Button, IconButton,Drawer} from '@material-ui/core';
 
 // import icons 
 import { FiMenu } from 'react-icons/fi';
@@ -109,17 +109,17 @@ const useStyle=makeStyles(theme=>(
     
 )
 
-const Header= () => {
+const Header = () => {
 
-    const classes=useStyle();
-    const logoURL="https://s3-alpha-sig.figma.com/img/878d/5004/35fa8ac75b99cc29a464ec310289ea9c?Expires=1632700800&Signature=INooMoo7crezLzOKDOMgjHJrB3bsWCdk7oc4nMGoIehYmfpDENc-m-pZLUGYiz5lkzUpe7tO1FgUc5jieLXaTNtVz~tu5zrMvpLGuMAdfJD2Zkknao33JH-tLEejpB5bb5Ppl13~NZaizJBZlowGGJsmZZrEGxDyK84B5cQn2N-HO6ylkZOffJ385wdf1dj0oqZmKPCt9tIzHCpXt~C8-0RUP-7h~~bHeK-3XFIYPmslAQ~5JvoGtQgHZ9fV14iOH5-GZi~YdaPCtT17cca4k-jaB3cuilJ6wpmiTKf2H2qnOsnlh4TL3InODtmoat4~8CDyl5Vl6elDXrMfpyR5Zg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
+    const classes = useStyle();
+    const logoURL = "https://s3-alpha-sig.figma.com/img/878d/5004/35fa8ac75b99cc29a464ec310289ea9c?Expires=1632700800&Signature=INooMoo7crezLzOKDOMgjHJrB3bsWCdk7oc4nMGoIehYmfpDENc-m-pZLUGYiz5lkzUpe7tO1FgUc5jieLXaTNtVz~tu5zrMvpLGuMAdfJD2Zkknao33JH-tLEejpB5bb5Ppl13~NZaizJBZlowGGJsmZZrEGxDyK84B5cQn2N-HO6ylkZOffJ385wdf1dj0oqZmKPCt9tIzHCpXt~C8-0RUP-7h~~bHeK-3XFIYPmslAQ~5JvoGtQgHZ9fV14iOH5-GZi~YdaPCtT17cca4k-jaB3cuilJ6wpmiTKf2H2qnOsnlh4TL3InODtmoat4~8CDyl5Vl6elDXrMfpyR5Zg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
 
     return (
         
         <AppBar className={classes.header}>
             <Toolbar >
                 
-                <img src={logoURL} alt="icon" className={classes.logoLg}/>
+                <img src={logoURL} alt="icon" className={classes.logoLg} />
                 
                
 
@@ -145,27 +145,107 @@ const Header= () => {
                 </Box>
 
                 <Box className={classes.endContainerIcons}>
-                    <Link to='/login'><PersonOutlineIcon className={classes.endicons}/></Link>
+                    <Link to='/login'><PersonOutlineIcon className={classes.endicons} /></Link>
 
                    
-                    <Link to='/favourites'><FavoriteBorderIcon className={classes.endicons}/></Link>
+                    <Link to='/favourites'><FavoriteBorderIcon className={classes.endicons} /></Link>
 
-                    <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons}/></Link>
+                    <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link>
                    
                     
                  
 
 
-                    </Box>
+                </Box>
 
-               {/** Menu icon For Mobile Screen */}
-                <FiMenu className={ classes.menuicon}/>
+                {/** Menu icon For Mobile Screen */}
+                <FiMenu className={classes.menuicon}/>
                 
                 
             </Toolbar>
-            </AppBar>
+        </AppBar>
     );
 
-}
+};
+
 
 export default Header;
+/**
+ * 
+ * import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
+export default function TemporaryDrawer() {
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <div>
+      {['left', 'right', 'top', 'bottom'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+ */

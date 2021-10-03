@@ -13,6 +13,7 @@ import About from './components/about/About';
 import Cart from './components/contact/Contact';
 import Favourites from './components/favourites/Favourites';
 
+
 import {
   BrowserRouter as Router,
   Route,
@@ -36,7 +37,7 @@ function App() {
     
       
       <Header/>
-
+      
        <Switch >
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />

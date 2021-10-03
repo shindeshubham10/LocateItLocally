@@ -8,7 +8,11 @@ const useStyles=makeStyles(theme=>(
     {
         root:{
 
-            
+           
+        },
+        boxWithHeadings: {
+            marginTop: 30,
+           //marginBottom:10, 
         }
 
     }
@@ -23,7 +27,7 @@ const Headings=(props)=>{
     return(
 
     
-           <Box>
+           <Box className={classes.boxWithHeadings}>
                <DividerWithText className={classes.root} name={props.name}>
                 
                 </DividerWithText>
