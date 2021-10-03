@@ -39,16 +39,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 200,
         marginTop: 20,
         display: 'flex',
-       // backgroundColor: 'black',
+     
         [theme.breakpoints.between('sm','md')]: {
             
             marginLeft: 50,
             marginRight:50,
         }
-        
-           
-            
-            
             
             
     },
@@ -65,12 +61,14 @@ const useStyles = makeStyles((theme) => ({
             
 
     },
+    // This is Carousal For Large Device
      LgCarousal: {
         marginLeft:10,
         [theme.breakpoints.between('sm', 'md')]: {
              display:'none',
          },
-     },
+    },
+     // This is carousal For Medium Device
      MdCarousal: {
          marginLeft: 40,
          marginRight:40,
