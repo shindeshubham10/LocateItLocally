@@ -26,42 +26,109 @@ import { getThemeProps } from '@material-ui/styles';
 
 
 
-const useStyles = makeStyles(
-    {
-        
-        
-        mainCard: {
+const useStyles = makeStyles((theme) => ({
+
+    
+    mainCard: {
+            position:'relative',
             display:'flex-col',
             backgroundColor: '#FFFFFF',
-            margin: 50,
+            //backgroundColor:'black',
+            margin: 5,
             width: 230,
             height: 400,
             borderRadius: 10,
             borderColor: '#A1B3BA',
-            borderWidth:0.5,
-        
+            borderWidth: 0.5,
+
+        [theme.breakpoints.down('sm')]: {
+                width: 200,
+                height: 400,
+               //padding:0,
+           },
+        // This will change Product card Height and width in Medium Devives
+        [theme.breakpoints.between('sm','md')]: {
+            width: 200,
+            height: 400,
+            
         },
+        
+         
+        
+        
+        
+    },
+    
+   
         
         
         imageBox: {
-            //marginTop: 300,
-            //marginBottom: 10,
-            //color: 'black',
-            width: '100%',
-            height: '60%',
+            
+            // width: '100%',
+            // height: '60%',
             backgroundColor: '#8FD1D1',
-            //borderTopLeftRadius: 50,
+          
             borderRadius: 10,
-            //alignItems: "center",
-            //justify:"center",
+            position: 'absolute',
+            top:20,
+            bottom:0,
+            left:0,
+            right:0,
+         
+
+             [theme.breakpoints.down('sm')]: {
+                 position:'absolute',
+                 marginTop: 6,
+                 padding: 0,
+                 width: '100%',
+                 height:'30%'
+             },
+
+            [theme.breakpoints.between('sm','md')]: {
+                position:'absolute',
+                margin: 0,
+                padding: 0,
+                width: '100%',
+                height:'30%'
+            },
+            
             
 
+    },
+    cardDescription: {
+        //backgroundColor: 'blue',
+        position: 'absolute',
+        bottom: 0,
+        
+        [theme.breakpoints.between('sm', 'md')]: {
+            position: 'absolute',
+            //marginTop:150,
+            bottom:0,
+            
         },
-        productCategory: {
+
+        [theme.breakpoints.down('sm')]: {
+            position: 'absolute',
+            //marginTop:150,
+            bottom:0,
+            
+        },
+        
+    },
+    productCategory: {
+            //position:'absolute',
             marginTop:10,
             fontFamily:['Roboto','sans-serif'],
             fontSize: 20,
-            fontWeight:'100',
+        fontWeight: '100',
+
+        [theme.breakpoints.between('sm', 'md')]: {
+            //position: 'absolute',
+            marginTop:50,
+            
+        },
+        
+
         },
 
         productName: {
@@ -76,26 +143,30 @@ const useStyles = makeStyles(
             fontSize: 30,
             fontWeight:'400',
         },
-    }
-);
+    
 
+
+}
+));
+
+// sx={{ minWidth: 275 }}
 const ProductCard = (props) => {
     const classes = useStyles();
     return (
         <div>
-            <Card className={classes.mainCard} sx={{ minWidth: 275 }} >
+            <Card className={classes.mainCard}  >
                 <CardContent>
                  
                     {/** Product Image */}
-                    <CardMedia
+                    <CardMedia className={classes.imageBox}
                         component="img"
                             //height="100%"
                         image= {props.img}
                         alt="Product Image"
                     />
                     
-
-                    {/** Product category */}
+                    <Box className={classes.cardDescription}>
+                        {/** Product category */}
                     <Typography variant="h6"  className={classes.productCategory} component="div">
                         Sound
                     </Typography>
@@ -111,6 +182,8 @@ const ProductCard = (props) => {
                     <Typography variant="h6"  className={classes.productPrice} component="div">
                         ₹719
                     </Typography>
+                    </Box>
+                    
                 </CardContent>
                 
             </Card>

@@ -22,4 +22,12 @@ export const card = [
 
 ];
 
+export const SliderImages = [
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/tplink.jpg?v=1527475823",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/tplink.jpg?v=1527475823",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/b-product4.jpg?v=1527480849",
+     "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/b-product4.jpg?v=1527480849",
+
+]
+
 

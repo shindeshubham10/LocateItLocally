@@ -1,13 +1,18 @@
 import { bannerData } from "../../constants/data";
 import Carousel from "react-material-ui-carousel";
 import { mergeClasses } from "@material-ui/styles";
-import {AppBar,Toolbar,makeStyles,Typography,Box, Button} from '@material-ui/core'
+import { AppBar, Toolbar, makeStyles, Typography, Box, Button } from '@material-ui/core';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles=makeStyles(theme=>(
 
 
     {
-        
+         AllContentWithBanner: {
+            //backgroundColor: 'red',
+            position: 'relative',
+           //display:'block',
+         },
         ban:
         {
             marginTop:20,
@@ -16,8 +21,8 @@ const useStyles=makeStyles(theme=>(
             [theme.breakpoints.down('sm')]: {
                 marginLeft:0,
                 marginRight:0,
-            }
-            
+            },
+            //position:'absolute',
 
             
 
@@ -30,12 +35,27 @@ const useStyles=makeStyles(theme=>(
             objectFit: 'cover',
             
         }
+        },
+        // ShopMoreButton: {
+        //     marginTop:0,
+        // borderTopLeftRadius:30,
+        // borderBottomLeftRadius:30,
+        // borderTopRightRadius:30,
+        // borderBottomRightRadius:30,
+        // width:180,
+        //     backgroundColor: 'white',
+        //     [theme.breakpoints.down('sm')]: {
+        //         width: 120,
+        //         height:20,
+        //         top: 200,
+        //         left: 25,
+               
+        //     },
+        //     top: 700,
+        //     left:250,
+        //     position: 'absolute',
         
-            
-           
-            
-
-        }
+        // },
     }
 )
     
@@ -46,18 +66,23 @@ const Banner=()=>{
 
     const classes = useStyles();
     return (
-       
-
+            <>
+            <Box className={classes.AllContentWithBanner}>
             <Carousel className={classes.ban}>
                 {
                     bannerData.map( image => (
                         
-                             <img src={image} className={classes.image} />
+                             <img src={image} className={classes.image} alt="bannerImages"/>
                         
                    ) )
                 }
-            </Carousel>
-
+                </Carousel>
+                {/* <Button variant="outlined" style={{textTransform: 'capitalize'}} className={classes.ShopMoreButton} startIcon={<ArrowDropDownIcon/>}>
+            Shop Now
+            </Button> */}
+            </Box> 
+             
+            </>
 
        
     )
@@ -65,3 +90,9 @@ const Banner=()=>{
 
 }
 export default Banner;
+
+/**
+ Now changes to be made in banner are 
+ 1. we have to add text and button (Shop Now) on these images
+ 2. Display dynamic text for each image 
+ */
