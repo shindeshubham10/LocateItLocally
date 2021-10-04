@@ -6,7 +6,7 @@
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
-    height: 507px;
+    height: 531px;
     color: white;
 }
 .p2
@@ -31,7 +31,8 @@
 {
     text-align: center;
     background-color: whitesmoke;
-    padding-bottom: 45px;   
+    padding-bottom: 50px;
+    margin: 0;   
 }
 
 .toggle
