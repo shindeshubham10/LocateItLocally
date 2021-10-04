@@ -12,7 +12,7 @@ import Contact from './components/contact/Contact';
 import About from './components/about/About';
 import Cart from './components/contact/Contact';
 import Favourites from './components/favourites/Favourites';
-
+import Register from './components/Account/User_Register/Register';
 
 import {
   BrowserRouter as Router,
@@ -45,7 +45,7 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/favourites" component={Favourites} />
-
+        <Route exact path="/register" component={Register} />
       </Switch>
 
       {/* <Footer/>   */}
