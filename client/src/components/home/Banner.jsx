@@ -9,9 +9,22 @@ const useStyles=makeStyles(theme=>(
 
     {
          AllContentWithBanner: {
-            //backgroundColor: 'red',
+           
             position: 'relative',
-           //display:'block',
+            border: '1px solid #A1B3BA',
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 30,
+            borderRadius: 10,
+            
+            [theme.breakpoints.down('sm')]: {
+                marginLeft: 10,
+            marginRight: 10,
+            marginTop: 20,
+            borderRadius: 10,
+            }
+             
+          
          },
         ban:
         {

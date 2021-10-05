@@ -1,5 +1,5 @@
 import React from "react";
-import '/Users/shubhamrajendrashinde/Desktop/New/LocateItLocally/client/src/components/Account/User_Register/RegisterStyle.css'
+import './RegisterStyle.css';
 import {Grid,TextField,Box,Button} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 
