@@ -69,7 +69,7 @@ function Register()
 
 
               <Grid item>
-              <Grid container direction="row" className="t" columnSpacing={50}>
+              <Grid container direction="row" className="t">
                 <Grid item lg={6} sm={6} xs={12}>
                   <TextField
                     required
