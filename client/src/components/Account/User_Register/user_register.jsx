@@ -1,60 +1,87 @@
 import React from "react";
-import '/Users/shubhamrajendrashinde/Desktop/New/LocateItLocally/client/src/components/Account/User_Register/RegisterStyle.css'
+import './RegisterStyle.css'
 import {Grid,TextField,Box,Button} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
-
-//import ToggleButton from '@mui/material/ToggleButton';
-//import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import {Link} from 'react-router-dom';
 import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-material"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 function Register()
 {
+  const [user, setUser] = React.useState('user');
+    const handleUserBusiness = (event, obj) => {
+      if (obj !== null) {
+        setUser(obj);
+        if(obj.value==="user"){
+          window.history.pushState({}, null, "/register");
+        }
+        else{
+          window.history.pushState({}, null, "/businessregister");
+        }
+      }
+    };
     return(
         <div>
-          <Grid container direction="row" className="main">
-            <Grid item lg={12} sm={12} xs={12}className="toggle">
-              <ToggleButtonGroup
-                  
-                  exclusive
-                  
-                  color="info"
-                  
-                >
-                <ToggleButton sx={{borderRadius:"15px",backgroundColor:'gray',color:'white'}} size="small" value="user" >
-                  Customer
-                </ToggleButton>
-                <ToggleButton sx={{borderRadius:"15px"}} size="small" value="business" >
-                Business Owner
-                </ToggleButton>
-                
-              </ToggleButtonGroup>
-            </Grid>
-            <Grid item lg={3} sm={12} xs={12}>
-            <Grid  container direction="column" className="p1">
-              <Grid item  style={{marginTop:'30px'}}>
-                  <h1>Welcome Back !!</h1>
-              </Grid>
-              <Grid item>
-                
-                  <p className="para">
-                    To keep connected 
-                    with us please login with
-                    your personal info
-                  </p>
-                  
-              </Grid>
-              <Grid item style={{textAlign:'center',marginTop:'60px'}}>
-                <p>Have a already Account ?</p>
-                <Button variant="contained" color="white" href="#">Login</Button>
-              </Grid>
-            </Grid>
-            </Grid>
-
-            <Grid item lg={9} xs={12}>
+          <Grid container direction="row" className="rmain">
             
-            <Grid container  className="p2" direction="row" >
+            <Grid item lg={3} sm={12} xs={12}>
+              <Grid  container direction="column" className="rp1">
+                <Grid item  style={{marginTop:'30px'}}>
+                    <h1>Welcome Back !!</h1>
+                </Grid>
+                <Grid item>
+                  
+                    <p className="rpara">
+                      To keep connected 
+                      with us please login with
+                      your personal info
+                    </p>
+                    
+                </Grid>
+                <Grid item style={{textAlign:'center',marginTop:'60px'}}>
+                  <p>Have a already Account ?</p>
+                  <Link to="/login"><Button variant="contained" color="white" >Login</Button></Link>
+                </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item lg={9} xs={12}>
+            
+            <Grid container  className="rp2" direction="row" >
               <Grid item lg={12} xs={12} >
+              
               <Grid container alignItems="center" direction="column">
+              <Grid
+                      item
+                      className="toggleButtons"
+                      direction="column"
+                      alignItems="flex-end"
+                      justify="flex-start"
+                      >
+                        
+                        <ToggleButtonGroup
+                            value={user}
+                            exclusive
+                            onChange={handleUserBusiness}
+                            color="info"
+                          
+                          >
+                          <ToggleButton 
+                          sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px"}} 
+                          size="small" 
+                          value="user" 
+                          >
+                            Customer
+                          </ToggleButton>
+                          <ToggleButton 
+                          sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px"}}
+                          size="small" 
+                          value="business" >
+                          Business Owner
+                          </ToggleButton>
+                        
+                        </ToggleButtonGroup>
+                        
+                      </Grid>
                     <Grid item><h1 style={{fontSize:'40px'}}>Create Account</h1></Grid>
                     <Grid item>
                     <a href="#"><Google fontSize="large"/></a>
@@ -69,7 +96,7 @@ function Register()
 
 
               <Grid item>
-              <Grid container direction="row" className="t">
+              <Grid container direction="row" className="rt">
                 <Grid item lg={6} sm={6} xs={12}>
                   <TextField
                     required
@@ -165,13 +192,9 @@ function Register()
               </Grid>
               </Grid>
 
-
-
-              
-              
-              <Grid container justifyContent="center" className="t">
+              <Grid container justifyContent="center" className="rt">
                   <Grid item>
-                  <Button className="t" variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
                   </Grid>
               </Grid>
               
