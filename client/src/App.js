@@ -13,6 +13,7 @@ import Cart from './components/contact/Contact';
 import Favourites from './components/favourites/Favourites';
 import Register from './components/Account/User_Register/Register';
 import Login from './components/Account/User_Login/user_login';
+import CategoryMenu from './components/home/PopOverModals/CategoryMenu';
 import {
   BrowserRouter as Router,
   Route,
@@ -46,6 +47,8 @@ function App() {
         <Route exact path="/favourites" component={Favourites} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/hover" component={CategoryMenu} />
+        
 
       </Switch>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {Grid,TextField,Box,Button} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
-import '/Users/shubhamrajendrashinde/Desktop/New/LocateItLocally/client/src/components/Account/User_Login/user_login_style.css'
+import './user_login_style.css'
 
 import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-material"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';

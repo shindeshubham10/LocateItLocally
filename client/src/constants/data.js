@@ -26,8 +26,31 @@ export const SliderImages = [
     "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/tplink.jpg?v=1527475823",
     "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/tplink.jpg?v=1527475823",
     "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/b-product4.jpg?v=1527480849",
-     "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/b-product4.jpg?v=1527480849",
+    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/b-product4.jpg?v=1527480849",
 
+];
+
+export const CategoryOptions = [
+    'New Arrivals',
+    'Top Seller',
+    'Category 1',
+    'Category 2',
+    'Category 3',
+    'Category 4',
+    'Category 5',
+    'Category 6',
+];
+
+export const AccountOptions = [
+    'Register',
+    'Login',
+];
+
+export const mainRoutes = [
+    'Home',
+    'Contact',
+    'About Us',
+    'Blogs',
 ]
 
 
