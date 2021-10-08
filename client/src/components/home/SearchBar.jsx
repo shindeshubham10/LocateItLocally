@@ -1,14 +1,18 @@
 
 import React from 'react';
-import {makeStyles, Box, Button } from '@material-ui/core';
-
+import { useState } from 'react';
+import { makeStyles, Box,Button } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import PageviewIcon from '@material-ui/icons/Pageview';
-
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+
+import Popover from '@mui/material/Popover';
+import CategoryMenu from './PopOverModals/CategoryMenu';
+import { styled } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -154,6 +158,10 @@ const useStyles = makeStyles((theme) => ({
     
 
         
+   },
+
+  category_popOver: {
+     borderRadius:15,
    }
 }
 ));
@@ -164,15 +172,76 @@ const HomeSearchBar=()=>{
     
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = useState();
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const open = Boolean(anchorEl);
+ 
+  const CategoryButton = styled(Button)(({ theme }) => ({
+    borderTopLeftRadius:30,
+    borderBottomLeftRadius:30,
+    borderTopRightRadius:30,
+    borderBottomRightRadius:30,
+    width:180,
+    backgroundColor: 'white',
+    border:'1px solid black',
+    
+  }));
+
   return (
     <>
     {/** Main Box Containing all Elements */}
       <Box className={classes.main}>
         
         {/** Button = All categories */}
-        <Button variant="outlined" style={{textTransform: 'none'}} className={classes.All_category_btn} startIcon={<ArrowDropDownIcon/>}>
+         <Button
+          aria-owns={open ? 'show-category-menu' : undefined}
+          aria-haspopup="true"
+          className={classes.All_category_btn}
+          variant="outlined" 
+          style={{ textTransform: 'none' }}
+          startIcon={<ArrowDropDownIcon />}
+          onClick={handlePopoverOpen}
+          onMouseOver={handlePopoverOpen}
+          //onMouseOut={handlePopoverClose}
+        >
             All Categories
-        </Button>
+        </Button> 
+        {/* <CategoryButton
+          startIcon={<ArrowDropDownIcon />}
+          variant="outlined"
+          aria-owns={open ? 'mouse-over-popover' : undefined}
+          aria-haspopup="true"
+          onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose}
+        >All Categories</CategoryButton> */}
+         
+
+        <Popover
+          id="show-category-menu"
+          //className={classes.category_popOver}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handlePopoverClose}
+          //onMouseOut={handlePopoverClose}
+           anchorOrigin={{
+             vertical: 'bottom',
+             horizontal: 'left',
+          }}
+          //aria-hidden={'true'}
+          //disableRestoreFocus
+        >
+           <CategoryMenu /> 
+          {/* <Typography sx={{ p: 1 }}>I use Popover.</Typography> */}
+        </Popover>
     
 
 
@@ -201,7 +270,7 @@ const HomeSearchBar=()=>{
           
           <IconButton type="submit" className={classes.iconButton} aria-label="search">
             {/** PageView Icon = Search Icon */}
-            <PageviewIcon className={classes.searchicon}/>
+            <SearchIcon className={classes.searchicon}/>
         </IconButton>
         
         </Paper>
