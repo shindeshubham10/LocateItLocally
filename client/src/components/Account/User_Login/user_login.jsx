@@ -1,40 +1,71 @@
 import React from "react";
-import {Grid,TextField,Box,Button} from '@material-ui/core';
+import {Grid,TextField,Button,} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 import './user_login_style.css'
+import {Link} from 'react-router-dom';
 
-import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-material"
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import {Person,Google,Facebook,Password,} from "@mui/icons-material"
+
+
+
 function Login()
 {
+  const [user, setUser] = React.useState('user');
+    const handleUserBusiness = (event, obj) => {
+      if (obj !== null) {
+        setUser(obj);
+        if(obj.value==="user"){
+          window.history.pushState({}, null, "/login");
+        }
+        else{
+          window.history.pushState({}, null, "/businesslogin");
+        }
+      }
+    };
     return(
         <div>
           <Grid container direction="row" className="main">
-            <Grid item lg={12} sm={12} xs={12}className="toggle">
-              <ToggleButtonGroup
-                  
-                  exclusive
-                  
-                  color="info"
-                  
-                >
-                <ToggleButton sx={{borderRadius:"15px",backgroundColor:'gray',color:'white'}} size="small" value="user" >
-                  Customer
-                </ToggleButton>
-                <ToggleButton sx={{borderRadius:"15px"}} size="small" value="business" >
-                Business Owner
-                </ToggleButton>
-                
-              </ToggleButtonGroup>
-            </Grid>
             
-
+            {/* Sign in box  */}
             <Grid item lg={9} xs={12}>
             
             <Grid container  className="p2" direction="row" >
               <Grid item lg={12} xs={12} >
               <Grid container alignItems="center" direction="column">
-                    <Grid item><h1 style={{fontSize:'50px'}}>Sign in</h1></Grid>
+                    
+                    <Grid
+                      item
+                      className="toggleButtons"
+                      direction="column"
+                      alignItems="flex-end"
+                      justify="flex-start"
+                      >
+                        
+                        <ToggleButtonGroup
+                            value={user}
+                            exclusive
+                            onChange={handleUserBusiness}
+                            color="standard"
+                          
+                          >
+                          <ToggleButton 
+                          sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",}} 
+                          size="small" 
+                          value="user" 
+                          >
+                            Customer
+                          </ToggleButton>
+                          <ToggleButton 
+                          sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px"}}
+                          size="small" 
+                          value="business" >
+                          Business Owner
+                          </ToggleButton>
+                        
+                        </ToggleButtonGroup>
+                        
+                      </Grid>
+                      <Grid item><h1 style={{fontSize:'50px'}}>Sign in</h1></Grid>
                     <Grid item>
                     <a href="#"><Google fontSize="large"/></a>
                     <a href="#"><Facebook fontSize="large"/></a>
@@ -99,33 +130,30 @@ function Login()
               
 
             </Grid>
-
-
-            <Grid item lg={3} sm={12} xs={12}>
-            <Grid  container direction="column" className="p1">
-              <Grid item  style={{marginTop:'30px'}}>
+            {/* Sign in box ends */}
+            {/* Side bar box  */}
+            <Grid item lg={3} sm={12} xs={12} >
+              <Grid  container direction="column" className="p1">
+                <Grid item  style={{marginTop:'30px',marginLeft:"30px"}}>
                   <h1>Welcome Back !!</h1>
-              </Grid>
-              <Grid item>
-                
-                  <p className="para">
-                    To keep connected 
-                    with us please login with
-                    your personal info
-                  </p>
+                </Grid>
+                <Grid item>
                   
-              </Grid>
-              <Grid item style={{textAlign:'center',marginTop:'60px'}}>
-                <p>Dont't Have a Account ?</p>
-                <Button variant="contained" color="white" href="#">Register</Button>
+                    <p className="para">
+                      To keep connected 
+                      with us please login with
+                      your personal info
+                    </p>
+                    
+                </Grid>
+                <Grid item style={{textAlign:'center',marginTop:'60px'}}>
+                  <p>Dont't Have a Account ?</p>
+                  <Link to="/register"><Button variant="contained" color="white" >Register</Button></Link>
+                </Grid>
               </Grid>
             </Grid>
-            </Grid>
-
-
-
           </Grid>
-
+          {/* Side bar box ends */} 
         </div>
 
     );
