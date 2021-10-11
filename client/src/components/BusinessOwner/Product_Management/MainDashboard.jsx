@@ -1,7 +1,6 @@
 import React from 'react';
 
-//import Tabs from '@mui/material/Tabs';
-//import Tab from '@mui/material/Tab';
+
 
 
 import Tabs from '@material-ui/core/Tabs';
@@ -154,7 +153,7 @@ function TabPanel(props) {
     )
 }
 
-const AddNewProduct = () => {
+const MainDashboard= () => {
 
     const classes = useStyle();
     const [value, setValue] = React.useState(0);
@@ -207,4 +206,4 @@ const AddNewProduct = () => {
     )
 }
 
-export default AddNewProduct;
+export default MainDashboard;

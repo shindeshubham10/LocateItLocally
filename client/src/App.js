@@ -16,8 +16,7 @@ import Login from './components/Account/User_Login/user_login';
 import CategoryMenu from './components/home/PopOverModals/CategoryMenu';
 import BusinessRegister from './components/Account/User_Register/business_register';
 import BusinessLogin from './components/Account/User_Login/business_login';
-
-import AddNewProduct from './components/BusinessOwner/Product_Management/add_new_product';
+import MainDashboard from './components/BusinessOwner/Product_Management/MainDashboard';
 
 import {
   BrowserRouter as Router,
@@ -56,7 +55,7 @@ function App() {
         <Route exact path="/businesslogin" component={BusinessLogin} />
         <Route exact path="/businessregister" component={BusinessRegister} />
 
-        <Route exact path="/newproduct" component={AddNewProduct} />
+        <Route exact path="/businessdashboard" component={MainDashboard} />
 
       </Switch>
 
