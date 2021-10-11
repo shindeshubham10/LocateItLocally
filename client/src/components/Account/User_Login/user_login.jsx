@@ -10,16 +10,11 @@ import {Person,Google,Facebook,Password,} from "@mui/icons-material"
 
 function Login()
 {
-  const [user, setUser] = React.useState('user');
+  const [user, setUser] = React.useState('customer');
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
         setUser(obj);
-        if(obj.value==="user"){
-          window.history.pushState({}, null, "/login");
-        }
-        else{
-          window.history.pushState({}, null, "/businesslogin");
-        }
+        
       }
     };
     return(
@@ -51,7 +46,7 @@ function Login()
                               <ToggleButton 
                               sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",}} 
                               size="small" 
-                              value="user" 
+                              value="customer" 
                               >
                                 Customer
                               </ToggleButton>
@@ -65,7 +60,9 @@ function Login()
                             </ToggleButtonGroup>
                             
                           </Grid>
-                          <Grid item><h1 style={{fontSize:'50px'}}>Sign in</h1></Grid>
+                          <Grid item>
+                          {user=="customer"? <h1 style={{fontSize:'50px'}}> Login </h1> :<h1 style={{fontSize:'50px'}}> Business Login </h1>}
+                        </Grid>
                         <Grid item>
                         <a href="#"><Google fontSize="large"/></a>
                         <a href="#"><Facebook fontSize="large"/></a>
@@ -79,7 +76,7 @@ function Login()
 
 
                 <Grid item lg={12} sm={12} xs={12}>
-                { user=="user"? 
+                { user=="customer"? 
                 
                   <Grid container direction="column" className="t" spacing='3'>
                     <Grid item lg={12} sm={12} xs={12} >
@@ -157,7 +154,11 @@ function Login()
 
               <Grid container justifyContent="center" className="t">
                   <Grid item>
+                  { user=="customer"?
                   <Button variant="contained" >Sign in</Button>
+                  :
+                  <Button variant="contained" >Sign in</Button>
+                  }
                   </Grid>
               </Grid>
               

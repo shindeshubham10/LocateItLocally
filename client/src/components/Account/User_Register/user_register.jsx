@@ -7,16 +7,11 @@ import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 function Register()
 {
-  const [user, setUser] = React.useState('user');
+  const [user, setUser] = React.useState('customer');
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
         setUser(obj);
-        if(obj.value==="user"){
-          window.history.pushState({}, null, "/register");
-        }
-        else{
-          window.history.pushState({}, null, "/businessregister");
-        }
+        
       }
     };
     return(
@@ -68,7 +63,7 @@ function Register()
                           <ToggleButton 
                           sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px"}} 
                           size="small" 
-                          value="user" 
+                          value="customer" 
                           >
                             Customer
                           </ToggleButton>
@@ -82,7 +77,9 @@ function Register()
                         </ToggleButtonGroup>
                         
                       </Grid>
-                    <Grid item><h1 style={{fontSize:'40px'}}>Create Account</h1></Grid>
+                    <Grid item>
+                      {user=="customer"? <h1 style={{fontSize:'40px'}}> Create Account </h1> :<h1 style={{fontSize:'40px'}}> Create Business Account </h1>}
+                    </Grid>
                     <Grid item>
                     <a href="#"><Google fontSize="large"/></a>
                     <a href="#"><Facebook fontSize="large"/></a>
@@ -93,7 +90,7 @@ function Register()
                     
               </Grid>
               </Grid>
-              { user=="user"?
+              { user=="customer"?
               <Grid item>
               <Grid container direction="row" className="rt">
                 <Grid item lg={6} sm={6} xs={12}>
@@ -292,7 +289,11 @@ function Register()
 
               <Grid container justifyContent="center" className="rt">
                   <Grid item>
+                  {user=="customer"?
                   <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  :
+                  <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  }
                   </Grid>
               </Grid>
               
