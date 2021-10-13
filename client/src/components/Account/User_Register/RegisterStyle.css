@@ -1,0 +1,36 @@
+.rp1 {
+  background-color: gray;
+  height: max-content;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 590px;
+  color: white;
+}
+.rp2 {
+  background-color: #ffffff !important;
+  padding-bottom: 13px;
+  padding-top: 25px;
+}
+
+.rmain {
+  margin-top: 120px;
+  height: fit-content;
+  margin-bottom: 40px;
+}
+
+.rpara {
+  text-align: center;
+  padding: 30px;
+}
+.rt {
+  text-align: center;
+  background-color: #ffffff !important;
+  padding-bottom: 55px;
+}
+
+.rtoggle {
+  background-color: #ffffff !important;
+  text-align: center;
+  padding: 25px;
+}

@@ -3,23 +3,27 @@ import React from 'react';
 import Banner from './Banner';
 import Headings from './Headings'
 import Cards from './Cards';
-
+import Footer from '../footer/footer';
 
 
 import MultiSlider from './MultiSlider';
+
 
 const Home=()=>{
 
 
     return (
-        <div >
-             
-             <Headings name="NEW ARRIVALS"/>
-             
-             <Headings name="TOP PRODUCTS"/>
-             
-             <Headings name="TOP SELLERS"/>
-             
+      <div >
+             <HomeSearchBar />
+             <Banner />
+             <Headings name="NEW ARRIVALS"/> 
+              <Cards />
+     
+              <Headings name="TOP PRODUCTS"/> 
+              <MultiSlider/> 
+             <Headings name="TOP SELLERS"/> 
+              <Cards />
+               <Footer/>    
 
         </div>
           

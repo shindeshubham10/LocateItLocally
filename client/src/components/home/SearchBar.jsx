@@ -1,19 +1,19 @@
 
-import {AppBar,Toolbar,makeStyles,Typography,Box, Button} from '@material-ui/core'
-import SearchBar from 'material-ui-search-bar';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import PageviewIcon from '@material-ui/icons/Pageview';
-
-
 import React from 'react';
-
+import { useState } from 'react';
+import { makeStyles, Box,Button } from '@material-ui/core';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
+
+import Popover from '@mui/material/Popover';
+import CategoryMenu from './PopOverModals/CategoryMenu';
+import { styled } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
+
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     gap : 50,
   },
+
+
+  
   root: {
+    // This is the main Root of both of the Search bars ( Product + Location )
     padding: '2px 4px',
     display: 'flex',
     alignItems:'center',
@@ -36,35 +40,104 @@ const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius:30,
     borderBottomLeftRadius:30,
     borderTopRightRadius:30,
-    borderBottomRightRadius:30,
-    
-    
+    borderBottomRightRadius: 30,
 
-  },
+    // For Mobile Screen
+    [theme.breakpoints.down('sm')]: {
+      marginRight: theme.spacing(1.5),
+      marginLeft:theme.spacing(1.5),
+    },
+
+    // For Medium Screen
+    [theme.breakpoints.between('sm', 'md')]: {
+      marginRight: theme.spacing(1),
+      marginLeft:theme.spacing(1),
+    },
  
-  input: {
+  },
+
+
+  // Input Location Search Bar
+  inputLocation: {
+    marginLeft:theme.spacing(1),
+    display: 'flex',
+
+    // For Mobile Screen - Disable
+    [theme.breakpoints.down('sm')]: {
+      display:'none',
+      },
+  
+    // For medium Screen - Enable 
+    [theme.breakpoints.between('sm','md') ]: {
+        display: 'flex',
+        marginLeft:theme.spacing(1),
+    },
+    
+  },
+
+  // Search Product - Search Bar
+  inputProduct: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    
-
   },
+
   iconButton: {
     padding: 10,
-    
-   
+     
   },
+
   divider: {
     height: 28,
     margin: 4,
-    marginLeft:150,
-  },
-  searchicon:{
-      color:'black',
-       
+    marginLeft: 150,
+
+    // For Mobile Screen - Disable
+    [theme.breakpoints.down('sm')]: {
+      display:'none',
+      },
+  
+    // For medium Screen - Enable 
+    [theme.breakpoints.between('sm', 'md')]: {
+      display: 'block',
+      height: 28,
+      margin: 4,
+      marginLeft:theme.spacing(1),
     },
 
-   btn:{
+  },
 
+
+  searchicon:{
+    color: 'black',
+    
+    // For Mobile Screen
+    [theme.breakpoints.down('sm')]: {
+      marginRight:theme.spacing(3),
+    },
+
+    // For Medium Screen
+    [theme.breakpoints.between('sm', 'md')]: {
+      marginRight:theme.spacing(1),
+    },
+  },
+
+
+  arrowDropDown: {
+
+    // For Mobile Screen - Disable
+    [theme.breakpoints.down('sm')]: {
+      display:'none',
+    },
+    // For medium Screen - Enable 
+    [theme.breakpoints.between('sm', 'md')]: {
+      display: 'block',
+    },
+  },
+
+
+  // All categories Button CSS
+    All_category_btn:{
+  
     borderTopLeftRadius:30,
     borderBottomLeftRadius:30,
     borderTopRightRadius:30,
@@ -72,29 +145,112 @@ const useStyles = makeStyles((theme) => ({
     width:180,
     backgroundColor:'white',
     
+    // For Mobile Screen - Disable
+    [theme.breakpoints.down('sm') ]: {
+      display: 'none',
+      },
+    
+    // For medium Screen - Enable 
+    [theme.breakpoints.between('sm', 'md')]: {
+      display: 'flex',
+      marginLeft: theme.spacing(2),
+    },
+    
 
         
+   },
+
+  category_popOver: {
+     borderRadius:15,
    }
 }
 ));
+
+
 const HomeSearchBar=()=>{
 
     
-    const classes = useStyles();
+  const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = useState();
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const open = Boolean(anchorEl);
+ 
+  const CategoryButton = styled(Button)(({ theme }) => ({
+    borderTopLeftRadius:30,
+    borderBottomLeftRadius:30,
+    borderTopRightRadius:30,
+    borderBottomRightRadius:30,
+    width:180,
+    backgroundColor: 'white',
+    border:'1px solid black',
+    
+  }));
 
   return (
-    <Box className={classes.main}>
-        <Button variant="outlined" style={{textTransform: 'none'}} className={classes.btn} startIcon={<ArrowDropDownIcon/>}>
+    <>
+    {/** Main Box Containing all Elements */}
+      <Box className={classes.main}>
+        
+        {/** Button = All categories */}
+         <Button
+          aria-owns={open ? 'show-category-menu' : undefined}
+          aria-haspopup="true"
+          className={classes.All_category_btn}
+          variant="outlined" 
+          style={{ textTransform: 'none' }}
+          startIcon={<ArrowDropDownIcon />}
+          onClick={handlePopoverOpen}
+          onMouseOver={handlePopoverOpen}
+          //onMouseOut={handlePopoverClose}
+        >
             All Categories
-        </Button>
+        </Button> 
+        {/* <CategoryButton
+          startIcon={<ArrowDropDownIcon />}
+          variant="outlined"
+          aria-owns={open ? 'mouse-over-popover' : undefined}
+          aria-haspopup="true"
+          onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose}
+        >All Categories</CategoryButton> */}
+         
+
+        <Popover
+          id="show-category-menu"
+          //className={classes.category_popOver}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handlePopoverClose}
+          //onMouseOut={handlePopoverClose}
+           anchorOrigin={{
+             vertical: 'bottom',
+             horizontal: 'left',
+          }}
+          //aria-hidden={'true'}
+          //disableRestoreFocus
+        >
+           <CategoryMenu /> 
+          {/* <Typography sx={{ p: 1 }}>I use Popover.</Typography> */}
+        </Popover>
     
 
 
-      
+       {/** Input For Both Product Search and Location */}
         <Paper component="form" className={classes.root} elevation={3} variant="outlined">
         
+        {/** Input For Product Search */}  
         <InputBase
-            className={classes.input}
+            className={classes.inputProduct}
             placeholder="i'm searching for"
             inputProps={{ 'aria-label': 'im searching for' }}
         
@@ -102,22 +258,25 @@ const HomeSearchBar=()=>{
         
         <Divider className={classes.divider} orientation="vertical" />
 
+        {/** Input For Location Search */}
         <InputBase
         
-            className={classes.input}
+            className={classes.inputLocation}
             placeholder="Location"
             inputProps={{ 'aria-label': 'Location' }}
             
         />
-        <ArrowDropDownIcon/>
-        <IconButton type="submit" className={classes.iconButton} aria-label="search">
-            <PageviewIcon className={classes.searchicon}/>
+          <ArrowDropDownIcon className={classes.arrowDropDown} />
+          
+          <IconButton type="submit" className={classes.iconButton} aria-label="search">
+            {/** PageView Icon = Search Icon */}
+            <SearchIcon className={classes.searchicon}/>
         </IconButton>
         
         </Paper>
 
     </Box>
-    
+    </>
     
   );
 }
