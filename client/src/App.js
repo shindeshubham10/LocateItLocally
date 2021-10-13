@@ -10,14 +10,17 @@ import { makeStyles } from '@material-ui/core';
 import Login from './components/login/Login';
 import Contact from './components/contact/Contact';
 import About from './components/about/About';
-import Cart from './components/contact/Contact';
+import Cart from './components/cart/Cart';
 import Favourites from './components/favourites/Favourites';
+
 
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from "react-router-dom";
+import Product from './components/product/Product';
+import FAQ from './components/product/FAQ';
 
 
 const useStyles=makeStyles(
@@ -37,17 +40,18 @@ function App() {
       
       <Header/>
 
-      <Switch >
+       <Switch >
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/about" component={About} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/favourites" component={Favourites} />
+        
 
       </Switch>
 
-      <Footer/> 
+      
     </Router>
 
 

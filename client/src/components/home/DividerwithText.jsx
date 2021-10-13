@@ -10,6 +10,14 @@ const useStyles = makeStyles(theme => ({
     alignItems:'center',
     marginLeft: 300,
     marginRight: 250,
+    [theme.breakpoints.down("sm")]: {
+
+      marginLeft: 300,
+      marginRight: 250,
+      
+      
+    }
+    
     
     
   },
@@ -21,6 +29,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor:"#E5E5E5",
     fontFamily:'Montserrat',
     fontWeight:'bold',
+    [theme.breakpoints.down("sm")]: {
+      minWidth: 32,
+      paddingLeft: 8,
+      paddingRight: 8,
+      height:25,
+      "& .MuiButton-endIcon": {
+        margin: 0
+      }
+    }
     
 
     
@@ -32,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     display:'none',
     [theme.breakpoints.down("sm")]: {
       display:"block",
-      marginLeft: 5,
+      marginRight:150,
       fontWeight:'bold',
       fontSize:20,
     },
@@ -40,7 +57,12 @@ const useStyles = makeStyles(theme => ({
 
   border: {
     borderBottom: "2px solid grey",
-    width: "100%",
+    width:"100%",
+    backgroundColor:'black',
+    [theme.breakpoints.down("sm")]: {
+      
+
+    },
     
   },
 
@@ -55,12 +77,26 @@ const useStyles = makeStyles(theme => ({
       fontSize:20,
       fontWeight :'bold',
       [theme.breakpoints.down("sm")]: {
-        display:"none",
+        
+        borderRadius:0,
+        paddingLeft: 10,
+        paddingRight: 35,
+        marginLeft : 0,
+        fontSize:10,
+        fontWeight :'bold',
     },
 
 
 
   },
+
+  buttonText: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
+  },
+
+
  
 }));
 
@@ -80,11 +116,9 @@ const DividerWithText = (props) => {
     </Box>
     <div className={classes.border} />
 
-    <Typography className={classes.txt}>
-        {props.name}
-    </Typography>
+    
     <Button variant="contained" endIcon={<ArrowRightIcon />} className={classes.btn} >
-                    Shop More
+        <span className={classes.buttonText}>Shop More</span>
      </Button>
 
   </div>

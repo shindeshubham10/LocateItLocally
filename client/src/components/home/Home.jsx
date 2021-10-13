@@ -13,14 +13,13 @@ const Home=()=>{
 
     return (
         <div >
-             <HomeSearchBar />
-             <Banner/>
+             
              <Headings name="NEW ARRIVALS"/>
-             <Cards/>
+             
              <Headings name="TOP PRODUCTS"/>
-             <MultiSlider/>
+             
              <Headings name="TOP SELLERS"/>
-             <Cards/>
+             
 
         </div>
           
