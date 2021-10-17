@@ -21,6 +21,8 @@ import { TextField } from '@mui/material';
 import { minWidth } from '@mui/system';
 import Newproduct from './AddNewProduct/new_product';
 
+import ViewAllProducts from './AllProducts/allProducts';
+
 
 const useStyle = makeStyles(theme => (
     {
@@ -179,8 +181,9 @@ const MainDashboard= () => {
                     onChange={handleChange}
                 >
 
-        <Tab label="Add Product" className={ value===0 ? classes.active_tabStyle : classes.default_tabStyle  } />
-        <Tab label="Item Two"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+        
+        <Tab label="All Products" className={value === 0 ? classes.active_tabStyle : classes.default_tabStyle} />
+        <Tab label="Add Product" className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  } />
         <Tab label="Item Three" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Four" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Five" className={ value===4 ? classes.active_tabStyle : classes.default_tabStyle  }/>
@@ -192,10 +195,13 @@ const MainDashboard= () => {
         
         </Box>
                 {/* <Grid container spacing={2}> */}
-                    <TabPanel value={value} index={0}>
+                <TabPanel value={value} index={0}>
+                    <ViewAllProducts/>        
+                </TabPanel>
+                <TabPanel value={value} index={1}>
                     <Newproduct/>        
-                    </TabPanel>
-            {/* </Grid> */}
+                </TabPanel>  
+                {/* </Grid> */}
             </Box>
             
             {/* <Divider className={classes.verticalDivider} orientation="vertical"/> */}
