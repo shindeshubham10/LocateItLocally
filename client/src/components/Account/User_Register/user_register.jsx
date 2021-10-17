@@ -7,16 +7,11 @@ import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 function Register()
 {
-  const [user, setUser] = React.useState('user');
+  const [user, setUser] = React.useState('customer');
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
         setUser(obj);
-        if(obj.value==="user"){
-          window.history.pushState({}, null, "/register");
-        }
-        else{
-          window.history.pushState({}, null, "/businessregister");
-        }
+        
       }
     };
     return(
@@ -62,13 +57,13 @@ function Register()
                             value={user}
                             exclusive
                             onChange={handleUserBusiness}
-                            color="info"
+                            color="standard"
                           
                           >
                           <ToggleButton 
                           sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px"}} 
                           size="small" 
-                          value="user" 
+                          value="customer" 
                           >
                             Customer
                           </ToggleButton>
@@ -82,7 +77,9 @@ function Register()
                         </ToggleButtonGroup>
                         
                       </Grid>
-                    <Grid item><h1 style={{fontSize:'40px'}}>Create Account</h1></Grid>
+                    <Grid item>
+                      {user=="customer"? <h1 style={{fontSize:'40px'}}> Create Account </h1> :<h1 style={{fontSize:'40px'}}> Create Business Account </h1>}
+                    </Grid>
                     <Grid item>
                     <a href="#"><Google fontSize="large"/></a>
                     <a href="#"><Facebook fontSize="large"/></a>
@@ -93,8 +90,7 @@ function Register()
                     
               </Grid>
               </Grid>
-
-
+              { user=="customer"?
               <Grid item>
               <Grid container direction="row" className="rt">
                 <Grid item lg={6} sm={6} xs={12}>
@@ -140,8 +136,8 @@ function Register()
                       endAdornment: <EmailOutlinedIcon />
                     }}
                     sx={{width:"45vh",padding:"5px"}}
-                 />
-                  </Grid>
+                />
+                </Grid>
 
                 <Grid item lg={6} sm={6} xs={12} >
                 <TextField
@@ -188,13 +184,116 @@ function Register()
                   sx={{width:"45vh",padding:"5px"}}
                 />
                 </Grid>
+                </Grid>
               </Grid>
-              </Grid>
+              :
+              <Grid item>
+                <Grid container direction="row" className="rt">
+                  <Grid item lg={6} sm={6} xs={12}>
+                    <TextField
+                      required
+                      variant="standard"
+                      color="primary"
+                      type="text"
+                      label="Company Name"
+                      size="medium"
+                      placeholder="test@test.com"
+                      InputProps={{
+                        endAdornment: <Person/>
+                      }}
+                      sx={{width:"45vh",padding:"5px"}}
+                    />
+                    </Grid>
+                    <Grid item lg={6} xs={12} sm={6}>
+                    <TextField
+                      required
+                      variant="standard"
+                      color="primary"
+                      type="text"
+                      label="Username"
+                      size="small"
+                      placeholder="test@test.com"
+                      InputProps={{
+                        endAdornment: <AccountBox />
+                      }}
+                      sx={{width:"45vh",padding:"5px"}}
+                    />
+                    </Grid>
+                    <Grid item lg={6} sm={6} xs={12}>
+                    <TextField
+                      required
+                      variant="standard"
+                      color="primary"
+                      type="email"
+                      label="Business Email"
+                      size="small"
+                      placeholder="test@test.com"
+                      InputProps={{
+                        endAdornment: <EmailOutlinedIcon />
+                      }}
+                      sx={{width:"45vh",padding:"5px"}}
+                  />
+                  </Grid>
+
+                  <Grid item lg={6} sm={6} xs={12} >
+                  <TextField
+                    required
+                    variant="standard"
+                    color="primary"
+                    type="number"
+                    label="Contact Number"
+                    size="small"
+                    placeholder="123456789"
+                    InputProps={{
+                      endAdornment: <Phone/>
+                    }}
+                    sx={{width:"45vh",padding:"5px"}}
+                  />
+                  </Grid>
+                  <Grid item lg={6} sm={6} xs={12} >
+                  <TextField
+                    required
+                    variant="standard"
+                    color="primary"
+                    type="password"
+                    label="Password"
+                    size="small"
+                    placeholder="*******"
+                    InputProps={{
+                      endAdornment: <Password />
+                    }}
+                    sx={{width:"45vh",padding:"5px"}}
+                  />
+                  </Grid>
+                  <Grid item lg={6} sm={6} xs={12}>
+                  <TextField
+                    required
+                    variant="standard"
+                    color="primary"
+                    type="password"
+                    label="Confirm Password"
+                    size="small"
+                    placeholder="*******"
+                    InputProps={{
+                      endAdornment: <Lock />
+                    }}
+                    sx={{width:"45vh",padding:"5px"}}
+                  />
+                  </Grid>
+                  </Grid>
+                </Grid>
+              }
+
+              
               </Grid>
 
               <Grid container justifyContent="center" className="rt">
                   <Grid item>
+                  {user=="customer"?
                   <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  :
+                  <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  }
                   </Grid>
               </Grid>
               

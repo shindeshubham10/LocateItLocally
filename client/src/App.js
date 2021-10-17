@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core';
 
 import Contact from './components/contact/Contact';
 import About from './components/about/About';
-import Cart from './components/contact/Contact';
+import Cart from './components/cart/Cart';
 import Favourites from './components/favourites/Favourites';
 import Register from './components/Account/User_Register/user_register';
 import Login from './components/Account/User_Login/user_login';
@@ -18,11 +18,14 @@ import BusinessRegister from './components/Account/User_Register/business_regist
 import BusinessLogin from './components/Account/User_Login/business_login';
 import MainDashboard from './components/BusinessOwner/Product_Management/MainDashboard';
 
+
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from "react-router-dom";
+import Product from './components/product/Product';
+import FAQ from './components/product/FAQ';
 
 const useStyles=makeStyles(
   {
@@ -50,15 +53,11 @@ function App() {
         <Route exact path="/favourites" component={Favourites} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/hover" component={CategoryMenu} />
         
-        <Route exact path="/businesslogin" component={BusinessLogin} />
-        <Route exact path="/businessregister" component={BusinessRegister} />
 
         <Route exact path="/businessdashboard" component={MainDashboard} />
 
       </Switch>
-
       {/* <Footer/>   */}
     </Router>
    

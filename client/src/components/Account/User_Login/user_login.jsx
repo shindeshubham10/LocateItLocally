@@ -12,16 +12,11 @@ import {Person,Google,Facebook,Password,} from "@mui/icons-material";
 
 function Login()
 {
-  const [user, setUser] = React.useState('user');
+  const [user, setUser] = React.useState('customer');
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
         setUser(obj);
-        if(obj.value==="user"){
-          window.history.pushState({}, null, "/login");
-        }
-        else{
-          window.history.pushState({}, null, "/businesslogin");
-        }
+        
       }
     };
     return(
@@ -32,100 +27,140 @@ function Login()
             <Grid item lg={9} xs={12}>
             
             <Grid container  className="p2" direction="row" >
-              <Grid item lg={12} xs={12} >
-              <Grid container alignItems="center" direction="column">
-                    
-                    <Grid
-                      item
-                      className="toggleButtons"
-                      direction="column"
-                      alignItems="flex-end"
-                      justify="flex-start"
-                      >
+                <Grid item lg={12} xs={12} >
+                    <Grid container alignItems="center" direction="column">
                         
-                        <ToggleButtonGroup
-                            value={user}
-                            exclusive
-                            onChange={handleUserBusiness}
-                            color="standard"
-                          
+                        <Grid
+                          item
+                          className="toggleButtons"
+                          direction="column"
+                          alignItems="flex-end"
+                          justify="flex-start"
                           >
-                          <ToggleButton 
-                          sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",}} 
-                          size="small" 
-                          value="user" 
-                          >
-                            Customer
-                          </ToggleButton>
-                          <ToggleButton 
-                          sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px"}}
-                          size="small" 
-                          value="business" >
-                          Business Owner
-                          </ToggleButton>
+                            
+                            <ToggleButtonGroup
+                                value={user}
+                                exclusive
+                                onChange={handleUserBusiness}
+                                color="standard"
+                              
+                              >
+                              <ToggleButton 
+                              sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",}} 
+                              size="small" 
+                              value="customer" 
+                              >
+                                Customer
+                              </ToggleButton>
+                              <ToggleButton 
+                              sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px"}}
+                              size="small" 
+                              value="business" >
+                              Business Owner
+                              </ToggleButton>
+                            
+                            </ToggleButtonGroup>
+                            
+                          </Grid>
+                          <Grid item>
+                          {user=="customer"? <h1 style={{fontSize:'50px'}}> Login </h1> :<h1 style={{fontSize:'50px'}}> Business Login </h1>}
+                        </Grid>
+                        <Grid item>
+                        <a href="#"><Google fontSize="large"/></a>
+                        <a href="#"><Facebook fontSize="large"/></a>
+                        </Grid>
+                        <Grid item>
+                        <p>Or Use your Email for Sign in</p>
+                        </Grid>
                         
-                        </ToggleButtonGroup>
-                        
-                      </Grid>
-                      <Grid item><h1 style={{fontSize:'50px'}}>Sign in</h1></Grid>
-                    <Grid item>
-                    <a href="#"><Google fontSize="large"/></a>
-                    <a href="#"><Facebook fontSize="large"/></a>
                     </Grid>
-                    <Grid item>
-                    <p>Or Use your Email for Sign in</p>
-                    </Grid>
-                    
-              </Grid>
-              </Grid>
+                </Grid>
 
 
-              <Grid item lg={12} sm={12} xs={12}>
-              <Grid container direction="column" className="t" spacing='3'>
-                <Grid item lg={12} sm={12} xs={12} >
-                  <TextField
-                    required
-                    variant="standard"
-                    color="primary"
-                    type="email"
-                    label="Email"
-                    size="medium"
-                    placeholder="test@test.com"
-                    InputProps={{
-                      endAdornment: <Person/>
-                    }}
-                    sx={{width:"45vh",padding:"5px"}}
-                  />
-                  </Grid>
-
-                  <Grid item lg={12} sm={12} xs={12} >
-                    <TextField
+                <Grid item lg={12} sm={12} xs={12}>
+                { user=="customer"? 
+                
+                  <Grid container direction="column" className="t" spacing='3'>
+                    <Grid item lg={12} sm={12} xs={12} >
+                      <TextField
                         required
                         variant="standard"
                         color="primary"
-                        type="password"
-                        label="Password"
+                        type="email"
+                        label="Email"
                         size="medium"
-                        placeholder="**********"
+                        placeholder="test@test.com"
                         InputProps={{
-                        endAdornment: <Password/>
+                          endAdornment: <Person/>
                         }}
                         sx={{width:"45vh",padding:"5px"}}
-                    />
-                  </Grid> 
+                      />
+                      </Grid>
 
-                  
+                      <Grid item lg={12} sm={12} xs={12} >
+                        <TextField
+                            required
+                            variant="standard"
+                            color="primary"
+                            type="password"
+                            label="Password"
+                            size="medium"
+                            placeholder="**********"
+                            InputProps={{
+                            endAdornment: <Password/>
+                            }}
+                            sx={{width:"45vh",padding:"5px"}}
+                        />
+                      </Grid> 
+
+                      
+                  </Grid>
+                :
+                
+                  <Grid container direction="column" className="t" spacing='3'>
+                    <Grid item lg={12} sm={12} xs={12} >
+                      <TextField
+                        required
+                        variant="standard"
+                        color="primary"
+                        type="email"
+                        label="Business Email"
+                        size="medium"
+                        placeholder="test@test.com"
+                        InputProps={{
+                          endAdornment: <Person/>
+                        }}
+                        sx={{width:"45vh",padding:"5px"}}
+                      />
+                      </Grid>
+
+                      <Grid item lg={12} sm={12} xs={12} >
+                        <TextField
+                            required
+                            variant="standard"
+                            color="primary"
+                            type="password"
+                            label="Password"
+                            size="medium"
+                            placeholder="**********"
+                            InputProps={{
+                            endAdornment: <Password/>
+                            }}
+                            sx={{width:"45vh",padding:"5px"}}
+                        />
+                    </Grid> 
+                  </Grid>
+                }
+                </Grid>
               </Grid>
-              </Grid>
-              </Grid>
 
-
-
-              
-              
               <Grid container justifyContent="center" className="t">
                   <Grid item>
-                  <Button className="t" variant="contained" style={{marginTop:"30px"}}>Sign in</Button>
+                  { user=="customer"?
+                  <Button variant="contained" >Sign in</Button>
+                  :
+                  <Button variant="contained" >Sign in</Button>
+                  }
                   </Grid>
               </Grid>
               
@@ -148,10 +183,10 @@ function Login()
                     </p>
                     
                 </Grid>
-                <Grid item style={{textAlign:'center',marginTop:'60px'}}>
-                  <p>Dont't Have a Account ?</p>
-                  <Link to="/register"><Button variant="contained" color="white" >Register</Button></Link>
-                </Grid>
+                  <Grid item style={{textAlign:'center',marginTop:'30px'}}>
+                    <p>Dont't Have a Account ?</p>
+                    <Link to="/register"><Button variant="contained" color="white" >Register</Button></Link>
+                  </Grid>
               </Grid>
             </Grid>
           </Grid>
