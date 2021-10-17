@@ -14,6 +14,9 @@ import Favourites from './components/favourites/Favourites';
 import Register from './components/Account/User_Register/user_register';
 import Login from './components/Account/User_Login/user_login';
 import CategoryMenu from './components/home/PopOverModals/CategoryMenu';
+import BusinessRegister from './components/Account/User_Register/business_register';
+import BusinessLogin from './components/Account/User_Login/business_login';
+import MainDashboard from './components/BusinessOwner/Product_Management/MainDashboard';
 
 
 import {
@@ -51,6 +54,8 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         
+
+        <Route exact path="/businessdashboard" component={MainDashboard} />
 
       </Switch>
       {/* <Footer/>   */}
