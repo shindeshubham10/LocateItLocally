@@ -161,7 +161,7 @@ const Product=()=>{
                     </Box>
                     <Box style={{marginLeft:10,marginTop:10,}}>
                         <Typography style={{fontFamily:'Monteserrat'}}>
-                            Ratnadeep Socielty Civil lines solapur FRFERGREGERGREGGGGSEGEF
+                            Ratnadeep Socielty Civil lines solapur 
                         </Typography>
                     </Box>
                     </Box>
@@ -175,7 +175,7 @@ const Product=()=>{
                         </Box>
                         <Box style={{marginLeft:10,marginTop:10,}}>
                         <Typography style={{fontFamily:'Monteserrat'}}>
-                            Ratnadeep Socielty Civil lines solapur FRFERGREGERGREGGGGSEGEF
+                            Ratnadeep Socielty Civil lines solapur 
                         </Typography>
                         </Box>
                         
