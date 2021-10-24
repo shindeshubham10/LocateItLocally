@@ -120,6 +120,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 10,
       paddingRight: 35,
       marginLeft : 19,
+      padding:10,
       fontSize:20,
     fontWeight: 'bold',
     fontFamily:'Montserrat',
