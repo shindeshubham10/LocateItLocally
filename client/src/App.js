@@ -50,7 +50,7 @@ function App() {
         <Route exact path="/favourites" component={Favourites} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        
+        <Route exact path="/cart" component={Cart} />
 
       </Switch>
       {/* <Footer/>   */}

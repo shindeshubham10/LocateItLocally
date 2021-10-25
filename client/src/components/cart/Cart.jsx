@@ -1,16 +1,19 @@
 
-import {withStyles,Paper,Chip,Grid,Card,Box,makeStyles,Button, CardActions, CardContent,Container, CardHeader, Divider,TextareaAutosize, Typography} from "@material-ui/core"
+import {withStyles,Paper,Chip,Grid,Card,Box,ListItem,makeStyles,Button,List, CardActions, CardContent,Container, CardHeader, Divider,TextareaAutosize, Typography, ListItemText} from "@material-ui/core"
 import CartItem from "./CartItem"
 import { cartitems } from "../../constants/data"
 import { NetworkWifiSharp } from "@material-ui/icons";
+import { fontSize } from "@mui/system";
 
 const StyledChip = withStyles({
     root: {
-        
+       
         
     },
     label:{
-        fontStyle:'bold',
+        fontWeight:'bold',
+        fontFamily:"Monteserrat",
+        fontSize:16,
         
     }
   })(Chip);
@@ -26,6 +29,7 @@ const useStyles=makeStyles(theme=>(
             
             justifyContent:'center',
             [theme.breakpoints.down('sm')]: {
+
                
            },
            
@@ -34,12 +38,12 @@ const useStyles=makeStyles(theme=>(
         },
         first:{
 
-            
-            [theme.breakpoints.down('sm')]: {
+            // [theme.breakpoints.down('sm')]: {
                 
-                overflow:'auto',
-                whitespace: 'nowrap',
-            }
+            //     overflowX:'auto',
+            //     //whitespace: 'nowrap',
+            // }
+            
 
             
 
@@ -55,7 +59,8 @@ const useStyles=makeStyles(theme=>(
         btn:{
             backgroundColor:'#C4C4C4',
             borderRadius:25,
-            fontWeight:'bold',
+            fontWeight:1400,
+            fontFamily:"Roboto",
             [theme.breakpoints.down('sm')]: {
               
             },
@@ -93,15 +98,21 @@ const useStyles=makeStyles(theme=>(
         chipstyle:
         {
             position:'relative',
-            left:190,
+            left:200,
             top:10,
+           
             
             
             borderColor:'black',
             backgroundColor:'white',
             [theme.breakpoints.down('sm')]: {
                 position:'relative',
-                left:100,
+                left:110,
+            },
+            [theme.breakpoints.down('md')]: {
+                position:'relative',
+                left:335,
+                
             },
             
             
@@ -111,11 +122,20 @@ const useStyles=makeStyles(theme=>(
         {
             position:'relative',
             left:300,
-            top:10,
-            
+            top:20,
+     
             
             borderColor:'black',
-            backgroundColor:'white'
+            backgroundColor:'white',
+            [theme.breakpoints.down('sm')]: {
+                position:'relative',
+                left:110,
+            },
+            [theme.breakpoints.down('md')]: {
+                position:'relative',
+                left:350,
+                
+            },
             
 
         },
@@ -129,6 +149,33 @@ const useStyles=makeStyles(theme=>(
               gap:25,
             },
 
+
+        },
+
+        cartitem:{
+
+            
+           
+
+            [theme.breakpoints.down('sm')]: {
+              
+                overflowX:'scroll',
+                whiteSpace:'nowrap',
+                
+              },
+
+        },
+
+        txtarea:{
+            width:200,
+            
+            marginLeft:'auto',
+            marginRight:'auto',
+            display:'block',
+
+
+           
+        
         }
         
 
@@ -143,24 +190,43 @@ const Cart = () => {
     const classes=useStyles()
     return (
         <Grid container className={classes.main} >
-            
-            <Grid item xs={12} lg={6} className={classes.first} >
+           
+            <Grid item xs={12} lg={6} md={12} className={classes.first} >
             <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/>
+               
+                    <List className={classes.cartitem}>
+                    
                     {
                            cartitems.map(item =>(
+                               
+                                  
+                                        <CartItem items={item} style={{width:'100%',height:'100%'}}/>
+                               
+                                    
+                            
 
-                            <CartItem items={item} style={{width:'100%',height:'100%'}}/>
+                            
                            ))
                     }
                     <Grid className={classes.btns}>
                         <Button className={classes.btn}>
-                            Continue Shopping
+                            <Typography style={{fontFamily:'bold'}}>
+                                Continue Shopping
+                            </Typography>
                         </Button>
                         <Button className={classes.btn}>
-                            Update Cart
+                           <Typography style={{fontFamily:'bold'}}>
+                                Update Cart
+                            </Typography>
                         </Button>
 
                     </Grid>
+
+                    </List>
+               
+
+                    
+                    
                 {/* <Card  >
                     <CardHeader title="desfedf"/>
                         
@@ -187,22 +253,30 @@ const Cart = () => {
             </Grid>
          
                
-            <Grid item xs={12} lg={4} >
-            <StyledChip label="Cart Total" size='medium' variant='outlined'  className={classes.chipstyle}/>
-                <Card style={{height:600,width:427}}>
+            <Grid item xs={12} md={12} lg={4}  >
+            <StyledChip label="Cart Total" size='large' variant='outlined'  className={classes.chipstyle}/>
+                <Card  >
                 
                     <CardHeader title={<Typography style={{fontWeight:'bold'}}>Cart Note</Typography>} style={{fontWeight:'bold',textAlign: 'center'}}/>
                     <Divider/>
                     <CardContent>
-                    <TextareaAutosize
+                     
+                     <TextareaAutosize
                         aria-label="minimum height"
                         minRows={6}
-                        
+                        className={classes.txtarea}
                         placeholder="Note Regarding the Cart"
-                        style={{ width: 200,marginLeft:100, }}
+                        
+                
                         
 
                     />
+
+
+                     
+
+                      
+                    
                     
                     <Divider style={{marginTop:25,}}/>
                     <Container style={{display:'flex',gap:20,justifyContent:'center',marginTop:25,}}>

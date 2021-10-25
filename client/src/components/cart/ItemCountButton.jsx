@@ -53,7 +53,7 @@ const GroupedButton = () => {
         <Card className={classes.main} >
             <ButtonGroup className={classes.component} >
             
-            <Button disabled><Typography style={{fontWeight:'bold'}} >{counter} </Typography></Button>
+            <Button  ><Typography style={{fontWeight: 800 }} >{counter} </Typography></Button>
            <ButtonGroup orientation="vertical" className={classes.second} >
                <Button className={classes.button} onClick={() => handleIncrement()} >
                    <ArrowDropUp/>
