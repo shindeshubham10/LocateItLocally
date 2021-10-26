@@ -22,8 +22,10 @@ const StyledChip = withStyles({
 const useStyles=makeStyles(theme=>(
     {
         main:{
-            marginTop:150,
+            
             display:"flex",
+            marginBottom:0,
+            marginTop:150,
            
             gap:50,
             
@@ -37,7 +39,9 @@ const useStyles=makeStyles(theme=>(
             
         },
         first:{
+                borderRadius:40,
 
+            
             // [theme.breakpoints.down('sm')]: {
                 
             //     overflowX:'auto',
@@ -52,6 +56,8 @@ const useStyles=makeStyles(theme=>(
 
         second :{
             [theme.breakpoints.down('sm')]: {
+
+               
                 
             },
         },
@@ -106,8 +112,7 @@ const useStyles=makeStyles(theme=>(
             borderColor:'black',
             backgroundColor:'white',
             [theme.breakpoints.down('sm')]: {
-                position:'relative',
-                left:110,
+                
             },
             [theme.breakpoints.down('md')]: {
                 position:'relative',
@@ -129,7 +134,8 @@ const useStyles=makeStyles(theme=>(
             backgroundColor:'white',
             [theme.breakpoints.down('sm')]: {
                 position:'relative',
-                left:110,
+                backgroundColor:'red',
+                
             },
             [theme.breakpoints.down('md')]: {
                 position:'relative',
@@ -141,11 +147,12 @@ const useStyles=makeStyles(theme=>(
         },
         btns:{
 
-            display:'flex',alignItems:'center',gap:150,justifyContent:'center',height:'100px',backgroundColor:'white',
+            display:'flex',alignItems:'center',gap:150,justifyContent:'center',height:'125px',backgroundColor:'white',
             
             [theme.breakpoints.down('sm')]: {
               
-              flexDirection:'column',  
+              flexDirection:'column',
+              
               gap:25,
             },
 
@@ -192,22 +199,31 @@ const Cart = () => {
         <Grid container className={classes.main} >
            
             <Grid item xs={12} lg={6} md={12} className={classes.first} >
+
             <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/>
-               
-                    <List className={classes.cartitem}>
+               <div style={{borderRadius:25}}>
+               <Grid className={classes.cartitem}>
                     
                     {
                            cartitems.map(item =>(
                                
-                                  
+                                  <>
                                         <CartItem items={item} style={{width:'100%',height:'100%'}}/>
+                                        <Divider/>
                                
-                                    
+                                    </>
                             
 
                             
                            ))
                     }
+                    
+                    
+
+                    </Grid>
+                    
+                    
+                    <Divider/>
                     <Grid className={classes.btns}>
                         <Button className={classes.btn}>
                             <Typography style={{fontFamily:'bold'}}>
@@ -221,10 +237,11 @@ const Cart = () => {
                         </Button>
 
                     </Grid>
-
-                    </List>
                
 
+
+               </div>
+                    
                     
                     
                 {/* <Card  >

@@ -19,6 +19,11 @@ const useStyles=makeStyles(theme=>(
             justifyContent:'space-around',
             backgroundColor:'white',
             gap:20,
+            minHeight:200,
+            [theme.breakpoints.down('sm')]: {
+                minHeight:0,
+               
+            },
             
 
             
@@ -67,7 +72,7 @@ const CartItem=(props)=>{
 
         //     </Card>
         // </Grid>
-        <Paper className={classes.main} elevation={3}>
+        <Paper className={classes.main} elevation={0} >
              <CancelOutlined style={{color:'#C4C4C4',marginLeft:10}}/>
              <Grid container xs={12}  className={classes.root}>
                  <Grid item>
