@@ -21,14 +21,10 @@ const ProductDetails = () => {
        
        <>
             <Product />
-            <Divider variant="middle" sx={{marginTop:"20px"}} >
-            </Divider>
             
             <Description />
-            <Headings name="Related" />
+            <Headings name="Related Products" />
             <Cart/>
-            <Divider variant="middle" sx={{marginTop:"20px"}} >
-            </Divider>
             <FAQ />
             
             

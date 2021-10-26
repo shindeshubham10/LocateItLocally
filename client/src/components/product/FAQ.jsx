@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography"
-import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 
@@ -90,52 +90,68 @@ const FAQ=()=>{
     ];
 
     return(
-    <Container sx={{boder:"1px solid black",borderRadius:"10px",}}>
-    <Grid item textAlign="center" justifyItems="center" sx={{marginTop:"15px"}} >
-       <Chip size="medium" label="FAQ's" sx={{fontSize:"1.2rem",height: "2rem",borderRadius: "9999px"}}></Chip>
-    </Grid> 
-    <Grid container sx={{alignContent:"center",marginTop:"20px"}} >
-    
-    <Grid item>
-    <List
-      sx={{
-        width: '100%',
-        bgcolor: 'background.paper',
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
-        border:"1px solid black",
-        borderRadius:"10px",
-        '& ul': { padding: 0 },
-      }}
-      
-    >
-      
-        <li >
-          <ul>
-          <Grid container spacing={1}>
-            {QA.map((item) => (
-              <Grid item xs={12} md={6} lg={6}>
-              <ListItem >
-                <Question txt="Q" />
-                <ListItemText primary={item.q} />
-                </ListItem>
+        <Grid container >
+        <Grid
+          item
+          sx={{
+            width: '100%',
+            height: 400,
+            backgroundColor: '#f3f3f3',
+            margin:"40px 60px",
+            position:"relative",
+            border:"1px solid black",
+            borderRadius:"10px",
+            
+            
+          }}
+        >
+        <Box
+            display="flex" 
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center" 
+        >
+            <Chip label="FAQ's" sx={{position:"absolute",top:"-15px",backgroundColor: '#8FD1D1'}}/>
+        </Box>
+          
+        <List
+        sx={{
+            width: '100%',
+            bgcolor: 'background.paper',
+            position: 'relative',
+            overflow: 'auto',
+            maxWidth:1200,
+            maxHeight: 300,
+            margin:"30px 20px 20px 20px",
+           
+            '& ul': { padding: 0 },
+        }}
+        
+        >
+        
+            <li >
+            <ul>
+            <Grid container spacing={1}>
+                {QA.map((item) => (
+                <Grid item xs={12} md={6} lg={6}>
                 <ListItem >
-                <Question txt="A" />
-                <ListItemText primary={item.a} />
-              </ListItem>
-             </Grid>
-            ))}
-            </Grid>
-          </ul>
-        </li>
-      
-    </List>
-    </Grid>
-    </Grid> 
-      
-    </Container>
-    )
+                    <Question txt="Q" />
+                    <ListItemText primary={item.q} />
+                    </ListItem>
+                    <ListItem >
+                    <Question txt="A" />
+                    <ListItemText primary={item.a} />
+                </ListItem>
+                </Grid>
+                ))}
+                </Grid>
+            </ul>
+            </li>
+        
+        </List>
+        </Grid>
+        </Grid> 
+    );
 
 }
 
