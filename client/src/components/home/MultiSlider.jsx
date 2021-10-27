@@ -3,7 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import {AppBar,Toolbar,makeStyles,Typography,Box, Button, FormHelperText,Grid} from '@material-ui/core'
 import ProductCard from "./ProductCard";
 import { useState } from "react";
-import { card } from "../../constants/data";
+import { productDetails } from "../../constants/data";
 import Bigcard from "./BigCard";
 
 import { SliderImages } from "../../constants/data";
@@ -170,12 +170,24 @@ const MultiSlider=()=>{
             <Box className={classes.firstbox}>
                 <Carousel responsive={responsive} infinite={true} className={classes.LgCarousal} >
                     {
-                        card.map( image => (
+                       productDetails.map( details => (
                             
                         <Box className={classes.ForLGScren}>
 
-                                 <ProductCard img={image}/>
-                                <ProductCard img={image} /> 
+                               <ProductCard
+                                   image={details.imageUrl}
+                                   category={details.productCategory}
+                                   productname={details.productName}
+                                   productprice={details.productPrice}
+                               
+                               />
+                               <ProductCard
+                                  image={details.imageUrl}
+                                  category={details.productCategory}
+                                  productname={details.productName}
+                                  productprice={details.productPrice}
+                                   
+                               />
                               
 
                         </Box> 
@@ -195,11 +207,16 @@ const MultiSlider=()=>{
                     customLeftArrow={<Rightarrow/>}
                 >
                     {
-                        card.map( image => (
+                       productDetails.map( details => (
                             
                             <Box>
     
-                                    <ProductCard img={image}/>
+                               <ProductCard
+                                  image={details.imageUrl}
+                                  category={details.productCategory}
+                                  productname={details.productName}
+                                  productprice={details.productPrice}
+                               />
                                    
                             </Box> 
                                 
