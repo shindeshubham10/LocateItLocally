@@ -1,5 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import './paginationStyle.css';
+import { useState } from 'react';
+import { makeStyles} from '@material-ui/core';
 import { Box, Grid, Typography,OutlinedInput,InputLabel,MenuItem,FormControl,Select,Chip,Divider } from '@material-ui/core';
 
 import { productDetails } from '../../constants/data'; 
@@ -75,7 +77,7 @@ const useStyle = makeStyles(theme => ({
         
     },
     productContainer: {
-        //backgroundColor: 'green',
+        backgroundColor: 'green',
         width: '100%',
         height: '100%',
         marginTop: 40,
@@ -88,7 +90,12 @@ const useStyle = makeStyles(theme => ({
         border: '1px solid #A1B3BA',
         borderRadius:8,
         }
-    },
+  },
+  forProductCards: {
+    backgroundColor: 'orange',
+    width: '100%',
+    
+  },
     mainHeading: {
         fontSize: '2.4rem',
         color: '#323232',
@@ -102,7 +109,8 @@ const useStyle = makeStyles(theme => ({
     },
     filterBody: {
         width: '100%',
-        marginBottom:40,
+      marginBottom: 40,
+        
     },
 }));
 
@@ -110,10 +118,10 @@ const useStyle = makeStyles(theme => ({
 
 const ShowProducts = () => {
 
-    const classes = useStyle();
-    const theme = useTheme();
+  const classes = useStyle();
+  const theme = useTheme();
 
-    const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
     const {
@@ -124,126 +132,126 @@ const ShowProducts = () => {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
-    return (
-        <>
-            <Box className={classes.mainBoxForFiltersandProducts}>
+  return (
+    <>
+      <Box className={classes.mainBoxForFiltersandProducts}>
 
-          {/** Following Box is for Filters UI - filterBox */}
+        {/** Following Box is for Filters UI - filterBox */}
 
-          <Grid container spacing={2} className={classes.filterBox}>
+        <Grid container spacing={2} className={classes.filterBox}>
             
             
-            <Grid item lg={12} xs={12} md={12}>
-            <Typography component="div" style={{ fontSize: '1.5rem',color: '#323232',fontFamily: ['Montserrat', 'sans-serif'],fontweight: 'medium',marginBottom:20,}} >Filters</Typography> 
-            <Divider style={{marginBottom:30}}/>
-            </Grid>
+          <Grid item lg={12} xs={12} md={12}>
+            <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
+            <Divider style={{ marginBottom: 30 }} />
+          </Grid>
 
-            {/** First Filter  */}
-            <Grid item lg={12} xs={6}>
+          {/** First Filter  */}
+          <Grid item lg={12} xs={6}>
             <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-        <InputLabel id="Filter-Heading">Price</InputLabel>
-        <Select
-          labelId="Filter-Heading"
-          id="filter-chip"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-        </FormControl>
+              <InputLabel id="Filter-Heading">Price</InputLabel>
+              <Select
+                labelId="Filter-Heading"
+                id="filter-chip"
+                multiple
+                value={personName}
+                onChange={handleChange}
+                input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, personName, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+
+
+          {/** Second Filter */}
+          <Grid item lg={12} xs={6}>
+            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+              <InputLabel id="Filter-Heading">Brand</InputLabel>
+              <Select
+                labelId="Filter-Heading"
+                id="filter-chip"
+                multiple
+                value={personName}
+                onChange={handleChange}
+                input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, personName, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+
+          {/** Third Filter */}
+          <Grid item lg={12} xs={6}>
+            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+              <InputLabel id="Filter-Heading">Price</InputLabel>
+              <Select
+                labelId="Filter-Heading"
+                id="filter-chip"
+                multiple
+                value={personName}
+                onChange={handleChange}
+                input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, personName, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+
         </Grid>
-
-
-
-            {/** Second Filter */}
-            <Grid item lg={12} xs={6}>
-            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-        <InputLabel id="Filter-Heading">Brand</InputLabel>
-        <Select
-          labelId="Filter-Heading"
-          id="filter-chip"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-        </FormControl>
-            </Grid>
-
-
-            {/** Third Filter */}
-            <Grid item lg={12} xs={6}>
-            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-        <InputLabel id="Filter-Heading">Price</InputLabel>
-        <Select
-          labelId="Filter-Heading"
-          id="filter-chip"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-        </FormControl>
-            </Grid>
-
-
-          </Grid> 
           
-             {/* <Box className={classes.filterBox} style={{display:'flex',flexDirection:'row',overflowX:'scroll',width:'400px'}}>
+        {/* <Box className={classes.filterBox} style={{display:'flex',flexDirection:'row',overflowX:'scroll',width:'400px'}}>
             <Typography component="div" style={{ fontSize: '1.5rem',color: '#323232',fontFamily: ['Montserrat', 'sans-serif'],fontweight: 'medium',marginBottom:20,}} >Filters</Typography>       
             <Divider style={{marginBottom:30}}/> 
                     
@@ -410,43 +418,136 @@ const ShowProducts = () => {
         {/** filterBox - END */}
                 
            
-           {/** Following Box is for Product View - ProductContainer */} 
-          <Grid container className={classes.productContainer}>
-            <Grid container >
+        {/** Following Box is for Product View - ProductContainer */}
+        <Grid container className={classes.productContainer}>
+          <Grid item lg={12} xs={12} md={12}>
+          <Grid container >
             <Grid item lg={12} xs={12} md={12}>
-                        <Typography className={classes.mainHeading} component="div" >Sound and Accessories</Typography>
-                        <Divider style={{marginBottom:30,}}/>
-                    </Grid>
+              <Typography className={classes.mainHeading} component="div" >Sound and Accessories</Typography>
+              <Divider style={{ marginBottom: 30, }} />
             </Grid>
-                    
-                    
-                    {
-                       productDetails.map( details => (
-                        
-                        <Grid item lg={3}>
-                             <ProductCard
-                                  image={details.imageUrl}
-                                  category={details.productCategory}
-                                  productname={details.productName}
-                                  productprice={details.productPrice}
+          </Grid> 
+          </Grid>
+
+         {/** Pagination Component is built below. */}
+          <Pagination
+            data={productDetails}
+            RenderComponent={IndividualProductCard} // here whole component is returned
+            // flow of the component are - 
+            // 1. IndividualProductCard is rendered
+            // 2. Then in Pagination Function this whole component is Rendered in Map() container name = forProductCard
+            pageLimit={5}
+            dataLimit={10}
+          />
+         </Grid> 
+        {/** ProductContainer - END */}
+        
+      </Box>
            
-                                  
-                           />
-                           <Divider style={{marginTop:40,marginBottom:40}}/>
-                       </Grid>
-                        
-                        
-                      ) ) 
-                    }
-                    {/* <Grid item lg={3}>Category 2</Grid>
-                    <Grid item lg={3}>Category 3</Grid>
-                    <Grid item lg={3}>Category 4</Grid> */}
-                </Grid>
-                {/** ProductContainer - END */}
-            </Box>
+    </>
+  )
+};
+
+// So this function is used to provide ProductCard that we built previously. It will return that ProductCard with data on it
+function IndividualProductCard(props) {
+  const { imageUrl, productCategory, productName, productPrice } = props.data;
+  return (
+    <>
+      <ProductCard
+                  image={imageUrl}
+                  category={productCategory}
+                  productname={productName}
+                  productprice={productPrice}
+                            
+        />    
+        <Divider style={{ marginTop: 40, marginBottom: 40 }} />
+      </>
+  );
+}
+
+// So this function is used for whole pagination purpose. Our component to be rendered is used in this function. Also Functionality for changing pages is also added..
+function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
+  const [pages] = useState(Math.round(data.length / dataLimit));
+  const [currentPage, setCurrentPage] = useState(1);
+
+  function goToNextPage() {
+     // For Next Page
+     setCurrentPage((page) => page + 1);
+  }
+
+  function goToPreviousPage() {
+     // For Previous Page
+     setCurrentPage((page) => page - 1);
+  }
+
+  function changePage(event) {
+     // Change Page Using Page Number
+     const pageNumber = Number(event.target.textContent);
+     setCurrentPage(pageNumber);
+  }
+
+  const getPaginatedData = () => {
+   
+     const startIndex = currentPage * dataLimit - dataLimit;
+     const endIndex = startIndex + dataLimit;
+     return productDetails.slice(startIndex, endIndex);
+  };
+
+  const getPaginationGroup = () => {
+    
+     let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+     return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
+  };
+  const classes = useStyle();
+
+  return (
+    <>
+      {/* show the posts, 10 posts at a time */}
+      {/** This is the actual data we want to show.  */}
+      <Grid container className={classes.forProductCards}>
+          {getPaginatedData().map((d, idx) => (
            
-        </>
-    )
+              <Grid item lg={3}> 
+              <RenderComponent key={idx} data={d} />
+              </Grid> 
+          ))}
+         </Grid>
+       
+      
+   
+
+    {/* show the pagiantion it consists of next and previous buttons along with page numbers, in our case, 5 page numbers at a time*/}
+    <div className='pagination'>
+      {/* previous button */}
+      <button
+        onClick={goToPreviousPage}
+        className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
+      >
+        Prev
+      </button>
+
+      {/* show page numbers */}
+      {getPaginationGroup().map((item, index) => (
+        <button
+          key={index}
+          onClick={changePage}
+          className={`paginationItem ${currentPage === item ? 'active' : null}`}
+        >
+          <span>{item}</span>
+        </button>
+      ))}
+
+      {/* next button */}
+      <button
+        onClick={goToNextPage}
+        className={`next ${currentPage === pages ? 'disabled' : ''}`}
+      >
+        Next
+      </button>
+    </div>
+    
+    </>
+  );
 }
 
 export default ShowProducts;

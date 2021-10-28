@@ -58,6 +58,30 @@ export const productDetails = [
         productName: 'Epson Home Cinema 5040UB 7648732',
         productPrice:'₹719',
     },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
     
 
 
