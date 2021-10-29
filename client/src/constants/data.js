@@ -9,15 +9,80 @@ export const bannerData = [
 
 ];
 
-export const card = [
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
-    "https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782",
+export const productDetails = [
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/samsung3.jpg?v=1527330210',
+        productCategory: 'Cell Phones',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹720',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/macbook2.jpg?v=1527330267',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    {
+        imageUrl: 'https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound.jpg?v=1527327782',
+        productCategory: 'Sound',
+        productName: 'Epson Home Cinema 5040UB 7648732',
+        productPrice:'₹719',
+    },
+    
 
 
 ];
@@ -79,6 +144,13 @@ export const mainRoutes = [
     'Contact',
     'About Us',
     'Blogs',
-]
+];
+
+// export const productDetails = [
+//     {
+//         imageUrl:'',
+//         category
+//     }
+// ]
 
 

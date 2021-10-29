@@ -14,6 +14,7 @@
 
 
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { makeStyles,Grid} from '@material-ui/core';
 import { ListItemButton,ListItemText,List,ListItem} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -74,8 +75,10 @@ const CategoryMenu = () => {
               
               CategoryOptions.map(option => (
                    
-
-                  <ListItem
+                <Link to='/allproducts'>
+                
+                <ListItem
+                  
                   secondaryAction={
                     <IconButton>
                       <FiChevronRight/>
@@ -97,6 +100,8 @@ const CategoryMenu = () => {
                   />
                 </ListItemButton>
                 </ListItem>
+                </Link>
+               
               
                   ))
                  
