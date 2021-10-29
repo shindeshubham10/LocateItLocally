@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .paginationItem {
@@ -14,6 +16,8 @@
   position: relative;
   margin: 0 5px;
   cursor: pointer;
+  font-family: "Courier New", Courier, monospace, sans-serif;
+  font-size: medium;
 }
 
 .paginationItem span {
@@ -27,6 +31,7 @@
 .next {
   background: #fff;
   border: none;
+  border-radius: 5px;
   padding: 10px;
   color: blue;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
@@ -35,8 +40,8 @@
 }
 
 .paginationItem.active {
-  border: 1px solid #888;
-  color: #888;
+  border: 1px solid #82b6e5;
+  color: #82b6e5;
   pointer-events: none;
 }
 

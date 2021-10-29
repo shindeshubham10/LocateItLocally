@@ -1,6 +1,6 @@
 import React from 'react';
-import './paginationStyle.css';
-import { useState } from 'react';
+import './pagination_Style.css';
+import { useState,useEffect} from 'react';
 import { makeStyles} from '@material-ui/core';
 import { Box, Grid, Typography,OutlinedInput,InputLabel,MenuItem,FormControl,Select,Chip,Divider } from '@material-ui/core';
 
@@ -77,7 +77,7 @@ const useStyle = makeStyles(theme => ({
         
     },
     productContainer: {
-        backgroundColor: 'green',
+        //backgroundColor: 'green',
         width: '100%',
         height: '100%',
         marginTop: 40,
@@ -92,8 +92,12 @@ const useStyle = makeStyles(theme => ({
         }
   },
   forProductCards: {
-    backgroundColor: 'orange',
+    //backgroundColor: 'orange',
     width: '100%',
+
+    [theme.breakpoints.down('sm')]: {
+      justifyContent:'center',
+    }
     
   },
     mainHeading: {
@@ -469,6 +473,9 @@ function IndividualProductCard(props) {
 function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
   const [pages] = useState(Math.round(data.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    window.scrollTo({ behavior: 'smooth', top: '0px' });
+  }, [currentPage]);
 
   function goToNextPage() {
      // For Next Page
@@ -514,9 +521,8 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
          </Grid>
        
       
-   
-
-    {/* show the pagiantion it consists of next and previous buttons along with page numbers, in our case, 5 page numbers at a time*/}
+      <Grid container justifyContent='center'>
+         {/* show the pagiantion it consists of next and previous buttons along with page numbers, in our case, 5 page numbers at a time*/}
     <div className='pagination'>
       {/* previous button */}
       <button
@@ -544,7 +550,13 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
       >
         Next
       </button>
-    </div>
+        </div>
+        </Grid>
+      {/* <div className="holdPagination">
+        
+      </div> */}
+
+
     
     </>
   );
