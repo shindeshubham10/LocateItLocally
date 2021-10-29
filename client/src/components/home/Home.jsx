@@ -23,7 +23,7 @@ const Home=()=>{
               <MultiSlider/> 
              <Headings name="TOP SELLERS"/> 
               <Cards />
-               <Footer/>    
+                   
 
         </div>
           
