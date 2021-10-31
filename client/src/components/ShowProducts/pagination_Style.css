@@ -7,8 +7,8 @@
 }
 
 .paginationItem {
-  background: #fff;
-  border: 2px solid #666;
+  background: #38495a;
+  border: 2px solid #38495a;
   padding: 10px 15px;
   border-radius: 50%;
   height: 45px;
@@ -34,12 +34,13 @@
   border-radius: 5px;
   padding: 10px;
   color: blue;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.4); */
   margin: 0 10px;
   cursor: pointer;
 }
 
 .paginationItem.active {
+  background-color: transparent;
   border: 1px solid #82b6e5;
   color: #82b6e5;
   pointer-events: none;

@@ -441,7 +441,7 @@ const ShowProducts = () => {
             // 1. IndividualProductCard is rendered
             // 2. Then in Pagination Function this whole component is Rendered in Map() container name = forProductCard
             pageLimit={5}
-            dataLimit={10}
+            dataLimit={8}
           />
          </Grid> 
         {/** ProductContainer - END */}

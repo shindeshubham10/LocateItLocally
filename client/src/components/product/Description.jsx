@@ -4,14 +4,15 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Typography } from '@material-ui/core';
+import { Typography,useMediaQuery,useTheme} from '@material-ui/core';
 const useStyle = makeStyles(theme=>({
    
 }))
 const Description = () => {
 
     const classes=useStyle()
-    
+    const theme = useTheme();
+    const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const [alignment, setAlignment] = React.useState('A');
 
     const handleAlignment = (event, newAlignment) => {
@@ -21,12 +22,12 @@ const Description = () => {
     return (
         <Grid container >
             <Grid
-            item
+            item xs={12}
             sx={{
                 width: '100%',
                 minHeight:300,
                 backgroundColor: '#f3f3f3',
-                margin:"40px 60px",
+                margin:"40px 20px",
                 position:"relative",
                 border:"1px solid black",
                 borderRadius:"10px",
@@ -35,7 +36,7 @@ const Description = () => {
             }}
             >
             <Box 
-                display="flex" 
+                display="flex"
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="center"
@@ -49,13 +50,13 @@ const Description = () => {
                     onChange={handleAlignment}
                     sx={{position:"absolute",top:"10px",textAlign:"center"}}
                     >
-                    <ToggleButton  sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px"}}value="A" >
+                    <ToggleButton  sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} value="A" >
                         Description 
                     </ToggleButton>
-                    <ToggleButton  value="B" >
+                    <ToggleButton  value="B" sx={{color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} >
                         Specification 
                     </ToggleButton>
-                    <ToggleButton  sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px",paddingRight:"30px"}} value="C" >
+                    <ToggleButton  sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px",paddingRight:"30px",color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} value="C" >
                         Review 
                     </ToggleButton>
                     
