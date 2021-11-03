@@ -40,7 +40,7 @@ const useStyles=makeStyles(theme=>(
         },
         first:{
                 borderRadius:40,
-
+                position:'relative',
             
             // [theme.breakpoints.down('sm')]: {
                 
@@ -103,45 +103,43 @@ const useStyles=makeStyles(theme=>(
         },*/
         chipstyle:
         {
-            position:'relative',
-            left:200,
-            top:10,
+            position:'absolute',
+            
            
             
             
             borderColor:'black',
             backgroundColor:'white',
-            [theme.breakpoints.down('sm')]: {
+            // [theme.breakpoints.down('sm')]: {
                 
-            },
-            [theme.breakpoints.down('md')]: {
-                position:'relative',
-                left:335,
+            // },
+            // [theme.breakpoints.down('md')]: {
+            //     position:'relative',
+            //     left:335,
                 
-            },
+            // },
             
             
 
         },
         chipstyle2:
         {
-            position:'relative',
-            left:300,
-            top:20,
+            position:'absolute',
+            
      
             
             borderColor:'black',
             backgroundColor:'white',
-            [theme.breakpoints.down('sm')]: {
-                position:'relative',
-                backgroundColor:'red',
+            // [theme.breakpoints.down('sm')]: {
+            //     position:'relative',
+            //     backgroundColor:'red',
                 
-            },
-            [theme.breakpoints.down('md')]: {
-                position:'relative',
-                left:350,
+            // },
+            // [theme.breakpoints.down('md')]: {
+            //     position:'relative',
+            //     left:350,
                 
-            },
+            // },
             
 
         },
@@ -199,8 +197,16 @@ const Cart = () => {
         <Grid container className={classes.main} >
            
             <Grid item xs={12} lg={6} md={12} className={classes.first} >
+            <Box
+            display="flex" 
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center" 
+           >
+               <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/>
+          </Box>
 
-            <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/>
+            {/* <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/> */}
                <div style={{borderRadius:25}}>
                <Grid className={classes.cartitem}>
                     
@@ -270,8 +276,15 @@ const Cart = () => {
             </Grid>
          
                
-            <Grid item xs={12} md={12} lg={4}  >
-            <StyledChip label="Cart Total" size='large' variant='outlined'  className={classes.chipstyle}/>
+            <Grid item xs={12} md={12} lg={4} style={{position:'relative'}} >
+            <Box
+            display="flex" 
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center" 
+           >
+               <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle}/>
+          </Box>
                 <Card  >
                 
                     <CardHeader title={<Typography style={{fontWeight:'bold'}}>Cart Note</Typography>} style={{fontWeight:'bold',textAlign: 'center'}}/>

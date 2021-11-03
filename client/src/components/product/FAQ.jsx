@@ -123,6 +123,7 @@ const FAQ=()=>{
             maxWidth:1200,
             maxHeight: 300,
             margin:"30px 20px 20px 20px",
+            width:{xs:"80%",},
            
             '& ul': { padding: 0 },
         }}

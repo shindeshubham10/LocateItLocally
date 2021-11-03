@@ -51,6 +51,7 @@ const useStyles=makeStyles(theme=>(
         third:{
 
             [theme.breakpoints.down('sm')]: {
+                marginLeft:'10px'
                    
             },
         },
@@ -126,12 +127,14 @@ const Product=()=>{
                                  features_.map(
                                     item =>(
                                         <ListItem key={item}>
-                                                <ListItemIcon>
+                                                {/* <ListItemIcon>
                                                     <ArrowRight/>
                                                 </ListItemIcon>
                                                 <ListItemText>
                                                     {item}
-                                                </ListItemText>
+                                                </ListItemText> */}
+                                                <ArrowRight/>
+                                                {item}
                                         </ListItem>
 
     
