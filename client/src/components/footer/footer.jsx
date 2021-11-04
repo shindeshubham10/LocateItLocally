@@ -1,20 +1,32 @@
 import React from "react";
 import "./footer.css"
-import {Grid, Icon, IconButton,Paper } from '@material-ui/core';
+import {Grid, Icon, IconButton,Paper, Typography,makeStyles } from '@material-ui/core';
 import logo from "../Logo/LocateItLocally Logo.png"
 import {Twitter,Facebook,Instagram,LinkedIn,YouTube,Copyright,LocationOn,ContactMail,Menu,Home,Call,LiveHelp} from "@material-ui/icons"
+import { fontFamily } from "@mui/system";
+
+
 
 
 function Footer() {
+  const headingstyle={
+      fontSize:"30px",
+      fontFamily:['Noto Sans', 'sans-serif'],
+      fontWeight:"bold"
+  }
+  
   return (
     <div>
       
-      <Grid container className='main'>
-          <Grid item lg={3} sm={3} xs={6}>
-            <a href="#"><img src={logo}></img></a>
+      <Grid container className='main' direction="row">
+          <Grid item lg={3} sm={3} xs={6} className="logodiv">
+            <a href="#"><img src={logo} className="logoimg"></img></a>
           </Grid>
+
+
           <Grid item lg={3} sm={3} xs={6}>
-            <h2>Contact Us</h2>
+            <Typography style={headingstyle}>Contact Us</Typography>
+            
             <p>Email:info@locateitlocally<br></br>
                 Phone No:7768424964
             </p>
@@ -31,7 +43,6 @@ function Footer() {
           <Grid item lg={3} sm={3} xs={6} className='address'>
             <h2>Address <LocationOn/></h2>
             <p>Street: A 36, New Empire Indl Estate,<br></br>
-             Kondivita Road,J B Nagar,Andheri(west)<br></br>
                 State/area: Maharashtra<br></br>
                 Phone number  02236389036<br></br>
                 Zip code  400069
