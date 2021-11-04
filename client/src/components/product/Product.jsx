@@ -1,11 +1,14 @@
 
-import {Grid,Box,makeStyles, Typography,Rating,List,Button, ListItemIcon,Divider, ListItemText, CardHeader,Card, CardContent, ListItem,useMediaQuery,useTheme} from '@material-ui/core'
+import {Grid,Box,makeStyles, Typography,Rating,List,Button, ListItemIcon,Divider, ListItemText, CardHeader,Card, CardContent, ListItem,useMediaQuery,useTheme,GridList} from '@material-ui/core'
 import {FavoriteOutlined,LocationDisabled,Star,PermDeviceInformationOutlined,CallOutlined,GrFavorite} from '@material-ui/icons';
 import ReactStars from "react-rating-stars-component";
 import { ArrowRight } from '@material-ui/icons';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallIcon from '../product/icon-call.png';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
 
  
 const useStyles=makeStyles(theme=>(
@@ -28,27 +31,30 @@ const useStyles=makeStyles(theme=>(
 
         forVerticalImageCarousal: {
             //backgroundColor:'red',
-            width:100,
+            width: 100,
+            height:300,
            
         },
 
         firstbox:{
-            backgroundColor:'purple',
+            //backgroundColor:'purple',
             width:"100%",
             
 
         },
 
-        second:{
-            backgroundColor:'green',
+        gridForMainBigImage:{
+           // backgroundColor:'green',
             width:400,
-            height:400,
+            height: 400,
+            margin:10,
             
 
         },
-        secondbox:{
+        boxForMainImage:{
             width:"100%",
-            height:"100%",
+            height: "100%",
+           
             
         },
         sellerInfoHeading: {
@@ -65,7 +71,7 @@ const useStyles=makeStyles(theme=>(
         },
 
         productAllInformation:{
-            backgroundColor:'pink',
+           // backgroundColor:'pink',
             [theme.breakpoints.down('sm')]: {
                   paddingLeft:10, 
             },
@@ -84,7 +90,56 @@ const useStyles=makeStyles(theme=>(
 )
 
 )
-
+const itemData = [
+    {
+      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+      title: 'Breakfast',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+      title: 'Burger',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+      title: 'Camera',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+      title: 'Coffee',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+      title: 'Hats',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+      title: 'Honey',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+      title: 'Basketball',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+      title: 'Fern',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+      title: 'Mushrooms',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
+      title: 'Tomato basil',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
+      title: 'Sea star',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
+      title: 'Bike',
+    },
+  ];
 
 const Product=()=>{
         
@@ -97,21 +152,41 @@ const Product=()=>{
             "Computers running Windows",
 
         ];
+        const flexContainer = {
+            display: 'flex',
+            flexDirection: mobileScreen ? 'row' : 'column',
+            padding: 0,
 
+            
+          };
 
 
         const classes=useStyles();
         return(
 
-            <Grid container className={classes.root}>
-                <Grid item className={classes.forVerticalImageCarousal}>
-                    <Box className={classes.firstbox}>
-                        <img style={{width:"100%",height:"auto"}}src="https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound2_79x79.jpg?v=1569164954" alt=""/>
-                    </Box>
-                </Grid>
-                <Grid item className={classes.second} >
-
-                    <Box className={classes.secondbox} >
+            <Grid container className={classes.root}>                    
+                    <ImageList 
+                        cols={ 1 }
+                        rowHeight={200}
+                    sx={{ width: mobileScreen ? '70%' : 200, height: 300 }}
+                    
+                    >
+                        {itemData.map((item) => (
+                            <ImageListItem key={item.img}>
+                            <img
+                                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                alt={item.title}
+                                    loading="lazy"
+                                    width={'100%'}
+                                    height={'100%'}
+                            />
+                            </ImageListItem>
+                    ))}
+                    </ImageList>
+                    
+                <Grid item className={classes.gridForMainBigImage} >
+                    <Box className={classes.boxForMainImage} >
                         <img style={{width:"100%",height:"100%"}} src="https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound2_79x79.jpg?v=1569164954" alt=""/>
                     </Box>
                 </Grid>
