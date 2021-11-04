@@ -182,7 +182,7 @@ const MainDashboard= () => {
                 >
 
         <Tab label="Add Product" className={ value===0 ? classes.active_tabStyle : classes.default_tabStyle  } />
-        <Tab label="Item Two"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+        <Tab label="All Products"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Three" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Four" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Five" className={ value===4 ? classes.active_tabStyle : classes.default_tabStyle  }/>

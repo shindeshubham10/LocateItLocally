@@ -19,6 +19,8 @@ import Login from './components/Account/User_Login/user_login.jsx';
 
 
 import User_profile from './components/Account/User_Profile/user_profile';
+import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profile';
+import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
 
 import {
   BrowserRouter as Router,
@@ -59,7 +61,9 @@ function App() {
         <Route exact path="/allproducts" component={ShowProducts} />
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
-
+        <Route exact path="/owner_profile" component={Owner_profile} />
+        <Route exact path="/display_user_profile" component={display_user_profile} />
+        
     
         
 

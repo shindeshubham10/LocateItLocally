@@ -256,12 +256,12 @@ const Newproduct = () => {
                             fullWidth
                             required
                             select
-                  variant="outlined"
-                  color="primary"
-                  value={currency}
-                  onChange={handleChange}
-                  size='medium'
-                  placeholder="test@test.com"
+                            variant="outlined"
+                            color="primary"
+                            value={currency}
+                            onChange={handleChange}
+                            size='medium'
+                            placeholder="test@test.com"
                  
                         >
                                 
