@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid,TextField,Box,Button,Typography, Paper} from '@material-ui/core';
-import owner_profile_style from '../Owner_Profile/owner_profile_style.css'
+import "./owner_profile_style.css";
 import src from '../Owner_Profile/Profile_Photo.png'
 import {AccountCircle,ArrowForward} from "@material-ui/icons";
 import { borderRadius } from "@mui/system";
