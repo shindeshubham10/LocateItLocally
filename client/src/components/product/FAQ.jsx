@@ -1,13 +1,8 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Grid from '@mui/material/Grid';
-import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography"
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import {List,ListItemText,ListItem,Grid,Chip,Box,useMediaQuery} from '@mui/material'
+import { useTheme } from '@mui/material/styles';
+import { Divider } from '@material-ui/core';
+
 
 
 const FAQ=()=>{
@@ -88,7 +83,8 @@ const FAQ=()=>{
         
 
     ];
-
+    const theme = useTheme();
+    const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
     return(
         <Grid container >
         <Grid
@@ -96,11 +92,12 @@ const FAQ=()=>{
           sx={{
             width: '100%',
             height: 400,
-            backgroundColor: '#f3f3f3',
-            margin:"40px 60px",
+            //backgroundColor: '#f3f3f3',
+            margin:"40px 30px",
             position:"relative",
             border:"1px solid black",
-            borderRadius:"10px",
+              borderRadius: "10px",
+           
             
             
           }}
@@ -117,14 +114,15 @@ const FAQ=()=>{
         <List
         sx={{
             width: '100%',
-            bgcolor: 'background.paper',
-            position: 'relative',
+            //bgcolor: 'background.paper',
+             position: 'relative',
+        
             overflow: 'auto',
             maxWidth:1200,
             maxHeight: 300,
-            margin:"30px 20px 20px 20px",
-            width:{xs:"80%",},
-           
+            margin: mobileScreen ? "30px 0px 20px 0px" : "30px 20px 20px 120px",
+
+            
             '& ul': { padding: 0 },
         }}
         
@@ -137,12 +135,14 @@ const FAQ=()=>{
                 <Grid item xs={12} md={6} lg={6}>
                 <ListItem >
                     <Question txt="Q" />
-                    <ListItemText primary={item.q} />
-                    </ListItem>
+                    <ListItemText primary={item.q} primaryTypographyProps={{ fontSize: mobileScreen ? '1rem':'1.2rem',fontWeight:400,fontFamily:['Roboto','sans-serif']}}/>
+                        </ListItem>
+                    
                     <ListItem >
                     <Question txt="A" />
-                    <ListItemText primary={item.a} />
+                    <ListItemText primary={item.a} primaryTypographyProps={{ fontSize: mobileScreen ? '1rem':'1.2rem',fontWeight:400,fontFamily:['Roboto','sans-serif']}}/>
                 </ListItem>
+                <Divider/>        
                 </Grid>
                 ))}
                 </Grid>

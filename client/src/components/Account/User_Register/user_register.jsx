@@ -34,7 +34,7 @@ function Register()
                 </Grid>
                 <Grid item style={{textAlign:'center',marginTop:'60px'}}>
                   <p>Have a already Account ?</p>
-                  <Link to="/login"><Button variant="contained" color="white" >Login</Button></Link>
+                  <Link to="/login"><Button variant="contained"  style={{color:"white",borderRadius:"50px", backgroundColor:"#38495a",width:200}} >Login</Button></Link>
                 </Grid>
             </Grid>
           </Grid>
@@ -57,13 +57,16 @@ function Register()
                             value={user}
                             exclusive
                             onChange={handleUserBusiness}
-                            color="standard"
+                            //color="red"
+                           style={{color:'red'}}
                           
                           >
                           <ToggleButton 
-                          sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px"}} 
+                          sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",}} 
                           size="small" 
                           value="customer" 
+                        //style={{}}
+                        
                           >
                             Customer
                           </ToggleButton>
@@ -290,9 +293,9 @@ function Register()
               <Grid container justifyContent="center" className="rt">
                   <Grid item>
                   {user=="customer"?
-                  <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="registerbutton">Register</Button>
                   :
-                  <Button  variant="contained" style={{marginTop:"30px"}}>Register</Button>
+                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="registerbutton">Register</Button>
                   }
                   </Grid>
               </Grid>

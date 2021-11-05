@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import {AppBar,Toolbar,makeStyles,Typography,Box, Button} from '@material-ui/core'
 import ProductCard from "./ProductCard";
 import { FiChevronRight } from 'react-icons/fi';
-import { card } from "../../constants/data";
+import { productDetails } from "../../constants/data";
 
 
 const responsive = {
@@ -99,10 +99,17 @@ const Cards=()=>{
           />} 
         >
                 {
-                    card.map( image => (
+                   productDetails.map( details => (
                         
                        
-                     <ProductCard img={image} />
+                     <ProductCard
+                       image={details.imageUrl}
+                       category={details.productCategory}
+                       productname={details.productName}
+                       productprice={details.productPrice}
+
+                       
+                     />
                       //<DemoProductCard/>
                      
                    ) )

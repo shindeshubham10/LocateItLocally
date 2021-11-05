@@ -161,26 +161,26 @@ const ProductCard = (props) => {
                     <CardMedia className={classes.imageBox}
                         component="img"
                             //height="100%"
-                        image= {props.img}
+                        image= {props.image}
                         alt="Product Image"
                     />
                     
                     <Box className={classes.cardDescription}>
                         {/** Product category */}
                     <Typography variant="h6"  className={classes.productCategory} component="div">
-                        Sound
+                       {props.category}
                     </Typography>
 
                     
                     {/** Product Name */}
                     <Typography variant="h6"  className={classes.productName} component="div">
-                    Epson Home Cinema 5040UB 7648732
+                    {props.productname}
                     </Typography>
 
                     
                     {/** Product Pricing */}
                     <Typography variant="h6"  className={classes.productPrice} component="div">
-                        ₹719
+                        {props.productprice}
                     </Typography>
                     </Box>
                     
