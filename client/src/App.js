@@ -63,6 +63,7 @@ function App() {
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
         <Route exact path="/reviews" component={Reviews} />
+        <Route exact path="/shopproducts" component={Reviews} />
 
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
