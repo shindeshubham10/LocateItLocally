@@ -1,12 +1,14 @@
 import React from 'react'
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Typography,useMediaQuery,useTheme} from '@material-ui/core';
+import { Typography,useMediaQuery} from '@material-ui/core';
 const useStyle = makeStyles(theme=>({
-   
+    
+        
 }))
 const Description = () => {
 
@@ -40,6 +42,7 @@ const Description = () => {
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="center"
+                className={classes.togglebox}
             >
                 <ToggleButtonGroup
                     value={alignment}
@@ -47,8 +50,10 @@ const Description = () => {
                     color="primary"
                     size="small"
                     
+                    
+                    
                     onChange={handleAlignment}
-                    sx={{position:"absolute",top:"10px",textAlign:"center"}}
+                    sx={{position:"absolute",top:"10px",textAlign:"center",}}
                     >
                     <ToggleButton  sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} value="A" >
                         Description 

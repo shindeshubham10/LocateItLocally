@@ -121,7 +121,8 @@ const FAQ=()=>{
             maxWidth:1200,
             maxHeight: 300,
             margin: mobileScreen ? "30px 0px 20px 0px" : "30px 20px 20px 120px",
-           
+
+            
             '& ul': { padding: 0 },
         }}
         

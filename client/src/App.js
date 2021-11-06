@@ -16,6 +16,7 @@ import Register from './components/Account/User_Register/user_register';
 import MainDashboard from './components/BusinessOwner/Product_Management/MainDashboard';
 import ShowProducts from './components/ShowProducts/showProducts';
 import Login from './components/Account/User_Login/user_login.jsx';
+import Reviews from './components/Account/ShopDetails/Reviews';
 
 
 import User_profile from './components/Account/User_Profile/user_profile';
@@ -61,6 +62,9 @@ function App() {
         <Route exact path="/allproducts" component={ShowProducts} />
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
+        <Route exact path="/reviews" component={Reviews} />
+        <Route exact path="/shopproducts" component={Reviews} />
+
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
         

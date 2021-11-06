@@ -215,12 +215,14 @@ const Product=()=>{
                                  features_.map(
                                     item =>(
                                         <ListItem key={item}>
-                                                <ListItemIcon>
+                                                {/* <ListItemIcon>
                                                     <ArrowRight/>
                                                 </ListItemIcon>
                                                 <ListItemText style={{fontSize:15,fontWeight:400,fontFamily:['Roboto','sans-serif']}}>
                                                     {item}
-                                                </ListItemText>
+                                                </ListItemText> */}
+                                                <ArrowRight/>
+                                                {item}
                                         </ListItem>
 
     
