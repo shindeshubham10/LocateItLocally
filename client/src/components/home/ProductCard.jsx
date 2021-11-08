@@ -16,6 +16,8 @@ import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { getThemeProps } from '@material-ui/styles';
 
+import { Link } from "react-router-dom";
+
 
 
 // card have three components 
@@ -155,7 +157,7 @@ const ProductCard = (props) => {
     return (
         <div>
             <Card className={classes.mainCard}  >
-                <CardContent>
+                <CardContent >
                  
                     {/** Product Image */}
                     <CardMedia className={classes.imageBox}
@@ -163,6 +165,8 @@ const ProductCard = (props) => {
                             //height="100%"
                         image= {props.image}
                         alt="Product Image"
+                        //component={Link}
+                        //to="/allproducts"
                     />
                     
                     <Box className={classes.cardDescription}>
@@ -193,7 +197,7 @@ const ProductCard = (props) => {
 }
 
 export default ProductCard;
-
+// component={Link} to="/products"
 
 
 /**

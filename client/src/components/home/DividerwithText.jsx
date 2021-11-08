@@ -3,6 +3,17 @@ import { makeStyles,Box, Typography ,Button} from "@material-ui/core";
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { FiChevronRight } from 'react-icons/fi';
 
+
+// for navigation From one page to other 
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
+import { Link } from "react-router-dom";
+import ShowProducts from "../ShowProducts/showProducts";
+
+
 const useStyles = makeStyles(theme => ({
   container: {
     
@@ -156,6 +167,11 @@ const useStyles = makeStyles(theme => ({
  
 }));
 
+const navigateToPage = () => {
+
+}
+
+
 const DividerWithText = (props) => {
  const classes = useStyles();
  return (
@@ -178,10 +194,12 @@ const DividerWithText = (props) => {
         <span className={classes.buttonText}>Shop More</span>
      </Button> */}
 
-    
-    <Button variant="contained" endIcon={<FiChevronRight  />} className={classes.btn} >
+     
+         <Button variant="contained" endIcon={<FiChevronRight  />} className={classes.btn} component={Link} to="/allproducts">
         <span className={classes.buttonText}>Shop More</span>
-     </Button>
+        </Button>
+         
+    
 
   </div>
  );

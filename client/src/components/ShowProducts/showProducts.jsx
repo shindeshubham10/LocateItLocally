@@ -120,7 +120,7 @@ const useStyle = makeStyles(theme => ({
 
 
 
-const ShowProducts = () => {
+const ShowProducts = (props) => {
 
   const classes = useStyle();
   const theme = useTheme();
