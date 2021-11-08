@@ -77,11 +77,11 @@ function Login()
                 </Grid>
 
 
-                <Grid item lg={12} sm={12} xs={12}>
+                <Grid item lg={12} sm={12} xs={12} justifyContent="center">
                 { user=="customer"? 
                 
-                  <Grid container direction="column" className="t" spacing='3'>
-                    <Grid item lg={12} sm={12} xs={12} >
+                  <Grid container direction="row" className="t" spacing='1'>
+                    <Grid item lg={12} sm={12} xs={12}>
                       <TextField
                         required
                         variant="standard"
