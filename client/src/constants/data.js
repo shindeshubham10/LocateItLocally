@@ -88,6 +88,12 @@ export const productDetails = [
 ];
 
 export const cartitems=[
+    {
+        img:"https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound2_79x79.jpg?v=1569164954",
+        name:"Cordless Spinner",
+        price:"12333$"
+
+    },
 
     {
         img:"https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound2_79x79.jpg?v=1569164954",

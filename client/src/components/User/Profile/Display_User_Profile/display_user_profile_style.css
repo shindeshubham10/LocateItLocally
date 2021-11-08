@@ -1,0 +1,48 @@
+
+.profile_content
+{
+    min-height: max-content;
+    padding-bottom: 50px;
+    padding-top: 20px;
+    
+}
+
+.profile_picture
+{
+    
+    
+
+}
+.editbtndiv
+{
+    
+}
+.user_info
+{
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.p_img
+{
+    
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.photo_upload
+{
+    cursor: pointer;
+}
+.editicon
+{
+    margin-right: 20px;
+    margin-top: 20px;
+
+}
+
+.editicon :hover
+{
+}

@@ -3,7 +3,7 @@ import {Grid,TextField,Box,Button,Typography, Paper, Select,MenuItem,Datepi} fro
 import src from "../Owner_Profile/Profile_Photo.png"
 import {AccountCircle,ArrowForward} from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import "./user_profile_style.css"
+import "./user_profile_style.css";
 
 
 
