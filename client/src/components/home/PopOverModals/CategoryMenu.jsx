@@ -19,6 +19,7 @@ import { makeStyles,Grid} from '@material-ui/core';
 import { ListItemButton,ListItemText,List,ListItem} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { FiChevronRight } from 'react-icons/fi';
+import { useState } from 'react';
 
 // Import card and realated 
 import Card from "@material-ui/core/Card";
@@ -61,9 +62,15 @@ import { fontFamily, fontSize } from '@mui/system';
 
   }));
 
+  
  
 const CategoryMenu = () => {
-    const classes =  useStyles();
+  const classes = useStyles();
+  const [Navigation, setNavigation] = useState();
+  const navigateToPage = (props) => {
+    const path = props.ListItemText;
+    <Link to='/path' />
+  }
     return (
        
         <>
@@ -75,10 +82,10 @@ const CategoryMenu = () => {
               
               CategoryOptions.map(option => (
                    
-                <Link to='/allproducts'>
+                // <Link to='/allproducts'>
                 
                 <ListItem
-                  
+                onClick={navigateToPage(option)}
                   secondaryAction={
                     <IconButton>
                       <FiChevronRight/>
@@ -88,7 +95,7 @@ const CategoryMenu = () => {
                   disablePadding>
                   <ListItemButton>
                   <ListItemText
-                    
+                   
                     primary={option} 
                     primaryTypographyProps={
                       {
@@ -100,7 +107,7 @@ const CategoryMenu = () => {
                   />
                 </ListItemButton>
                 </ListItem>
-                </Link>
+                // </Link>
                
               
                   ))
