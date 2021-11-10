@@ -22,6 +22,7 @@ import ShopProducts from './components/Account/ShopDetails/ShopProducts';
 
 
 import User_profile from './components/Account/User_Profile/user_profile';
+import googleMapsComponent from './components/GoogleMapIntegration/googleMaps.component';
 import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profile';
 import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
 
@@ -34,6 +35,7 @@ import Product from './components/product/Product';
 import FAQ from './components/product/FAQ';
 import ProductDetails from './components/product/ProductDetails';
 import ShopDetails from './components/Account/ShopDetails/ShopDetails';
+import ShowMap from './components/GoogleMapIntegration/googleMapsIntegration';
 
 const useStyles=makeStyles(
   {
@@ -63,8 +65,10 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/businessdashboard" component={MainDashboard} />
         <Route exact path="/allproducts" component={ShowProducts} />
+        <Route exact path="/New Arrivals" component={User_profile} />
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
+        <Route exact path="/maps" component={ShowMap} />
         <Route exact path="/reviews" component={Reviews} />
         <Route exact path="/shopproducts" component={ShopProducts} />
 

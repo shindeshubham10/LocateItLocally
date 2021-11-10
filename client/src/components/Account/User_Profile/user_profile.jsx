@@ -1,6 +1,10 @@
 import React from "react";
 import {Grid,TextField,Box,Button,Typography, Paper, Select,MenuItem,Datepi} from '@material-ui/core';
+<<<<<<< HEAD
 import src from "components\User\Profile\Display_User_Profile\Profile_Photo.png"
+=======
+import src from "./Profile_Photo.png"
+>>>>>>> fe18f750479826acae9f5755449807aa8f50332f
 import {AccountCircle,ArrowForward} from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import "./user_profile_style.css";
