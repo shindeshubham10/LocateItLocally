@@ -18,6 +18,8 @@ import ShowProducts from './components/ShowProducts/showProducts';
 import Login from './components/Account/User_Login/user_login.jsx';
 import Reviews from './components/Account/ShopDetails/Reviews';
 
+import ShopProducts from './components/Account/ShopDetails/ShopProducts';
+
 
 import User_profile from './components/Account/User_Profile/user_profile';
 import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profile';
@@ -31,6 +33,7 @@ import {
 import Product from './components/product/Product';
 import FAQ from './components/product/FAQ';
 import ProductDetails from './components/product/ProductDetails';
+import ShopDetails from './components/Account/ShopDetails/ShopDetails';
 
 const useStyles=makeStyles(
   {
@@ -63,10 +66,12 @@ function App() {
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
         <Route exact path="/reviews" component={Reviews} />
-        <Route exact path="/shopproducts" component={Reviews} />
+        <Route exact path="/shopproducts" component={ShopProducts} />
 
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
+
+        <Route exact path="/shopdetails" component={ShopDetails} />
         
     
         

@@ -5,8 +5,9 @@ import { IconButton, makeStyles} from '@material-ui/core';
 import { Box, Grid, Typography,OutlinedInput,InputLabel,MenuItem,FormControl,Select,Chip,Divider,TextField } from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { productDetails } from '../../constants/data'; 
-import ProductCard from '../home/ProductCard';
+import { productDetails } from '../../../constants/data';
+//import { productDetails } from '../../constants/data'; 
+import ProductCard from '../../home/ProductCard';
 import { useTheme } from '@emotion/react';
 
 
@@ -428,7 +429,7 @@ const ShopProducts = () => {
           <Grid item lg={12} xs={12} md={12}>
           <Grid container >
             <Grid item lg={12} xs={12} md={12}>
-              <Box>
+              <Box style={{display:'flex'}}>
                 <Box>
                   <TextField>
 
