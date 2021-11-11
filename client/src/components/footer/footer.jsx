@@ -18,7 +18,8 @@ function Footer() {
   return (
     <div>
       
-      <Grid container className='main' direction="row">
+      <div className="topdiv">
+      <Grid container direction="row">
           <Grid item lg={3} sm={3} xs={6} className="logodiv">
             <a href="#"><img src={logo} className="logoimg"></img></a>
           </Grid>
@@ -66,6 +67,8 @@ function Footer() {
           </Grid>
           
       </Grid>
+
+      </div>
     </div>
   );
 }
