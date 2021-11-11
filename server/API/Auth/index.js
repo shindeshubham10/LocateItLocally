@@ -2,8 +2,8 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import passport from "passport";
-
-const Router = express.Router();
+import { Router } from "express";
+const router = express.Router();
 
 //Models
 import { UserModel } from "../../Database/user";
@@ -19,9 +19,9 @@ Access        Public
 Method        POST
 */
 
-Router.post("/signup", async(req,res) => {
+router.post("/signup", async(req,res) => {
   try {
-await ValidateSignup(req.body.credentials);
+//await ValidateSignup(req.body.credentials);
 
 await UserModel.findEmailAndPhone(req.body.credentials);
 //DB
@@ -46,56 +46,53 @@ Access        Public
 Method        POST
 */
 
-Router.post("/signin", async(req,res) => {
-  try {
-await ValidateSignin(req.body.credentials);
+// Router.post("/signin", async(req,res) => {
+//   try {
+// await ValidateSignin(req.body.credentials);
 
-    const user = await UserModel.findByEmailAndPassword(
-      req.body.credentials
-    );
+//     const user = await UserModel.findByEmailAndPassword(
+//       req.body.credentials
+//     );
 
-   //JWT Auth Token
-   const token = user.generateJwtToken();
+//    //JWT Auth Token
+//    const token = user.generateJwtToken();
 
-   return res.status(200).json({token, status: "Success"});
+//    return res.status(200).json({token, status: "Success"});
 
-  } catch (error) {
-    return res.status(500).json({error: error.message});
-  }
-});
-
-
-/*
-Route         /google
-Descrip       Google Signin
-Params        None
-Access        Public
-Method        GET
-*/
-
-Router.get("/google", passport.authenticate("google",{
-scope: [
-  "https://www.googleapis.com/auth/userinfo.profile",
-  "https://www.googleapis.com/auth/userinfo.email"
-],
-})
-);
-
-/*
-Route         /google/callback
-Descrip       Google Signin callback
-Params        None
-Access        Public
-Method        GET
-*/
-
-Router.get("/google/callback", passport.authenticate("google",{failureRedirect: "/"}),
-(req,res) => {
-  return res.json({token: req.session.passport.user.token});
-}
-);
+//   } catch (error) {
+//     return res.status(500).json({error: error.message});
+//   }
+// });
 
 
+// /*
+// Route         /google
+// Descrip       Google Signin
+// Params        None
+// Access        Public
+// Method        GET
+// */
 
+// Router.get("/google", passport.authenticate("google",{
+// scope: [
+//   "https://www.googleapis.com/auth/userinfo.profile",
+//   "https://www.googleapis.com/auth/userinfo.email"
+// ],
+// })
+// );
+
+// /*
+// Route         /google/callback
+// Descrip       Google Signin callback
+// Params        None
+// Access        Public
+// Method        GET
+// */
+
+// Router.get("/google/callback", passport.authenticate("google",{failureRedirect: "/"}),
+// (req,res) => {
+//   return res.json({token: req.session.passport.user.token});
+// }
+// );
 
 export default Router;

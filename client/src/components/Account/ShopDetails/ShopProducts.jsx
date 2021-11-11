@@ -1,11 +1,11 @@
 import React from 'react';
-import './pagination_Style.css';
+import '../../ShowProducts/pagination_Style.css';
 import { useState,useEffect} from 'react';
 import { IconButton, makeStyles} from '@material-ui/core';
-import { Box, Grid, Typography,OutlinedInput,InputLabel,MenuItem,FormControl,Select,Chip,Divider,TextField } from '@material-ui/core';
+import { Box, Grid, Divider,TextField } from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { productDetails } from '../../../constants/data';
+import { productDetails } from '../../../constants/data'; 
 //import { productDetails } from '../../constants/data'; 
 import ProductCard from '../../home/ProductCard';
 import { useTheme } from '@emotion/react';
@@ -140,122 +140,11 @@ const ShopProducts = () => {
   };
   return (
     <>
-      <Box className={classes.mainBoxForFiltersandProducts}>
+      
 
         {/** Following Box is for Filters UI - filterBox */}
 
-        <Grid container spacing={2} className={classes.filterBox}>
-            
-            
-          <Grid item lg={12} xs={12} md={12}>
-            <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
-            <Divider style={{ marginBottom: 30 }} />
-          </Grid>
-
-          {/** First Filter  */}
-          <Grid item lg={12} xs={6}>
-            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-              <InputLabel id="Filter-Heading">Price</InputLabel>
-              <Select
-                labelId="Filter-Heading"
-                id="filter-chip"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                renderValue={(selected) => (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                    {selected.map((value) => (
-                      <Chip key={value} label={value} />
-                    ))}
-                  </Box>
-                )}
-                MenuProps={MenuProps}
-              >
-                {names.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                    style={getStyles(name, personName, theme)}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-
-
-          {/** Second Filter */}
-          <Grid item lg={12} xs={6}>
-            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-              <InputLabel id="Filter-Heading">Brand</InputLabel>
-              <Select
-                labelId="Filter-Heading"
-                id="filter-chip"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                renderValue={(selected) => (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                    {selected.map((value) => (
-                      <Chip key={value} label={value} />
-                    ))}
-                  </Box>
-                )}
-                MenuProps={MenuProps}
-              >
-                {names.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                    style={getStyles(name, personName, theme)}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-
-          {/** Third Filter */}
-          <Grid item lg={12} xs={6}>
-            <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-              <InputLabel id="Filter-Heading">Price</InputLabel>
-              <Select
-                labelId="Filter-Heading"
-                id="filter-chip"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                renderValue={(selected) => (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                    {selected.map((value) => (
-                      <Chip key={value} label={value} />
-                    ))}
-                  </Box>
-                )}
-                MenuProps={MenuProps}
-              >
-                {names.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                    style={getStyles(name, personName, theme)}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-
-        </Grid>
+        
           
         {/* <Box className={classes.filterBox} style={{display:'flex',flexDirection:'row',overflowX:'scroll',width:'400px'}}>
             <Typography component="div" style={{ fontSize: '1.5rem',color: '#323232',fontFamily: ['Montserrat', 'sans-serif'],fontweight: 'medium',marginBottom:20,}} >Filters</Typography>       
@@ -425,7 +314,7 @@ const ShopProducts = () => {
                 
            
         {/** Following Box is for Product View - ProductContainer */}
-        <Grid container className={classes.productContainer}>
+       <>
           <Grid item lg={12} xs={12} md={12}>
           <Grid container >
             <Grid item lg={12} xs={12} md={12}>
@@ -455,10 +344,10 @@ const ShopProducts = () => {
             pageLimit={5}
             dataLimit={8}
           />
-         </Grid> 
+        </>
         {/** ProductContainer - END */}
         
-      </Box>
+      
            
     </>
   )
