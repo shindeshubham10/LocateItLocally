@@ -31,6 +31,7 @@ const MenuProps = {
     },
   };
 
+
 function TabPanel(props) {
     const { children ,value,index} = props;
     return (
@@ -316,6 +317,7 @@ const ShopDetails = () => {
     
             </Box>
             {/* <Grid container spacing={2}> 
+            {/* <Grid container spacing={2}> */}
             <TabPanel value={value} index={0}>
                     <Typography gutterBottom component="div" style={{fontFamily:"Montserrat,sans-serif",fontWeight:"700"}}  >
                     Seller Products
@@ -323,6 +325,8 @@ const ShopDetails = () => {
             </TabPanel>
                
             
+                
+            {/*
             <TabPanel value={value} index={2}>
                     <Typography gutterBottom component="div" style={{fontFamily:"Montserrat,sans-serif",fontWeight:"700"}}  >
                     Description
