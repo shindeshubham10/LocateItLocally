@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { GoogleMap,withScriptjs,withGoogleMap } from 'react-google-maps';
 
@@ -30,3 +31,4 @@ const ShowMap = () => {
 }
 
 export default ShowMap;
+*/

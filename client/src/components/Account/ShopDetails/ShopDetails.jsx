@@ -1,7 +1,7 @@
 import { Grid, makeStyles, Paper, Typography ,Box, useMediaQuery, useTheme} from '@material-ui/core'
 import React from 'react'
 import CoverImage from "./coverImage.jpg"
-import ProfileImage from "./profileImage.png"
+import ProfileImage from "./Profile_Photo.png"
 import ReactStars from "react-rating-stars-component";
 // import {LocationOn} from "@material-ui/icons"
 // import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined';
