@@ -14,9 +14,10 @@ import Register from './components/Account/User_Register/user_register';
 
 
 import MainDashboard from './components/BusinessOwner/Product_Management/MainDashboard';
-import ShowProducts from './components/ShowProducts/showProducts';
 import Login from './components/Account/User_Login/user_login.jsx';
 import Reviews from './components/Account/ShopDetails/Reviews';
+
+import ShopProducts from './components/Account/ShopDetails/ShopProducts';
 
 
 import User_profile from './components/Account/User_Profile/user_profile';
@@ -32,6 +33,7 @@ import {
 import Product from './components/product/Product';
 import FAQ from './components/product/FAQ';
 import ProductDetails from './components/product/ProductDetails';
+import ShopDetails from './components/Account/ShopDetails/ShopDetails';
 import ShowMap from './components/GoogleMapIntegration/googleMapsIntegration';
 
 const useStyles=makeStyles(
@@ -61,14 +63,14 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/businessdashboard" component={MainDashboard} />
-        <Route exact path="/allproducts" component={ShowProducts} />
+        
         <Route exact path="/New Arrivals" component={User_profile} />
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
         <Route exact path="/maps" component={ShowMap} />
         <Route exact path="/reviews" component={Reviews} />
-        <Route exact path="/shopproducts" component={Reviews} />
-
+        <Route exact path="/shopproducts" component={ShopProducts} />
+        <Route exact path="/shopdetails" component={ShopDetails} />
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
       
