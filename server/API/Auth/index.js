@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import passport from "passport";
-import { Router } from "express";
+//import { Router } from "express";
 const router = express.Router();
 
 //Models
@@ -46,23 +46,23 @@ Access        Public
 Method        POST
 */
 
-// Router.post("/signin", async(req,res) => {
-//   try {
-// await ValidateSignin(req.body.credentials);
+ Router.post("/signin", async(req,res) => {
+   try {
+ await ValidateSignin(req.body.credentials);
 
-//     const user = await UserModel.findByEmailAndPassword(
-//       req.body.credentials
-//     );
+     const user = await UserModel.findByEmailAndPassword(
+       req.body.credentials
+     );
 
-//    //JWT Auth Token
-//    const token = user.generateJwtToken();
+    //JWT Auth Token
+    const token = user.generateJwtToken();
 
-//    return res.status(200).json({token, status: "Success"});
+    return res.status(200).json({token, status: "Success"});
 
-//   } catch (error) {
-//     return res.status(500).json({error: error.message});
-//   }
-// });
+   } catch (error) {
+     return res.status(500).json({error: error.message});
+   }
+ });
 
 
 // /*
@@ -73,13 +73,13 @@ Method        POST
 // Method        GET
 // */
 
-// Router.get("/google", passport.authenticate("google",{
-// scope: [
-//   "https://www.googleapis.com/auth/userinfo.profile",
-//   "https://www.googleapis.com/auth/userinfo.email"
-// ],
-// })
-// );
+router.get("/google", passport.authenticate("google",{
+ scope: [
+   "https://www.googleapis.com/auth/userinfo.profile",
+   "https://www.googleapis.com/auth/userinfo.email"
+ ],
+ })
+ );
 
 // /*
 // Route         /google/callback
@@ -89,10 +89,10 @@ Method        POST
 // Method        GET
 // */
 
-// Router.get("/google/callback", passport.authenticate("google",{failureRedirect: "/"}),
-// (req,res) => {
-//   return res.json({token: req.session.passport.user.token});
-// }
-// );
+ router.get("/google/callback", passport.authenticate("google",{failureRedirect: "/"}),
+ (req,res) => {
+   return res.json({token: req.session.passport.user.token});
+ }
+ );
 
-export default Router;
+export default router;

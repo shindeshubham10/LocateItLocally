@@ -7,6 +7,17 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import Auth from './API/Auth/index.js';
+import passport from "passport";
+
+
+import googleAuthConfig from "./config/google.config.js";
+
+
+const app=express();
+
+
+
+
 
 const app=express();
 
@@ -14,13 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(cors());
-app.use("/auth",Auth);
+app.use(passport.initialize())
+app.use(passport.session())
+app.use('/auth', Auth);
 
-
+googleAuthConfig(passport);
 
 app.get("/",(req,res)=>res.json({message:"Setup Success"}))
-
-
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
   });
