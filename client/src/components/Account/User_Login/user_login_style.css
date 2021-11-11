@@ -34,3 +34,8 @@
   text-align: center;
   padding: 25px;
 }
+.loginbutton {
+  background-color: #38495a !important;
+  border-radius: 10px;
+  width: 200px;
+}
