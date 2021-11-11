@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    required: true,
+    
     trim: true,
     unique: true,
     index: true,
@@ -34,10 +34,10 @@ const UserSchema = new mongoose.Schema({
   },
   hash_password: {
     type: String,
-    required: true,
+    
   },
   contactNumber: { type: String },
-  pofilePicture: { type: String },
+  profilePicture: { type: String },
 },
 { timestamps: true }
 );

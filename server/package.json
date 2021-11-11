@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "start": "nodemon --exec node --experimental-specifier-resolution=node index"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.15",
-    "passport": "^0.5.0"
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
   }
 }
