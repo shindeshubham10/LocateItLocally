@@ -1,14 +1,36 @@
-import { Grid, makeStyles, Paper, Typography ,Box, useMediaQuery, useTheme} from '@material-ui/core'
+import { Grid, makeStyles, Paper ,Box, useMediaQuery, useTheme,Typography,OutlinedInput,InputLabel,MenuItem,FormControl,Select,Chip,Divider} from '@material-ui/core'
 import React from 'react'
-import CoverImage from "./coverImage.jpg"
-import ProfileImage from "./Profile_Photo.png"
+import CoverImage from "./cover_image.jpg"
+import ProfileImage from "./profile_image.png"
 import ReactStars from "react-rating-stars-component";
-// import {LocationOn} from "@material-ui/icons"
-// import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined';
-// import Newproduct from '../BusinessOwner/Product_Management/AddNewProduct/new_product';
-// import ViewAllProducts from '../BusinessOwner/Product_Management/AllProducts/allProducts';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import ShopProducts from './ShopProducts';
+import Reviews from "./Reviews";
+
+const names = [
+    'JBL',
+    'BOAT',
+    'ScullCandy',
+    'BOAT Wireless',
+    'BOAT Airpods',
+    'INTEX',
+    'BOAT Wireless',
+    'BOAT Wireless',
+    'BOAT Wireless',
+    'BOAT Wireless',
+];
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
 
 function TabPanel(props) {
     const { children ,value,index} = props;
@@ -30,6 +52,16 @@ const item={
     "details":"Joined Since 2018 | Total Products 9",
     "rating" : 4,
 }
+
+function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? 400
+          : 500
+    };
+}
+
 const useStyles= makeStyles(theme=>({
     paper:{
         margin:"200px 20px 20px 20px",
@@ -143,6 +175,53 @@ const useStyles= makeStyles(theme=>({
         backgroundColor: '#ff6868',
         borderRadius: 5,
        },
+       mainBoxForFiltersandProducts: {
+        display: 'flex',
+        flexDirection: 'row',
+        //backgroundColor: 'pink',
+        marginTop: 100,
+        marginLeft:20,
+        marginRight: 20,
+        
+    [theme.breakpoints.down('sm')]: {
+      //display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      marginTop: 40,
+      
+    }
+        
+    },
+    filterBox: {
+        width: 350,
+        height: '100%',
+        //backgroundColor: 'red',
+        marginTop: 50,
+        marginLeft: 20,
+        padding: 10,
+        
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        marginLeft: 0,
+      }
+        
+        
+    },
+    productContainer: {
+        //backgroundColor: 'green',
+        width: '100%',
+        height: '100%',
+        marginTop: 0,
+        marginLeft: 30,
+        marginRight: 20,
+      paddingLeft: 20,
+      [theme.breakpoints.down('sm')]: {
+        marginLeft: 0,
+        justifyContent: 'center',
+        border: '1px solid #A1B3BA',
+        borderRadius:8,
+        }
+  },
 }))
 
 const ShopDetails = () => {
@@ -154,6 +233,19 @@ const ShopDetails = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    
+
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChanges = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a the stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
     return (
         <Paper flexGrow={2} elevation={5} className={classes.paper}>
         <Grid container className={classes.main}>
@@ -224,18 +316,17 @@ const ShopDetails = () => {
                 </Tabs>
     
             </Box>
+            {/* <Grid container spacing={2}> 
             {/* <Grid container spacing={2}> */}
             <TabPanel value={value} index={0}>
                     <Typography gutterBottom component="div" style={{fontFamily:"Montserrat,sans-serif",fontWeight:"700"}}  >
                     Seller Products
                     </Typography>     
             </TabPanel>
+               
+            
                 
-            <TabPanel value={value} index={1}>
-                    <Typography gutterBottom component="div" style={{fontFamily:"Montserrat,sans-serif",fontWeight:"700"}}  >
-                    Reviews 
-                    </Typography>      
-            </TabPanel>
+            {/*
             <TabPanel value={value} index={2}>
                     <Typography gutterBottom component="div" style={{fontFamily:"Montserrat,sans-serif",fontWeight:"700"}}  >
                     Description
@@ -251,12 +342,133 @@ const ShopDetails = () => {
                     Photos 
                     </Typography>      
             </TabPanel>
-            
+            */} 
             {/* </Grid> */}
             </Box>
+            <Box className={classes.mainBoxForFiltersandProducts}>
+            <Grid container spacing={2} className={classes.filterBox}>
             
+            
+                <Grid item lg={12} xs={12} md={12}>
+                    <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
+                    <Divider style={{ marginBottom: 30 }} />
+                </Grid>
 
-        
+                {/** First Filter  */}
+                <Grid item lg={12} xs={6}>
+                    <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+                    <InputLabel id="Filter-Heading">Price</InputLabel>
+                    <Select
+                        labelId="Filter-Heading"
+                        id="filter-chip"
+                        multiple
+                        value={personName}
+                        onChange={handleChanges}
+                        input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                        renderValue={(selected) => (
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                            {selected.map((value) => (
+                            <Chip key={value} label={value} />
+                            ))}
+                        </Box>
+                        )}
+                        MenuProps={MenuProps}
+                    >
+                        {names.map((name) => (
+                        <MenuItem
+                            key={name}
+                            value={name}
+                            style={getStyles(name, personName, theme)}
+                        >
+                            {name}
+                        </MenuItem>
+                        ))}
+                    </Select>
+                    </FormControl>
+                </Grid>
+
+
+
+                {/** Second Filter */}
+                <Grid item lg={12} xs={6}>
+                    <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+                    <InputLabel id="Filter-Heading">Brand</InputLabel>
+                    <Select
+                        labelId="Filter-Heading"
+                        id="filter-chip"
+                        multiple
+                        value={personName}
+                        onChange={handleChanges}
+                        input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                        renderValue={(selected) => (
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                            {selected.map((value) => (
+                            <Chip key={value} label={value} />
+                            ))}
+                        </Box>
+                        )}
+                        MenuProps={MenuProps}
+                    >
+                        {names.map((name) => (
+                        <MenuItem
+                            key={name}
+                            value={name}
+                            style={getStyles(name, personName, theme)}
+                        >
+                            {name}
+                        </MenuItem>
+                        ))}
+                    </Select>
+                    </FormControl>
+                </Grid>
+
+
+                {/** Third Filter */}
+                <Grid item lg={12} xs={6}>
+                    <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+                    <InputLabel id="Filter-Heading">Price</InputLabel>
+                    <Select
+                        labelId="Filter-Heading"
+                        id="filter-chip"
+                        multiple
+                        value={personName}
+                        onChange={handleChanges}
+                        input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                        renderValue={(selected) => (
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                            {selected.map((value) => (
+                            <Chip key={value} label={value} />
+                            ))}
+                        </Box>
+                        )}
+                        MenuProps={MenuProps}
+                    >
+                        {names.map((name) => (
+                        <MenuItem
+                            key={name}
+                            value={name}
+                            style={getStyles(name, personName, theme)}
+                        >
+                            {name}
+                        </MenuItem>
+                        ))}
+                    </Select>
+                    </FormControl>
+                </Grid>
+
+
+                </Grid>
+                <Grid container className={classes.productContainer}>
+                <TabPanel value={value} index={0}>
+                    
+                            <ShopProducts />
+                    
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Reviews />      
+                </TabPanel>
+                </Grid> 
+                </Box>
         </Paper>
     )
 }
