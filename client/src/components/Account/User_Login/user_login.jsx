@@ -69,7 +69,7 @@ function Login()
                         <a href="#"><Google fontSize="large"/></a>
                         <a href="#"><Facebook fontSize="large"/></a>
                         </Grid>
-                        <Grid item>
+                        <Grid item style={{marginBottom:20}}>
                         <p>Or Use your Email for Sign in</p>
                         </Grid>
                         
@@ -157,9 +157,9 @@ function Login()
               <Grid container justifyContent="center" className="t">
                   <Grid item>
                   { user=="customer"?
-                  <Button variant="contained" >Sign in</Button>
+                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Sign in</Button>
                   :
-                  <Button variant="contained" >Sign in</Button>
+                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Sign in</Button>
                   }
                   </Grid>
               </Grid>
@@ -185,7 +185,7 @@ function Login()
                 </Grid>
                   <Grid item style={{textAlign:'center',marginTop:'30px'}}>
                     <p>Dont't Have a Account ?</p>
-                    <Link to="/register"><Button variant="contained" color="white" >Register</Button></Link>
+                    <Link to="/register"><Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Register</Button></Link>
                   </Grid>
               </Grid>
             </Grid>
