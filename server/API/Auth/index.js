@@ -46,7 +46,7 @@ Access        Public
 Method        POST
 */
 
- Router.post("/signin", async(req,res) => {
+ router.post("/signin", async(req,res) => {
    try {
  await ValidateSignin(req.body.credentials);
 
