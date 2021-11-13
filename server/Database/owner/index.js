@@ -20,35 +20,7 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-const BusinessSchema = new mongoose.Schema({
 
-  name: {
-    type: String,
-    required: true
-  },
-  ownerID:{
-    type: String,
-  },
-  address:{
-    type:String,
-  },
-  description:{
-    type:String,
-  },
-  maplocation: {
-    type:String,
-  },
-  images:{
-    type: mongoose.Types.ObjectId,
-    ref: "Images"
-  },
-  reviews: [
-    reviewSchema
-  ]
-
-
-
-});
 
 const OwnerSchema = new mongoose.Schema({
   
