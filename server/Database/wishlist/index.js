@@ -1,5 +1,5 @@
 import  mongoose  from "mongoose";
-import  products from "../products/index"
+import  product from "../products/index"
 
 const wishlistSchema = new mongoose.Schema({
     
@@ -16,7 +16,10 @@ const wishlistSchema = new mongoose.Schema({
         type:String,
       },
       wishlistProducts:[
-          products
+          {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'product' 
+          }          
       ]
     },
     {

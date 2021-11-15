@@ -73,6 +73,7 @@ function App() {
         <Route exact path="/shopdetails" component={ShopDetails} />
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
+        
       
       </Switch>
        <Footer/> 
