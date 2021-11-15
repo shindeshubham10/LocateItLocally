@@ -1,3 +1,7 @@
+.maindiv
+{
+  background-color: white;
+}
 .rp1 {
   background-color: gray;
   height: max-content;
@@ -14,7 +18,7 @@
 }
 
 .rmain {
-  margin-top: 120px;
+  margin-top: 150px;
   height: fit-content;
   margin-bottom: 40px;
 }
@@ -38,4 +42,5 @@
   background-color: #38495a !important;
   border-radius: 10px;
   width: 200px;
+  font-weight: bold;
 }

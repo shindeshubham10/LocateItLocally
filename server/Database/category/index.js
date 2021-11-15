@@ -12,10 +12,10 @@ const categorySchema = new mongoose.Schema(
     
     categoryImage: { type: String },
 
-    //owner
+    //business
     createdBY:{
-        type: mongoose.Types.ObjectId,
-        ref: "owner"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "business"
     }
   },
   { timestamps: true }

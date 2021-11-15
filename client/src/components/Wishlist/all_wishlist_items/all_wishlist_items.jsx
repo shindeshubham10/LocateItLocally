@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import {ShoppingCart,ShoppingCartOutlined} from "@mui/icons-material";
-import MenuItem from '@mui/material/MenuItem';
-import { borderRadius, color } from '@mui/system';
+//import MenuItem from '@mui/material/MenuItem';
+//import { borderRadius, color } from '@mui/system';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import ListItemButton from '@mui/material/ListItemButton';
 import Cart from '../../cart/Cart';
