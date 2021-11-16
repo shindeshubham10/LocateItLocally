@@ -7,12 +7,18 @@ import {Link} from 'react-router-dom';
 import {Person,Google,Facebook,Password,} from "@mui/icons-material";
 
 
-import  {UserSignIn}  from "../../../Service/api";
+import  {UserSignIn,BusinessSignIn}  from "../../../service/api";
 
 const signInInitialValues = {
 
   email: "",
   hash_password: "",
+};
+
+const signInBusinessInitialValues = {
+
+  email: "",
+  password: "",
 };
 
 
@@ -29,6 +35,7 @@ function Login()
 
   
     const [signinState, setsigninState] = React.useState(signInInitialValues);
+    const [signinbusinessState, setsigninbusinessState] = React.useState(signInBusinessInitialValues);
 
   
   
@@ -40,10 +47,24 @@ function Login()
     
     };
 
+    const signInBusiness = async () => {
+      console.log("enter into function");
+      let response = await BusinessSignIn(signinbusinessState);
+      console.log(response);
+      if (!response) return;
+    
+    };
+
     const onInputChange = (event) => {
       setsigninState({ ...signinState, [event.target.name]: event.target.value });
       console.log(signinState);
     };
+
+    const onbusinessInputChange = (event) => {
+      setsigninState({ ...signinbusinessState, [event.target.name]: event.target.value });
+      console.log(signinbusinessState);
+    };
+
     return(
         <div>
           <Grid container direction="row" className="main">
@@ -150,7 +171,8 @@ function Login()
                     <Grid item lg={12} sm={12} xs={12} >
                       <TextField
                         required
-                        onChange={(e)=>onInputChange(e)}
+                        name="email"
+                        onChange={(e)=>onbusinessInputChange(e)}
                         variant="standard"
                         color="primary"
                         type="email"
@@ -167,12 +189,13 @@ function Login()
                       <Grid item lg={12} sm={12} xs={12} >
                         <TextField
                         required
-                        onChange={(e)=>onInputChange(e)}
+                        onChange={(e)=>onbusinessInputChange(e)}
                             variant="standard"
                             color="primary"
                             type="password"
                             label="Password"
                             size="medium"
+                            name="password"
                             placeholder="**********"
                             InputProps={{
                             endAdornment: <Password/>
@@ -191,7 +214,7 @@ function Login()
                   
                   <Button style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} onClick={()=>signInUser()} className="loginbutton" >Sign in</Button>
                   :
-                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Sign in</Button>
+                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} onClick={()=>signInBusiness()} className="loginbutton" >Sign in</Button>
                   }
                   </Grid>
               </Grid>

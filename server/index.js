@@ -14,7 +14,7 @@ import UserAuth from './API/Auth/UserAuthentication/index.js';
 import BusinessAuth from "./API/Auth/BusinessAuthentication/index.js";
 
 // Product API's
-import Product from './API/Products/index.js';
+import Product from './API/Product/index.js';
 
 
 
@@ -41,7 +41,7 @@ app.use('/userAuth', UserAuth);
 app.use('/businessAuth', BusinessAuth);
 
 // Product API's
-app.use('/newProduct', Product);
+//app.use('/newProduct', Product);
 
 // Product API's
 
