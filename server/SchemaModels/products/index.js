@@ -14,7 +14,8 @@ const reviewSchema = new mongoose.Schema(
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
-    seller: { type: mongoose.Types.ObjectID, ref: 'business' },
+    
+    seller: { type: mongoose.Types.ObjectID, ref: 'Business' },
     image: { type:mongoose.Types.ObjectId,ref:"Images" },
     brand: { type: String, required: true },
     productcategory: { type:mongoose.Types.ObjectId,ref:"Category" },
@@ -22,14 +23,11 @@ const productSchema = new mongoose.Schema(
     description: { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
-    rating: { type: Number, required: true },
-    numReviews: { type: Number, required: true },
+    rating: { type: Number, },
     reviews: [reviewSchema],
   },
   {
     timestamps: true,
   }
 );
-const Product = mongoose.model('Product', productSchema);
-
-export default Product;
+export const ProductModel = mongoose.model('Product', productSchema);

@@ -4,7 +4,7 @@ import googleOAuth from "passport-google-oauth20";
 //   path: require("path").resolve(__dirname, "../.env"),
 // });
 
-import { UserModel } from "../Database/user";
+import { UserModel } from "../SchemaModels/user";
 
 
 
@@ -25,7 +25,7 @@ export default (passport) => {
           firstName: profile.name.givenName,
           lastName:profile.name.familyName,
           email: profile.emails[0].value,
-          
+                
         };
         try {
           // check if the user exist

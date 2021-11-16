@@ -11,7 +11,7 @@ const Schema = joi.object({
     email: joi.string().required().email(),
     hash_password: joi.string().required().max(8).min(5),
     contactNumber: joi.string().length(10),
-    profilePicture:joi.string(),
+  
 });
 
 return Schema.validateAsync(userData);
@@ -20,13 +20,13 @@ return Schema.validateAsync(userData);
 
 
 // Validation For SignIn
-// export const ValidateSignin = (userData) => {
+ export const ValidateSignin = (userData) => {
 
-// const Schema = joi.object({
-//   email: joi.string().email().required(),
-//   password: joi.string().min(5).required()
-// });
+ const Schema = joi.object({
+   email: joi.string().email().required(),
+   hash_password: joi.string().min(5).max(8).required()
+ });
 
-// return Schema.validateAsync(userData);
+ return Schema.validateAsync(userData);
 
-// };
+ };

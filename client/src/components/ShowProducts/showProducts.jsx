@@ -7,7 +7,7 @@ import { Box, Grid, Typography,OutlinedInput,InputLabel,MenuItem,FormControl,Sel
 import { productDetails } from '../../constants/data'; 
 import ProductCard from '../home/ProductCard';
 import { useTheme } from '@emotion/react';
-
+import { useParams } from 'react-router';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -122,6 +122,7 @@ const useStyle = makeStyles(theme => ({
 
 const ShowProducts = (props) => {
 
+  const {options } = useParams();
   const classes = useStyle();
   const theme = useTheme();
 
@@ -427,7 +428,7 @@ const ShowProducts = (props) => {
           <Grid item lg={12} xs={12} md={12}>
           <Grid container >
             <Grid item lg={12} xs={12} md={12}>
-              <Typography className={classes.mainHeading} component="div" >Sound and Accessories</Typography>
+              <Typography className={classes.mainHeading} component="div" >{options}</Typography>
               <Divider style={{ marginBottom: 30, }} />
             </Grid>
           </Grid> 
