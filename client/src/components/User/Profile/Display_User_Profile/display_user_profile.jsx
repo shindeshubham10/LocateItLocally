@@ -249,19 +249,20 @@ const Display_user_profile= () =>
         <Box className={classes.mainBoxFor_Tabs_Divider}>
             
             <Box className={classes.testBox}>
+            
             <Grid container direction="row">
-            <Grid item xs={8} sm={10} lg={12}>
-            <div style={{display:"flex"}}>
-                <FactCheckOutlined fontSize="large"/>
-                <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
-              
-            </div>
-            </Grid>
-            <Grid item lg={12} sm={2} xs={4}>
-            <div>
-                <Button style={{marginLeft:"40px"}}><AddCircleOutline fontSize="large"/></Button>
-            </div>
-            </Grid>
+                <Grid item xs={8} sm={10} lg={12}>
+                <div style={{display:"flex"}}>
+                    <FactCheckOutlined fontSize="large"/>
+                    <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
+                
+                </div>
+                </Grid>
+                <Grid item lg={12} sm={2} xs={4}>
+                <div>
+                    <Button style={{marginLeft:"40px"}}><AddCircleOutline fontSize="large"/></Button>
+                </div>
+                </Grid>
             </Grid>
             <Tabs
                 orientation={mobileScreen ? 'horizontal' : 'vertical'}

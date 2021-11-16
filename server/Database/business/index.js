@@ -32,7 +32,16 @@ const BusinessSchema = new mongoose.Schema({
     },
     
     owner: { 
-        type: mongoose.Schema.Types.ObjectId, ref: 'owner', required: true 
+        firstname:
+        {
+          type:String,
+          required:true
+        },
+        lastname:
+        {
+          type:String,
+          required:true
+        }
     },
 
     address:{
