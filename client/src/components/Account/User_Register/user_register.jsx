@@ -3,11 +3,42 @@ import './RegisterStyle.css'
 import {Grid,TextField,Box,Button} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 import {Link} from 'react-router-dom';
-import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-material"
+import {Person,Google,Facebook,Password,AccountBox,Phone,Lock,Store} from "@mui/icons-material"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+
+
+import {UserSignUp}  from "../../../Service/api";
+
+const signUpInitialValues = {
+  
+  firstName:"",
+  lastName: "",
+  username:"",
+  email:"",
+  hash_password:"",
+  contactNumber:"",
+}
+
 function Register()
 {
   const [user, setUser] = React.useState('customer');
+
+  const [signupState, setsignupState] = React.useState(signUpInitialValues);
+
+  
+  
+  const signUpUser = async () => {
+    console.log("enter into function");
+    let response = await UserSignUp(signupState);
+    console.log(response);
+    if (!response) return;
+  
+  };
+  
+  const onInputChange = (event) => {
+    setsignupState({ ...signupState, [event.target.name]: event.target.value });
+    console.log(signupState);
+  };
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
         setUser(obj);
@@ -34,12 +65,12 @@ function Register()
                 </Grid>
                 <Grid item style={{textAlign:'center',marginTop:'60px'}}>
                   <p>Have a already Account ?</p>
-                  <Link to="/login"><Button variant="contained"  style={{color:"white",borderRadius:"50px", backgroundColor:"#38495a",width:200}} >Login</Button></Link>
+                  <Link to="/login"><Button variant="contained"  style={{color:"white",borderRadius:"50px", backgroundColor:"#38495a",width:200,marginTop:"60px",fontWeight:"bold"}} >Login</Button></Link>
                 </Grid>
             </Grid>
           </Grid>
 
-          <Grid item lg={9} xs={12}>
+          <Grid item lg={9} xs={12} className="maindiv">
             
             <Grid container  className="rp2" direction="row" >
               <Grid item lg={12} xs={12} >
@@ -98,13 +129,15 @@ function Register()
               <Grid container direction="row" className="rt">
                 <Grid item lg={6} sm={6} xs={12}>
                   <TextField
-                    required
+                        required
+                        name="firstName"
                     variant="standard"
                     color="primary"
                     type="text"
-                    label="Name"
+                    label="First Name"
                     size="medium"
-                    placeholder="test@test.com"
+                        placeholder="John"
+                        onChange={(e)=>onInputChange(e)}
                     InputProps={{
                       endAdornment: <Person/>
                     }}
@@ -113,28 +146,32 @@ function Register()
                   </Grid>
                   <Grid item lg={6} xs={12} sm={6}>
                   <TextField
-                    required
+                        required
+                        name="lastName"
                     variant="standard"
                     color="primary"
                     type="text"
-                    label="Username"
+                    label="Last Name"
                     size="small"
-                    placeholder="test@test.com"
+                        placeholder="Samual"
+                        onChange={(e)=>onInputChange(e)}
                     InputProps={{
-                      endAdornment: <AccountBox />
+                      endAdornment: <Person/>
                     }}
                     sx={{width:"45vh",padding:"5px"}}
                   />
                   </Grid>
                   <Grid item lg={6} sm={6} xs={12}>
                   <TextField
-                    required
+                        required
+                        name="email"
                     variant="standard"
                     color="primary"
                     type="email"
                     label="Email"
                     size="small"
-                    placeholder="test@test.com"
+                        placeholder="test@test.com"
+                        onChange={(e)=>onInputChange(e)}
                     InputProps={{
                       endAdornment: <EmailOutlinedIcon />
                     }}
@@ -144,13 +181,15 @@ function Register()
 
                 <Grid item lg={6} sm={6} xs={12} >
                 <TextField
-                  required
+                        required
+                        name="contactNumber"
                   variant="standard"
                   color="primary"
                   type="number"
                   label="Contact Number"
                   size="small"
-                  placeholder="123456789"
+                        placeholder="123456789"
+                        onChange={(e)=>onInputChange(e)}
                   InputProps={{
                     endAdornment: <Phone/>
                   }}
@@ -159,34 +198,38 @@ function Register()
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12} >
                 <TextField
-                  required
+                        required
+                        name="hash_password"
                   variant="standard"
                   color="primary"
                   type="password"
                   label="Password"
                   size="small"
-                  placeholder="*******"
+                        placeholder="*******"
+                        onChange={(e)=>onInputChange(e)}
                   InputProps={{
                     endAdornment: <Password />
                   }}
                   sx={{width:"45vh",padding:"5px"}}
                 />
                 </Grid>
-                <Grid item lg={6} sm={6} xs={12}>
-                <TextField
-                  required
-                  variant="standard"
-                  color="primary"
-                  type="password"
-                  label="Confirm Password"
-                  size="small"
-                  placeholder="*******"
-                  InputProps={{
-                    endAdornment: <Lock />
-                  }}
-                  sx={{width:"45vh",padding:"5px"}}
-                />
-                </Grid>
+                <Grid item lg={6} xs={12} sm={6}>
+                  <TextField
+                    required
+                    name="username"
+                    variant="standard"
+                    color="primary"
+                    type="text"
+                    label="Username"
+                    size="small"
+                        placeholder="test@test.com"
+                        onChange={(e)=>onInputChange(e)}
+                    InputProps={{
+                      endAdornment: <AccountBox />
+                    }}
+                    sx={{width:"45vh",padding:"5px"}}
+                  />
+                  </Grid>
                 </Grid>
               </Grid>
               :
@@ -198,11 +241,11 @@ function Register()
                       variant="standard"
                       color="primary"
                       type="text"
-                      label="Company Name"
+                      label="Business Name"
                       size="medium"
-                      placeholder="test@test.com"
+                      
                       InputProps={{
-                        endAdornment: <Person/>
+                        endAdornment: <Store/>
                       }}
                       sx={{width:"45vh",padding:"5px"}}
                     />
@@ -213,11 +256,26 @@ function Register()
                       variant="standard"
                       color="primary"
                       type="text"
-                      label="Username"
+                      label="First Name"
                       size="small"
-                      placeholder="test@test.com"
+                      
                       InputProps={{
-                        endAdornment: <AccountBox />
+                        endAdornment: <Person />
+                      }}
+                      sx={{width:"45vh",padding:"5px"}}
+                    />
+                    </Grid>
+                    <Grid item lg={6} xs={12} sm={6}>
+                    <TextField
+                      required
+                      variant="standard"
+                      color="primary"
+                      type="text"
+                      label="Last Name"
+                      size="small"
+                      
+                      InputProps={{
+                        endAdornment: <Person />
                       }}
                       sx={{width:"45vh",padding:"5px"}}
                     />
@@ -230,7 +288,7 @@ function Register()
                       type="email"
                       label="Business Email"
                       size="small"
-                      placeholder="test@test.com"
+                      
                       InputProps={{
                         endAdornment: <EmailOutlinedIcon />
                       }}
@@ -293,9 +351,10 @@ function Register()
               <Grid container justifyContent="center" className="rt">
                   <Grid item>
                   {user=="customer"?
-                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="registerbutton">Register</Button>
+                  
+                  <Button  variant="contained"  onClick={()=>signUpUser()} style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
                   :
-                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="registerbutton">Register</Button>
+                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
                   }
                   </Grid>
               </Grid>

@@ -7,6 +7,13 @@ import {Link} from 'react-router-dom';
 import {Person,Google,Facebook,Password,} from "@mui/icons-material";
 
 
+import  {UserSignIn}  from "../../../Service/api";
+
+const signInInitialValues = {
+
+  email: "",
+  hash_password: "",
+};
 
 
 
@@ -18,6 +25,24 @@ function Login()
         setUser(obj);
         
       }
+    };
+
+  
+    const [signinState, setsigninState] = React.useState(signInInitialValues);
+
+  
+  
+    const signInUser = async () => {
+      console.log("enter into function");
+      let response = await UserSignIn(signinState);
+      console.log(response);
+      if (!response) return;
+    
+    };
+
+    const onInputChange = (event) => {
+      setsigninState({ ...signinState, [event.target.name]: event.target.value });
+      console.log(signinState);
     };
     return(
         <div>
@@ -84,6 +109,8 @@ function Login()
                     <Grid item lg={12} sm={12} xs={12}>
                       <TextField
                         required
+                        name="email"
+                        onChange={(e)=>onInputChange(e)}
                         variant="standard"
                         color="primary"
                         type="email"
@@ -99,7 +126,9 @@ function Login()
 
                       <Grid item lg={12} sm={12} xs={12} >
                         <TextField
-                            required
+                        required
+                        name="hash_password"
+                        onChange={(e)=>onInputChange(e)}
                             variant="standard"
                             color="primary"
                             type="password"
@@ -121,6 +150,7 @@ function Login()
                     <Grid item lg={12} sm={12} xs={12} >
                       <TextField
                         required
+                        onChange={(e)=>onInputChange(e)}
                         variant="standard"
                         color="primary"
                         type="email"
@@ -136,7 +166,8 @@ function Login()
 
                       <Grid item lg={12} sm={12} xs={12} >
                         <TextField
-                            required
+                        required
+                        onChange={(e)=>onInputChange(e)}
                             variant="standard"
                             color="primary"
                             type="password"
@@ -157,7 +188,8 @@ function Login()
               <Grid container justifyContent="center" className="t">
                   <Grid item>
                   { user=="customer"?
-                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Sign in</Button>
+                  
+                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} onClick={()=>signInUser()} className="loginbutton" >Sign in</Button>
                   :
                   <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Sign in</Button>
                   }
@@ -185,7 +217,7 @@ function Login()
                 </Grid>
                   <Grid item style={{textAlign:'center',marginTop:'30px'}}>
                     <p>Dont't Have a Account ?</p>
-                    <Link to="/register"><Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Register</Button></Link>
+                    <Link to="/register"><Button style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold",marginTop:"60px"}} className="loginbutton" >Register</Button></Link>
                   </Grid>
               </Grid>
             </Grid>

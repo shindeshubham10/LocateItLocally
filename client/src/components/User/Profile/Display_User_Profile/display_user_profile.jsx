@@ -1,7 +1,7 @@
 import React from 'react';
 import "./display_user_profile_style.css";
 import {Grid,TextField,Box,Button,Typography, Paper,Tab,useMediaQuery,useTheme,makeStyles,Tabs} from '@material-ui/core';
-import {LocationOn,ContactMail,Edit, Phone,EditOutlined} from "@material-ui/icons"
+import {LocationOn,ContactMail,Edit, Phone,EditOutlined,AddCircleOutline} from "@material-ui/icons"
 import { FactCheckRounded ,FactCheckOutlined} from '@mui/icons-material';
 import src from "./Profile_Photo.png"
 
@@ -71,7 +71,7 @@ const useStyle = makeStyles(theme => (
         mainHeading: {
            // marginTop:80,
             //marginLeft: 10,
-            marginBottom: 50,
+            marginBottom: 20,
             fontSize:'1.7rem',
             color: '#323232',
             fontFamily: ['Montserrat', 'sans-serif'],
@@ -249,11 +249,20 @@ const Display_user_profile= () =>
         <Box className={classes.mainBoxFor_Tabs_Divider}>
             
             <Box className={classes.testBox}>
+            <Grid container direction="row">
+            <Grid item xs={8} sm={10} lg={12}>
             <div style={{display:"flex"}}>
                 <FactCheckOutlined fontSize="large"/>
                 <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
               
             </div>
+            </Grid>
+            <Grid item lg={12} sm={2} xs={4}>
+            <div>
+                <Button style={{marginLeft:"40px"}}><AddCircleOutline fontSize="large"/></Button>
+            </div>
+            </Grid>
+            </Grid>
             <Tabs
                 orientation={mobileScreen ? 'horizontal' : 'vertical'}
                 variant='scrollable'
