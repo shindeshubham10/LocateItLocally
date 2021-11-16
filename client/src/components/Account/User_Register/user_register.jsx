@@ -3,7 +3,7 @@ import './RegisterStyle.css'
 import {Grid,TextField,Box,Button} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 import {Link} from 'react-router-dom';
-import {Person,Google,Facebook,Password,AccountBox,Phone,Lock} from "@mui/icons-material"
+import {Person,Google,Facebook,Password,AccountBox,Phone,Lock,Store} from "@mui/icons-material"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 
@@ -65,12 +65,12 @@ function Register()
                 </Grid>
                 <Grid item style={{textAlign:'center',marginTop:'60px'}}>
                   <p>Have a already Account ?</p>
-                  <Link to="/login"><Button variant="contained"  style={{color:"white",borderRadius:"50px", backgroundColor:"#38495a",width:200}} >Login</Button></Link>
+                  <Link to="/login"><Button variant="contained"  style={{color:"white",borderRadius:"50px", backgroundColor:"#38495a",width:200,marginTop:"60px",fontWeight:"bold"}} >Login</Button></Link>
                 </Grid>
             </Grid>
           </Grid>
 
-          <Grid item lg={9} xs={12}>
+          <Grid item lg={9} xs={12} className="maindiv">
             
             <Grid container  className="rp2" direction="row" >
               <Grid item lg={12} xs={12} >
@@ -241,11 +241,11 @@ function Register()
                       variant="standard"
                       color="primary"
                       type="text"
-                      label="Company Name"
+                      label="Business Name"
                       size="medium"
-                      placeholder="test@test.com"
+                      
                       InputProps={{
-                        endAdornment: <Person/>
+                        endAdornment: <Store/>
                       }}
                       sx={{width:"45vh",padding:"5px"}}
                     />
@@ -256,11 +256,26 @@ function Register()
                       variant="standard"
                       color="primary"
                       type="text"
-                      label="Username"
+                      label="First Name"
                       size="small"
-                      placeholder="test@test.com"
+                      
                       InputProps={{
-                        endAdornment: <AccountBox />
+                        endAdornment: <Person />
+                      }}
+                      sx={{width:"45vh",padding:"5px"}}
+                    />
+                    </Grid>
+                    <Grid item lg={6} xs={12} sm={6}>
+                    <TextField
+                      required
+                      variant="standard"
+                      color="primary"
+                      type="text"
+                      label="Last Name"
+                      size="small"
+                      
+                      InputProps={{
+                        endAdornment: <Person />
                       }}
                       sx={{width:"45vh",padding:"5px"}}
                     />
@@ -273,7 +288,7 @@ function Register()
                       type="email"
                       label="Business Email"
                       size="small"
-                      placeholder="test@test.com"
+                      
                       InputProps={{
                         endAdornment: <EmailOutlinedIcon />
                       }}
@@ -336,9 +351,10 @@ function Register()
               <Grid container justifyContent="center" className="rt">
                   <Grid item>
                   {user=="customer"?
-                  <Button  variant="contained" onClick={()=>signUpUser()} style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="registerbutton">Register</Button>
+                  
+                  <Button  variant="contained"  onClick={()=>signUpUser()} style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
                   :
-                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="registerbutton">Register</Button>
+                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
                   }
                   </Grid>
               </Grid>

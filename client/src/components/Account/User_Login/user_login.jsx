@@ -188,7 +188,8 @@ function Login()
               <Grid container justifyContent="center" className="t">
                   <Grid item>
                   { user=="customer"?
-                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} onClick={()=>signInUser()}  className="loginbutton" >Sign in</Button>
+                  
+                  <Button style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} onClick={()=>signInUser()} className="loginbutton" >Sign in</Button>
                   :
                   <Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Sign in</Button>
                   }
@@ -216,7 +217,7 @@ function Login()
                 </Grid>
                   <Grid item style={{textAlign:'center',marginTop:'30px'}}>
                     <p>Dont't Have a Account ?</p>
-                    <Link to="/register"><Button style={{color:"white",marginTop:"30px", borderRadius:"50px"}} className="loginbutton" >Register</Button></Link>
+                    <Link to="/register"><Button style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold",marginTop:"60px"}} className="loginbutton" >Register</Button></Link>
                   </Grid>
               </Grid>
             </Grid>

@@ -1,6 +1,6 @@
 
 
-import express from 'express';
+import  express  from 'express';
 import cors from 'cors';     //Used for connecting to frontend
 import helmet from 'helmet'; //Used for security
 import mongoose from 'mongoose';
@@ -48,7 +48,12 @@ app.use('/newProduct', Product);
 
 googleAuthConfig(passport);
 
-app.get("/",(req,res)=>res.json({message:"Setup Success"}))
+/*
+app.get("/",function(req,res){
+    res.render(home);
+});
+*/
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
   });
