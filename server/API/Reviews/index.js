@@ -1,6 +1,6 @@
 import express from "express"
 
-import {ProductModel} from "../../Database/products"
+import {ProductModel} from "../../SchemaModels/products"
 
 const Router=express.Router()
 

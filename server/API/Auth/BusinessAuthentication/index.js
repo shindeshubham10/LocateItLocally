@@ -24,10 +24,13 @@ Method        POST
 router.post("/signup", async(req,res) => {
   try {
 //await ValidateSignup(req.body.credentials);
-
-await BusinessModel.findByEmailAndPhone(req.body.credentials);
+console.log("grr");
+await BusinessModel.findByEmailAndPhone(req.body);
+console.log("grrtttt");
   //DB
-   const newBusiness = await BusinessModel.create(req.body.credentials);
+   const newBusiness = await BusinessModel.create(req.body);
+   console.log("ho gaya");
+   console.log(newBusiness);
 
    //JWT Auth Token
    const token = newBusiness.generateJwtToken();
