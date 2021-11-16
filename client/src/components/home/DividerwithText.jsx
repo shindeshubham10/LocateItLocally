@@ -194,11 +194,11 @@ const DividerWithText = (props) => {
         <span className={classes.buttonText}>Shop More</span>
      </Button> */}
 
-     
+     <Link to="/allproducts">
          <Button variant="contained" endIcon={<FiChevronRight  />} className={classes.btn} component={Link} to="/allproducts">
         <span className={classes.buttonText}>Shop More</span>
         </Button>
-         
+      </Link>   
     
 
   </div>

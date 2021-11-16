@@ -157,6 +157,8 @@ const ProductCard = (props) => {
     return (
         <div>
             <Card className={classes.mainCard}  >
+                
+            <Link to="/products">
                 <CardContent >
                  
                     {/** Product Image */}
@@ -189,7 +191,7 @@ const ProductCard = (props) => {
                     </Box>
                     
                 </CardContent>
-                
+            </Link>  
             </Card>
    
         </div>

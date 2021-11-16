@@ -203,7 +203,7 @@ const Cart = () => {
             alignItems="center"
             justifyContent="center" 
            >
-               <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/>
+               <StyledChip label="Wishlist Items"  variant="outlined" className={classes.chipstyle2}/>
           </Box>
 
             {/* <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle2}/> */}
@@ -238,7 +238,7 @@ const Cart = () => {
                         </Button>
                         <Button className={classes.btn}>
                            <Typography style={{fontFamily:'bold'}}>
-                                Update Cart
+                                Update Wishlist
                             </Typography>
                         </Button>
 
@@ -283,7 +283,7 @@ const Cart = () => {
             alignItems="center"
             justifyContent="center" 
            >
-               <StyledChip label="Cart Items"  variant="outlined" className={classes.chipstyle}/>
+               <StyledChip label="Expected Total Bill"  variant="outlined" className={classes.chipstyle}/>
           </Box>
                 <Card  >
                 
@@ -295,7 +295,7 @@ const Cart = () => {
                         aria-label="minimum height"
                         minRows={6}
                         className={classes.txtarea}
-                        placeholder="Note Regarding the Cart"
+                        placeholder="Note Regarding the Wishlist"
                         
                 
                         
