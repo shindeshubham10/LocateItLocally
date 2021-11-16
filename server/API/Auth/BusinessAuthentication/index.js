@@ -6,10 +6,12 @@ import passport from "passport";
 const router = express.Router();
 
 //Models
-import { UserModel } from "../../Database/user";
+import { BusinessModel } from "../../../SchemaModels/business";
 
-//Validation
-//import { ValidateSignup, ValidateSignin } from "../../validation/auth";
+//Validation for fields we are entering
+//import { ValidateSignup , ValidateSignin} from "../../../Validation/auth";
+
+
 
 /*
 Route         /signup
@@ -23,12 +25,12 @@ router.post("/signup", async(req,res) => {
   try {
 //await ValidateSignup(req.body.credentials);
 
-await UserModel.findEmailAndPhone(req.body.credentials);
-//DB
-   const newUser = await UserModel.create(req.body.credentials);
+await BusinessModel.findByEmailAndPhone(req.body.credentials);
+  //DB
+   const newBusiness = await BusinessModel.create(req.body.credentials);
 
    //JWT Auth Token
-   const token = newUser.generateJwtToken();
+   const token = newBusiness.generateJwtToken();
 
    return res.status(200).json({token});
 
@@ -46,23 +48,22 @@ Access        Public
 Method        POST
 */
 
- router.post("/signin", async(req,res) => {
-   try {
- await ValidateSignin(req.body.credentials);
+//  router.post("/signin", async(req,res) => {
+//    try {
+//  //await ValidateSignin(req.body.credentials);
 
-     const user = await UserModel.findByEmailAndPassword(
-       req.body.credentials
-     );
+//     const user = await UserModel.findByEmailAndPassword(req.body.credentials);
 
-    //JWT Auth Token
-    const token = user.generateJwtToken();
+//     //JWT Auth Token
+//     const token = user.generateJwtToken();
 
-    return res.status(200).json({token, status: "Success"});
+//      return res.json({ userExists: user });
+//     //return res.status(200).json({token, status: "Success"});
 
-   } catch (error) {
-     return res.status(500).json({error: error.message});
-   }
- });
+//    } catch (error) {
+//      return res.status(500).json({error: error.message});
+//    }
+//  });
 
 
 // /*

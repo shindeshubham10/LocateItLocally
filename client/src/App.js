@@ -25,6 +25,8 @@ import googleMapsComponent from './components/GoogleMapIntegration/googleMaps.co
 import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profile';
 import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
 
+import ShowProducts from './components/ShowProducts/showProducts';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -73,6 +75,7 @@ function App() {
         <Route exact path="/shopdetails" component={ShopDetails} />
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
+        <Route exact path="/allproducts/:options/" component={ShowProducts}/>
       
       </Switch>
        <Footer/> 

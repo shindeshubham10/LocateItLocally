@@ -64,13 +64,10 @@ import { fontFamily, fontSize } from '@mui/system';
 
   
  
-const CategoryMenu = () => {
+const CategoryMenu = (props) => {
   const classes = useStyles();
   const [Navigation, setNavigation] = useState();
-  const navigateToPage = (props) => {
-    const path = props.ListItemText;
-    <Link to='/path' />
-  }
+ 
     return (
        
         <>
@@ -85,7 +82,7 @@ const CategoryMenu = () => {
                 // <Link to='/allproducts'>
                 
                 <ListItem
-                onClick={navigateToPage(option)}
+              
                   secondaryAction={
                     <IconButton>
                       <FiChevronRight/>
@@ -93,6 +90,8 @@ const CategoryMenu = () => {
                   }
                   
                   disablePadding>
+                
+                  <Link to={{pathname: `/allproducts/${option}`}} >
                   <ListItemButton>
                   <ListItemText
                    
@@ -106,6 +105,8 @@ const CategoryMenu = () => {
                     }
                   />
                 </ListItemButton>
+                  </Link>
+                  
                 </ListItem>
                 // </Link>
                
