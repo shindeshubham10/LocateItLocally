@@ -132,9 +132,9 @@ export const SliderImages = [
 export const CategoryOptions = [
     'New Arrivals',
     'Top Seller',
-    'Category 1',
-    'Category 2',
-    'Category 3',
+    'TV and Accesories',
+    'Mobiles Phones',
+    'Electronics',
     'Category 4',
     'Category 5',
     'Category 6',

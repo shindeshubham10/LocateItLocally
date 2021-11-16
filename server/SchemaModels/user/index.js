@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 import jwt from "jsonwebtoken";
 
+import bcrypt from "bcrypt";
+
 
 const UserSchema = new mongoose.Schema({
   firstName: {
@@ -47,22 +49,27 @@ UserSchema.methods.generateJwtToken = function() {
   return jwt.sign({user: this._id.toString()}, "ZomatoApp");
 };
 
-UserSchema.statics.findEmailAndPhone = async ({ email, contactNumber }) => {
+
+
+ // Function used for Signup Purpose
+ UserSchema.statics.findByEmailAndPhone = async ({ email, contactNumber }) => {
+   
   //check whether the email exists
-  const checkUserByEmail = await UserModel.findOne({email});
+   const checkUserByEmail = await UserModel.findOne({email});
 
-  //check whether the phoneNumber Exists
-  const checkUserByPhone = await UserModel.findOne({contactNumber});
-  if(checkUserByEmail || checkUserByPhone) {
-    throw new Error("User already exist");
-  }
-  return false;
-};
+   //check whether the phoneNumber Exists
+   const checkUserByPhone = await UserModel.findOne({contactNumber});
+   if(checkUserByEmail || checkUserByPhone) {
+     throw new Error("User already exist");
+   }
+   return false;
+ };
 
+ // Function Used for SignIn Purpose
 UserSchema.statics.findByEmailAndPassword = async ({ email, hash_password }) => {
   //check whether the email exists
   const user = await UserModel.findOne({email});
-if(!user) throw new Error("User doesnot exist");
+  if (!user) throw new Error("User doesnot exist");
 
   //compare password
   const doesPasswordMatch = await bcrypt.compare(hash_password, user.hash_password);
@@ -98,31 +105,6 @@ UserSchema.pre("save",function(next){
     return jwt.sign({user: this._id.toString()}, "ZomatoApp");
   };
   
-  UserSchema.statics.findEmailAndPhone = async ({ email, phoneNumber }) => {
-    //check whether the email exists
-    const checkUserByEmail = await UserModel.findOne({email});
-  
-    //check whether the phoneNumber Exists
-    const checkUserByPhone = await UserModel.findOne({phoneNumber});
-    if(checkUserByEmail || checkUserByPhone) {
-      throw new Error("User already exist");
-    }
-    return false;
-  };
-  
-  UserSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
-    //check whether the email exists
-    const user = await UserModel.findOne({email});
-  if(!user) throw new Error("User doesnot exist");
-  
-    //compare password
-    const doesPasswordMatch = await bcrypt.compare(password, user.password);
-  
-    if(!doesPasswordMatch) {
-      throw new Error("Invalid password");
-    }
-    return user;
-  };
   
   UserSchema.pre("save",function(next){
     const user = this;

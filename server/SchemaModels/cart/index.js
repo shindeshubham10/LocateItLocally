@@ -5,14 +5,20 @@ const CartSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "Users"
   },
-
   CartDetails: [
     {
-      product: { type: mongoose.Types.ObjectId, ref: "Products"},
-      quantity: {type: Number, required: true},
-      itemTotal: {type: Number, required: true},
-      
-      
+      product: {
+        type: mongoose.Types.ObjectId,
+        ref: "Products"
+      },
+      quantity: {
+        type: Number,
+        required: true
+      },
+      itemTotal: {
+        type: Number,
+        required: true
+      },
     }
   ],
  

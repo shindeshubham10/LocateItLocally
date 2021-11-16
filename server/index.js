@@ -1,17 +1,25 @@
-require("dotenv").config();
+
 
 import  express  from 'express';
 import cors from 'cors';     //Used for connecting to frontend
 import helmet from 'helmet'; //Used for security
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-
-import Auth from './API/Auth/index.js';
 import passport from "passport";
-//import home from "../client/src/components/home/Home"
-
 import googleAuthConfig from "./config/google.config.js";
 
+
+// Authentication API's
+import UserAuth from './API/Auth/UserAuthentication/index.js';
+import BusinessAuth from "./API/Auth/BusinessAuthentication/index.js";
+
+// Product API's
+import Product from './API/Products/index.js';
+
+
+
+
+require("dotenv").config();
 
 const app=express();
 
@@ -26,8 +34,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(cors());
 app.use(passport.initialize())
-app.use(passport.session())
-app.use('/auth', Auth);
+app.use(passport.session());
+
+// Two Authentications imported
+app.use('/userAuth', UserAuth);
+app.use('/businessAuth', BusinessAuth);
+
+// Product API's
+app.use('/newProduct', Product);
+
+// Product API's
+
 
 googleAuthConfig(passport);
 
