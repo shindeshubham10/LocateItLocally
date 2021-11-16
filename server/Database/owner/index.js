@@ -80,7 +80,7 @@ const OwnerSchema = new mongoose.Schema({
     timestamps: true
   });
 
-export const OwnerModel = mongoose.model("Owners", OwnerSchema);
+export const BusinessModel = mongoose.model("Business", OwnerSchema);
   
 /**
  * 
