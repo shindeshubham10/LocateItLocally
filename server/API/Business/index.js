@@ -1,4 +1,4 @@
-import { BusinessModel } from "../../Database/owner";
+import { BusinessModel } from "../../SchemaModels/business";
 
 import express from "express"
 

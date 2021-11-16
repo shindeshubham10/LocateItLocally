@@ -26,13 +26,39 @@ const reviewSchema = new mongoose.Schema(
 
 const BusinessSchema = new mongoose.Schema({
 
+    email:{
+      type: String,
+      required: true
+
+    },
+
     name: {
       type: String,
       required: true
     },
     
-    owner: { 
-        type: mongoose.Schema.Types.ObjectId, ref: 'owner', required: true 
+    firstName:{
+
+      type: String,
+      required: true
+    },
+    lastName:{
+
+      type: String,
+      required: true
+    },
+    contactNumber:{
+
+      type: String,
+      required: true
+
+    },
+
+    password:{
+
+      type: String,
+      required: true
+
     },
 
     address:{
@@ -48,9 +74,7 @@ const BusinessSchema = new mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: "Images"
     },
-    categories:[
-        category
-    ],
+    
     reviews: [
       reviewSchema
     ]
@@ -59,5 +83,63 @@ const BusinessSchema = new mongoose.Schema({
   
   
   });
+
+  BusinessSchema.methods.generateJwtToken = function() {
+    return jwt.sign({user: this._id.toString()}, "LocateItLocally");
+  };
+  
+  
+  
+   // Function used for Signup Purpose
+   BusinessSchema.statics.findByEmailAndPhone = async ({ email, contactNumber }) => {
+     
+    //check whether the email exists
+     const checkUserByEmail = await BusinessModel.findOne({email});
+  
+     //check whether the phoneNumber Exists
+     const checkUserByPhone = await BusinessModel.findOne({contactNumber});
+     if(checkUserByEmail || checkUserByPhone) {
+       throw new Error("Business already exist");
+     }
+     return false;
+   };
+  
+   // Function Used for SignIn Purpose
+  BusinessSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
+    //check whether the email exists
+    const user = await BusinessModel.findOne({email});
+    if (!user) throw new Error("Business doesnot exist");
+  
+    //compare password
+    const doesPasswordMatch = await bcrypt.compare(password, user.password);
+  
+    if(!doesPasswordMatch) {
+      throw new Error("Invalid password");
+    }
+    return user;
+  };
+  
+  BusinessSchema.pre("save",function(next){
+    const user = this;
+  
+  //password isnot modified
+    if(!user.isModified("password")) return next();
+  
+  //generating bcrypt salt
+    bcrypt.genSalt(8,(error,salt)=> {
+      if(error) return next(error);
+  
+      //hashing the password
+      bcrypt.hash(user.password, salt, (error,hash)=>{
+        if(error) return next(error);
+  
+        //assigning hashed password
+        user.password = hash;
+        return next();
+      });
+    });
+  });
+  
+   
   
   export const BusinessModel = mongoose.model("Business", BusinessSchema);

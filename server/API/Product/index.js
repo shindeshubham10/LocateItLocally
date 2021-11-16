@@ -1,152 +1,153 @@
-import express from "express";
-import passport from "passport";
+// import express from "express";
+// import passport from "passport";
 
-// Database modal
-import {ProductModel} from "../../Database/products";
-import { BusinessModel } from "../../Database/owner";
-// validation
-// import {
-//   ValidateRestaurantCity,
-//   ValidateRestaurantSearchString,
-// } from "../../validation/restaurant";
-// import { ValidateRestaurantId } from "../../validation/food";
+// // Database modal
+// import {ProductModel} from "../../SchemaModels/products"
+// import { BusinessModel } from "../../SchemaModels/business";
+// // validation
+// // import {
+// //   ValidateRestaurantCity,
+// //   ValidateRestaurantSearchString,
+// // } from "../../validation/restaurant";
+// // import { ValidateRestaurantId } from "../../validation/food";
 
-const Router = express.Router();
+// const Router = express.Router();
 
-/*
-Route     /
-Des       Get all the products
-Params    none
-Access    Public
-Method    GET  
-*/
-Router.get("/", async (req, res) => {
-  try {
-    //await ValidateRestaurantCity(req.query);
-    
-    const products = await ProductModel.find();
+// /*
+// Route     /
+// Des       Get all the products
+// Params    none
+// Access    Public
+// Method    GET
+// */
+// Router.get("/", async (req, res) => {
+//   try {
+//     //await ValidateRestaurantCity(req.query);
 
-    return res.json({ products });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+//     const products = await ProductModel.find();
 
-/*
-Route     /
-Des       Get individual  details based on id
-Params    id
-Access    Public
-Method    GET  
-*/
-Router.get("/:_id", async (req, res) => {
-  try {
-    //await ValidateRestaurantId(req.params);
+//     return res.json({ products });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
 
-    const { _id } = req.params;
-    const product = await ProductModel.findById(_id);
-    if (!product)
-      return res.status(404).json({ error: "Product Not Found" });
+// /*
+// Route     /
+// Des       Get individual  details based on id
+// Params    id
+// Access    Public
+// Method    GET
+// */
+// Router.get("/:_id", async (req, res) => {
+//   try {
+//     //await ValidateRestaurantId(req.params);
 
-    return res.json({ product });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+//     const { _id } = req.params;
+//     const product = await ProductModel.findById(_id);
+//     if (!product)
+//       return res.status(404).json({ error: "Product Not Found" });
 
-/*
-Route     /search
-Des       Get restaurant details based on search string
-Params    none
-Body      searchSting  
-Access    Public
-Method    GET  
-*/
-Router.get("/search", async (req, res) => {
-  try {
-    //await ValidateRestaurantSearchString(req.body);
+//     return res.json({ product });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
 
-    const { searchString } = req.body;
+// /*
+// Route     /search
+// Des       Get restaurant details based on search string
+// Params    none
+// Body      searchSting
+// Access    Public
+// Method    GET
+// */
+// Router.get("/search", async (req, res) => {
+//   try {
+//     //await ValidateRestaurantSearchString(req.body);
 
-    const products = await ProductModel.find({
-      name: { $regex: searchString, $options: "i" },
-    });
-    if (!products)
-      return res
-        .status(404)
-        .json({ error: `No Product matched with ${searchString}` });
+//     const { searchString } = req.body;
 
-    return res.json({ restaurants });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+//     const products = await ProductModel.find({
+//       name: { $regex: searchString, $options: "i" },
+//     });
+//     if (!products)
+//       return res
+//         .status(404)
+//         .json({ error: `No Product matched with ${searchString}` });
 
-Router.get("/owner/:_id", async (req, res) => {
-  try {
-    //await ValidateRestaurantId(req.params);
+//     return res.json({ restaurants });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
 
-    const { _id } = req.params;
-    const products = await ProductModel.find({ seller: _id });
+// Router.get("/owner/:_id", async (req, res) => {
+//   try {
+//     //await ValidateRestaurantId(req.params);
 
-    return res.json({ products });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+//     const { _id } = req.params;
+//     const products = await ProductModel.find({ seller: _id });
+
+//     return res.json({ products });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
 
 
-Router.get("/:category", async (req, res) => {
-  try {
-    //await ValidateRestaurantId(req.params);
+// Router.get("/:category", async (req, res) => {
+//   try {
+//     //await ValidateRestaurantId(req.params);
 
-    const { category } = req.params;
-    const products = await ProductModel.find({
-      category: { $regex: category, $options: "i" },
-    });
+//     const { category } = req.params;
+//     const products = await ProductModel.find({
+//       category: { $regex: category, $options: "i" },
+//     });
 
-    return res.json({ products });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+//     return res.json({ products });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// });
 
-Router.get("/:location", async (req, res) => {
-  try {
-    //await ValidateRestaurantId(req.params);
+// // Router.get("/:location", async (req, res) => {
+// //   try {
+// //     //await ValidateRestaurantId(req.params);
 
-    const { location } = req.params;
-    
-    const shops=await BusinessModel.find(
-      {
-        maplocation: { $regex: location, $options: "i" },
-      }
+// //     const { location } = req.params;
 
-     
-      
-
-    )
-
-    const products=shops.map(
-      shop=>await ProductModel.find(
-
-        {
-          seller:shop.name
-        }
-
-      )
-
-    )
-
-    return res.json({ products });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+// //     const shops=await BusinessModel.find(
+// //       {
+// //         maplocation: { $regex: location, $options: "i" },
+// //       }
 
 
 
 
+// //     )
+
+// //     const products=shops.map(
+// //       async (shop)=>{return await ProductModel.find(
+
+// //         {
+// //           seller:shop.name
+// //         }
+
+// //       )
+// //       }
+
+// //     )
+
+// //     return res.json({ products });
+// //   } catch (error) {
+// //     return res.status(500).json({ error: error.message });
+// //   }
+// // });
 
 
-export default Router;
+
+
+
+
+// export default Router;

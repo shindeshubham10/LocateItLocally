@@ -9,6 +9,8 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 import {UserSignUp}  from "../../../Service/api";
 
+import {BusinessSignUp}  from "../../../Service/api";
+
 const signUpInitialValues = {
   
   firstName:"",
@@ -19,11 +21,23 @@ const signUpInitialValues = {
   contactNumber:"",
 }
 
+const signUpBusinessInitialValues = {
+  
+  name:"",
+  firstName:"",
+  lastName: "",
+  email:"",
+  password:"",
+  contactNumber:"",
+}
+
 function Register()
 {
   const [user, setUser] = React.useState('customer');
 
   const [signupState, setsignupState] = React.useState(signUpInitialValues);
+
+  const [signupbusinessState, setsignupbusinessState] = React.useState(signUpBusinessInitialValues);
 
   
   
@@ -34,10 +48,27 @@ function Register()
     if (!response) return;
   
   };
+
+  const signUpBusiness = async () => {
+    console.log("enter into function");
+    let response = await BusinessSignUp(signupbusinessState);
+    console.log(response);
+    if (!response) return;
   
+  };
+
+
+  
+  
+
   const onInputChange = (event) => {
     setsignupState({ ...signupState, [event.target.name]: event.target.value });
     console.log(signupState);
+  };
+  
+  const onbusinessInputChange = (event) => {
+    setsignupbusinessState({ ...signupbusinessState, [event.target.name]: event.target.value });
+    console.log(signupbusinessState);
   };
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
@@ -243,7 +274,8 @@ function Register()
                       type="text"
                       label="Business Name"
                       size="medium"
-                      
+                      name="name"
+                      onChange={(e)=>onbusinessInputChange(e)}
                       InputProps={{
                         endAdornment: <Store/>
                       }}
@@ -258,7 +290,8 @@ function Register()
                       type="text"
                       label="First Name"
                       size="small"
-                      
+                      name="firstName"
+                      onChange={(e)=>onbusinessInputChange(e)}
                       InputProps={{
                         endAdornment: <Person />
                       }}
@@ -273,7 +306,8 @@ function Register()
                       type="text"
                       label="Last Name"
                       size="small"
-                      
+                      name="lastName"
+                      onChange={(e)=>onbusinessInputChange(e)}
                       InputProps={{
                         endAdornment: <Person />
                       }}
@@ -288,7 +322,8 @@ function Register()
                       type="email"
                       label="Business Email"
                       size="small"
-                      
+                      name="email"
+                      onChange={(e)=>onbusinessInputChange(e)}
                       InputProps={{
                         endAdornment: <EmailOutlinedIcon />
                       }}
@@ -304,7 +339,9 @@ function Register()
                     type="number"
                     label="Contact Number"
                     size="small"
+                    name="contactNumber"
                     placeholder="123456789"
+                    onChange={(e)=>onbusinessInputChange(e)}
                     InputProps={{
                       endAdornment: <Phone/>
                     }}
@@ -319,14 +356,17 @@ function Register()
                     type="password"
                     label="Password"
                     size="small"
+                    name="password"
+
                     placeholder="*******"
+                    onChange={(e)=>onbusinessInputChange(e)}
                     InputProps={{
                       endAdornment: <Password />
                     }}
                     sx={{width:"45vh",padding:"5px"}}
                   />
                   </Grid>
-                  <Grid item lg={6} sm={6} xs={12}>
+                  {/* <Grid item lg={6} sm={6} xs={12}>
                   <TextField
                     required
                     variant="standard"
@@ -334,13 +374,15 @@ function Register()
                     type="password"
                     label="Confirm Password"
                     size="small"
+                    name="password"
+                    onChange={(e)=>onbusinessInputChange(e)}
                     placeholder="*******"
                     InputProps={{
                       endAdornment: <Lock />
                     }}
                     sx={{width:"45vh",padding:"5px"}}
                   />
-                  </Grid>
+                  </Grid> */}
                   </Grid>
                 </Grid>
               }
@@ -354,7 +396,7 @@ function Register()
                   
                   <Button  variant="contained"  onClick={()=>signUpUser()} style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
                   :
-                  <Button  variant="contained" style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
+                  <Button  variant="contained" onClick={()=>signUpBusiness()}style={{color:"white",marginTop:"30px", borderRadius:"50px",fontWeight:"bold"}} className="registerbutton">Register</Button>
                   }
                   </Grid>
               </Grid>
