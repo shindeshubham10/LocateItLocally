@@ -7,9 +7,9 @@ import {Person,Google,Facebook,Password,AccountBox,Phone,Lock,Store} from "@mui/
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 
-import {UserSignUp}  from "../../../Service/api";
+import {UserSignUp}  from "../../../service/api";
 
-import {BusinessSignUp}  from "../../../Service/api";
+import {BusinessSignUp}  from "../../../service/api";
 
 const signUpInitialValues = {
   
