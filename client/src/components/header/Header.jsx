@@ -187,7 +187,7 @@ const Header = (props) => {
                 </Popover>
 
                    
-                    <Link to='/favourites'><FavoriteBorderIcon className={classes.endicons} /></Link>
+                    <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
 
                     <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link>
                    

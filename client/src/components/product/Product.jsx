@@ -1,5 +1,5 @@
 
-import {Grid,Box,makeStyles, Typography,Rating,List,Button, ListItemIcon,Divider, ListItemText, CardHeader,Card, CardContent, ListItem,useMediaQuery,useTheme,GridList} from '@material-ui/core'
+import {Grid,Box,makeStyles, Typography,Rating,List,Button,Divider,ListItem,useMediaQuery,useTheme } from '@material-ui/core'
 import {FavoriteOutlined,LocationDisabled,Star,PermDeviceInformationOutlined,CallOutlined,GrFavorite} from '@material-ui/icons';
 import ReactStars from "react-rating-stars-component";
 import { ArrowRight } from '@material-ui/icons';
@@ -8,7 +8,9 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallIcon from '../product/icon-call.png';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-
+import {ArrowForward} from "@material-ui/icons"
+import { Link } from 'react-router-dom';
+import { display } from '@mui/system';
 
  
 const useStyles=makeStyles(theme=>(
@@ -62,7 +64,9 @@ const useStyles=makeStyles(theme=>(
             fontweight: 500,
             fontSize: 15,
             fontFamily: ['Monteserrat', 'sans-serif'],
-            color: '#A1B3BA'
+            color: '#A1B3BA',
+            display:"flex",
+            
         },
         sellerInfoDescription: {
             fontweight: 'light',
@@ -247,8 +251,10 @@ const Product=()=>{
                     <Box >
                     <Box style={{display:'flex',marginTop:10}}>
                         <PermDeviceInformationOutlined style={{color:'#A1B3BA'}}/>
+                        
+                        
                         <Typography className={classes.sellerInfoHeading}>
-                            Seller Information
+                            Seller Information  <Link to="/shopdetails"> <ArrowForward style={{marginLeft:"30px"}}/> </Link>
                         </Typography>
                     </Box>
                     <Box style={{marginLeft:10,marginTop:10,}}>
