@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import category from "../category/index"
+// import  {categorySchema}  from "../category/index";
+//import { CategoryModel } from "../category/index";
 
 const reviewSchema = new mongoose.Schema(
     {
@@ -32,7 +33,9 @@ const BusinessSchema = new mongoose.Schema({
     },
     
     owner: { 
-        type: mongoose.Schema.Types.ObjectId, ref: 'owner', required: true 
+        type: mongoose.Schema.Types.ObjectId, 
+      ref: 'owner',
+      required: true
     },
 
     address:{
@@ -48,9 +51,9 @@ const BusinessSchema = new mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: "Images"
     },
-    categories:[
-        category
-    ],
+    // categories:[
+    //   categorySchema
+    // ],
     reviews: [
       reviewSchema
     ]

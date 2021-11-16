@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import { makeStyles} from '@material-ui/core';
 
 import { ListItemButton,ListItemText,List,ListItem} from '@mui/material';
@@ -38,8 +38,57 @@ const AccountMenu = () => {
       <Card className={classes.mainCard}>
                 
         <List>
-            
-          {
+          <Link to="/register">
+          <ListItem
+                secondaryAction={
+                  <IconButton>
+                    <FiChevronRight />
+                  </IconButton>
+                }
+                  
+                disablePadding>
+                <ListItemButton>
+                  <ListItemText
+                    
+                    primary="Register"
+                    primaryTypographyProps={
+                      {
+                        fontFamily: ['Oswald', 'sans-serif'],
+                        fontSize: 20,
+                      }
+                     
+                    }
+                  />
+                </ListItemButton>
+          </ListItem>
+          </Link>
+        
+          <Link to="/login">
+          <ListItem
+                secondaryAction={
+                  <IconButton>
+                    <FiChevronRight />
+                  </IconButton>
+                }
+                  
+                disablePadding>
+                <ListItemButton>
+                  <ListItemText
+                    
+                    primary="Login"
+                    primaryTypographyProps={
+                      {
+                        fontFamily: ['Oswald', 'sans-serif'],
+                        fontSize: 20,
+                      }
+                     
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+          </Link>
+         
+          {/* {
               
             AccountOptions.map(option => (
                    
@@ -71,7 +120,7 @@ const AccountMenu = () => {
 
             ))
                  
-          }
+          } */}
         </List>
       </Card>
     </>
