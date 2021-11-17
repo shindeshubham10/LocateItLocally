@@ -9,6 +9,11 @@ export const UserSignUp = (userInformation) => {
         console.log("asdasdadasd");
         console.log(userInformation);
         return axios.post(`${backendUrl}/userAuth/signup`,  userInformation );
+        // return await axios({
+        //     method: "POST",
+        //     url: `http://localhost:2000/userAuth/signup`,
+        //     data: { credentials: userInformation },
+        //   });
         
         
     } catch (error) {

@@ -7,8 +7,9 @@ import {Link} from 'react-router-dom';
 import {Person,Google,Facebook,Password,} from "@mui/icons-material";
 
 
-import  {UserSignIn,BusinessSignIn}  from "../../../service/api";
+//import  {UserSignIn,BusinessSignIn}  from "../../../service/api";
 
+import { UserSignIn,BusinessSignIn } from "../../../service/api";
 const signInInitialValues = {
 
   email: "",
@@ -61,7 +62,7 @@ function Login()
     };
 
     const onbusinessInputChange = (event) => {
-      setsigninState({ ...signinbusinessState, [event.target.name]: event.target.value });
+      setsigninbusinessState({ ...signinbusinessState, [event.target.name]: event.target.value });
       console.log(signinbusinessState);
     };
 

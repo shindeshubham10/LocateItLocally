@@ -9,7 +9,7 @@ const Schema = joi.object({
     lastName: joi.string().required(),
     username: joi.string().required().min(5),
     email: joi.string().required().email(),
-    hash_password: joi.string().required().max(8).min(5),
+    hash_password: joi.string().required().max(50).min(5),
     contactNumber: joi.string().length(10),
   
 });

@@ -23,14 +23,21 @@ Method        POST
 
 router.post("/signup", async(req,res) => {
   try {
-    console.log(req.body);
+    
 await ValidateSignup(req.body);
 
 await UserModel.findByEmailAndPhone(req.body);
   //DB
+  console.log(req.body);
   console.log("above newuser");
-    const newUser = await UserModel.create(req.body);
+    //const newUser = await UserModel.create(req.body.credentials);
+    const user = req.body;
+    const newUser = new UserModel(user);
+    await newUser.save();
+    console.log("After Save");
     console.log(newUser);
+    console.log("After fdone")
+
 
    //JWT Auth Token
     const token = newUser.generateJwtToken();
@@ -60,7 +67,7 @@ Method        POST
 
     //JWT Auth Token
     const token = user.generateJwtToken();
-
+      
      return res.json({ userExists: user });
     //return res.status(200).json({token, status: "Success"});
 

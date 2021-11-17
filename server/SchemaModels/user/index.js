@@ -72,34 +72,36 @@ UserSchema.statics.findByEmailAndPassword = async ({ email, hash_password }) => 
   if (!user) throw new Error("User doesnot exist");
 
   //compare password
-  const doesPasswordMatch = await bcrypt.compare(hash_password, user.hash_password);
+  //const doesPasswordMatch = await bcrypt.compare(hash_password, user.hash_password);
 
-  if(!doesPasswordMatch) {
+
+
+  if(hash_password!==user.hash_password) {
     throw new Error("Invalid password");
   }
   return user;
 };
 
-UserSchema.pre("save",function(next){
-  const user = this;
+// UserSchema.pre("save",function(next){
+//   const user = this;
 
-//password isnot modified
-  if(!user.isModified("hash_password")) return next();
+// //password isnot modified
+//   if(!user.isModified("hash_password")) return next();
 
-//generating bcrypt salt
-  bcrypt.genSalt(8,(error,salt)=> {
-    if(error) return next(error);
+// //generating bcrypt salt
+//   bcrypt.genSalt(8,(error,salt)=> {
+//     if(error) return next(error);
 
-    //hashing the password
-    bcrypt.hash(user.hash_password, salt, (error,hash)=>{
-      if(error) return next(error);
+//     //hashing the password
+//     bcrypt.hash(user.hash_password, salt, (error,hash)=>{
+//       if(error) return next(error);
 
-      //assigning hashed password
-      user.hash_password = hash;
-      return next();
-    });
-  });
-});
+//       //assigning hashed password
+//       user.hash_password = hash;
+//       return next();
+//     });
+//   });
+// });
 
   
   export const UserModel = mongoose.model("Users", UserSchema);
