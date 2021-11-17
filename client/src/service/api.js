@@ -22,11 +22,11 @@ export const UserSignUp = (userInformation) => {
 };
 //default UserSignUp;
 
-export const UserSignIn = (userInformation) => {
+export const UserSignIn = async (userInformation) => {
     try {
         console.log("asdasdadasd");
         console.log(userInformation);
-        return axios.post(`${backendUrl}/userAuth/signin`,  userInformation );
+        return await axios.post(`${backendUrl}/userAuth/signin`,  userInformation );
         
         
     } catch (error) {

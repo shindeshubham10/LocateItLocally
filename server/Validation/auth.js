@@ -24,7 +24,7 @@ return Schema.validateAsync(userData);
 
  const Schema = joi.object({
    email: joi.string().email().required(),
-   hash_password: joi.string().min(5).max(8).required()
+   hash_password: joi.string().min(5).max(50).required()
  });
 
  return Schema.validateAsync(userData);

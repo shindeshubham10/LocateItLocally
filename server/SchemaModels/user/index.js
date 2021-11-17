@@ -60,7 +60,8 @@ UserSchema.methods.generateJwtToken = function() {
    //check whether the phoneNumber Exists
    const checkUserByPhone = await UserModel.findOne({contactNumber});
    if(checkUserByEmail || checkUserByPhone) {
-     throw new Error("User already exist");
+     //throw new Error("User already exist");
+     return true;
    }
    return false;
  };
@@ -69,15 +70,17 @@ UserSchema.methods.generateJwtToken = function() {
 UserSchema.statics.findByEmailAndPassword = async ({ email, hash_password }) => {
   //check whether the email exists
   const user = await UserModel.findOne({email});
-  if (!user) throw new Error("User doesnot exist");
+  if (!user) return null;
 
   //compare password
   //const doesPasswordMatch = await bcrypt.compare(hash_password, user.hash_password);
 
-
+      console.log(user);
 
   if(hash_password!==user.hash_password) {
-    throw new Error("Invalid password");
+    //throw new Error("Invalid password");
+
+    return null;
   }
   return user;
 };
