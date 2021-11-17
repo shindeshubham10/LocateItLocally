@@ -76,6 +76,7 @@ function App() {
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
         <Route exact path="/allproducts/:options/" component={ShowProducts}/>
+        <Route exact path="/allproducts" component={ShowProducts}/>
       
       </Switch>
        <Footer/> 
