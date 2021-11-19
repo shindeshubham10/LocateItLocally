@@ -23,20 +23,31 @@ Method        POST
 
 router.post("/signup", async(req,res) => {
   try {
-    console.log(req.body);
-await ValidateSignup(req.body);
+    
+      await ValidateSignup(req.body);
 
-await UserModel.findByEmailAndPhone(req.body);
+      const bool=await UserModel.findByEmailAndPhone(req.body);
   //DB
-  console.log("above newuser");
-    const newUser = await UserModel.create(req.body);
+        if(bool === true)
+        {
+          return res.status(401).json('User Already Exist');
+        }
+      console.log(req.body);
+      console.log("above newuser");
+    //const newUser = await UserModel.create(req.body.credentials);
+    const user = req.body;
+    const newUser = new UserModel(user);
+    await newUser.save();
+    console.log("After Save");
     console.log(newUser);
+    console.log("After fdone")
+
 
    //JWT Auth Token
-    const token = newUser.generateJwtToken();
-    console.log("below token");
+     
+    
 
-   return res.status(200).json({token});
+   return res.status(200).json({userExists:newUser});
 
   } catch (error) {
     return res.status(500).json({error: error.message});
@@ -54,13 +65,19 @@ Method        POST
 
  router.post("/signin", async(req,res) => {
    try {
- await ValidateSignin(req.body);
-
+    console.log(req.body);
+     await ValidateSignin(req.body);
+     console.log(req.body);
+    
     const user = await UserModel.findByEmailAndPassword(req.body);
-
+    console.log(user);
     //JWT Auth Token
-    const token = user.generateJwtToken();
-
+    //const token = user.generateJwtToken();
+    if(user===null)
+    {
+      return res.status(401).json('Invalid Login');
+    }
+      
      return res.json({ userExists: user });
     //return res.status(200).json({token, status: "Success"});
 

@@ -60,7 +60,8 @@ UserSchema.methods.generateJwtToken = function() {
    //check whether the phoneNumber Exists
    const checkUserByPhone = await UserModel.findOne({contactNumber});
    if(checkUserByEmail || checkUserByPhone) {
-     throw new Error("User already exist");
+     //throw new Error("User already exist");
+     return true;
    }
    return false;
  };
@@ -69,37 +70,41 @@ UserSchema.methods.generateJwtToken = function() {
 UserSchema.statics.findByEmailAndPassword = async ({ email, hash_password }) => {
   //check whether the email exists
   const user = await UserModel.findOne({email});
-  if (!user) throw new Error("User doesnot exist");
+  if (!user) return null;
 
   //compare password
-  const doesPasswordMatch = await bcrypt.compare(hash_password, user.hash_password);
+  //const doesPasswordMatch = await bcrypt.compare(hash_password, user.hash_password);
 
-  if(!doesPasswordMatch) {
-    throw new Error("Invalid password");
+      console.log(user);
+
+  if(hash_password!==user.hash_password) {
+    //throw new Error("Invalid password");
+
+    return null;
   }
   return user;
 };
 
-UserSchema.pre("save",function(next){
-  const user = this;
+// UserSchema.pre("save",function(next){
+//   const user = this;
 
-//password isnot modified
-  if(!user.isModified("hash_password")) return next();
+// //password isnot modified
+//   if(!user.isModified("hash_password")) return next();
 
-//generating bcrypt salt
-  bcrypt.genSalt(8,(error,salt)=> {
-    if(error) return next(error);
+// //generating bcrypt salt
+//   bcrypt.genSalt(8,(error,salt)=> {
+//     if(error) return next(error);
 
-    //hashing the password
-    bcrypt.hash(user.hash_password, salt, (error,hash)=>{
-      if(error) return next(error);
+//     //hashing the password
+//     bcrypt.hash(user.hash_password, salt, (error,hash)=>{
+//       if(error) return next(error);
 
-      //assigning hashed password
-      user.hash_password = hash;
-      return next();
-    });
-  });
-});
+//       //assigning hashed password
+//       user.hash_password = hash;
+//       return next();
+//     });
+//   });
+// });
 
   
   export const UserModel = mongoose.model("Users", UserSchema);

@@ -110,34 +110,34 @@ const BusinessSchema = new mongoose.Schema({
     if (!user) throw new Error("Business doesnot exist");
   
     //compare password
-    const doesPasswordMatch = await bcrypt.compare(password, user.password);
+   // const doesPasswordMatch = await bcrypt.compare(password, user.password);
   
-    if(!doesPasswordMatch) {
-      throw new Error("Invalid password");
+    if(password!==user.password) {
+      return new Error("Invalid password");
     }
     return user;
   };
   
-  BusinessSchema.pre("save",function(next){
-    const user = this;
+  // BusinessSchema.pre("save",function(next){
+  //   const user = this;
   
-  //password isnot modified
-    if(!user.isModified("password")) return next();
+  // //password isnot modified
+  //   if(!user.isModified("password")) return next();
   
-  //generating bcrypt salt
-    bcrypt.genSalt(8,(error,salt)=> {
-      if(error) return next(error);
+  // //generating bcrypt salt
+  //   bcrypt.genSalt(8,(error,salt)=> {
+  //     if(error) return next(error);
   
-      //hashing the password
-      bcrypt.hash(user.password, salt, (error,hash)=>{
-        if(error) return next(error);
+  //     //hashing the password
+  //     bcrypt.hash(user.password, salt, (error,hash)=>{
+  //       if(error) return next(error);
   
-        //assigning hashed password
-        user.password = hash;
-        return next();
-      });
-    });
-  });
+  //       //assigning hashed password
+  //       user.password = hash;
+  //       return next();
+  //     });
+  //   });
+  // });
   
    
   
