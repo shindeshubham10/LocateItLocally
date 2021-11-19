@@ -63,9 +63,11 @@ function Register()
     console.log("enter into function");
     let response = await UserSignUp(signupState);
     console.log(response);
+    console.log("dfndncjndjk");
     if (!response)
     {
       seterror(true);
+     
       return;
     }
     else
@@ -82,7 +84,18 @@ function Register()
     console.log("enter into function");
     let response = await BusinessSignUp(signupbusinessState);
     console.log(response);
-    if (!response) return;
+    if (!response)
+    {
+      seterror(true);
+     
+      return;
+    }
+    else
+    {
+
+      setmove(true);
+
+    }
   
   };
 

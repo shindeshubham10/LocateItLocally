@@ -15,15 +15,16 @@ const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
     
-    seller: { type: mongoose.Types.ObjectID, ref: 'Business' },
+    seller: { type: mongoose.Types.ObjectId, ref: 'Business' },
     image: { type:mongoose.Types.ObjectId,ref:"Images" },
     brand: { type: String, required: true },
-    productcategory: { type:mongoose.Types.ObjectId,ref:"Category" },
+    category: {type: String, required: true },
     
     description: { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
     rating: { type: Number, },
+    availibilty:{ type:String }, 
     reviews: [reviewSchema],
   },
   {

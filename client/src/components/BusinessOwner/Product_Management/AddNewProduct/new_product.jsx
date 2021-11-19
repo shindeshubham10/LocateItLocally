@@ -9,6 +9,11 @@ import { Person, Google, Facebook, Password, } from "@mui/icons-material";
 import MenuItem from '@mui/material/MenuItem';
 import { borderRadius } from '@mui/system';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import { newProduct } from '../../../../service/api';
+
+
+
+
 
 
 
@@ -171,6 +176,21 @@ const ProductAvailabilty = [
     }
 ]
 
+const intialValues={
+
+    name:"",
+    category:"",
+    description:"",
+    brand:"",
+    price:0,
+    countInStock:0,
+    availability:"",
+
+
+
+
+}
+
 
 const Newproduct = () => {
     const classes = useStyle();
@@ -182,16 +202,43 @@ const Newproduct = () => {
     // This is used for Category Selection of the form on the page
     const [currency, setCurrency] = React.useState('EUR'); 
 
+    const [error,seterror]=React.useState(false);
+
     const handleChange = (event) => {
         setCurrency(event.target.value);
+        handleInputChange(event);
     };
 
     // For Product Availability
     const [availability, setAvailability] = React.useState('In Stock');
     const handleProductAvailability = (event) => {
         setAvailability(event.target.value);
+        handleInputChange(event);
     }
 
+    const [productdata, setproductdata] = React.useState(intialValues);
+
+    const handleInputChange = (event) => {
+        setproductdata({ ...productdata, [event.target.name]: event.target.value });
+        console.log(productdata);
+      };
+    
+
+    const addproduct = async () => {
+        console.log("enter into function");
+        let response = await newProduct(productdata);
+        console.log(response);
+        console.log("dfndncjndjk");
+        if (!response)
+        {
+          seterror(true);
+         
+          return;
+        }
+       return;
+             
+      
+      };
 
     /***** Code For Uploading Image (use at the time of doing backend) */
     // const [image, setImage] = React.useState(0);
@@ -237,8 +284,10 @@ const Newproduct = () => {
                   color="primary"
                   type="email"
                   //label="Email"
+                  name="name"
                   size='medium'
                   placeholder="test@test.com"
+                  onChange={(e)=>handleInputChange(e)}
                  
                      />
                     </Box>
@@ -257,9 +306,11 @@ const Newproduct = () => {
                             required
                             select
                             variant="outlined"
+                            name="category"
                             color="primary"
                             value={currency}
                             onChange={handleChange}
+                           
                             size='medium'
                             placeholder="test@test.com"
                  
@@ -289,7 +340,7 @@ const Newproduct = () => {
                   onChange={handleChange}
                   size='medium'
                   placeholder="test@test.com"
-                 
+                   name="brand"
                         >
                                 
                                 {currencies.map((option) => (
@@ -308,6 +359,7 @@ const Newproduct = () => {
                         <TextField className={classes.realTextField}
                                         type="number"
                                         variant="outlined"
+                                        name="countInStock"
                             InputLabelProps={{
                                 shrink: true,
 
@@ -335,6 +387,8 @@ const Newproduct = () => {
                             rows={4}
                             defaultValue="Description"
                             variant='outlined'
+                            name="description"
+                            onChange={(e)=>handleInputChange(e)}
                             />
                         </Box>
                         
@@ -355,6 +409,8 @@ const Newproduct = () => {
                   //label="Email"
                   size='medium'
                   placeholder="₹1000"
+                  name="price"
+                onChange={(e)=>handleInputChange(e)}
                  
                      />
                     </Box>
@@ -505,6 +561,7 @@ const Newproduct = () => {
                   onChange={handleProductAvailability}
                   size='medium'
                   placeholder="In Stock"
+                  name="availability"
                  
                         >
                                 
@@ -525,7 +582,7 @@ const Newproduct = () => {
                                         
                                         className={classes.addProductButton}
                                         style={{color:'white', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem'}}
-                                    
+                                        onClick={()=>addproduct()}
                                     >Add Product</Button>
                                 </Box>
                             

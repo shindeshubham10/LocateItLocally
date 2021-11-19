@@ -30,7 +30,12 @@ router.post("/signup", async(req,res) => {
   try {
 //await ValidateSignup(req.body.credentials);
   console.log("grr");
-  await BusinessModel.findByEmailAndPhone(req.body);
+  const chk=await BusinessModel.findByEmailAndPhone(req.body);
+  if(chk === true)
+  {
+         console.log("Business Already Exist");
+          return res.status(401).json('Busisness Already Exist');
+  }
   console.log("grrtttt");
   //DB
  
@@ -71,7 +76,9 @@ Method        POST
     console.log("ghvvh");
     const user = await BusinessModel.findByEmailAndPassword(req.body);
     if(user===NULL)
-        res.json({ error:"Wroong passs" });
+    {
+      return res.status(401).json('Invalid Login');
+    }
     //JWT Auth Token
     //const token = user.generateJwtToken();
 

@@ -19,7 +19,7 @@ import Reviews from './components/Account/ShopDetails/Reviews';
 
 import ShopProducts from './components/Account/ShopDetails/ShopProducts';
 
-
+import Newproduct from './components/BusinessOwner/Product_Management/AddNewProduct/new_product';
 import User_profile from './components/Account/User_Profile/user_profile';
 import googleMapsComponent from './components/GoogleMapIntegration/googleMaps.component';
 import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profile';
@@ -65,7 +65,7 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/businessdashboard" component={MainDashboard} />
-        
+        <Route exact path="/newProduct" component={Newproduct} />
         <Route exact path="/New Arrivals" component={User_profile} />
         <Route exact path="/products" component={ProductDetails} />
         <Route exact path="/user_profile" component={User_profile} />
