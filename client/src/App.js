@@ -32,12 +32,12 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import Product from './components/product/Product';
+//import Product from './components/product/Product';
 import FAQ from './components/product/FAQ';
 import ProductDetails from './components/product/ProductDetails';
 import ShopDetails from './components/Account/ShopDetails/ShopDetails';
 import ShowMap from './components/GoogleMapIntegration/googleMapsIntegration';
-
+//import Product from './components/product/Product';
 const useStyles=makeStyles(
   {
       main :{
@@ -67,7 +67,8 @@ function App() {
         <Route exact path="/businessdashboard" component={MainDashboard} />
         <Route exact path="/newProduct" component={Newproduct} />
         <Route exact path="/New Arrivals" component={User_profile} />
-        <Route exact path="/products" component={ProductDetails} />
+        <Route exact path="/productsDetails" component={ProductDetails} />
+        
         <Route exact path="/user_profile" component={User_profile} />
         <Route exact path="/maps" component={ShowMap} />
         <Route exact path="/reviews" component={Reviews} />

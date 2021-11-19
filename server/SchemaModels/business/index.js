@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+// import  {categorySchema}  from "../category/index";
+//import { CategoryModel } from "../category/index";
 
 const reviewSchema = new mongoose.Schema(
     {

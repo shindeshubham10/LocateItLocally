@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 
 const backendUrl = 'http://localhost:2000';
@@ -17,7 +15,7 @@ export const UserSignUp = async (userInformation) => {
         
         
     } catch (error) {
-        console.log("Error while signup user");
+        console.log(error.response.data);
     }
 };
 //default UserSignUp;
@@ -67,3 +65,14 @@ export const newProduct=async (product) =>{
     }
 }
 
+// for product data
+export const ShowProducts = (productInformation) => {
+    try {
+        console.log("Enter into product");
+        console.log(productInformation);
+        return axios.get(`${backendUrl}/newProduct/getProducts`);
+
+    } catch (error) {
+        console.log("Error while Fetching Product Information")
+    }
+}

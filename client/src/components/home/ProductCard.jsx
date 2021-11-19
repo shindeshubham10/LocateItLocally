@@ -153,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
 
 // sx={{ minWidth: 275 }}
 const ProductCard = (props) => {
-    const classes = useStyles();
+    const classes = useStyles(); 
     return (
         <div>
             <Card className={classes.mainCard}  >
