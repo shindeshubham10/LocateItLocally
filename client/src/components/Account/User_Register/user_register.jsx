@@ -1,15 +1,32 @@
 import React from "react";
 import './RegisterStyle.css'
-import {Grid,TextField,Box,Button} from '@material-ui/core';
+import {Grid,TextField,Box,Button,makeStyles,Typography} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 import {Link} from 'react-router-dom';
 import {Person,Google,Facebook,Password,AccountBox,Phone,Lock,Store} from "@mui/icons-material"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-
+import { Redirect } from "react-router";
 
 import {UserSignUp}  from "../../../service/api"
 
 import {BusinessSignUp}  from "../../../service/api";
+const useStyles=makeStyles(theme=>(
+  {
+    error:{
+      fontSize:15,
+      marginTop:0,
+      fontWeight:600,
+      color:'red',
+
+    }
+  
+      
+      
+
+  }
+
+)
+);
 
 const signUpInitialValues = {
   
@@ -40,14 +57,26 @@ function Register()
 
   const [signupbusinessState, setsignupbusinessState] = React.useState(signUpBusinessInitialValues);
 
-  
+  const [error,seterror]=React.useState(false);
+  const [move,setmove]=React.useState(false);
   
   const signUpUser = async () => {
     console.log("enter into function");
     //let data = JSON.stringify({ signupState });
     let response = await UserSignUp(signupState);
     console.log(response);
-    if (!response) return;
+    if (!response)
+    {
+      seterror(true);
+      return;
+    }
+    else
+    {
+
+      setmove(true);
+
+    }
+         
   
   };
 
@@ -67,6 +96,8 @@ function Register()
     setsignupState({ ...signupState, [event.target.name]: event.target.value });
     console.log(signupState);
   };
+
+  
   
   const onbusinessInputChange = (event) => {
     setsignupbusinessState({ ...signupbusinessState, [event.target.name]: event.target.value });
@@ -78,7 +109,9 @@ function Register()
         
       }
     };
+    const classes=useStyles();
     return(
+      move? <Redirect to='/' />:
         <div>
           <Grid container direction="row" className="rmain">
             
@@ -263,7 +296,15 @@ function Register()
                     sx={{width:"45vh",padding:"5px"}}
                   />
                   </Grid>
+
+
                 </Grid>
+                <Grid item lg={12} sm={12} xs={12}>
+
+                         {error && <Typography className={classes.error}>User Already Exist </Typography>}
+
+                </Grid>
+
               </Grid>
               :
               <Grid item>

@@ -9,7 +9,7 @@ const Schema = joi.object({
     lastName: joi.string().required(),
     username: joi.string().required().min(5),
     email: joi.string().required().email(),
-    hash_password: joi.string().required().max(8).min(5),
+    hash_password: joi.string().required().max(50).min(5),
     contactNumber: joi.string().length(10),
   
 });
@@ -24,7 +24,7 @@ return Schema.validateAsync(userData);
 
  const Schema = joi.object({
    email: joi.string().email().required(),
-   hash_password: joi.string().min(5).max(8).required()
+   hash_password: joi.string().min(5).max(50).required()
  });
 
  return Schema.validateAsync(userData);

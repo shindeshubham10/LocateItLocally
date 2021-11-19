@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 
 import { FiChevronRight } from 'react-icons/fi';
 
+
+
 // Import card and realated 
 import Card from "@material-ui/core/Card";
 
@@ -38,8 +40,8 @@ const AccountMenu = () => {
       <Card className={classes.mainCard}>
                 
         <List>
-          <Link to="/register">
-          <ListItem
+        <Link to="/register">
+        <ListItem
                 secondaryAction={
                   <IconButton>
                     <FiChevronRight />
@@ -60,11 +62,12 @@ const AccountMenu = () => {
                     }
                   />
                 </ListItemButton>
-          </ListItem>
-          </Link>
+        </ListItem>
+        </Link>
+
         
-          <Link to="/login">
-          <ListItem
+        <Link to="/login">
+        <ListItem
                 secondaryAction={
                   <IconButton>
                     <FiChevronRight />
@@ -85,10 +88,11 @@ const AccountMenu = () => {
                     }
                   />
                 </ListItemButton>
-              </ListItem>
-          </Link>
-         
-          {/* {
+        </ListItem>
+        </Link>
+
+{/*             
+          {
               
             AccountOptions.map(option => (
                    

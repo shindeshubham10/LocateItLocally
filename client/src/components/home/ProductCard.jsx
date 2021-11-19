@@ -157,50 +157,41 @@ const ProductCard = (props) => {
     return (
         <div>
             <Card className={classes.mainCard}  >
-                <Link  to={{
-                            pathname:'/productsDetails',
-                            state:props,
-                        }}>
-                    <CardContent >
-                   
-                        {/** Product Image */}
-                        <Link to={{
-                            pathname:'/productsDetails',
-                            state:props,
-                        }}>
-                   <CardMedia className={classes.imageBox}
-                       component="img"
-                           //height="100%"
-                       image= {props.image}
-                       alt="Product Image"
-                       //component={Link}
-                       //to="/allproducts"
-                   />
-                    </Link>
-                   
-                   <Box className={classes.cardDescription}>
-                       {/** Product category */}
-                   <Typography variant="h6"  className={classes.productCategory} component="div">
-                      {props.category}
-                   </Typography>
-
-                   
-                   {/** Product Name */}
-                   <Typography variant="h6"  className={classes.productName} component="div">
-                   {props.productname}
-                   </Typography>
-
-                   
-                   {/** Product Pricing */}
-                   <Typography variant="h6"  className={classes.productPrice} component="div">
-                    ₹ {props.productprice}
-                   </Typography>
-                   </Box>
-                   
-               </CardContent>
-                    </Link>
                 
-                
+            <Link to="/products">
+                <CardContent >
+                 
+                    {/** Product Image */}
+                    <CardMedia className={classes.imageBox}
+                        component="img"
+                            //height="100%"
+                        image= {props.image}
+                        alt="Product Image"
+                        //component={Link}
+                        //to="/allproducts"
+                    />
+                    
+                    <Box className={classes.cardDescription}>
+                        {/** Product category */}
+                    <Typography variant="h6"  className={classes.productCategory} component="div">
+                       {props.category}
+                    </Typography>
+
+                    
+                    {/** Product Name */}
+                    <Typography variant="h6"  className={classes.productName} component="div">
+                    {props.productname}
+                    </Typography>
+
+                    
+                    {/** Product Pricing */}
+                    <Typography variant="h6"  className={classes.productPrice} component="div">
+                        {props.productprice}
+                    </Typography>
+                    </Box>
+                    
+                </CardContent>
+            </Link>  
             </Card>
    
         </div>

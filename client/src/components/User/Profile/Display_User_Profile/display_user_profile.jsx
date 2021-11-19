@@ -1,11 +1,12 @@
 import React from 'react';
 import "./display_user_profile_style.css";
-import {Grid,TextField,Box,Button,Typography, Paper,Tab,useMediaQuery,useTheme,makeStyles,Tabs} from '@material-ui/core';
+import {Grid,Box,Button,Typography, Paper,Tab,useMediaQuery,useTheme,makeStyles,Tabs} from '@material-ui/core';
 import {LocationOn,ContactMail,Edit, Phone,EditOutlined,AddCircleOutline} from "@material-ui/icons"
-import { FactCheckRounded ,FactCheckOutlined} from '@mui/icons-material';
-import src from "./Profile_Photo.png"
+import {FactCheckOutlined} from '@mui/icons-material';
+import profileimg from "./User_Profile_Photo.png"
 
-//import ViewAllProducts from '../../../BusinessOwner/Product_Management/AllProducts/allProducts';
+import {Link} from "react-router-dom";
+
 import All_wishlist_items from '../../../Wishlist/all_wishlist_items/all_wishlist_items';
 const useStyle = makeStyles(theme => (
     {
@@ -185,7 +186,7 @@ const Display_user_profile= () =>
         <Grid container>
         <Grid item lg={12} xs={12}>
             <Grid container justifyContent="flex-end">
-                <a href="#" className="editicon"><EditOutlined/></a>
+                <Link to="/user_profile" className="editicon"><EditOutlined/></Link>
             </Grid>
             </Grid>
         </Grid>
@@ -196,7 +197,7 @@ const Display_user_profile= () =>
             <Grid container justifyContent="center">
                 <label>
                     <div >
-                        <img className="photo_upload" src={src}/>
+                        <img className="photo_upload" src={profileimg}/>
                     </div>
                     
                     <input type="file" /> 
@@ -249,19 +250,20 @@ const Display_user_profile= () =>
         <Box className={classes.mainBoxFor_Tabs_Divider}>
             
             <Box className={classes.testBox}>
+            
             <Grid container direction="row">
-            <Grid item xs={8} sm={10} lg={12}>
-            <div style={{display:"flex"}}>
-                <FactCheckOutlined fontSize="large"/>
-                <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
-              
-            </div>
-            </Grid>
-            <Grid item lg={12} sm={2} xs={4}>
-            <div>
-                <Button style={{marginLeft:"40px"}}><AddCircleOutline fontSize="large"/></Button>
-            </div>
-            </Grid>
+                <Grid item xs={8} sm={10} lg={12}>
+                <div style={{display:"flex"}}>
+                    <FactCheckOutlined fontSize="large"/>
+                    <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
+                
+                </div>
+                </Grid>
+                <Grid item lg={12} sm={2} xs={4}>
+                <div>
+                    <Button style={{marginLeft:"40px"}}><AddCircleOutline fontSize="large"/></Button>
+                </div>
+                </Grid>
             </Grid>
             <Tabs
                 orientation={mobileScreen ? 'horizontal' : 'vertical'}

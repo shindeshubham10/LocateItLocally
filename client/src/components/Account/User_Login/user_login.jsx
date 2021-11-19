@@ -1,14 +1,35 @@
 import React from "react";
-import {Grid,TextField,Button,} from '@material-ui/core';
+import {Grid,TextField,Button,makeStyles,Typography} from '@material-ui/core';
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 import './user_login_style.css'
 import {Link} from 'react-router-dom';
+import { Redirect } from "react-router";
+
 
 import {Person,Google,Facebook,Password,} from "@mui/icons-material";
 
 
-import  {UserSignIn,BusinessSignIn}  from "../../../service/api";
+//import  {UserSignIn,BusinessSignIn}  from "../../../service/api";
 
+import { UserSignIn,BusinessSignIn } from "../../../service/api";
+
+const useStyles=makeStyles(theme=>(
+  {
+    error:{
+      fontSize:15,
+      marginTop:0,
+      fontWeight:600,
+      color:'red',
+
+    }
+  
+      
+      
+
+  }
+
+)
+);
 const signInInitialValues = {
 
   email: "",
@@ -25,6 +46,7 @@ const signInBusinessInitialValues = {
 
 function Login()
 {
+  const classes=useStyles()
   const [user, setUser] = React.useState('customer');
     const handleUserBusiness = (event, obj) => {
       if (obj !== null) {
@@ -37,13 +59,27 @@ function Login()
     const [signinState, setsigninState] = React.useState(signInInitialValues);
     const [signinbusinessState, setsigninbusinessState] = React.useState(signInBusinessInitialValues);
 
+    const [error,setError]=React.useState(false)
+
+    const [move,setmove]=React.useState(false)
+
   
   
     const signInUser = async () => {
       console.log("enter into function");
       let response = await UserSignIn(signinState);
       console.log(response);
-      if (!response) return;
+      if (!response)
+      {
+        setError(true);
+        return;
+      }
+      else
+      {
+        setmove(true);
+
+      }
+       
     
     };
 
@@ -51,7 +87,13 @@ function Login()
       console.log("enter into function");
       let response = await BusinessSignIn(signinbusinessState);
       console.log(response);
-      if (!response) return;
+      if (!response)
+      {
+        setError(true);
+        return;
+
+      } 
+      return;
     
     };
 
@@ -61,11 +103,12 @@ function Login()
     };
 
     const onbusinessInputChange = (event) => {
-      setsigninState({ ...signinbusinessState, [event.target.name]: event.target.value });
+      setsigninbusinessState({ ...signinbusinessState, [event.target.name]: event.target.value });
       console.log(signinbusinessState);
     };
 
     return(
+      move? <Redirect to='/' />:
         <div>
           <Grid container direction="row" className="main">
             
@@ -160,8 +203,17 @@ function Login()
                             endAdornment: <Password/>
                             }}
                             sx={{width:"45vh",padding:"5px"}}
+
                         />
+                        
                       </Grid> 
+
+                      <Grid item lg={12} sm={12} xs={12}>
+
+                              {error && <Typography className={classes.error}>Invalid Email or Password</Typography>}
+
+                      </Grid>
+                      
 
                       
                   </Grid>
@@ -203,6 +255,7 @@ function Login()
                             sx={{width:"45vh",padding:"5px"}}
                         />
                     </Grid> 
+                    { error && <Typography className={classes.error}>Please enter valid Email ID/Password</Typography> }
                   </Grid>
                 }
                 </Grid>
