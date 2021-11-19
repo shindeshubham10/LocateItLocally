@@ -193,7 +193,7 @@ const ProductCard = (props) => {
                    
                    {/** Product Pricing */}
                    <Typography variant="h6"  className={classes.productPrice} component="div">
-                       {props.productprice}
+                    ₹ {props.productprice}
                    </Typography>
                    </Box>
                    

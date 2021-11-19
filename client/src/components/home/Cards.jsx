@@ -4,8 +4,9 @@ import "react-multi-carousel/lib/styles.css";
 import {AppBar,Toolbar,makeStyles,Typography,Box, Button} from '@material-ui/core'
 import ProductCard from "./ProductCard";
 import { FiChevronRight } from 'react-icons/fi';
-import { productDetails } from "../../constants/data";
+//import { productDetails } from "../../constants/data";
 
+import { useSelector } from 'react-redux';
 
 const responsive = {
     superLargeDesktop: {
@@ -78,10 +79,13 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
   // onMove means if dragging or swiping in progress.
   return <FiChevronRight
    
-    onClick={() => onClick()} />;
+    onClick={() => onClick()} />; 
 };
-const Cards=()=>{
-    const classes = useStyles();
+const Cards = ({data}) => {
+  const classes = useStyles();
+  const ProductData = data.Products;
+  console.log(ProductData);
+  console.log("inside Card")
     return(
         
         <Box className={classes.root} >
@@ -98,22 +102,27 @@ const Cards=()=>{
             deviceType={'mobile'}
           />} 
         >
-                {
-                   productDetails.map( details => (
+          
+          {
+                  
+                  ProductData.map( details => (
                         
-                       
-                     <ProductCard
-                       image={details.imageUrl}
-                       category={details.productCategory}
-                       productname={details.productName}
-                       productprice={details.productPrice}
+               
+                    <ProductCard
+                      image={details.image}
+                      category={details.category}
+                      productname={details.name}
+                      productprice={details.price}
 
-                       
-                     />
-                      //<DemoProductCard/>
-                     
-                   ) )
-                }
+                      
+                    />
+                    
+                    
+                  ) )
+              } 
+          
+            
+          
         </Carousel>
         </Box>
             

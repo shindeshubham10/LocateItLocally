@@ -160,7 +160,7 @@ const Product=(props)=>{
             
           };
 
-    const { cardData } = this.props.location;
+    //const { cardData } = this.props.location;
     // const { cardData1 } = this.props.location;
     // const [cardData, setcardData] = useState(cardData1);
 
@@ -196,7 +196,7 @@ const Product=(props)=>{
                 </Grid>
                 <Grid item xs={12} lg={4} className={classes.productAllInformation}>
                     <Typography style={{fontSize:25,fontFamily:['Roboto','sans-serif'],}}>
-                      {cardData.category}
+                      Sound
                     </Typography>
                     <ReactStars
                             count={5}
