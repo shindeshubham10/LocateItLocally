@@ -21,7 +21,6 @@ const ProductDetails = () => {
        
        <>
             <Product />
-            
             <Description />
             <Headings name="Related Products" />
             <Cart/>

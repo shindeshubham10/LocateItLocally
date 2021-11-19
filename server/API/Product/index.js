@@ -1,8 +1,9 @@
-// import express from "express";
-// import passport from "passport";
+ import express from "express";
+ import passport from "passport";
 
 // // Database modal
-// import {ProductModel} from "../../SchemaModels/products"
+import { ProductModel } from "../../SchemaModels/products";
+import { getProducts } from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -11,26 +12,30 @@
 // // } from "../../validation/restaurant";
 // // import { ValidateRestaurantId } from "../../validation/food";
 
-// const Router = express.Router();
+ const Router = express.Router();
 
-// /*
-// Route     /
-// Des       Get all the products
-// Params    none
-// Access    Public
-// Method    GET
-// */
-// Router.get("/", async (req, res) => {
+/*
+Route     /
+Des       Get all the products
+Params    none
+Access    Public
+Method    GET
+*/
+// Router.get("/getProducts", async (req, res) => {
 //   try {
 //     //await ValidateRestaurantCity(req.query);
 
 //     const products = await ProductModel.find();
-
+//     console.log("inside API");
+//     console.log(products);
 //     return res.json({ products });
 //   } catch (error) {
 //     return res.status(500).json({ error: error.message });
 //   }
 // });
+
+// getProducts code is writteen in controller->productController file
+Router.get("/getProducts", getProducts);
 
 // /*
 // Route     /
@@ -150,4 +155,4 @@
 
 
 
-// export default Router;
+export default Router;

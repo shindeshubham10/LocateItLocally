@@ -8,6 +8,8 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallIcon from '../product/icon-call.png';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+
+import { useState } from 'react';
 import {ArrowForward} from "@material-ui/icons"
 import { Link } from 'react-router-dom';
 import { display } from '@mui/system';
@@ -145,7 +147,7 @@ const itemData = [
     },
   ];
 
-const Product=()=>{
+const Product=(props)=>{
         
         const theme = useTheme();
         const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -164,10 +166,14 @@ const Product=()=>{
             
           };
 
+    //const { cardData } = this.props.location;
+    // const { cardData1 } = this.props.location;
+    // const [cardData, setcardData] = useState(cardData1);
 
+    
         const classes=useStyles();
         return(
-
+           
             <Grid container className={classes.root}>                    
                     <ImageList 
                         cols={ 1 }
@@ -196,7 +202,7 @@ const Product=()=>{
                 </Grid>
                 <Grid item xs={12} lg={4} className={classes.productAllInformation}>
                     <Typography style={{fontSize:25,fontFamily:['Roboto','sans-serif'],}}>
-                        Audio Speakers
+                      Sound
                     </Typography>
                     <ReactStars
                             count={5}
