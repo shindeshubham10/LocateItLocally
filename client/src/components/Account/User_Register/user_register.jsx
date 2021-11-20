@@ -7,7 +7,7 @@ import {Person,Google,Facebook,Password,AccountBox,Phone,Lock,Store} from "@mui/
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { Redirect } from "react-router";
 
-import {UserSignUp}  from "../../../service/api";
+import {UserSignUp}  from "../../../service/api"
 
 import {BusinessSignUp}  from "../../../service/api";
 const useStyles=makeStyles(theme=>(
@@ -48,6 +48,7 @@ const signUpBusinessInitialValues = {
   contactNumber:"",
 }
 
+
 function Register()
 {
   const [user, setUser] = React.useState('customer');
@@ -61,11 +62,14 @@ function Register()
   
   const signUpUser = async () => {
     console.log("enter into function");
+    //let data = JSON.stringify({ signupState });
     let response = await UserSignUp(signupState);
     console.log(response);
+    console.log("dfndncjndjk");
     if (!response)
     {
       seterror(true);
+     
       return;
     }
     else
@@ -82,7 +86,18 @@ function Register()
     console.log("enter into function");
     let response = await BusinessSignUp(signupbusinessState);
     console.log(response);
-    if (!response) return;
+    if (!response)
+    {
+      seterror(true);
+     
+      return;
+    }
+    else
+    {
+
+      setmove(true);
+
+    }
   
   };
 

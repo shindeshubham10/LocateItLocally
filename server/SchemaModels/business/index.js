@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+// import  {categorySchema}  from "../category/index";
+//import { CategoryModel } from "../category/index";
 
 const reviewSchema = new mongoose.Schema(
     {
@@ -98,7 +100,7 @@ const BusinessSchema = new mongoose.Schema({
      //check whether the phoneNumber Exists
      const checkUserByPhone = await BusinessModel.findOne({contactNumber});
      if(checkUserByEmail || checkUserByPhone) {
-       throw new Error("Business already exist");
+       return true;
      }
      return false;
    };
@@ -107,13 +109,13 @@ const BusinessSchema = new mongoose.Schema({
   BusinessSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     //check whether the email exists
     const user = await BusinessModel.findOne({email});
-    if (!user) throw new Error("Business doesnot exist");
+    if (!user) return null;
   
     //compare password
    // const doesPasswordMatch = await bcrypt.compare(password, user.password);
   
     if(password!==user.password) {
-      return new Error("Invalid password");
+      return null;
     }
     return user;
   };

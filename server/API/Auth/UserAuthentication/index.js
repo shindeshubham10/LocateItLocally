@@ -26,10 +26,11 @@ router.post("/signup", async(req,res) => {
     
       await ValidateSignup(req.body);
 
-      const bool=await UserModel.findByEmailAndPhone(req.body);
+      const chk=await UserModel.findByEmailAndPhone(req.body);
   //DB
-        if(bool === true)
+        if(chk === true)
         {
+          console.log("USer Already Exist");
           return res.status(401).json('User Already Exist');
         }
       console.log(req.body);

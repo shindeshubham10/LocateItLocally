@@ -91,9 +91,12 @@ function Login()
       {
         setError(true);
         return;
+      }
+      else
+      {
+        setmove(true);
 
-      } 
-      return;
+      }
     
     };
 
