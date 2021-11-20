@@ -132,7 +132,7 @@ const Header = (props) => {
         <AppBar className={classes.header}>
             <Toolbar >
                 
-                <img src={logo} alt="icon" className={classes.logoLg} />
+                <Link to="/"><img src={logo} alt="icon" className={classes.logoLg} /></Link>
                 
                 <Box className={classes.containerOptions}>
 

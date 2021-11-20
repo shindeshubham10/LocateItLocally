@@ -254,7 +254,7 @@ const Display_user_profile= () =>
             <Grid container direction="row">
                 <Grid item xs={8} sm={10} lg={12}>
                 <div style={{display:"flex"}}>
-                    <FactCheckOutlined fontSize="large"/>
+                    <Link to="/carts"><FactCheckOutlined fontSize="large"/></Link>
                     <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
                 
                 </div>
