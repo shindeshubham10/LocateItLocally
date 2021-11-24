@@ -11,6 +11,8 @@ import AccountMenu from '../home/PopOverModals/AccountMenu';
 import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
 
+import { useSelector,useDispatch } from 'react-redux';
+
  
 const useStyle = makeStyles(theme => (
 
@@ -93,6 +95,12 @@ const useStyle = makeStyles(theme => (
 
 
 const Header = (props) => {
+
+
+  const reduxState=useSelector((global) => global.user.user);
+
+  console.log({reduxState});
+
   
    
 
@@ -158,33 +166,60 @@ const Header = (props) => {
           <Box className={classes.endContainerIcons}>
             
                 {/** Write extra properties for the icon - onClick(),onMouseOver() */}
-                <Link to='/login'>
-                  <PersonOutlineIcon
-                    aria-owns={open ? 'show-Account-menu' : undefined}
-                    aria-haspopup="true"
-                    className={classes.endicons}
-                    onClick={handlePopoverOpen}
-                    onMouseOver={handlePopoverOpen}
-                  
-              />
-            </Link>
+                
 
                   {/** This is the PopOver Element which will be shown after hovering on button/icon */}
-                  <Popover
-                  id="show-Account-menu"
-                
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={handlePopoverClose}
-                  //onMouseOut={handlePopoverClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  disableRestoreFocus
-                >
-                  <AccountMenu  /> {/** This item will be displayed after hovering */}
-                </Popover>
+
+                  {
+                    reduxState?.user?.firstName ?(
+
+                      <>
+                          <p>
+                              {reduxState.user.firstName}
+                          </p>
+                      </>
+
+
+
+
+                    ):(
+
+                      <>
+
+                   <Link to='/login'>
+                          <PersonOutlineIcon
+                            aria-owns={open ? 'show-Account-menu' : undefined}
+                            aria-haspopup="true"
+                            className={classes.endicons}
+                            onClick={handlePopoverOpen}
+                            onMouseOver={handlePopoverOpen}
+                          
+                      />
+                 </Link>
+                            
+                      
+                      </>
+
+                      
+                    )
+                  }
+
+                         <Popover
+                              id="show-Account-menu"
+                            
+                              open={open}
+                              anchorEl={anchorEl}
+                              onClose={handlePopoverClose}
+                              //onMouseOut={handlePopoverClose}
+                              anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                              }}
+                              disableRestoreFocus
+                            >
+                              <AccountMenu  /> {/** This item will be displayed after hovering */}
+                            </Popover>
+                  
 
                    
                     <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>

@@ -14,7 +14,7 @@ require("dotenv").config();
 
 
 //Validation for fields we are entering
-//import { ValidateSignup , ValidateSignin} from "../../../Validation/auth";
+import { ValidateSignup , ValidateSignin} from "../../../Validation/auth";
 
 
 
@@ -28,33 +28,37 @@ Method        POST
 
 router.post("/signup", async(req,res) => {
   try {
-//await ValidateSignup(req.body.credentials);
-  console.log("grr");
-  const chk=await BusinessModel.findByEmailAndPhone(req.body);
-  if(chk === true)
-  {
-         console.log("Business Already Exist");
-          return res.status(401).json('Busisness Already Exist');
-  }
-  console.log("grrtttt");
-  //DB
+    console.log("hfbbfvj");
+    console.log(req.body.credentials);
+    
+   //await ValidateSignup(req.body.credentials);
+  
  
-
-  //  const newBusiness = await BusinessModel.create(req.body);
-  const user = req.body;
-    const newBusiness = new BusinessModel(user);
-    await newBusiness.save();
-    console.log("After Save");
-    console.log(newBusiness);
-    console.log("After fdone")
-
-   console.log("ho gaya");
+    console.log("dbdbdj");
+    await BusinessModel.findByEmailAndPhone(req.body.credentials);
+    console.log("hghhvg");
+     const newBusiness = await BusinessModel.create(req.body.credentials);
+ 
    console.log(newBusiness);
+   console.log(newBusiness.email);
+   console.log("uyguygfyft");
+
 
    //JWT Auth Token
-   //const token = newBusiness.generateJwtToken();
+   const token =await newBusiness.generateJwtToken();
+    // if(newBusiness)
+    // {
+    //   const choken=jwt.sign({_id:newBusiness._id.toString()},"LocateitLocallyBusiness");
+    //   console.log(choken);
 
-   return res.status(200).json({"jhal":"hjgybhj"});
+
+    // }
+    // else{
+
+    //   console.log("Waiting for otu");
+    // }
+   console.log(token);
+   return res.status(200).json({ token, status: "success" });
 
   } catch (error) {
     return res.status(500).json({error: error.message});
@@ -72,17 +76,14 @@ Method        POST
 
  router.post("/signin", async(req,res) => {
    try {
- //await ValidateSignin(req.body.credentials);
-    console.log("ghvvh");
-    const user = await BusinessModel.findByEmailAndPassword(req.body);
-    if(user===NULL)
-    {
-      return res.status(401).json('Invalid Login');
-    }
+     await ValidateSignin(req.body.credentials);
+    
+    const user = await BusinessModel.findByEmailAndPassword(req.body.credentials);
+    
     //JWT Auth Token
-    //const token = user.generateJwtToken();
+    const token = user.generateJwtToken();
 
-     return res.json({ userExists: user });
+     return res.json({ token,status:"success" });
     //return res.status(200).json({token, status: "Success"});
 
    } catch (error) {

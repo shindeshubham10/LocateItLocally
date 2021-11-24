@@ -7,6 +7,7 @@ import { FiChevronRight } from 'react-icons/fi';
 //import { productDetails } from "../../constants/data";
 
 import { useSelector } from 'react-redux';
+//import { getProducts } from "../../../../server/Controllers/productController";
 
 const responsive = {
     superLargeDesktop: {
@@ -105,7 +106,7 @@ const Cards = ({data}) => {
           
           {
                   
-                  ProductData.map( details => (
+                 ProductData? ProductData.map( details => (
                         
                
                     <ProductCard
@@ -113,12 +114,14 @@ const Cards = ({data}) => {
                       category={details.category}
                       productname={details.name}
                       productprice={details.price}
+                      
+
 
                       
                     />
                     
                     
-                  ) )
+                  ) ):<Typography>Waiting...</Typography>
               } 
           
             

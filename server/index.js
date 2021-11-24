@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import passport from "passport";
 import googleAuthConfig from "./config/google.config.js";
+import routeConfig from './config/route.config.js';
 
 
 // Authentication API's
@@ -16,6 +17,13 @@ import BusinessAuth from "./API/Auth/BusinessAuthentication/index.js";
 
 // Product API's
 import Product from './API/Product/index.js';
+
+//USER API's
+
+import User from "./API/User/index.js"
+
+
+
 
 
 
@@ -43,14 +51,18 @@ app.use('/businessAuth', BusinessAuth);
 
 
 
+
+
 // Product API's
 app.use('/newProduct', Product);
 
-// Product API's
+// User API's
+
+app.use('/user',User);
 
 
 googleAuthConfig(passport);
-
+routeConfig(passport);
 /*
 app.get("/",function(req,res){
     res.render(home);

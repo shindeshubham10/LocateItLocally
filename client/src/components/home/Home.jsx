@@ -10,7 +10,6 @@ import Footer from '../footer/footer';
 
 import MultiSlider from './MultiSlider';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { getProducts as ProductList } from '../../redux/actions/productActions';
 
 const Home = () => {

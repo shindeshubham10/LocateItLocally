@@ -7,9 +7,12 @@ import {Person,Google,Facebook,Password,AccountBox,Phone,Lock,Store} from "@mui/
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { Redirect } from "react-router";
 
-import {UserSignUp}  from "../../../service/api"
+//import {UserSignUp}  from "../../../service/api"
 
-import {BusinessSignUp}  from "../../../service/api";
+import { UsersignUp } from "../../../redux/actions/userauthActions";
+import {useDispatch} from "react-redux"
+
+import { BusinesssignUp } from "../../../redux/actions/businessauthActions";
 const useStyles=makeStyles(theme=>(
   {
     error:{
@@ -59,11 +62,14 @@ function Register()
 
   const [error,seterror]=React.useState(false);
   const [move,setmove]=React.useState(false);
+
+  const dispatch=useDispatch();
   
   const signUpUser = async () => {
     console.log("enter into function");
     //let data = JSON.stringify({ signupState });
-    let response = await UserSignUp(signupState);
+    //let response = await UserSignUp(signupState);
+        let response=dispatch(UsersignUp(signupState))
     console.log(response);
     console.log("dfndncjndjk");
     if (!response)
@@ -84,7 +90,8 @@ function Register()
 
   const signUpBusiness = async () => {
     console.log("enter into function");
-    let response = await BusinessSignUp(signupbusinessState);
+    //let response = await BusinessSignUp(signupbusinessState);
+    let response=dispatch(BusinesssignUp(signupbusinessState))
     console.log(response);
     if (!response)
     {

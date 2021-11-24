@@ -6,6 +6,10 @@ import Home from './components/home/Home';
 import Footer from './components/footer/footer'
 import { makeStyles } from '@material-ui/core';
 
+import { useSelector ,useDispatch} from 'react-redux';
+
+import { useEffect } from 'react';
+
 import Contact from './components/contact/Contact';
 import About from './components/about/About';
 import Cart from './components/cart/Cart';
@@ -37,7 +41,18 @@ import FAQ from './components/product/FAQ';
 import ProductDetails from './components/product/ProductDetails';
 import ShopDetails from './components/Account/ShopDetails/ShopDetails';
 import ShowMap from './components/GoogleMapIntegration/googleMapsIntegration';
+import axios from "axios"
 //import Product from './components/product/Product';
+import { getMyself } from './redux/actions/userActions';
+
+
+// axios global settings
+if (localStorage.LocateItLocallyUser) {
+  const { token } = JSON.parse(localStorage.LocateItLocallyUser);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  console.log(token);
+}
+
 const useStyles=makeStyles(
   {
       main :{
@@ -46,6 +61,18 @@ const useStyles=makeStyles(
   }
 )
 function App() {
+
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+      if(localStorage.LocateItLocallyUser)
+    {
+      dispatch(getMyself());
+    }
+
+  },[])
+
+  
 
   const classes=useStyles();
   return (

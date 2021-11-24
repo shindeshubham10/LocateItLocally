@@ -185,6 +185,7 @@ const intialValues={
     price:0,
     countInStock:0,
     availability:"",
+    image:[],
 
 
 
@@ -241,20 +242,32 @@ const Newproduct = () => {
       };
 
     /***** Code For Uploading Image (use at the time of doing backend) */
-    // const [image, setImage] = React.useState(0);
+    const [image, setImage] = React.useState([]);
 
-    // const Imageset = (event) => {
-    //     const reader = new FileReader();
-    //     console.log(reader.result);
-    //     reader.onload = () => {
-    //         if(reader.readyState===2){
-    //             setImage(reader.result);
-    //             console.log(reader.result);
-    //         } 
-    //     }
+    const Imageset = (event) => {
+        // const reader = new FileReader();
+        // console.log(reader.result);
+        // reader.onload = () => {
+        //     if(reader.readyState===2){
+        //         setImage(reader.result);
+        //         console.log(reader.result);
+        //     } 
+        // }
 
-    //     reader.readAsDataURL(event.target.files[0])
-    // }
+        // reader.readAsDataURL(event.target.files[0])
+
+        console.log(event.target.files[0]);
+        // console.log(image);
+        // console.log(URL.createObjectURL(event.target.files[0]));
+        // setImage([...image,URL.createObjectURL(event.target.files[0])])
+        setImage([...image,URL.createObjectURL(event.target.files[0])]);
+        setproductdata({ ...productdata, image:[...image,image] });
+        console.log(image);
+        console.log(productdata);
+        
+
+
+    }
    
 
     return (
@@ -437,18 +450,20 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                      <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                        <Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-                                            <div>
-                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    //onChange={Imageset} 
-                                                />
-                                                <div className='label'>
-                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                        click to browse
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </Typography>
+                                     {  image[0]?<img src={image[0]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+
+                                                            <div>
+                                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
+                                                                    onChange={Imageset} 
+                                                                />
+                                                                <div className='label'>
+                                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
+                                                                        click to browse
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            </Typography>
+                                    }
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -464,10 +479,12 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                         <AddPhotoAlternateOutlinedIcon fontSize='large' style={ {color:'#C4C4C4'}}/>
-                                        <Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+                                
+                                        {  image[1]?<img src={image[1]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+
                                             <div>
                                                 <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    //onChange={Imageset} 
+                                                    onChange={Imageset} 
                                                 />
                                                 <div className='label'>
                                                     <label htmlFor='upload-image' style={{color:'#064482'}}>
@@ -476,6 +493,7 @@ const Newproduct = () => {
                                                 </div>
                                             </div>
                                         </Typography>
+                                    }
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -491,18 +509,20 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                      <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                        <Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-                                            <div>
-                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    //onChange={Imageset} 
-                                                />
-                                                <div className='label'>
-                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                        click to browse
-                                                    </label>
+                                     {  image[2]?<img src={image[2]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+
+                                                <div>
+                                                    <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
+                                                        onChange={Imageset} 
+                                                    />
+                                                    <div className='label'>
+                                                        <label htmlFor='upload-image' style={{color:'#064482'}}>
+                                                            click to browse
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </Typography>
+                                                </Typography>
+                                    }
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -518,18 +538,20 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                      <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                        <Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-                                            <div>
-                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    //onChange={Imageset} 
-                                                />
-                                                <div className='label'>
-                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                        click to browse
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </Typography>
+                                     {  image[3]?<img src={image[3]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+
+                                                                    <div>
+                                                                        <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
+                                                                            onChange={Imageset} 
+                                                                        />
+                                                                        <div className='label'>
+                                                                            <label htmlFor='upload-image' style={{color:'#064482'}}>
+                                                                                click to browse
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    </Typography>
+                                        }
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"

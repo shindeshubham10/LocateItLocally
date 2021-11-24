@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 // import  {categorySchema}  from "../category/index";
 //import { CategoryModel } from "../category/index";
 
+
+import jwt from "jsonwebtoken";
+
+import bcrypt from "bcryptjs";
+
 const reviewSchema = new mongoose.Schema(
     {
       name: {
@@ -86,7 +91,7 @@ const BusinessSchema = new mongoose.Schema({
   });
 
   BusinessSchema.methods.generateJwtToken = function() {
-    return jwt.sign({user: this._id.toString()}, "LocateItLocally");
+    return jwt.sign({business: this._id.toString()}, "LocateItLocallyBusiness");
   };
   
   
@@ -99,47 +104,56 @@ const BusinessSchema = new mongoose.Schema({
   
      //check whether the phoneNumber Exists
      const checkUserByPhone = await BusinessModel.findOne({contactNumber});
+
      if(checkUserByEmail || checkUserByPhone) {
-       return true;
-     }
-     return false;
+      throw new Error("Business already exist");
+      //return true;
+    }
+    return false;
+     
    };
   
    // Function Used for SignIn Purpose
   BusinessSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     //check whether the email exists
     const user = await BusinessModel.findOne({email});
-    if (!user) return null;
-  
-    //compare password
-   // const doesPasswordMatch = await bcrypt.compare(password, user.password);
-  
-    if(password!==user.password) {
-      return null;
-    }
-    return user;
+    if (!user) throw new Error("User does no exist!!!");
+
+      // Compare password
+      const doesPasswordMatch = await bcrypt.compare(password, user.password);
+
+      if (!doesPasswordMatch) throw new Error("invalid Password!!!");
+
+      return user;
+
+   
   };
   
-  // BusinessSchema.pre("save",function(next){
-  //   const user = this;
+  BusinessSchema.pre("save",function(next){
+
+    console.log("frfrfbn");
+     const business = this;
+      
+   //password isnot modified
+     if(!business.isModified("password")) return next();
+
+     console.log("frfrfbn");
   
-  // //password isnot modified
-  //   if(!user.isModified("password")) return next();
+   //generating bcrypt salt
+     bcrypt.genSalt(8,(error,salt)=> {
+       if(error) return next(error);
+
+       //hashing the password
+       bcrypt.hash(business.password, salt, (error,hash)=>{
+         if(error) return next(error);
   
-  // //generating bcrypt salt
-  //   bcrypt.genSalt(8,(error,salt)=> {
-  //     if(error) return next(error);
-  
-  //     //hashing the password
-  //     bcrypt.hash(user.password, salt, (error,hash)=>{
-  //       if(error) return next(error);
-  
-  //       //assigning hashed password
-  //       user.password = hash;
-  //       return next();
-  //     });
-  //   });
-  // });
+         //assigning hashed password
+         console.log(business.password);
+         business.password = hash;
+         return next();
+       });
+     });
+   });
   
    
   
