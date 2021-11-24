@@ -3,7 +3,7 @@
 
 // // Database modal
 import { ProductModel } from "../../SchemaModels/products";
-import { getProducts } from "../../Controllers/productController";
+import { getProductDetails, getProducts } from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -63,20 +63,9 @@ Router.get("/getProducts", getProducts);
 // Access    Public
 // Method    GET
 // */
-// Router.get("/:_id", async (req, res) => {
-//   try {
-//     //await ValidateRestaurantId(req.params);
 
-//     const { _id } = req.params;
-//     const product = await ProductModel.findById(_id);
-//     if (!product)
-//       return res.status(404).json({ error: "Product Not Found" });
-
-//     return res.json({ product });
-//   } catch (error) {
-//     return res.status(500).json({ error: error.message });
-//   }
-// });
+Router.get("/:_id",getProductDetails);
+  
 
 //Add Products
 

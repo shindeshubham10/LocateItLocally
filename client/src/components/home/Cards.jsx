@@ -1,10 +1,12 @@
 import Carousel from "react-multi-carousel";
+import {Link} from 'react-router-dom';
 //import Carousel from 'react-material-ui-carousel';
 import "react-multi-carousel/lib/styles.css";
-import {AppBar,Toolbar,makeStyles,Typography,Box, Button} from '@material-ui/core'
+import {AppBar,Toolbar,makeStyles,Typography,Box, Button,Grid} from '@material-ui/core'
 import ProductCard from "./ProductCard";
 import { FiChevronRight } from 'react-icons/fi';
 //import { productDetails } from "../../constants/data";
+
 
 import { useSelector } from 'react-redux';
 //import { getProducts } from "../../../../server/Controllers/productController";
@@ -86,7 +88,9 @@ const Cards = ({data}) => {
   const classes = useStyles();
   const ProductData = data.Products;
   console.log(ProductData);
-  console.log("inside Card")
+  console.log("inside Card");
+
+  //console.log("ID of the Product - ",ProductData._id);
     return(
         
         <Box className={classes.root} >
@@ -105,11 +109,11 @@ const Cards = ({data}) => {
         >
           
           {
-                  
-                 ProductData? ProductData.map( details => (
+                  ProductData ? 
+                  ProductData.map( details => (
                         
-               
-                    <ProductCard
+                    <Link to={`productsDetails/${details._id}`}>
+                      <ProductCard
                       image={details.image}
                       category={details.category}
                       productname={details.name}
@@ -119,9 +123,13 @@ const Cards = ({data}) => {
 
                       
                     />
+                    </Link>
+                
+                  ) ) : 
+                  <Grid container justify="center">
+                    <Typography style={{fontSize:20,}}>Loading....</Typography>
+                  </Grid>
                     
-                    
-                  ) ):<Typography>Waiting...</Typography>
               } 
           
             

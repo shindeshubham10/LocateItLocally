@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import {getProductReducer} from './reducers/productReducers';
+import {getProductReducer,getProductDetailsReducer} from './reducers/productReducers';
 import AuthReducer from './reducers/userAuthreducer';
 import BAuthReducer from './reducers/businessauthreducer';
 import UserReducer from "./reducers/userreducer";
@@ -17,8 +17,8 @@ const reducer = combineReducers({
     AuthReducer,
     BAuthReducer,
     user:UserReducer,
-    
-});
+    getProductDetails:getProductDetailsReducer,
+})
 
 const middleWare = [thunk];
 

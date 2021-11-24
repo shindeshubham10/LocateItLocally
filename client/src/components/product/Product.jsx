@@ -147,8 +147,12 @@ const itemData = [
     },
   ];
 
-const Product=(props)=>{
+const Product=({data})=>{
         
+    //const {productData} = data;
+
+        console.log("In the Product seaction");
+        console.log("data in the Product Section - ",data);
         const theme = useTheme();
         const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
         const features_=[
@@ -173,6 +177,8 @@ const Product=(props)=>{
     
         const classes=useStyles();
         return(
+
+            data ?
            
             <Grid container className={classes.root}>                    
                     <ImageList 
@@ -202,7 +208,7 @@ const Product=(props)=>{
                 </Grid>
                 <Grid item xs={12} lg={4} className={classes.productAllInformation}>
                     <Typography style={{fontSize:25,fontFamily:['Roboto','sans-serif'],}}>
-                      Sound
+                      {data.category}
                     </Typography>
                     <ReactStars
                             count={5}
@@ -331,6 +337,13 @@ const Product=(props)=>{
                 
                 </Grid>
                 
+            </Grid>
+
+             :
+            <Grid container justifyContent="center">
+                <Grid item lg={12}>
+                    <Typography>Fetching The Data........</Typography>
+                </Grid>
             </Grid>
 
         
