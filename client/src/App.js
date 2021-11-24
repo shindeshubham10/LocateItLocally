@@ -67,7 +67,7 @@ function App() {
         <Route exact path="/businessdashboard" component={MainDashboard} />
         <Route exact path="/newProduct" component={Newproduct} />
         <Route exact path="/New Arrivals" component={User_profile} />
-        <Route exact path="/productsDetails" component={ProductDetails} />
+        <Route exact path="/productsDetails/:id" component={ProductDetails} />
         
         <Route exact path="/user_profile" component={User_profile} />
         <Route exact path="/maps" component={ShowMap} />
