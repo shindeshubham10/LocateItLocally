@@ -13,8 +13,6 @@ import logo from "../Logo/LocateItLocally Logo.png"
 
 import { useSelector,useDispatch } from 'react-redux';
 
-
-
  
 const useStyle = makeStyles(theme => (
 
@@ -96,7 +94,7 @@ const useStyle = makeStyles(theme => (
 
 
 
-const Header = (props) => {
+const BusinessHeader = (props) => {
 
 
   const reduxState=useSelector((global) => global.user.user);
@@ -111,12 +109,9 @@ const Header = (props) => {
   // UseState
   const [anchorEl, setAnchorEl] = useState(null);
   
-  // usestate for oprn review dialog
-  const [openReview,setopenReview] = useState(false);
 
-  const openReviewDailog = () =>{
-    setopenReview(true);
-  }
+
+
  
   
   
@@ -154,16 +149,16 @@ const Header = (props) => {
                     </Link>
                     
                     <Link to='/' className={classes.txt}>
-                        Demo
+                        DashBoard
+                    </Link>
+
+                    <Link to='/' className={classes.txt}>
+                        Profile
                     </Link>
                     
                     <Link to='/contact' className={classes.txt}>
-                        Contact
+                        Jobs
                     </Link>
-                    <Link to='/about' className={classes.txt}>
-                        About Us
-                    </Link>
-                   
 
                     
                 </Box>
@@ -227,10 +222,9 @@ const Header = (props) => {
                   
 
                    
-                    <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
+                   
 
-                    {/* <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link> */}
-                  <ShoppingCartOutlinedIcon className={classes.endicons} onClick={()=>openReviewDailog()} />
+                   
                    
                     
                  
@@ -243,12 +237,12 @@ const Header = (props) => {
   
             </Toolbar>
         </AppBar>
-        
 
+        
         </>
     );
 
 };
 
 
-export default Header;
+export default BusinessHeader;

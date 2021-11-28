@@ -1,5 +1,6 @@
 
 import Header from './components/header/Header'
+import BusinessHeader from './components/header/BusinessHeader';
 import './App.css';
 import Home from './components/home/Home';
 
@@ -8,7 +9,7 @@ import { makeStyles } from '@material-ui/core';
 
 import { useSelector ,useDispatch} from 'react-redux';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Contact from './components/contact/Contact';
 import About from './components/about/About';
@@ -64,10 +65,16 @@ function App() {
 
   const dispatch=useDispatch();
 
+const [chooseHeader,setchooseHeader] = useState(false);
+
+
+
   useEffect(()=>{
       if(localStorage.LocateItLocallyUser)
     {
+      setchooseHeader(true);
       dispatch(getMyself());
+
     }
 
   },[])
@@ -76,11 +83,12 @@ function App() {
 
   const classes=useStyles();
   return (
-    
+    <>
+    {
     <Router>
     
+     { chooseHeader ? <Header/> :  <BusinessHeader/> }
       
-      <Header/>
       
        <Switch >
         <Route exact path="/" component={Home} />
@@ -109,6 +117,8 @@ function App() {
       </Switch>
        <Footer/> 
     </Router>
+}
+    </>
    
    
   );
