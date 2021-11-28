@@ -18,6 +18,7 @@ import { display } from '@mui/system';
 // Temporary importing dialog box
 import UserReview from '../reviews/UserReviews';
 
+
  
 const useStyles=makeStyles(theme=>(
 
@@ -289,7 +290,7 @@ const Product=({data})=>{
                     </Box>
                     
                    
-                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50,marginRight:10 }} variant="contained" endIcon={<FavoriteBorderOutlinedIcon style={ {color:'white'}}/>}>
+                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50,marginRight:10 ,marginBottom: mobileScreen ? 10 : 0}} variant="contained" endIcon={<FavoriteBorderOutlinedIcon style={ {color:'white'}}/>}>
                          <Typography style={{fontweight:'bold',fontSize:18,color:'white',fontFamily:['Monteserrat','sans-serif']}}>FAVOURITES</Typography> 
                     </Button>
 
@@ -381,6 +382,7 @@ const Product=({data})=>{
                 
                 </Grid>
                 <UserReview open={openReview} setopenReview={setopenReview}/>
+                
             </Grid>
 
              :

@@ -13,6 +13,8 @@ import logo from "../Logo/LocateItLocally Logo.png"
 
 import { useSelector,useDispatch } from 'react-redux';
 
+import { BusinesssignOut } from '../../redux/actions/businessauthActions';
+
  
 const useStyle = makeStyles(theme => (
 
@@ -97,7 +99,7 @@ const useStyle = makeStyles(theme => (
 const BusinessHeader = (props) => {
 
 
-  const reduxState=useSelector((global) => global.user.user);
+  const reduxState=useSelector((global) => global.business.business);
 
   console.log({reduxState});
 
@@ -110,10 +112,14 @@ const BusinessHeader = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   
 
+const dispatch = useDispatch();
 
+ // bsuiness signout
+  const signOuthandler=()=>{
 
- 
-  
+    dispatch(BusinesssignOut())
+  }
+
   
   // This are the functions for handling Hover Events
   //For Open
@@ -171,11 +177,12 @@ const BusinessHeader = (props) => {
                   {/** This is the PopOver Element which will be shown after hovering on button/icon */}
 
                   {
-                    reduxState?.user?.firstName ?(
+                    reduxState?.business?.firstName ?(
 
                       <>
                           <p>
-                              {reduxState.user.firstName}
+                              {reduxState.business.firstName}
+                              <button onClick={signOuthandler}>Sign Out</button>
                           </p>
                       </>
 

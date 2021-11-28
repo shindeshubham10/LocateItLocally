@@ -46,7 +46,7 @@ import axios from "axios"
 //import Product from './components/product/Product';
 import { getMyself } from './redux/actions/userActions';
 import { getMyBusiness } from './redux/actions/businessActions';
-
+import TemplateProvider from './templates/TemplateProvider';
 
 // axios global settings
 if (localStorage.LocateItLocallyUser) {
@@ -102,6 +102,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
   return (
     <>
     {
+    <TemplateProvider>
     <Router>
     
      { chooseHeader ? <Header/> :  <BusinessHeader/> }
@@ -134,6 +135,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
       </Switch>
        <Footer/> 
     </Router>
+    </TemplateProvider>
 }
     </>
    

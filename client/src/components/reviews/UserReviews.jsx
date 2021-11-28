@@ -1,22 +1,62 @@
 
 import React from "react";
 
-import { Dialog,DialogTitle,DialogContent, Typography, Grid } from "@material-ui/core";
+import { Dialog,DialogTitle,DialogContent, Typography, Grid,Box ,TextField,Button,useMediaQuery,useTheme} from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import ReactStars from "react-rating-stars-component";
+
 
 const UserReview = ({open,setopenReview}) => {
+
 
     const handleOnClose = () => {
         setopenReview(false);
     };
-
+    const theme = useTheme();
+    const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const useStyle = makeStyles(theme=>(
        {
         mainDialog:{
-                height:"100%",
-                width:'100%',
+                height:"50vh",
+                width:'90vh',
+                backgroundColor:'#F7F8F9',
+               [theme.breakpoints.down('sm')]:{
+                height:"70vh",
+                width:'60vh',
+               }
            },
+           maincontainer:{
+            backgroundColor:'#F7F8F9',
+           },
+           
+           heading:{
+            //backgroundColor:'purple',
+            marginBottom:20,
+            marginTop:10,
+           },
+           forDescription:{
+            //backgroundColor:'pink',
+            width:500,
+            height:'100%',
+            marginLeft:0,
+
+            [theme.breakpoints.down('sm')]:{
+                width:'100%',
+            }
+           },
+           addProductButton: {
+            width: '90%',
+            height:'7vh',
+            backgroundColor: '#38495A',
+            
+        },
+        containerForButtons:{
+            marginTop:5,
+            //marginLeft:20,
+
+        }
        }
     ));
 
@@ -27,15 +67,77 @@ return(
     <>
     
     <Dialog open={open} onClose={handleOnClose}  >
-         <Grid container justifyContent="center">
-            <Grid item lg={12} md={12} xs={12}> 
-            <DialogContent className={classes.mainDialog}>
-                <Typography>Product Review</Typography>
-            </DialogContent>    
-             </Grid>
-        </Grid> 
+         
+        <DialogContent className={classes.mainDialog} >
+         {/** Main Container For all Content Start*/}
+         <Grid container alignItems='center' direction='column' className={classes.maincontainer}>
+         
+         {/**Heading Here */}
+         <Grid item xs={12} md={7} lg={6} className={classes.heading}> 
+            <Typography style={{fontSize:30,fontFamily:['Monteserrat','sans-serif'],fontWeight:400,}}>Product Review</Typography> 
+         </Grid>
+
+        {/** TextField Box Start Here */}
+         <Grid item lg={12} md={12} xs={12}> 
+         <Box className={classes.forDescription}> 
+        <TextField className={classes.realTextField}
+            id="outlined-multiline-static"
+            //label="Multiline"
+            fullWidth
+            multiline
+            rows={8}
+            defaultValue="Enter Review Here...."
+            variant='outlined'
+            name="Reviewtext"
+            // onChange={(e)=>handleInputChange(e)}
+        />
+         </Box>  
+         </Grid>
+          {/** TextField Box End Here */}
+
+        <Grid item xs={12} md={7} lg={6}> 
+            <Typography style={{fontSize:15,fontFamily:['Monteserrat','sans-serif'],fontWeight:400,marginTop:5}}>Rate Product</Typography> 
+         </Grid>
+          <ReactStars
+            count={5}
+            size={mobileScreen ? 30 : 40}
+            activeColor="#ffd700"
+        />
+
+
+        {/** Item For Buttons Start here */}
+        <Grid item lg={12} md={12} xs={12}>
+        <Grid container direction='row' spacing={2} className={classes.containerForButtons} >
+        <Grid item lg={6} md={12} xs={12}> 
+         <Button
+            variant="contained"
+            className={classes.addProductButton}
+            style={{color:'white', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem'}}
+            //onClick={()=>addproduct()}
+        >Submit</Button>
+         </Grid>
         
-    </Dialog>
+        <Grid item lg={6} md={12} xs={12}> 
+        <Button
+            variant="contained"
+            className={classes.addProductButton}
+            style={{color:'white', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem'}}
+            onClick={()=>handleOnClose()}
+        >Cancel</Button>
+        </Grid>
+
+        
+        </Grid>
+
+        </Grid> {/** Item For Buttons End here */}
+       
+        
+     </Grid> {/** Main Container For all Content End*/}
+         </DialogContent> 
+          
+            
+ </Dialog>
+   
     </>
 )
 
