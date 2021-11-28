@@ -26,11 +26,11 @@ const ProductDetails = ({match}) => {
         setAlignment(newAlignment);
     };
 
-    const {productDetails} = useSelector(state=>state.getProductDetails);
+    const productDetails = useSelector(state=>state.getProductDetails);
     const dispatch = useDispatch();
-    if(productDetails){
-        setloading(false);
-    }
+    // if(productDetails){
+    //     setloading(false);
+    // }
 
     console.log("Product ID in details page");
     console.log(match.params.id);
@@ -45,11 +45,14 @@ const ProductDetails = ({match}) => {
     return (
        
        <>
-            { loading ? <Product data={productDetails}/> : <Typography>Loading......</Typography>}
+            
+            <Product data={productDetails}/> 
             <Description />
              <Headings name="Related Products" />
              {/* <Cards/> */}
-             <FAQ />    
+             <FAQ /> 
+             
+             
             
             
         </>

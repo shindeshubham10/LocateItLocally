@@ -5,10 +5,14 @@ import {GET_BUSINESS,AUTH_BUSINESS,SELF,CLEAR_BUSINESS,UPDATE_BUSINESS} from "..
 
 export const getBusiness = (_id) => async (dispatch) => {
   try {
+
+    console.log("In getBusiness");
+    console.log(_id);
     const Business = await axios({
       method: "GET",
       url: `http://localhost:2000/business/${_id}`,
     });
+
 
     return dispatch({ type: GET_BUSINESS, payload: Business.data });
   } catch (error) {

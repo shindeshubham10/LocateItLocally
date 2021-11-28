@@ -22,7 +22,9 @@ Router.get("/", passport.authenticate("business"), async (req, res) => {
 
 Router.get("/:_id", async (req, res) => {
   try {
-    const business = await UserModel.findById(req.params._id);
+
+    
+    const business = await BusinessModel.findById(req.params._id);
     
 
     return res.json({ business });

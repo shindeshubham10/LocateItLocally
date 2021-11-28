@@ -10,12 +10,8 @@ import Popover from '@mui/material/Popover';
 import AccountMenu from '../home/PopOverModals/AccountMenu';
 import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
-//import gravatar from "gravatar";
 
 import { useSelector,useDispatch } from 'react-redux';
-import { UsersignOut } from '../../redux/actions/userauthActions';
-
-
 
  
 const useStyle = makeStyles(theme => (
@@ -98,16 +94,10 @@ const useStyle = makeStyles(theme => (
 
 
 
-const Header = (props) => {
+const BusinessHeader = (props) => {
 
 
-  const dispatch=useDispatch();
   const reduxState=useSelector((global) => global.user.user);
-
-  const signOuthandler=()=>{
-
-    dispatch(UsersignOut())
-  }
 
   console.log({reduxState});
 
@@ -119,12 +109,9 @@ const Header = (props) => {
   // UseState
   const [anchorEl, setAnchorEl] = useState(null);
   
-  // usestate for oprn review dialog
-  const [openReview,setopenReview] = useState(false);
 
-  const openReviewDailog = () =>{
-    setopenReview(true);
-  }
+
+
  
   
   
@@ -162,16 +149,16 @@ const Header = (props) => {
                     </Link>
                     
                     <Link to='/' className={classes.txt}>
-                        Demo
+                        DashBoard
+                    </Link>
+
+                    <Link to='/' className={classes.txt}>
+                        Profile
                     </Link>
                     
                     <Link to='/contact' className={classes.txt}>
-                        Contact
+                        Jobs
                     </Link>
-                    <Link to='/about' className={classes.txt}>
-                        About Us
-                    </Link>
-                   
 
                     
                 </Box>
@@ -189,7 +176,6 @@ const Header = (props) => {
                       <>
                           <p>
                               {reduxState.user.firstName}
-                              <button onClick={signOuthandler}>Sign Out</button>
                           </p>
                       </>
 
@@ -236,10 +222,9 @@ const Header = (props) => {
                   
 
                    
-                    <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
+                   
 
-                    {/* <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link> */}
-                  <ShoppingCartOutlinedIcon className={classes.endicons} onClick={()=>openReviewDailog()} />
+                   
                    
                     
                  
@@ -252,12 +237,12 @@ const Header = (props) => {
   
             </Toolbar>
         </AppBar>
-        
 
+        
         </>
     );
 
 };
 
 
-export default Header;
+export default BusinessHeader;
