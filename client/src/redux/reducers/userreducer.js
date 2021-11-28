@@ -1,4 +1,4 @@
-import { GET_USER, SELF, CLEAR_USER } from "../constants/userconstants";
+import { GET_USER, SELF, CLEAR_USER,UPDATE_USER } from "../constants/userconstants";
 
 const INITIAL_STATE = {
   user: {},
@@ -10,12 +10,18 @@ const UserReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
       };
+    case UPDATE_USER:
+      return {
+          ...state,
+          user: action.payload,
+      };
 
     case SELF:
       return {
         ...state,
         user: action.payload,
       };
+
       
     case CLEAR_USER:
       return {};

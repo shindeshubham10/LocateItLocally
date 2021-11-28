@@ -4,23 +4,23 @@ import dotenv from "dotenv";
 //   path: require("path").resolve(__dirname, "../.env"),
 // });
 // Database Model
-import { UserModel } from "../SchemaModels/user";
+import { BusinessModel } from "../SchemaModels/business";
 
 const JWTStratergy = JwtPassport.Strategy;
 const ExtractJwt = JwtPassport.ExtractJwt;
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "LocateItLocallyUser",
+  secretOrKey: "LocateItLocallyBusiness",
 };
 
 export default (passport) => {
-  passport.use("user",
+  passport.use("business",
     new JWTStratergy(options, async (jwt__payload, done) => {
       try {
-        const doesUserExist = await UserModel.findById(jwt__payload.user);
-        if (!doesUserExist) return done(null, false);
-        return done(null, doesUserExist);
+        const doesBusinessExist = await BusinessModel.findById(jwt__payload.business);
+        if (!doesBusinessExist) return done(null, false);
+        return done(null, doesBusinessExist);
       } catch (error) {
         throw new Error(error);
       }

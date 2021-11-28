@@ -73,6 +73,18 @@ const BusinessSchema = new mongoose.Schema({
     description:{
       type:String,
     },
+    website:{
+      type:String,
+    },
+    twitter:{
+      type:String,
+    },
+    instagram:{
+      type:String,
+    },
+    facebook:{
+      type:String,
+    },
     maplocation: {
       type:String,
     },
@@ -116,15 +128,15 @@ const BusinessSchema = new mongoose.Schema({
    // Function Used for SignIn Purpose
   BusinessSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     //check whether the email exists
-    const user = await BusinessModel.findOne({email});
-    if (!user) throw new Error("User does no exist!!!");
+    const business = await BusinessModel.findOne({email});
+    if (!business) throw new Error("User does no exist!!!");
 
       // Compare password
-      const doesPasswordMatch = await bcrypt.compare(password, user.password);
+      const doesPasswordMatch = await bcrypt.compare(password, business.password);
 
       if (!doesPasswordMatch) throw new Error("invalid Password!!!");
 
-      return user;
+      return business;
 
    
   };

@@ -44,6 +44,7 @@ import ShowMap from './components/GoogleMapIntegration/googleMapsIntegration';
 import axios from "axios"
 //import Product from './components/product/Product';
 import { getMyself } from './redux/actions/userActions';
+import { getMyBusiness } from './redux/actions/businessActions';
 
 
 // axios global settings
@@ -51,6 +52,13 @@ if (localStorage.LocateItLocallyUser) {
   const { token } = JSON.parse(localStorage.LocateItLocallyUser);
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   console.log(token);
+}
+else if(localStorage.LocateItLocallyBusiness)
+{
+  const { token } = JSON.parse(localStorage.LocateItLocallyBusiness);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  console.log(token);
+
 }
 
 const useStyles=makeStyles(
@@ -62,15 +70,24 @@ const useStyles=makeStyles(
 )
 function App() {
 
+  console.log("Hello");
+
   const dispatch=useDispatch();
 
   useEffect(()=>{
       if(localStorage.LocateItLocallyUser)
     {
+      console.log("In doinhgghyhhgg");
       dispatch(getMyself());
     }
 
-  },[])
+    if(localStorage.LocateItLocallyBusiness)
+    {
+      console.log("In doinhgghyhhgg");
+      dispatch(getMyBusiness());
+    }
+
+  })
 
   
 

@@ -5,9 +5,46 @@ import "./owner_profile_style.css";
 import src from "./Profile_Photo.png"
 import {AccountCircle,ArrowForward} from "@material-ui/icons";
 import { borderRadius } from "@mui/system";
+import { useSelector,useDispatch } from 'react-redux';
+import { updateBusiness } from "../../../redux/actions/businessActions";
+
+const businessInitialValues = {
+  
+    
+    name:"",
+    address:"",
+    website:"",
+    description:"",
+    
+    twitter:"",
+    facebook:"",
+    instagram:"",
+
+}
 
 function Owner_profile()
 {
+    
+    const dispatch=useDispatch();
+    const reduxState=useSelector((global) => global.business.business);
+
+     console.log({reduxState});
+
+    const [businessState, setbusinessState] = React.useState(reduxState.business);
+
+    
+    const handleChange = (event) => {
+        setbusinessState({ ...businessState, [event.target.name]: event.target.value });
+        console.log(businessState);
+      };
+
+    const saveBusiness=()=>{
+            console.log(reduxState.business._id);
+            dispatch(updateBusiness(reduxState.business._id,businessState))
+        
+
+                
+    }
     return(
         <div>
             <Grid container className="first">
@@ -23,6 +60,7 @@ function Owner_profile()
                             
                             borderRadius:"25px"
                         }}
+                        onClick={saveBusiness}
                     >Save</Button>
                 </Grid>
             </Grid>
@@ -32,6 +70,7 @@ function Owner_profile()
 
 
         <div className="p">
+        { reduxState?.business?
         <Paper elevation={15} style={{borderRadius:"50px"}}>
             <Grid container direction="row" className="main" spacing="2">
                 <Grid item lg={6} sm={6} xs={12} className="part1">
@@ -56,6 +95,9 @@ function Owner_profile()
                         type="text"
                         placeholder="Business Name*"
                         variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.name}
+                        name="name"
                     />
                     </Grid>
 
@@ -69,6 +111,9 @@ function Owner_profile()
                             id="outlined-required"
                             placeholder="First Name*"
                             variant="outlined"
+                            onChange={handleChange}
+                            defaultValue={reduxState.business.firstName}
+                            name="firstName"
                         />
                         </Grid>
 
@@ -80,6 +125,9 @@ function Owner_profile()
                             label="last Name"
                             placeholder="Last Name*"
                             variant="outlined"
+                            onChange={handleChange}
+                            defaultValue={reduxState.business.lastName}
+                            name="lastName"
                         />
                         </Grid>
                     </Grid>
@@ -93,6 +141,9 @@ function Owner_profile()
                         type="email"
                         placeholder="Email*"
                         variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.email}
+                        name="email"
                     />
                     </Grid>
 
@@ -104,6 +155,9 @@ function Owner_profile()
                         type="tel"
                         placeholder="Phone*"
                         variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.contactNumber}
+                        name="contactNumber"
                     />
                     </Grid>
 
@@ -126,6 +180,9 @@ function Owner_profile()
                         type="url"
                         placeholder="Business Website*"
                         variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.website}
+                        name="website"
                     />
                     </Grid>
 
@@ -139,6 +196,9 @@ function Owner_profile()
                         type="text"
                         placeholder="Address*"
                         variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.address}
+                        name="address"
                     />
                     </Grid>
 
@@ -152,6 +212,9 @@ function Owner_profile()
                         type="text"
                         placeholder="Business Discription*"
                         variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.description}
+                        name="description"
                     />
                     </Grid>
 
@@ -165,6 +228,9 @@ function Owner_profile()
                             type="url"
                             placeholder="Twitter*"
                             variant="outlined"
+                            onChange={handleChange}
+                            defaultValue={reduxState.business.twitter}
+                            name="twitter"
                         />
                         </Grid>
 
@@ -176,6 +242,9 @@ function Owner_profile()
                             type="url"
                             placeholder="Instagram*"
                             variant="outlined"
+                            onChange={handleChange}
+                            defaultValue={reduxState.business.instagram}
+                            name="instagram"
                         />
                         </Grid>
 
@@ -187,6 +256,9 @@ function Owner_profile()
                             type="url"
                             placeholder="Facebook*"
                             variant="outlined"
+                            onChange={handleChange}
+                            defaultValue={reduxState.business.facebook}
+                            name="facebook"
                         />
                         </Grid>
                         
@@ -205,7 +277,8 @@ function Owner_profile()
                 
 
             </Grid>
-        </Paper>
+        </Paper>:<div>Waiting___</div>
+        }
         </div>
             
         </div>

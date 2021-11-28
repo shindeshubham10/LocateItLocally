@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Redux types
-import {GET_USER,AUTH_USER,SELF,CLEAR_USER} from "../constants/userconstants.js"
+import {GET_USER,AUTH_USER,SELF,CLEAR_USER,UPDATE_USER} from "../constants/userconstants.js"
 
 export const getUser = (_id) => async (dispatch) => {
   try {
@@ -11,6 +11,20 @@ export const getUser = (_id) => async (dispatch) => {
     });
 
     return dispatch({ type: GET_USER, payload: User.data });
+  } catch (error) {
+    return dispatch({ type: "ERROR", payload: error });
+  }
+};
+
+export const updateUser = (_id,userData) => async (dispatch) => {
+  try {
+    const User = await axios({
+      method: "PUT",
+      url: `http://localhost:2000/user/update/${_id}`,
+      data:{ userUpdatedata:userData},
+    });
+
+    return dispatch({ type: UPDATE_USER, payload: User.data });
   } catch (error) {
     return dispatch({ type: "ERROR", payload: error });
   }

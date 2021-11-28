@@ -5,6 +5,8 @@ import {LocationOn,ContactMail,Edit, Phone,EditOutlined,AddCircleOutline} from "
 import {FactCheckOutlined} from '@mui/icons-material';
 import profileimg from "./User_Profile_Photo.png"
 
+import { useSelector } from 'react-redux';
+
 import {Link} from "react-router-dom";
 
 import All_wishlist_items from '../../../Wishlist/all_wishlist_items/all_wishlist_items';
@@ -168,6 +170,10 @@ function TabPanel(props) {
 
 const Display_user_profile= () =>
 {
+
+    const reduxState=useSelector((global) => global.user.user);
+
+     console.log({reduxState});
     const classes = useStyle();
     const [value, setValue] = React.useState(0);
 
@@ -182,6 +188,7 @@ const Display_user_profile= () =>
         <div>
 
         <div className={classes.mainprofilediv}>
+        {reduxState?.user?
         <Paper elevation={15}>
         <Grid container>
         <Grid item lg={12} xs={12}>
@@ -210,26 +217,26 @@ const Display_user_profile= () =>
             <Grid item lg={9} sm={9} xs={12} className="user_info" >
             <Grid container>
                 <Grid item lg={12} sm={12} xs={12}>
-                    <Typography className={classes.username}>Shubham Rajendra Shinde</Typography>
+                    <Typography className={classes.username}>{reduxState.user.firstName}</Typography>
                     <br></br>
                     <br></br>
                 </Grid>
                 <Grid item lg={12} xs={12}>
                     <div style={{display:"flex"}}>
                         <ContactMail style={{marginRight:"20px"}}/>
-                        <Typography className={classes.userinfo}>shindeshubham1100@gmail.com</Typography>
+                        <Typography className={classes.userinfo}>{reduxState.user.email}</Typography>
                     </div>
                 </Grid>
                 <Grid item lg={12} xs={12}>
                     <div style={{display:"flex"}}>
                         <Phone style={{marginRight:"20px"}}/>
-                        <Typography className={classes.userinfo}>8329471122</Typography>
+                        <Typography className={classes.userinfo}>{reduxState.user.contactNumber}</Typography>
                     </div>
                 </Grid>
                 <Grid item lg={12} xs={12}>
                     <div style={{display:"flex"}}>
                         <LocationOn style={{marginRight:"20px"}}/>
-                        <Typography className={classes.userinfo}>Pune 411048, India</Typography>
+                        <Typography className={classes.userinfo}>{reduxState.user.address}</Typography>
                     </div>
                 </Grid>
             </Grid>
@@ -239,7 +246,8 @@ const Display_user_profile= () =>
             
 
         </Grid>
-        </Paper>
+        </Paper>:<div>(Waiting....</div>
+    }
 
 
 

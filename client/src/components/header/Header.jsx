@@ -10,8 +10,10 @@ import Popover from '@mui/material/Popover';
 import AccountMenu from '../home/PopOverModals/AccountMenu';
 import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
+//import gravatar from "gravatar";
 
 import { useSelector,useDispatch } from 'react-redux';
+import { UsersignOut } from '../../redux/actions/userauthActions';
 
  
 const useStyle = makeStyles(theme => (
@@ -97,7 +99,13 @@ const useStyle = makeStyles(theme => (
 const Header = (props) => {
 
 
+  const dispatch=useDispatch();
   const reduxState=useSelector((global) => global.user.user);
+
+  const signOuthandler=()=>{
+
+    dispatch(UsersignOut())
+  }
 
   console.log({reduxState});
 
@@ -176,6 +184,7 @@ const Header = (props) => {
                       <>
                           <p>
                               {reduxState.user.firstName}
+                              <button onClick={signOuthandler}>Sign Out</button>
                           </p>
                       </>
 

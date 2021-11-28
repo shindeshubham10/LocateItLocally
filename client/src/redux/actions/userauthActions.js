@@ -1,6 +1,8 @@
 import axios from "axios"
 
-import { USER_SIGN_IN,USER_SIGN_UP } from "../constants/userauthconstants";
+import { USER_SIGN_IN,USER_SIGN_UP,USER_SIGN_OUT } from "../constants/userauthconstants";
+import { getMyself } from "./userActions";
+import { clearUser } from "./userActions";
 
 export const UsersignIn = (userData) => async (dispatch) => {
     try {
@@ -10,7 +12,7 @@ export const UsersignIn = (userData) => async (dispatch) => {
         data: { credentials: userData },
       });
   
-      //getMyself();
+      getMyself();
   
       localStorage.setItem(
         "LocateItLocallyUser",
@@ -31,7 +33,7 @@ export const UsersignIn = (userData) => async (dispatch) => {
         data: { credentials: userData },
       });
   
-      //getMyself();
+      getMyself();
   
       localStorage.setItem(
         "LocateItLocallyUser",
@@ -43,3 +45,16 @@ export const UsersignIn = (userData) => async (dispatch) => {
       return dispatch({ type: "ERROR", payload: error });
     }
   };
+
+  export const UsersignOut = () => async (dispatch) => {
+    try {
+      localStorage.removeItem("LocateItLocallyUser");
+      clearUser();
+      window.location.href = "http://localhost:3000";
+      
+      return dispatch({ type: USER_SIGN_OUT, payload: {} });
+    } catch (error) {
+      return dispatch({ type: "ERROR", payload: error });
+    }
+  };
+  

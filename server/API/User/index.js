@@ -14,13 +14,13 @@ BODY      none
 Access    Public
 Method    GET  
 */
-Router.get("/", passport.authenticate("jwt"), async (req, res) => {
+Router.get("/", passport.authenticate("user"), async (req, res) => {
    try {
     console.log(req.session.passport.user._doc);
-    const { email, firstName, contactNumber, address } =
+    const { email, firstName, contactNumber, lastName,_id,address,gender,twitter,facebook,instagram,birthdate} =
        req.session.passport.user._doc;
       
-     return res.json({ user: { email, firstName, contactNumber, address } });
+     return res.json({ user: {  email, firstName, contactNumber, lastName,_id,address,gender,twitter,facebook,instagram,birthdate} });
    } catch (error) {     return res.status(500).json({ error: error.message });
    }
  });
@@ -54,8 +54,12 @@ Method    PUT
 */
 Router.put("/update/:userId", async (req, res) => {
   try {
+    console.log(req.params);
     const { userId } = req.params;
-    const { userData } = req.body;
+    const  userData  = req.body.userUpdatedata;
+    console.log(userId);
+    console.log("Hurray");
+    console.log(userData);
     const updateUserData = await UserModel.findByIdAndUpdate(
       userId,
       {
