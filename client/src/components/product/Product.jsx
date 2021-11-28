@@ -4,6 +4,7 @@ import {FavoriteOutlined,LocationDisabled,Star,PermDeviceInformationOutlined,Cal
 import ReactStars from "react-rating-stars-component";
 import { ArrowRight } from '@material-ui/icons';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CallIcon from '../product/icon-call.png';
 import ImageList from '@mui/material/ImageList';
@@ -13,6 +14,9 @@ import { useState } from 'react';
 import {ArrowForward} from "@material-ui/icons"
 import { Link } from 'react-router-dom';
 import { display } from '@mui/system';
+
+// Temporary importing dialog box
+import UserReview from '../reviews/UserReviews';
 
  
 const useStyles=makeStyles(theme=>(
@@ -150,9 +154,26 @@ const itemData = [
 const Product=({data})=>{
         
     //const {productData} = data;
+    // const [Data,setaData] = useState(false);
+
+    //const check = false;
+
+    
+
+    
 
         console.log("In the Product seaction");
         console.log("data in the Product Section - ",data);
+
+        
+        // if(data){
+        //     const AllProductDetails = data.Products.product; 
+        // }
+        // else{
+
+        // }
+
+        // console.log("Individual fields - ",AllProductDetails.category);
         const theme = useTheme();
         const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
         const features_=[
@@ -176,9 +197,22 @@ const Product=({data})=>{
 
     
         const classes=useStyles();
-        return(
 
-            data ?
+
+
+            // usestate for oprn review dialog
+            const [openReview,setopenReview] = useState(false);
+
+            const openReviewDailog = () =>{
+                setopenReview(true);
+            };
+ 
+        return(
+            <>
+            {
+
+            
+         data.Products ?
            
             <Grid container className={classes.root}>                    
                     <ImageList 
@@ -208,7 +242,8 @@ const Product=({data})=>{
                 </Grid>
                 <Grid item xs={12} lg={4} className={classes.productAllInformation}>
                     <Typography style={{fontSize:25,fontFamily:['Roboto','sans-serif'],}}>
-                      {data.category}
+                      { data.Products.product.category}
+                  
                     </Typography>
                     <ReactStars
                             count={5}
@@ -216,10 +251,12 @@ const Product=({data})=>{
                             activeColor="#ffd700"
                         />
                     <Typography style={{fontSize:25,fontFamily:['Monteserrat','sans-serif'],marginTop:10,fontWeight:400,}}>
-                        Codeless Trackman Wheel 2
+                    { data.Products.product.name}
+                  
                     </Typography>
                     <Typography style={{fontWeight:500,fontSize:35,marginTop:10,fontFamily:['Monteserrat','sans-serif']}}>
-                    ₹1,225
+                    ₹{ data.Products.product.price}
+                   
                     </Typography>
                     <Typography style={{marginTop:10,fontSize:20,fontWeight:400,fontFamily:['Open Sans','sans-serif']}}>
                     Uses a dictionary of over combined with a handful of model sentence structures, to generate lorem Ipsum which looks reasonable.My name is  anthony gp
@@ -250,10 +287,17 @@ const Product=({data})=>{
 
                         </List>
                     </Box>
-
-                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50, }} variant="contained" endIcon={<FavoriteBorderOutlinedIcon style={ {color:'white'}}/>}>
-                         <Typography style={{fontweight:'bold',fontSize:18,color:'white',fontFamily:['Monteserrat','sans-serif']}}> ADD TO FAVOURITES</Typography> 
+                    
+                   
+                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50,marginRight:10 }} variant="contained" endIcon={<FavoriteBorderOutlinedIcon style={ {color:'white'}}/>}>
+                         <Typography style={{fontweight:'bold',fontSize:18,color:'white',fontFamily:['Monteserrat','sans-serif']}}>FAVOURITES</Typography> 
                     </Button>
+
+                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50, }} variant="contained"  onClick={()=>openReviewDailog()} endIcon={<ReviewsIcon style={ {color:'white'}}/>}>
+                         <Typography style={{fontweight:'bold',fontSize:18,color:'white',fontFamily:['Monteserrat','sans-serif']}}>ADD REVIEW</Typography> 
+                    </Button>
+                   
+                    
 
 
                 </Grid>
@@ -336,17 +380,18 @@ const Product=({data})=>{
 
                 
                 </Grid>
-                
+                <UserReview open={openReview} setopenReview={setopenReview}/>
             </Grid>
 
              :
+
             <Grid container justifyContent="center">
                 <Grid item lg={12}>
                     <Typography>Fetching The Data........</Typography>
                 </Grid>
             </Grid>
-
-        
+            }
+        </>
 
         );
 
