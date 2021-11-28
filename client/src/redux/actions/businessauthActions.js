@@ -52,7 +52,7 @@ export const BusinesssignIn = (businessData) => async (dispatch) => {
 
   export const BusinesssignOut = () => async (dispatch) => {
     try {
-      localStorage.removeItem("LocateItLocallyUser");
+      localStorage.removeItem("LocateItLocallyBusiness");
       clearBusiness();
       window.location.href = "http://localhost:3000";
       
