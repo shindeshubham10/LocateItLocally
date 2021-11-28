@@ -9,10 +9,12 @@ import CallIcon from '../product/icon-call.png';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {ArrowForward} from "@material-ui/icons"
 import { Link } from 'react-router-dom';
 import { display } from '@mui/system';
+import { useSelector,useDispatch } from 'react-redux';
+import { getBusiness } from '../../redux/actions/businessActions';
 
  
 const useStyles=makeStyles(theme=>(
@@ -147,9 +149,22 @@ const itemData = [
     },
   ];
 
+const initialbusinessdata={
+
+
+};
+
 const Product=({data})=>{
         
     //const {productData} = data;
+        //const [sellerdata,setsellerdata]=useState()
+        const dispatch=useDispatch();
+
+        useEffect(()=>{
+            data.seller && dispatch(getBusiness(data.seller)).then((item)=>console.log(item));
+        },[data.seller])
+
+
 
         console.log("In the Product seaction");
         console.log("data in the Product Section - ",data);

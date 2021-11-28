@@ -19,6 +19,18 @@ Router.get("/", passport.authenticate("business"), async (req, res) => {
   }
 });
 
+
+Router.get("/:_id", async (req, res) => {
+  try {
+    const business = await UserModel.findById(req.params._id);
+    
+
+    return res.json({ business });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 Router.put("/update/:businessId", async (req, res) => {
   try {
     console.log(req.params);
