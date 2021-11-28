@@ -1,6 +1,8 @@
 import axios from "axios"
 
-import { BUSINESS_SIGN_IN,BUSINESS_SIGN_UP } from "../constants/businessauthconstants";
+import { BUSINESS_SIGN_IN,BUSINESS_SIGN_UP,BUSINESS_SIGN_OUT } from "../constants/businessauthconstants";
+import { clearBusiness } from "./businessActions";
+import { getMyBusiness } from "./businessActions";
 
 export const BusinesssignIn = (businessData) => async (dispatch) => {
     try {
@@ -10,7 +12,7 @@ export const BusinesssignIn = (businessData) => async (dispatch) => {
         data: { credentials: businessData },
       });
   
-      //getMyself();
+      getMyBusiness();
   
       localStorage.setItem(
         "LocateItLocallyBusiness",
@@ -34,7 +36,7 @@ export const BusinesssignIn = (businessData) => async (dispatch) => {
       console.log("After business axios storage");
       console.log(Business);
   
-      //getMyself();
+      getMyBusiness();
       console.log("Before business local storage");
   
       localStorage.setItem(
@@ -47,3 +49,16 @@ export const BusinesssignIn = (businessData) => async (dispatch) => {
       return dispatch({ type: "ERROR", payload: error });
     }
   };
+
+  export const BusinesssignOut = () => async (dispatch) => {
+    try {
+      localStorage.removeItem("LocateItLocallyUser");
+      clearBusiness();
+      window.location.href = "http://localhost:3000";
+      
+      return dispatch({ type: BUSINESS_SIGN_OUT, payload: {} });
+    } catch (error) {
+      return dispatch({ type: "ERROR", payload: error });
+    }
+  };
+  

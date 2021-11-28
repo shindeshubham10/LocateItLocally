@@ -9,7 +9,8 @@ import { Person, Google, Facebook, Password, } from "@mui/icons-material";
 import MenuItem from '@mui/material/MenuItem';
 import { borderRadius } from '@mui/system';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import { newProduct } from '../../../../service/api';
+//import { newProduct } from '../../../../service/api';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -185,7 +186,8 @@ const intialValues={
     price:0,
     countInStock:0,
     availability:"",
-    image:[],
+    seller:{},
+    
 
 
 
@@ -194,6 +196,7 @@ const intialValues={
 
 
 const Newproduct = () => {
+    const dispatch=useDispatch()
     const classes = useStyle();
     const theme = useTheme();
     const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -204,6 +207,9 @@ const Newproduct = () => {
     const [currency, setCurrency] = React.useState('EUR'); 
 
     const [error,seterror]=React.useState(false);
+    const reduxState=useSelector((global) => global.business.business);
+
+     console.log({reduxState});
 
     const handleChange = (event) => {
         setCurrency(event.target.value);
@@ -227,7 +233,8 @@ const Newproduct = () => {
 
     const addproduct = async () => {
         console.log("enter into function");
-        let response = await newProduct(productdata);
+        productdata.seller=reduxState.business._id;
+        let response = dispatch(addproduct(productdata))
         console.log(response);
         console.log("dfndncjndjk");
         if (!response)
@@ -256,14 +263,14 @@ const Newproduct = () => {
 
         // reader.readAsDataURL(event.target.files[0])
 
-        console.log(event.target.files[0]);
+        // console.log(event.target.files[0]);
+        // // console.log(image);
+        // // console.log(URL.createObjectURL(event.target.files[0]));
+        // // setImage([...image,URL.createObjectURL(event.target.files[0])])
+        // setImage([...image,URL.createObjectURL(event.target.files[0])]);
+        // setproductdata({ ...productdata, image:[...image,image] });
         // console.log(image);
-        // console.log(URL.createObjectURL(event.target.files[0]));
-        // setImage([...image,URL.createObjectURL(event.target.files[0])])
-        setImage([...image,URL.createObjectURL(event.target.files[0])]);
-        setproductdata({ ...productdata, image:[...image,image] });
-        console.log(image);
-        console.log(productdata);
+        // console.log(productdata);
         
 
 

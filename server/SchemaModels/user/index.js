@@ -41,6 +41,13 @@ const UserSchema = new mongoose.Schema({
   },
   contactNumber: { type: String },
   profilePicture: { type: String },
+  address:{ type: String},
+  birthdate:{type:String},
+  gender:{type:String},
+  twitter:{type:String},
+  facebook:{type:String},
+  instagram:{type:String},
+
 },
 { timestamps: true }
 );

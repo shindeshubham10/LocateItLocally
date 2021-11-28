@@ -7,7 +7,8 @@ import {getProductReducer,getProductDetailsReducer} from './reducers/productRedu
 import AuthReducer from './reducers/userAuthreducer';
 import BAuthReducer from './reducers/businessauthreducer';
 import UserReducer from "./reducers/userreducer";
-
+import BusinessReducer from "./reducers/businessreducer";
+import { addProductDetailsReducer } from "./reducers/productReducers";
 
 
 
@@ -17,7 +18,9 @@ const reducer = combineReducers({
     AuthReducer,
     BAuthReducer,
     user:UserReducer,
+    business:BusinessReducer,
     getProductDetails:getProductDetailsReducer,
+    addProductDetailsReducer,
 })
 
 const middleWare = [thunk];

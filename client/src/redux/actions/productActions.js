@@ -32,3 +32,22 @@ export const getProductDetails = (_id) => async (dispatch)=>{
         dispatch({ type: actions.GET_PRODUCT_DETAILS_FAILURE, payload: error.response });
     }
 }
+
+export const addProductDetails = (productData) => async (dispatch)=>{
+    try {
+       
+        //const { data } = await axios.post(`${backendUrl}/newProduct/add`, productData);
+        const Product = await axios({
+            method: "POST",
+            url: `${backendUrl}/newProduct/add`,
+            data: { productData },
+          });
+       
+        dispatch({ type: actions.ADD_PRODUCT_SUCCESS, payload: Product.data });
+    } catch (error) {
+        console.log("Error while addProduct");
+        dispatch({ type: actions.ADD_PRODUCT_FAILURE, payload: error.response });
+    }
+}
+
+
