@@ -20,11 +20,11 @@ export const getBusiness = (_id) => async (dispatch) => {
   }
 };
 
-export const updateBusiness = (_id,businessData) => async (dispatch) => {
+export const updateBusiness = (businessData) => async (dispatch) => {
   try {
     const Business = await axios({
       method: "PUT",
-      url: `http://localhost:2000/business/update/${_id}`,
+      url: `http://localhost:2000/business/update`,
       data:{ businessUpdatedata:businessData},
     });
 

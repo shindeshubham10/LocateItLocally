@@ -33,10 +33,10 @@ Router.get("/:_id", async (req, res) => {
   }
 });
 
-Router.put("/update/:businessId", async (req, res) => {
+Router.put("/update", passport.authenticate("business"), async (req, res) => {
   try {
-    console.log(req.params);
-    const { businessId } = req.params;
+    // console.log(req.params);
+    const { businessId } = console.log(req.session.passport.user._doc);
     const  businessData  = req.body.businessUpdatedata;
     console.log(businessId);
     console.log("Hurray");

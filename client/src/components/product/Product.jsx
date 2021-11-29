@@ -235,6 +235,10 @@ const Product=({data})=>{
             const [openReview,setopenReview] = useState(false);
 
             const openReviewDailog = () =>{
+
+                if (!localStorage.LocateItLocallyUser) {
+                    return alert("Please sign in to post a review");
+                }
                 setopenReview(true);
             };
  

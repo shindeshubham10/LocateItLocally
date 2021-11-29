@@ -4,14 +4,54 @@ import React from "react";
 import { Dialog,DialogTitle,DialogContent, Typography, Grid,Box ,TextField,Button,useMediaQuery,useTheme} from "@material-ui/core";
 import { Modal } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { useState,useEffect } from "react";
+import {useParams} from "react-router-dom"
 import ReactStars from "react-rating-stars-component";
+
+import {useDispatch} from "react-redux"
+
+import { postReviews } from "../../redux/actions/reviewActions";
 
 
 const UserReview = ({open,setopenReview}) => {
 
 
+    const [reviewData, setReviewData] = useState({
+       
+        reviewText:"",
+        isProductReview: true,
+        isBusinessReview: false,
+        rating: 0,
+      });
+
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const handlechange = (e) =>
+        setReviewData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+    const handleRating = (rating) =>
+        setReviewData((prev) => ({ ...prev, rating }));
+
+
     const handleOnClose = () => {
         setopenReview(false);
+    };
+
+    const submit = () => {
+        dispatch(
+          postReviews({
+            ...reviewData,
+            product: id,
+          })
+        );
+        setReviewData({
+          subject: "",
+          reviewText: "",
+          isProductReview: false,
+          isBusinessReview: false,
+          rating: 0,
+        });
+        handleOnClose();
     };
     const theme = useTheme();
     const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -88,8 +128,8 @@ return(
             rows={8}
             defaultValue="Enter Review Here...."
             variant='outlined'
-            name="Reviewtext"
-            // onChange={(e)=>handleInputChange(e)}
+            name="reviewText"
+            onChange={(e)=>handlechange(e)}
         />
          </Box>  
          </Grid>
@@ -102,6 +142,9 @@ return(
             count={5}
             size={mobileScreen ? 30 : 40}
             activeColor="#ffd700"
+            name="rating"
+            defaultValue={reviewData.rating}
+            onChange={(e)=>handleRating(e)}
         />
 
 
@@ -113,7 +156,7 @@ return(
             variant="contained"
             className={classes.addProductButton}
             style={{color:'white', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem'}}
-            //onClick={()=>addproduct()}
+            onClick={submit}
         >Submit</Button>
          </Grid>
         

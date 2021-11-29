@@ -39,8 +39,8 @@ function Owner_profile()
       };
 
     const saveBusiness=()=>{
-            console.log(reduxState.business._id);
-            dispatch(updateBusiness(reduxState.business._id,businessState))
+            //console.log(reduxState.business._id);
+            dispatch(updateBusiness(businessState))
         
 
                 

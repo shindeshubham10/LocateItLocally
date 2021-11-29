@@ -16,11 +16,11 @@ export const getUser = (_id) => async (dispatch) => {
   }
 };
 
-export const updateUser = (_id,userData) => async (dispatch) => {
+export const updateUser = (userData) => async (dispatch) => {
   try {
     const User = await axios({
       method: "PUT",
-      url: `http://localhost:2000/user/update/${_id}`,
+      url: `http://localhost:2000/user/update`,
       data:{ userUpdatedata:userData},
     });
 

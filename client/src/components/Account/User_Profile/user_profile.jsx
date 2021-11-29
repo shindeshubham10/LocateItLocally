@@ -52,8 +52,8 @@ function User_profile()
       };
 
     const saveUser=()=>{
-            console.log(reduxState.user._id);
-            dispatch(updateUser(reduxState.user._id,userState))
+            //console.log(reduxState.user._id);
+            dispatch(updateUser(userState))
         
 
                 

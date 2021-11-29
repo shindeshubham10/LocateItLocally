@@ -27,7 +27,7 @@ import Business from "./API/Business/index.js"
 
 
 
-
+import Review from "./API/Reviews/index.js"
 
 
 
@@ -66,6 +66,10 @@ app.use('/user',User);
 //Business APIs
 
 app.use('/business',Business);
+
+//Review APIs
+
+app.use('/review',Review);
 
 
 
