@@ -89,7 +89,7 @@ const Cards = ({data}) => {
     return(
         
         <Box className={classes.root} >
-        <Carousel 
+2        <Carousel 
           
           swipeable={true}
           draggable={true}
