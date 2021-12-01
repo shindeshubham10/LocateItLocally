@@ -92,21 +92,22 @@ const Cards = ({data}) => {
 
   //console.log("ID of the Product - ",ProductData._id);
     return(
+      
+      <Box className={classes.root} >
+      
+      {/* <Carousel 
         
-        <Box className={classes.root} >
-        <Carousel 
+        swipeable={true}
+        draggable={true}
+        responsive={responsive}
+        ssr={true}
+        infinite={true}
+        customLeftArrow={<CustomLeftArrow
           
-          swipeable={true}
-          draggable={true}
-          responsive={responsive}
-          ssr={true}
-          infinite={true}
-          customLeftArrow={<CustomLeftArrow
-            
-            currentSlide={2}
-            deviceType={'mobile'}
-          />} 
-        >
+          currentSlide={2}
+          deviceType={'mobile'}
+        />} 
+      >
           
           {
                   ProductData ? 
@@ -134,7 +135,7 @@ const Cards = ({data}) => {
           
             
           
-        </Carousel>
+        </Carousel> */}
         </Box>
             
 
