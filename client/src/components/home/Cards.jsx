@@ -87,21 +87,22 @@ const Cards = ({data}) => {
   console.log(ProductData);
   console.log("inside Card")
     return(
+      
+      <Box className={classes.root} >
+      
+      {/* <Carousel 
         
-        <Box className={classes.root} >
-2        <Carousel 
+        swipeable={true}
+        draggable={true}
+        responsive={responsive}
+        ssr={true}
+        infinite={true}
+        customLeftArrow={<CustomLeftArrow
           
-          swipeable={true}
-          draggable={true}
-          responsive={responsive}
-          ssr={true}
-          infinite={true}
-          customLeftArrow={<CustomLeftArrow
-            
-            currentSlide={2}
-            deviceType={'mobile'}
-          />} 
-        >
+          currentSlide={2}
+          deviceType={'mobile'}
+        />} 
+      >
           
           {
                   
@@ -123,7 +124,7 @@ const Cards = ({data}) => {
           
             
           
-        </Carousel>
+        </Carousel> */}
         </Box>
             
 
