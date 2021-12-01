@@ -1,48 +1,59 @@
 import { BusinessModel } from "../../SchemaModels/business";
 
 import express from "express"
+import passport from "passport";
 
 
 const Router=express.Router()
 
-Router.get(
-
-    "/",(req,res)=>{
-
-        try {
-            //await ValidateRestaurantCity(req.query);
-            
-            const owners = await BusinessModel.find();
-        
-            return res.json({ owners });
-          } catch (error) {
-            return res.status(500).json({ error: error.message });
-          }
-
-    }
-)
+// 
+Router.get("/", passport.authenticate("business"), async (req, res) => {
+  try {
+    console.log(req);
+   console.log(req.session.passport.user._doc);
+   const { email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name} =
+      req.session.passport.user._doc;
+     
+    return res.json({ business: {  email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name} });
+  } catch (error) {     return res.status(500).json({ error: error.message });
+  }
+});
 
 
-
-
-Router.get(
-
-    "/:_id",(req,res)=>{
-
-        try {
-            //await ValidateRestaurantId(req.params);
-        
-            const { _id } = req.params;
-            const owner = await BusinessModel.findById(_id);
-            if (!owner)
-              return res.status(404).json({ error: "Owner Not Found" });
-        
-            return res.json({ owner });
-          } catch (error) {
-            return res.status(500).json({ error: error.message });
-          }
-        }
+Router.get("/:_id", async (req, res) => {
+  try {
 
     
-)
+    const business = await BusinessModel.findById(req.params._id);
+    
 
+    return res.json({ business });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+Router.put("/update", passport.authenticate("business"), async (req, res) => {
+  try {
+    // console.log(req.params);
+    const { businessId } = console.log(req.session.passport.user._doc);
+    const  businessData  = req.body.businessUpdatedata;
+    console.log(businessId);
+    console.log("Hurray");
+    console.log(businessData);
+    const updateBusinessData = await BusinessModel.findByIdAndUpdate(
+      businessId,
+      {
+        $set: businessData,
+      },
+      { new: true }
+    );
+
+    return res.json({ business: updateBusinessData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+
+export default Router;

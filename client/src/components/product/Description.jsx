@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Typography,useMediaQuery} from '@material-ui/core';
+
+import Reviews from './reviews';
 const useStyle = makeStyles(theme=>({
     
         
@@ -74,7 +76,7 @@ const Description = () => {
             alignment=="B"?
                 <Typography> {content} - Specs </Typography>
             :
-            <Typography> {content} - Review</Typography>
+              <Reviews/>
             }
             </Grid>
           </Grid>

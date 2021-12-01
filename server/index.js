@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 
 import passport from "passport";
 import googleAuthConfig from "./config/google.config.js";
+import routeConfig from './config/route.config.js';
+import routeBusinessConfig from './config/route.business.config.js';
 
 
 // Authentication API's
@@ -18,6 +20,15 @@ import BusinessAuth from "./API/Auth/BusinessAuthentication/index.js";
 // Product API's
 import Product from './API/Product/index.js';
 
+//USER API's
+
+import User from "./API/User/index.js"
+
+import Business from "./API/Business/index.js"
+
+
+
+import Review from "./API/Reviews/index.js"
 
 
 
@@ -44,14 +55,29 @@ app.use('/businessAuth', BusinessAuth);
 
 
 
+
+
 // Product API's
 app.use('/newProduct', Product);
 
-// Product API's
+// User API's
+
+app.use('/user',User);
+
+//Business APIs
+
+app.use('/business',Business);
+
+//Review APIs
+
+app.use('/review',Review);
+
+
 
 
 googleAuthConfig(passport);
-
+routeConfig(passport);
+routeBusinessConfig(passport);
 /*
 app.get("/",function(req,res){
     res.render(home);

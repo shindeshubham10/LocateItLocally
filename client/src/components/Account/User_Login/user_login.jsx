@@ -11,7 +11,11 @@ import {Person,Google,Facebook,Password,} from "@mui/icons-material";
 
 //import  {UserSignIn,BusinessSignIn}  from "../../../service/api";
 
-import { UserSignIn,BusinessSignIn } from "../../../service/api";
+import { BusinesssignIn } from "../../../redux/actions/businessauthActions";
+
+import { UsersignIn } from "../../../redux/actions/userauthActions";
+import {useDispatch} from "react-redux"
+
 
 const useStyles=makeStyles(theme=>(
   {
@@ -63,11 +67,13 @@ function Login()
 
     const [move,setmove]=React.useState(false)
 
+    const dispatch=useDispatch();
+
   
   
     const signInUser = async () => {
-      console.log("enter into function");
-      let response = await UserSignIn(signinState);
+      console.log("enter into sign in function");
+      let response=dispatch(UsersignIn(signinState))
       console.log(response);
       if (!response)
       {
@@ -85,7 +91,9 @@ function Login()
 
     const signInBusiness = async () => {
       console.log("enter into function");
-      let response = await BusinessSignIn(signinbusinessState);
+      //let response = await BusinessSignIn(signinbusinessState);
+      let response=dispatch(BusinesssignIn(signinbusinessState))
+
       console.log(response);
       if (!response)
       {

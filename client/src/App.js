@@ -1,10 +1,15 @@
 
 import Header from './components/header/Header'
+import BusinessHeader from './components/header/BusinessHeader';
 import './App.css';
 import Home from './components/home/Home';
 
 import Footer from './components/footer/footer'
 import { makeStyles } from '@material-ui/core';
+
+import { useSelector ,useDispatch} from 'react-redux';
+
+import { useEffect, useState } from 'react';
 
 import Contact from './components/contact/Contact';
 import About from './components/about/About';
@@ -38,7 +43,26 @@ import FAQ from './components/product/FAQ';
 import ProductDetails from './components/product/ProductDetails';
 import ShopDetails from './components/Account/ShopDetails/ShopDetails';
 import ShowMap from './components/GoogleMapIntegration/googleMapsIntegration';
+import axios from "axios"
 //import Product from './components/product/Product';
+import { getMyself } from './redux/actions/userActions';
+import { getMyBusiness } from './redux/actions/businessActions';
+import TemplateProvider from './templates/TemplateProvider';
+
+// axios global settings
+if (localStorage.LocateItLocallyUser) {
+  const { token } = JSON.parse(localStorage.LocateItLocallyUser);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  console.log(token);
+}
+else if(localStorage.LocateItLocallyBusiness)
+{
+  const { token } = JSON.parse(localStorage.LocateItLocallyBusiness);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  console.log(token);
+
+}
+
 const useStyles=makeStyles(
   {
       main :{
@@ -48,13 +72,42 @@ const useStyles=makeStyles(
 )
 function App() {
 
+  console.log("Hello");
+
+  const dispatch=useDispatch();
+
+const [chooseHeader,setchooseHeader] = useState(false);
+
+
+
+  useEffect(()=>{
+      if(localStorage.LocateItLocallyUser)
+    {
+      setchooseHeader(true);
+      console.log("In doinhgghyhhgg");
+      dispatch(getMyself());
+
+    }
+
+    if(localStorage.LocateItLocallyBusiness)
+    {
+      console.log("In doinhgghyhhgg");
+      dispatch(getMyBusiness());
+    }
+
+  })
+
+  
+
   const classes=useStyles();
   return (
-    
+    <>
+    {
+    <TemplateProvider>
     <Router>
     
+     { chooseHeader ? <Header/> :  <BusinessHeader/> }
       
-      <Header/>
       
        <Switch >
         <Route exact path="/" component={Home} />
@@ -68,7 +121,7 @@ function App() {
         <Route exact path="/businessdashboard" component={MainDashboard} />
         <Route exact path="/newProduct" component={Newproduct} />
         <Route exact path="/New Arrivals" component={User_profile} />
-        <Route exact path="/productsDetails" component={ProductDetails} />
+        <Route exact path="/productsDetails/:id" component={ProductDetails} />
         
         <Route exact path="/user_profile" component={User_profile} />
         <Route exact path="/maps" component={ShowMap} />
@@ -85,6 +138,9 @@ function App() {
       </Switch>
        <Footer/> 
     </Router>
+    </TemplateProvider>
+}
+    </>
    
    
   );

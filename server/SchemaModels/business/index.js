@@ -2,27 +2,10 @@ import mongoose from "mongoose";
 // import  {categorySchema}  from "../category/index";
 //import { CategoryModel } from "../category/index";
 
-const reviewSchema = new mongoose.Schema(
-    {
-      name: {
-        type: String,
-        required: true
-      },
-      comment: {
-        type: String,
-        required: true
-      },
-      rating: {
-        type: Number,
-        required: true
-      },
-    },
-    {
-      timestamps: true,
-    }
-  );
 
+import jwt from "jsonwebtoken";
 
+import bcrypt from "bcryptjs";
 
 
 const BusinessSchema = new mongoose.Schema({
@@ -68,6 +51,18 @@ const BusinessSchema = new mongoose.Schema({
     description:{
       type:String,
     },
+    website:{
+      type:String,
+    },
+    twitter:{
+      type:String,
+    },
+    instagram:{
+      type:String,
+    },
+    facebook:{
+      type:String,
+    },
     maplocation: {
       type:String,
     },
@@ -76,9 +71,10 @@ const BusinessSchema = new mongoose.Schema({
       ref: "Images"
     },
     
-    reviews: [
-      reviewSchema
-    ]
+    reviews: {
+      type: mongoose.Types.ObjectId,
+      ref: "Reviews",
+    },
   
   
   
@@ -86,7 +82,7 @@ const BusinessSchema = new mongoose.Schema({
   });
 
   BusinessSchema.methods.generateJwtToken = function() {
-    return jwt.sign({user: this._id.toString()}, "LocateItLocally");
+    return jwt.sign({business: this._id.toString()}, "LocateItLocallyBusiness");
   };
   
   
@@ -99,47 +95,56 @@ const BusinessSchema = new mongoose.Schema({
   
      //check whether the phoneNumber Exists
      const checkUserByPhone = await BusinessModel.findOne({contactNumber});
+
      if(checkUserByEmail || checkUserByPhone) {
-       return true;
-     }
-     return false;
+      throw new Error("Business already exist");
+      //return true;
+    }
+    return false;
+     
    };
   
    // Function Used for SignIn Purpose
   BusinessSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     //check whether the email exists
-    const user = await BusinessModel.findOne({email});
-    if (!user) return null;
-  
-    //compare password
-   // const doesPasswordMatch = await bcrypt.compare(password, user.password);
-  
-    if(password!==user.password) {
-      return null;
-    }
-    return user;
+    const business = await BusinessModel.findOne({email});
+    if (!business) throw new Error("User does no exist!!!");
+
+      // Compare password
+      const doesPasswordMatch = await bcrypt.compare(password, business.password);
+
+      if (!doesPasswordMatch) throw new Error("invalid Password!!!");
+
+      return business;
+
+   
   };
   
-  // BusinessSchema.pre("save",function(next){
-  //   const user = this;
+  BusinessSchema.pre("save",function(next){
+
+    console.log("frfrfbn");
+     const business = this;
+      
+   //password isnot modified
+     if(!business.isModified("password")) return next();
+
+     console.log("frfrfbn");
   
-  // //password isnot modified
-  //   if(!user.isModified("password")) return next();
+   //generating bcrypt salt
+     bcrypt.genSalt(8,(error,salt)=> {
+       if(error) return next(error);
+
+       //hashing the password
+       bcrypt.hash(business.password, salt, (error,hash)=>{
+         if(error) return next(error);
   
-  // //generating bcrypt salt
-  //   bcrypt.genSalt(8,(error,salt)=> {
-  //     if(error) return next(error);
-  
-  //     //hashing the password
-  //     bcrypt.hash(user.password, salt, (error,hash)=>{
-  //       if(error) return next(error);
-  
-  //       //assigning hashed password
-  //       user.password = hash;
-  //       return next();
-  //     });
-  //   });
-  // });
+         //assigning hashed password
+         console.log(business.password);
+         business.password = hash;
+         return next();
+       });
+     });
+   });
   
    
   

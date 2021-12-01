@@ -1,13 +1,25 @@
 import React from "react";
 import {Grid,TextField,Box,Button,Typography, Paper, Select,MenuItem,Datepi} from '@material-ui/core';
 import src from "./Profile_Photo.png"
+import { useEffect } from "react";
 
 import {AccountCircle,ArrowForward} from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import "./user_profile_style.css";
+import { useSelector,useDispatch } from 'react-redux';
+import { getMyself,updateUser } from "../../../redux/actions/userActions";
 
+const userInitialValues = {
+  
+    
+    address:"",
+    birthdate:"",
+    gender:"",
+    twitter:"",
+    facebook:"",
+    instagram:"",
 
-
+}
 
   
   
@@ -15,15 +27,42 @@ import "./user_profile_style.css";
 function User_profile()
 {
 
-    const [age, setAge] = React.useState('');
+    // const dispatch=useDispatch();
 
+    // useEffect(()=>{
+    //     if(localStorage.LocateItLocallyUser)
+    //     {
+    //     console.log("In doinhgghyhhgg");
+    //     dispatch(getMyself());
+    //     }
+
+    // })
+
+    const dispatch=useDispatch();
+    const reduxState=useSelector((global) => global.user.user);
+
+     console.log({reduxState});
+
+    const [userState, setuserState] = React.useState(reduxState.user);
+
+    
     const handleChange = (event) => {
-        setAge(event.target.value);
-    };
+        setuserState({ ...userState, [event.target.name]: event.target.value });
+        console.log(userState);
+      };
+
+    const saveUser=()=>{
+            //console.log(reduxState.user._id);
+            dispatch(updateUser(userState))
+        
+
+                
+    }
+    
 
     return(
         <div>
- 
+       {reduxState?.user?
         <div className="p">
         <Paper elevation={15}>
 
@@ -42,6 +81,7 @@ function User_profile()
                                 
                                 
                             }}
+                            onClick={saveUser}
                     >Save</Button>
                 </Grid>
 
@@ -72,7 +112,10 @@ function User_profile()
                             type="text"
                             id="outlined-required"
                             placeholder="First Name*"
+                            defaultValue={reduxState.user.firstName}
                             variant="outlined"
+                            onChange={handleChange}
+                            name="firstName"
                         />
                         </Grid>
 
@@ -84,7 +127,10 @@ function User_profile()
                             type="text"
                             label="last Name"
                             placeholder="Last Name*"
+                            value={reduxState.user.lastName}
+                            onChange={handleChange}
                             variant="outlined"
+                            name="lastName"
                         />
                         </Grid>
                     </Grid>
@@ -98,6 +144,9 @@ function User_profile()
                         type="email"
                         placeholder="Email*"
                         variant="outlined"
+                        value={reduxState.user.email}
+                        onChange={handleChange}
+                        name="email"
                     />
                     </Grid>
 
@@ -109,6 +158,9 @@ function User_profile()
                         type="tel"
                         placeholder="Phone*"
                         variant="outlined"
+                        name="contactNumber"
+                        value={reduxState.user.contactNumber}
+                        onChange={handleChange}
                     />
                     </Grid>
 
@@ -133,7 +185,10 @@ function User_profile()
                         rows={4}
                         type="text"
                         placeholder="Address*"
+                        value={reduxState.user.address}
                         variant="outlined"
+                        onChange={handleChange}
+                        name="address"
                     />
                     </Grid>
                     
@@ -145,14 +200,16 @@ function User_profile()
                         
                             <Select
                                 variant="outlined"
-                                value={age}
+                                //value={age}
                                 fullWidth
                                 placeholder="None"
+                                name="gender"
+                                value={reduxState.user.gender}
                                 onChange={handleChange}
                             >
                             <MenuItem value={"Male"}>Male</MenuItem>
-                            <MenuItem value={20}>Female</MenuItem>
-                            <MenuItem value={30}>Other</MenuItem>
+                            <MenuItem value={"Female"}>Female</MenuItem>
+                            <MenuItem value={"Other"}>Other</MenuItem>
                             </Select>
                         
                         
@@ -165,6 +222,9 @@ function User_profile()
                                     type="date"
                                     variant="outlined"
                                     fullWidth
+                                    value={reduxState.user.birthdate}
+                                    onChange={handleChange}
+                                    name="birthdate"
                             />
                        
                     
@@ -183,7 +243,11 @@ function User_profile()
                             type="url"
                             placeholder="Twitter*"
                             variant="outlined"
+                            value={reduxState.user.twitter}
+                            onChange={handleChange}
+                            name="twitter"
                         />
+
                         </Grid>
 
                         <Grid item lg={6} xs={12}>
@@ -194,6 +258,9 @@ function User_profile()
                             type="url"
                             placeholder="Instagram*"
                             variant="outlined"
+                            onChange={handleChange}
+                            value={reduxState.user.address}
+                            name="instagram"
                         />
                         </Grid>
 
@@ -205,6 +272,9 @@ function User_profile()
                             type="url"
                             placeholder="Facebook*"
                             variant="outlined"
+                            onChange={handleChange}
+                            value={reduxState.user.facebook}
+                            name="facebook"
                         />
                         </Grid>
 
@@ -223,8 +293,9 @@ function User_profile()
 
             </Grid>
         </Paper>
-        </div>
-
+        
+        </div>:<div>Waiting</div>
+        }
         
             
         </div>
