@@ -20,10 +20,12 @@ import BusinessAuth from "./API/Auth/BusinessAuthentication/index.js";
 import Product from './API/Product/index.js';
 
 //USER API's
-
 import User from "./API/User/index.js"
 
 import Business from "./API/Business/index.js"
+
+//Wishlist API
+import Wishlist from "./API/Wishlist/index.js"
 
 
 
@@ -52,22 +54,17 @@ app.use(passport.session());
 app.use('/userAuth', UserAuth);
 app.use('/businessAuth', BusinessAuth);
 
-
-
-
-
 // Product API's
 app.use('/newProduct', Product);
 
 // User API's
-
 app.use('/user',User);
 
 //Business APIs
-
 app.use('/business',Business);
 
-
+// wishlist APIs
+app.use('/wishlist',Wishlist);
 
 
 googleAuthConfig(passport);

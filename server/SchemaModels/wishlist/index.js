@@ -9,11 +9,7 @@ const wishlistSchema = new mongoose.Schema({
       },
       //user
       createdBy: { 
-          type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true 
-      },
-  
-      discription:{
-        type:String,
+          type: mongoose.Schema.Types.ObjectId, ref: 'user', 
       },
       wishlistProducts:[
           {

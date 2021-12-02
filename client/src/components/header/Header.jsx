@@ -1,9 +1,10 @@
 
 import React from 'react';
 import { useState } from 'react';
-import {AppBar,Toolbar,makeStyles,Box, Button} from '@material-ui/core';
+import {AppBar,Toolbar,makeStyles,Box, Button, Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import LogoutIcon from '@mui/icons-material/Logout';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Popover from '@mui/material/Popover';
@@ -74,7 +75,7 @@ const useStyle = makeStyles(theme => (
     // Icons - Enable For large and Medium Screen
     endContainerIcons: {
       display: 'flex',
-      marginLeft: 400,
+      marginLeft: 300,
       gap: 15,
             
       // Disable For Mobile Sceen
@@ -186,12 +187,20 @@ const Header = (props) => {
                   {
                     reduxState?.user?.firstName ?(
 
-                      <>
-                          <p>
-                              {reduxState.user.firstName}
-                              <button onClick={signOuthandler}>Sign Out</button>
-                          </p>
-                      </>
+                      <Box style={{display:'flex',direction:'row'}}>
+                          {/* <Box style={{display:'flex'}}> */}
+                              <Typography  style={{color:'#3498db', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem'}}>{reduxState.user.firstName}</Typography>
+                              {/* {reduxState.user.firstName} */}
+                              {/* <button onClick={signOuthandler}>Sign Out</button> */}
+                              <Button 
+                                  size="medium"  
+                                  //className={classes.addProductButton} 
+                                  style={{color:'#e74c3c', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem'}}
+                                  onClick={()=>signOuthandler()}
+                            >LogOut</Button>
+                           
+                          {/* </Box> */}
+                      </Box>
 
 
 
