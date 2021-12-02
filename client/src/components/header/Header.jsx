@@ -1,15 +1,17 @@
 
 import React from 'react';
 import { useState } from 'react';
-import {AppBar,Toolbar,makeStyles,Box, Button} from '@material-ui/core';
+import {AppBar,Toolbar,makeStyles,Box, Button, Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import LogoutIcon from '@mui/icons-material/Logout';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Popover from '@mui/material/Popover';
 import AccountMenu from '../home/PopOverModals/AccountMenu';
 import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
+import {MapOutlined} from "@material-ui/icons"
 //import gravatar from "gravatar";
 
 import { useSelector,useDispatch } from 'react-redux';
@@ -74,7 +76,7 @@ const useStyle = makeStyles(theme => (
     // Icons - Enable For large and Medium Screen
     endContainerIcons: {
       display: 'flex',
-      marginLeft: 400,
+      marginLeft: 300,
       gap: 15,
             
       // Disable For Mobile Sceen
@@ -153,7 +155,7 @@ const Header = (props) => {
         <AppBar className={classes.header}>
             <Toolbar >
                 
-                <img src={logo} alt="icon" className={classes.logoLg} />
+                <Link to="/"><img src={logo} alt="icon" className={classes.logoLg} /></Link>
                 
                 <Box className={classes.containerOptions}>
 
@@ -186,12 +188,20 @@ const Header = (props) => {
                   {
                     reduxState?.user?.firstName ?(
 
-                      <>
-                          <p>
-                              {reduxState.user.firstName}
-                              <button onClick={signOuthandler}>Sign Out</button>
-                          </p>
-                      </>
+                      <Box style={{display:'flex',direction:'row'}}>
+                          {/* <Box style={{display:'flex'}}> */}
+                              <Typography  style={{color:'#3498db', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem'}}>{reduxState.user.firstName}</Typography>
+                              {/* {reduxState.user.firstName} */}
+                              {/* <button onClick={signOuthandler}>Sign Out</button> */}
+                              <Button 
+                                  size="medium"  
+                                  //className={classes.addProductButton} 
+                                  style={{color:'#e74c3c', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem'}}
+                                  onClick={()=>signOuthandler()}
+                            >LogOut</Button>
+                           
+                          {/* </Box> */}
+                      </Box>
 
 
 
@@ -238,6 +248,7 @@ const Header = (props) => {
                    
                     <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
 
+                    <Link to='/cart'><MapOutlined className={classes.endicons} /></Link>
                     {/* <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link> */}
                   <ShoppingCartOutlinedIcon className={classes.endicons} onClick={()=>openReviewDailog()} />
                    

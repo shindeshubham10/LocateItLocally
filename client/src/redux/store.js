@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import {getProductReducer,getProductDetailsReducer} from './reducers/productReducers';
+import {getProductReducer,getProductDetailsReducer,getProductByCategoryReducer} from './reducers/productReducers';
 import AuthReducer from './reducers/userAuthreducer';
 import BAuthReducer from './reducers/businessauthreducer';
 import UserReducer from "./reducers/userreducer";
@@ -13,6 +13,9 @@ import { getProductsofBusinessReducer } from "./reducers/productReducers";
 import { deleteProductsofBusinessReducer } from "./reducers/productReducers";
 
 import { updateProductDetailsReducer } from "./reducers/productReducers";
+import {addNewWishlistReducer,getWishlistReducer} from "./reducers/wishlistReducer";
+
+
 
 const reducer = combineReducers({
     getProducts:getProductReducer,
@@ -25,6 +28,9 @@ const reducer = combineReducers({
     getProductsofBusinessReducer,
     deleteProductsofBusinessReducer,
     updateProductDetailsReducer 
+    wishlistData:addNewWishlistReducer,
+    getWishlistReducer,
+    getProductByCategoryReducer
 })
 
 const middleWare = [thunk];

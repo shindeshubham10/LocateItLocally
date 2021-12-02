@@ -22,7 +22,7 @@ const Home = () => {
     console.log("Inside hone 2");
     console.log("data from database type :", typeof (getProducts));
     console.log(getProducts);
-   
+    console.log(getProducts.Products);
     
     console.log("Inside hone 3");
   
@@ -43,12 +43,12 @@ const Home = () => {
              <HomeSearchBar />
              <Banner />
              <Headings name="NEW ARRIVALS"/> 
-             <Cards data={getProducts}/> 
+             <Cards data={getProducts.Products}/> 
      
               <Headings name="TOP PRODUCTS"/> 
               <MultiSlider/> 
              <Headings name="TOP SELLERS"/> 
-             <Cards data={getProducts}/> 
+             <Cards data={getProducts.Products}/> 
                    
 
         </div>

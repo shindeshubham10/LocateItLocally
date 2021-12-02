@@ -13,7 +13,7 @@ import Headings from '../home/Headings';
 import Cards from "../home/Cards";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getProductDetails } from '../../redux/actions/productActions'
+import { getProductDetails, getProductByCategory } from '../../redux/actions/productActions'
 import { Typography } from '@mui/material'
 
 
@@ -22,23 +22,53 @@ const ProductDetails = ({match}) => {
 
     const [loading, setloading] = React.useState(false);
 
+    const [categoryWiseProduct,setcategoryWiseProduct] = React.useState([]);
+       
+
     const handleAlignment = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
 
     const productDetails = useSelector(state=>state.getProductDetails);
     const dispatch = useDispatch();
-    // if(productDetails){
-    //     setloading(false);
-    // }
 
+    const dispatch1 = useDispatch();
+   
+   
     console.log("Product ID in details page");
     console.log(match.params.id);
 
     useEffect(()=>{
-        dispatch(getProductDetails(match.params.id));
-    },[dispatch])
 
+        dispatch(getProductDetails(match.params.id)).then((allProductDetails)=>{
+
+            console.log("alaData...........",allProductDetails);
+            const categoryOfProduct = allProductDetails.payload.product.category;
+
+            dispatch1(getProductByCategory(categoryOfProduct)).then((categoryWiseProduct)=>{
+
+                setcategoryWiseProduct(categoryWiseProduct.payload.productByCategory);
+                 console.log("In category wise dispatch = ",categoryWiseProduct);
+                 
+             });
+        });
+      
+    },[dispatch,dispatch1])
+
+    console.log("categoryWiseProduct ===" ,categoryWiseProduct);
+    
+
+
+
+
+    // this category data we have to use to fetch related products to that respective category.
+    if( productDetails.Products){
+        console.log("Category to fetch related products = ",productDetails.Products.product.category);
+        
+    }
+  
+
+   
 
     console.log("Product Data in Details Main page - ",productDetails); 
 
@@ -48,8 +78,8 @@ const ProductDetails = ({match}) => {
             
             <Product data={productDetails}/> 
             <Description />
-             <Headings name="Related Products" />
-             {/* <Cards/> */}
+            <Headings name="Related Products" />
+            <Cards data={categoryWiseProduct}/> 
              <FAQ /> 
              
              

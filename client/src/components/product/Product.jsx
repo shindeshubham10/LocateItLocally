@@ -21,6 +21,8 @@ import ShopDetails from '../Account/ShopDetails/ShopDetails'
 // Temporary importing dialog box
 import UserReview from '../reviews/UserReviews';
 
+import AddProductToWishList from '../Wishlist/addProductToWishlist';
+
 
  
 const useStyles=makeStyles(theme=>(
@@ -190,9 +192,8 @@ const Product=({data})=>{
 
     //const check = false;
 
-    
-
-    
+      
+        const reduxState = useSelector((global)=>global.user.user);
 
         console.log("In the Product seaction");
         console.log("data in the Product Section - ",data);
@@ -242,6 +243,16 @@ const Product=({data})=>{
                 }
                 setopenReview(true);
             };
+
+
+            // usestate for open add to wishlist dialog
+            const [openWishlistDialog,setopenWishlistDialog] = useState(false);
+
+            const openAddToWishlistDailog = () =>{
+                setopenWishlistDialog(true);
+            };
+
+            
  
         return(
             <>
@@ -325,8 +336,8 @@ const Product=({data})=>{
                     </Box>
                     
                    
-                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50,marginRight:10 ,marginBottom: mobileScreen ? 10 : 0}} variant="contained" endIcon={<FavoriteBorderOutlinedIcon style={ {color:'white'}}/>}>
-                         <Typography style={{fontweight:'bold',fontSize:18,color:'white',fontFamily:['Monteserrat','sans-serif']}}>FAVOURITES</Typography> 
+                    <Button style={{ backgroundColor: '#38495A', borderRadius: 50,marginRight:10 ,marginBottom: mobileScreen ? 10 : 0}} variant="contained" onClick={()=>openAddToWishlistDailog()} endIcon={<FavoriteBorderOutlinedIcon style={ {color:'white'}}/>}>
+                         <Typography style={{fontweight:'300',fontSize:18,color:'white',fontFamily:['Monteserrat','sans-serif']}}>Add to Wishlist</Typography> 
                     </Button>
 
                     <Button style={{ backgroundColor: '#38495A', borderRadius: 50, }} variant="contained"  onClick={()=>openReviewDailog()} endIcon={<ReviewsIcon style={ {color:'white'}}/>}>
@@ -418,6 +429,8 @@ const Product=({data})=>{
                 
                 </Grid>
                 <UserReview open={openReview} setopenReview={setopenReview}/>
+                <AddProductToWishList openWishlistDialog={openWishlistDialog} setopenWishlistDialog={setopenWishlistDialog} productData={data.Products.product._id}/>
+                
                 
             </Grid>
 

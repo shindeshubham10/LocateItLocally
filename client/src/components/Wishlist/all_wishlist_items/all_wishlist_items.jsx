@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 import  { makeStyles,Grid,TextField,OutlinedInput,Box,useTheme,useMediaQuery,InputBase,Card,CardContent, CardMedia,Button} from '@material-ui/core'
 import { List, ListItem,ListItemText,ListItemAvatar,Avatar,ListItemIcon ,Checkbox } from '@material-ui/core';
@@ -12,6 +12,9 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import ListItemButton from '@mui/material/ListItemButton';
 import Cart from '../../cart/Cart';
 import { EditOutlined } from '@material-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getProductDetails } from '../../../redux/actions/productActions';
 
 
 const useStyle = makeStyles(theme => (
@@ -153,14 +156,55 @@ const Productdata = [
 ]
 
 
+const Y = false;
 
-
-const All_wishlist_items = () => {
+const All_wishlist_items = (wishlistProductData) => {
     const classes = useStyle();
     const theme = useTheme();
     const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const TabletScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
+    console.log("In all wishlist items page - ",{wishlistProductData});
+    const [productArray,setproductArray] =React.useState([]);
+    ///const productDetails = useSelector(state=>state.getProductDetails);
+   
+   
+
+
+    const dispatch = useDispatch();
+    // if(productDetails){
+    //     setloading(false);
+    // }
+    const dummy = []; 
+    console.log("Product ID in details page");
+    //console.log(match.params.id);
+    
+    useEffect(()=>{
+        wishlistProductData.data.map((eachP)=>(
+            console.log("dispatched item - ",eachP ),
+            dispatch(getProductDetails(eachP)).then((x)=>{
+               console.log(x.payload.product);
+               //setproductArray([...productArray,x.payload.product]);
+               //productArray.push(x.payload.product)
+               dummy.push(x.payload.product);
+               //console.log("dummy in map dispatch",dummy)
+             
+               console.log("Product Array in dispatch - ",productArray);
+               console.log("below setpeoducts")
+            })
+           
+        ))
+        //console.log("dummy - ",dummy);
+        setproductArray(dummy)
+        console.log("Product Array baher dispatch - ",productArray);
+     },[Y])
+     
+     console.log("Product Array  - ",productArray);
+     
+
+     wishlistProductData.data.map((item)=>{console.log("Data from each item array - ",item)})
+
+    
     const productImage = null;
     // This is used for Category Selection of the form on the page
     const [currency, setCurrency] = React.useState('EUR'); 
@@ -197,6 +241,10 @@ const All_wishlist_items = () => {
 
     return (
         <div>  
+            {
+               productArray ? 
+                <>
+          
             {/* <Grid container> */}
             <div>
             <Typography className={classes.mainHeading} component="div" >Wishlist Name
@@ -223,23 +271,24 @@ const All_wishlist_items = () => {
                     <List className={classes.productList}>
                         
                         {
-                            
-                            Productdata.map(eachItem => (
-                                
+                           productArray ? 
+                           productArray.map(eachItem => (
+                            console.log("eachitem - ",eachItem),
                                // List Item Start
                                 <>
-                                <ListItem alignItems="flex-start" key={eachItem.value}>
+                               
+                                <ListItem alignItems="flex-start" key={productArray.indexOf(eachItem)}>
                                     
                                 {/** ListItemButton Start */}
-                                <ListItemButton role={undefined} onClick={handleToggle(eachItem.value)} dense>
+                                <ListItemButton role={undefined} onClick={handleToggle(productArray.indexOf(eachItem))} dense>
 
                                     <ListItemIcon>
                                         <Checkbox
                                         edge="start"
-                                        checked={checked.indexOf(eachItem.value) !== -1}
+                                        checked={checked.indexOf(productArray.indexOf(eachItem)) !== -1}
                                         tabIndex={-1}
                                         disableRipple
-                                        inputProps={{ 'aria-labelledby': eachItem.value }}
+                                        inputProps={{ 'aria-labelledby':productArray.indexOf(eachItem) }}
                                         />
                                     </ListItemIcon>
                                                             
@@ -251,7 +300,7 @@ const All_wishlist_items = () => {
                                         
 
                                         {/* // Container for responsive Product Info*/}
-                                        <Grid container direction='row' className={classes.productInfoContent} id={eachItem.value}>
+                                        <Grid container direction='row' className={classes.productInfoContent} id={productArray.indexOf(eachItem)}>
 
                                         <Grid item lg={3} xs={12} >
                                         <ListItemText>
@@ -284,7 +333,7 @@ const All_wishlist_items = () => {
                                 </>
                               
                         // List Item End         
-                        ))
+                        )) : <div>Wait..</div>
                         }
                  
             </List> 
@@ -292,6 +341,8 @@ const All_wishlist_items = () => {
             </Grid> 
 
             {/* </Grid> */}
+            </> : <div>Hello Shubham</div>
+        }
         </div>
     )
 }

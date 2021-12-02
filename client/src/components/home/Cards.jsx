@@ -86,31 +86,32 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
 };
 const Cards = ({data}) => {
   const classes = useStyles();
-  const ProductData = data.Products;
-  console.log(ProductData);
+ // const ProductData = data.Products;
+  console.log(data);
   console.log("inside Card");
 
   //console.log("ID of the Product - ",ProductData._id);
     return(
+      
+      <Box className={classes.root} >
+      
+      {/* <Carousel 
         
-        <Box className={classes.root} >
-        <Carousel 
+        swipeable={true}
+        draggable={true}
+        responsive={responsive}
+        ssr={true}
+        infinite={true}
+        customLeftArrow={<CustomLeftArrow
           
-          swipeable={true}
-          draggable={true}
-          responsive={responsive}
-          ssr={true}
-          infinite={true}
-          customLeftArrow={<CustomLeftArrow
-            
-            currentSlide={2}
-            deviceType={'mobile'}
-          />} 
-        >
+          currentSlide={2}
+          deviceType={'mobile'}
+        />} 
+      >
           
           {
-                  ProductData ? 
-                  ProductData.map( details => (
+                  data ? 
+                  data.map( details => (
                         
                     <Link to={`productsDetails/${details._id}`}>
                       <ProductCard
@@ -134,7 +135,7 @@ const Cards = ({data}) => {
           
             
           
-        </Carousel>
+        </Carousel> */}
         </Box>
             
 

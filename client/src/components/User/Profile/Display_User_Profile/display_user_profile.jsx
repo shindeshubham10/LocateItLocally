@@ -1,15 +1,22 @@
 import React from 'react';
+import { useState ,useEffect} from 'react';
 import "./display_user_profile_style.css";
 import {Grid,Box,Button,Typography, Paper,Tab,useMediaQuery,useTheme,makeStyles,Tabs} from '@material-ui/core';
 import {LocationOn,ContactMail,Edit, Phone,EditOutlined,AddCircleOutline} from "@material-ui/icons"
 import {FactCheckOutlined} from '@mui/icons-material';
 import profileimg from "./User_Profile_Photo.png"
 
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch} from 'react-redux';
 
 import {Link} from "react-router-dom";
 
 import All_wishlist_items from '../../../Wishlist/all_wishlist_items/all_wishlist_items';
+
+import AddNewWishList from '../../../Wishlist/addNewWishlist';
+import { getWishlist } from '../../../../redux/actions/wishlistActions';
+import { getProductDetails } from '../../../../redux/actions/productActions';
+
+
 const useStyle = makeStyles(theme => (
     {
         mainBoxFor_Tabs_Divider: {
@@ -168,21 +175,79 @@ function TabPanel(props) {
 }
 
 
+
+
+
+
+
 const Display_user_profile= () =>
 {
 
-    const reduxState=useSelector((global) => global.user.user);
+    
 
-     console.log({reduxState});
+    const [wishlist, setwishlist] = useState([]);
+
+    
+   
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        
+        dispatch(getWishlist()).then((data) =>{
+            console.log(data)
+            setwishlist(data.payload.UserWishlist)
+            console.log(wishlist);
+        }   
+        );
+        
+    }, []);
+
+
+    const productDetails = useSelector(state=>state.getProductDetails);
+   // const dispatch = useDispatch();
+    
+    console.log("Product ID in details page");
+    //console.log(match.params.id);
+
+    // useEffect(()=>{
+    //     dispatch(getProductDetails(match.params.id));
+    // },[dispatch])
+
+
+    console.log("Product Data in display User page - ",productDetails); 
+
+
+
+    const reduxState = useSelector((global)=>global.user.user);
+
+    console.log({reduxState});
+
+    //console.log("wishlist data name - ",{wishlistName});
     const classes = useStyle();
-    const [value, setValue] = React.useState(0);
+    //const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    // usestate for open add new wishlist dialog
+    const [openReview,setopenReview] = useState(false);
+
+    const openReviewDailog = () =>{
+        setopenReview(true);
     };
+
+
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue);
+    // };
     const theme = useTheme();
     const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
+    const [currentTab, setCurrentTab] = React.useState(0);
+
+  const handleChangeTab = (event, newTab) => {
+    setCurrentTab(newTab);
+  };
+
+    
+
 
     return(
         <div>
@@ -243,10 +308,10 @@ const Display_user_profile= () =>
             </Grid>
 
 
-            
+        <AddNewWishList open={openReview} setopenReview={setopenReview} data={reduxState.user._id}/>  
 
         </Grid>
-        </Paper>:<div>(Waiting....</div>
+        </Paper>:<div>Waiting....</div>
     }
 
 
@@ -262,41 +327,60 @@ const Display_user_profile= () =>
             <Grid container direction="row">
                 <Grid item xs={8} sm={10} lg={12}>
                 <div style={{display:"flex"}}>
-                    <FactCheckOutlined fontSize="large"/>
+                    <Link to="/carts"><FactCheckOutlined fontSize="large"/></Link>
                     <Typography className={classes.mainHeading} component="div">Wishlist</Typography>
                 
                 </div>
                 </Grid>
                 <Grid item lg={12} sm={2} xs={4}>
+
+                {/** Button to add new wishlist.. */}
                 <div>
-                    <Button style={{marginLeft:"40px"}}><AddCircleOutline fontSize="large"/></Button>
+                    <Button style={{marginLeft:"40px"}} onClick={()=>openReviewDailog()}><AddCircleOutline fontSize="large"/></Button>
                 </div>
+
                 </Grid>
             </Grid>
             <Tabs
                 orientation={mobileScreen ? 'horizontal' : 'vertical'}
                 variant='scrollable'
-                value={value}
-                onChange={handleChange}
+                value={currentTab}
+                onChange={handleChangeTab}
             >
-
-                <Tab label="Wishlist 1" className={ value===0 ? classes.active_tabStyle : classes.default_tabStyle  } />
-                <Tab label="Wishlist 2"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
-                <Tab label="Wishlist 3" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+                {/** take wishlist name from database */}
+                  {
+                      //console.log(wishlist)
+                      wishlist.map((wname)=>(
+                        <Tab key={wname.name} label={wname.name} />
+                      ))
+                  }  
+               
+                 {/* <Tab label={wishlist[0].name} /> */}
+                {/* <Tab label="Wishlist 2"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+                <Tab label="Wishlist 3" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>  */}
 
                 
             </Tabs>
     
             </Box>
             {/* <Grid container spacing={2}> */}
-            <TabPanel value={value} index={0}>
-                <All_wishlist_items/>
-                        
-            </TabPanel>
+            {
+                wishlist ? 
+                wishlist.map((winame,index)=>(
+                    console.log("In Tab Panel - ",winame.wishlistProducts),
+                    <TabPanel key={winame.name} value={currentTab} index={index} >
+                        <All_wishlist_items data={winame.wishlistProducts}/>                       
+                    </TabPanel>
+                )) : <div>wait....</div>
+            }
+
+            {/* <TabPanel value={value} index={0}>
+                <All_wishlist_items />                       
+            </TabPanel> */}
             
-            <TabPanel value={value} index={1}>
+            {/* <TabPanel value={value} >
                        
-            </TabPanel>
+            </TabPanel> */}
         {/* </Grid> */}
         </Box>
         
@@ -305,7 +389,7 @@ const Display_user_profile= () =>
         </Grid>
         </div>
             
-            
+        {/* <AddNewWishList open={openReview} setopenReview={setopenReview} data={reduxState.user._id}/> */}
 
         </div>
     );

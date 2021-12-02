@@ -31,6 +31,7 @@ import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profil
 import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
 import UpdateProduct from './components/BusinessOwner/Product_Management/UpdateProduct/update_product';
 import ShowProducts from './components/ShowProducts/showProducts';
+import addJobOpening from './components/Job/addJobOpening/addJobOpening';
 
 import {
   BrowserRouter as Router,
@@ -133,6 +134,8 @@ const [chooseHeader,setchooseHeader] = useState(false);
         <Route exact path="/display_user_profile" component={display_user_profile} />
         <Route exact path="/allproducts/:options/" component={ShowProducts}/>
         <Route exact path="/allproducts" component={ShowProducts}/>
+        <Route exact path="/addjobopening" component={addJobOpening}/>
+        
       
       </Switch>
        <Footer/> 
