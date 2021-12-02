@@ -51,3 +51,52 @@ export const addProductDetailsReducer = (state = {product:{}},action) => {
             return state;
     }
 };
+
+
+export const getProductsofBusinessReducer = (state = {products:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_PRODUCTS_OF_BUSINESS_SUCCESS:
+            return {...state, 
+                products: action.payload };
+        
+        case actionsType.GET_PRODUCTS_OF_BUSINESS_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};
+
+export const deleteProductsofBusinessReducer = (state = {products:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.DELETE_PRODUCTS_OF_BUSINESS_SUCCESS:
+            return {...state, 
+                products: action.payload };
+        
+        case actionsType.DELETE_PRODUCTS_OF_BUSINESS_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};
+
+export const updateProductDetailsReducer = (state = {product:{}},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.ADD_PRODUCT_SUCCESS:
+            return { ...state,
+                product: action.payload, };
+        
+        case actionsType.ADD_PRODUCT_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};

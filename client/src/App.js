@@ -29,7 +29,7 @@ import User_profile from './components/Account/User_Profile/user_profile';
 import googleMapsComponent from './components/GoogleMapIntegration/googleMaps.component';
 import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profile';
 import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
-
+import UpdateProduct from './components/BusinessOwner/Product_Management/UpdateProduct/update_product';
 import ShowProducts from './components/ShowProducts/showProducts';
 
 import {
@@ -47,6 +47,7 @@ import axios from "axios"
 import { getMyself } from './redux/actions/userActions';
 import { getMyBusiness } from './redux/actions/businessActions';
 import TemplateProvider from './templates/TemplateProvider';
+
 
 // axios global settings
 if (localStorage.LocateItLocallyUser) {
@@ -118,6 +119,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/businessdashboard" component={MainDashboard} />
+        <Route exact path="/businessdashboard/product/update" component={UpdateProduct} />
         <Route exact path="/newProduct" component={Newproduct} />
         <Route exact path="/New Arrivals" component={User_profile} />
         <Route exact path="/productsDetails/:id" component={ProductDetails} />
@@ -126,7 +128,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
         <Route exact path="/maps" component={ShowMap} />
         <Route exact path="/reviews" component={Reviews} />
         <Route exact path="/shopproducts" component={ShopProducts} />
-        <Route exact path="/shopdetails" component={ShopDetails} />
+        <Route exact path="/shopdetails/:id" component={ShopDetails} />
         <Route exact path="/owner_profile" component={Owner_profile} />
         <Route exact path="/display_user_profile" component={display_user_profile} />
         <Route exact path="/allproducts/:options/" component={ShowProducts}/>

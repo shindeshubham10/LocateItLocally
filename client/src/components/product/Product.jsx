@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import { display } from '@mui/system';
 import { useSelector,useDispatch } from 'react-redux';
 import { getBusiness } from '../../redux/actions/businessActions';
+import ShopDetails from '../Account/ShopDetails/ShopDetails' 
 
 // Temporary importing dialog box
 import UserReview from '../reviews/UserReviews';
@@ -345,7 +346,7 @@ const Product=({data})=>{
                         
                         
                         <Typography className={classes.sellerInfoHeading}>
-                                Seller Information <Link to="/shopdetails"> <ArrowForward style={{marginLeft:"30px"}}/> </Link>
+                                Seller Information <Link to={`/shopdetails/${sellerdata._id}`}><ArrowForward style={{marginLeft:"30px"}}/></Link> 
                         </Typography>
                     </Box>
                     <Box style={{marginLeft:10,marginTop:10,}}>
@@ -412,6 +413,7 @@ const Product=({data})=>{
                         </Box>
 
                     </Box>
+                    
 
                 
                 </Grid>

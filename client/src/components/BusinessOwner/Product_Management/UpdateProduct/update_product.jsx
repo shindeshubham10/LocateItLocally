@@ -11,7 +11,7 @@ import { borderRadius } from '@mui/system';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 //import { newProduct } from '../../../../service/api';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProductDetails } from '../../../../redux/actions/productActions';
+import { updateProduct} from '../../../../redux/actions/productActions';
 
 
 
@@ -196,7 +196,8 @@ const intialValues={
 }
 
 
-const Newproduct = () => {
+const UpdateProduct = (props) => {
+    console.log(props.location.state);
     const dispatch=useDispatch()
     const classes = useStyle();
     const theme = useTheme();
@@ -208,9 +209,7 @@ const Newproduct = () => {
     const [currency, setCurrency] = React.useState('EUR'); 
 
     const [error,seterror]=React.useState(false);
-    const reduxState=useSelector((global) => global.business.business);
-
-     console.log({reduxState});
+    
 
     const handleChange = (event) => {
         setCurrency(event.target.value);
@@ -232,11 +231,11 @@ const Newproduct = () => {
       };
     
 
-    const addproduct =  () => {
+    const updateproduct =  () => {
         console.log(productdata);
         console.log("enter into function");
         // productdata.seller=reduxState.business._id;
-        dispatch(addProductDetails(productdata)).then((data)=>console.log(data))
+        dispatch(updateProduct(productdata,props.location.state._id)).then((data)=>console.log(data))
         
     //     console.log("dfndncjndjk");
     //     if (!response)
@@ -309,6 +308,7 @@ const Newproduct = () => {
                   name="name"
                   size='medium'
                   placeholder="test@test.com"
+                  defaultValue={props.location.state.name}
                   onChange={(e)=>handleInputChange(e)}
                  
                      />
@@ -332,7 +332,7 @@ const Newproduct = () => {
                             color="primary"
                             value={currency}
                             onChange={handleChange}
-                           
+                            defaultValue={props.location.category}
                             size='medium'
                             placeholder="test@test.com"
                  
@@ -613,7 +613,7 @@ const Newproduct = () => {
                                         
                                         className={classes.addProductButton}
                                         style={{color:'white', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem'}}
-                                        onClick={()=>addproduct()}
+                                        onClick={()=>updateproduct()}
                                     >Add Product</Button>
                                 </Box>
                             
@@ -643,5 +643,5 @@ const Newproduct = () => {
     )
 }
 
-export default Newproduct
+export default UpdateProduct;
 //alignItems={mobileScreen || TabletScreen ? 'center' : 'flex-start' }

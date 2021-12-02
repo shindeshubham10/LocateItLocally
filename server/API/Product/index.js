@@ -65,15 +65,19 @@ Router.get("/getProducts", getProducts);
 // */
 
 Router.get("/:_id",getProductDetails);
-  
 
 //Add Products
 
-Router.post("/add",async(req,res)=>{
+Router.post("/add",passport.authenticate("business"), async(req,res)=>{
 
         try {
-          const product = await new ProductModel(req.body);
-          product.save();
+
+
+          
+          const {_id}=req.session.passport.user._doc;
+          const {productData}=req.body;
+          await ProductModel.create({ ...productData, seller: _id });
+          console.log(productData);
 
           res.status(200).json('Product saved successfully');
       } catch (error) {
@@ -82,6 +86,79 @@ Router.post("/add",async(req,res)=>{
 
 
 })
+
+
+//Get products of a business without productID used by business owner
+
+Router.get("/business/getProductsofbusiness",passport.authenticate("business"), async(req,res)=>{
+
+  try {
+    console.log("jdbehjbfchhfcb");
+    console.log("IN GET PROD");
+    
+    const {_id}=req.session.passport.user._doc;
+    console.log(_id);
+    const products = await ProductModel.find({seller:_id});
+    console.log(products);
+    
+
+    res.status(200).json({products});
+  } catch (error) {
+    res.status(500).json(error);
+}
+
+
+})
+
+//delete products of a business
+Router.delete("/business/deleteProductsofbusiness",passport.authenticate("business"), async(req,res)=>{
+
+  try {
+    console.log("jdbehjbfchhfcb");
+    console.log("IN DELETE PROD");
+    
+    const {_id}=req.session.passport.user._doc;
+    console.log(_id);
+    console.log(req.body.product_id_list);
+
+    // const products = await ProductModel.find({seller:_id});
+    // console.log(products);
+    await ProductModel.deleteMany({_id:{$in:req.body.product_id_list}})
+    
+
+    res.status(200).json("Deleted SucessFully");
+  } catch (error) {
+    res.status(500).json(error);
+}
+
+
+})
+
+Router.put("/update/:id",passport.authenticate("business"), async (req, res) => {
+  try {
+    
+    const { _id } = req.session.passport.user._doc;
+    const  productData  = req.body.productUpdatedata;
+    console.log(_id);
+    console.log("Hurray");
+    console.log(productData);
+    const {id}=req.params;
+    console.log(id);
+    const updateProductData = await ProductModel.findByIdAndUpdate(
+      id,
+      {
+        $set: productData,
+      },
+      { new: true }
+    );
+
+    return res.json({ product: updateProductData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 /*
 Route     /search

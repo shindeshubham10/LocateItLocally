@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import  { makeStyles,Grid,TextField,OutlinedInput,Box,useTheme,useMediaQuery,InputBase,Card,CardContent, CardMedia,Button} from '@material-ui/core'
 import { List, ListItem,ListItemText,ListItemAvatar,Avatar,ListItemIcon ,Checkbox } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-
+import { IconButton } from '@material-ui/core';
 import { Person, Google, Facebook, Password, } from "@mui/icons-material";
 import MenuItem from '@mui/material/MenuItem';
 import { borderRadius, color } from '@mui/system';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import ListItemButton from '@mui/material/ListItemButton';
+import { useDispatch } from 'react-redux';
+import { getProductsofbusiness } from '../../../../redux/actions/productActions';
+import { deleteProductsofbusiness } from '../../../../redux/actions/productActions';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Edit } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -153,6 +160,18 @@ const Productdata = [
 
 
 const ViewAllProducts = () => {
+
+    const [products,setproducts]=React.useState([]);
+    const [todeleteIDs,setdeleteIDs]=React.useState([]);
+    const [requestData, setRequestData] = React.useState(new Date());
+    const dispatch=useDispatch();
+    React.useEffect(()=>{
+
+
+
+        dispatch(getProductsofbusiness()).then((data)=>setproducts(data.payload.products))
+
+    },[requestData])
     const classes = useStyle();
     const theme = useTheme();
     const mobileScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -185,11 +204,36 @@ const ViewAllProducts = () => {
         } else {
           newChecked.splice(currentIndex, 1);
         }
-    
-        setChecked(newChecked);
-    };
-    // checkBox Code End
 
+        console.log(newChecked);
+        const arr=[]
+        setChecked(newChecked);
+        newChecked.map((x)=>(
+            
+           arr.push(products[x]._id)
+            
+            
+        )
+        )
+        console.log(arr);
+        setdeleteIDs(arr);
+
+       
+    };
+    
+    // checkBox Code End
+    const deleteproducts=()=>{
+        console.log(todeleteIDs);
+        dispatch(deleteProductsofbusiness(todeleteIDs)).then((x)=>{
+            setRequestData({})
+            setChecked([]);
+            setdeleteIDs([]);
+            console.log(x)});
+        
+        
+        
+        
+    }
 
 
     return (
@@ -199,6 +243,9 @@ const ViewAllProducts = () => {
                         <Grid item  style={{textAlign:'start',marginTop:'10px',marginLeft:'20px'}}>
                         <Typography className={classes.headingDescription} component="div" >All Products are Listed Down Below</Typography>
                         </Grid>
+                        <IconButton edge="end" aria-label="delete" onClick={deleteproducts}>
+                                    <DeleteIcon />
+                                  </IconButton>
                        
                 <Divider className={classes.horizontalDivider} />
 
@@ -210,22 +257,22 @@ const ViewAllProducts = () => {
                         
                         {
                             
-                            Productdata.map(eachItem => (
+                            products?.map(eachItem => (
                                 
                                // List Item Start
                                 <>
-                                <ListItem alignItems="flex-start" key={eachItem.value}>
+                                <ListItem alignItems="flex-start" key={products.indexOf(eachItem)} >
                                     
                                 {/** ListItemButton Start */}
-                                <ListItemButton role={undefined} onClick={handleToggle(eachItem.value)} dense>
+                                <ListItemButton role={undefined} onClick={handleToggle(products.indexOf(eachItem))} dense>
 
                                     <ListItemIcon>
                                         <Checkbox
                                         edge="start"
-                                        checked={checked.indexOf(eachItem.value) !== -1}
+                                        checked={checked.indexOf(products.indexOf(eachItem)) !== -1}
                                         tabIndex={-1}
                                         disableRipple
-                                        inputProps={{ 'aria-labelledby': eachItem.value }}
+                                        inputProps={{ 'aria-labelledby': products.indexOf(eachItem)}}
                                         />
                                     </ListItemIcon>
                                                             
@@ -237,7 +284,7 @@ const ViewAllProducts = () => {
                                         
 
                                         {/* // Container for responsive Product Info*/}
-                                        <Grid container direction='row' className={classes.productInfoContent} id={eachItem.value}>
+                                        <Grid container direction='row' className={classes.productInfoContent} id={eachItem._id}>
 
                                         <Grid item lg={3} xs={12} >
                                         <ListItemText>
@@ -258,12 +305,23 @@ const ViewAllProducts = () => {
                                         <ListItemText>
                                                     <Typography className={classes.productContentStyle}>{eachItem.availability}</Typography>
                                         </ListItemText> 
-                                        </Grid>           
+
+                                        </Grid>   
+                                           
+
                                         </Grid>
                                         {/* //Responsive product info container ends  */}
 
                                     </ListItemButton>
                                     {/** ListItemButton End */}
+                                    <Link to={{ 
+                                        pathname: "/businessdashboard/product/update", 
+                                        state: eachItem
+                                        }}>
+                                        <Edit/>
+                                    </Link>
+                                    
+
         
                                 </ListItem>
                                 <Divider className={classes.horizontalDivider} />

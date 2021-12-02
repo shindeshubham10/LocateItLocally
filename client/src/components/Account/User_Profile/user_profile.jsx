@@ -53,6 +53,7 @@ function User_profile()
 
     const saveUser=()=>{
             //console.log(reduxState.user._id);
+            console.log(userState);
             dispatch(updateUser(userState))
         
 
@@ -112,7 +113,7 @@ function User_profile()
                             type="text"
                             id="outlined-required"
                             placeholder="First Name*"
-                            defaultValue={reduxState.user.firstName}
+                            value={reduxState.user.firstName}
                             variant="outlined"
                             onChange={handleChange}
                             name="firstName"
@@ -185,7 +186,7 @@ function User_profile()
                         rows={4}
                         type="text"
                         placeholder="Address*"
-                        value={reduxState.user.address}
+                        defaultValue={reduxState.user.address}
                         variant="outlined"
                         onChange={handleChange}
                         name="address"
@@ -222,7 +223,7 @@ function User_profile()
                                     type="date"
                                     variant="outlined"
                                     fullWidth
-                                    value={reduxState.user.birthdate}
+                                    defaultValue={reduxState.user.birthdate}
                                     onChange={handleChange}
                                     name="birthdate"
                             />
@@ -243,7 +244,7 @@ function User_profile()
                             type="url"
                             placeholder="Twitter*"
                             variant="outlined"
-                            value={reduxState.user.twitter}
+                            defaultValue={reduxState.user.twitter}
                             onChange={handleChange}
                             name="twitter"
                         />
@@ -259,7 +260,7 @@ function User_profile()
                             placeholder="Instagram*"
                             variant="outlined"
                             onChange={handleChange}
-                            value={reduxState.user.address}
+                            defaultValue={reduxState.user.instagram}
                             name="instagram"
                         />
                         </Grid>
@@ -273,7 +274,7 @@ function User_profile()
                             placeholder="Facebook*"
                             variant="outlined"
                             onChange={handleChange}
-                            value={reduxState.user.facebook}
+                            defaultValue={reduxState.user.facebook}
                             name="facebook"
                         />
                         </Grid>

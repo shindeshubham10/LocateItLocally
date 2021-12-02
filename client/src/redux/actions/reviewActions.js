@@ -7,7 +7,7 @@ export const getReviews = (prodId) => async (dispatch) => {
   try {
     const reviewList = await axios({
       method: "GET",
-      url: `http://localhost:2000/review/${prodId}`,
+      url: `http://localhost:2000/review/product/${prodId}`,
     });
 
     return dispatch({ type: GET_REVIEW, payload: reviewList.data });
@@ -15,6 +15,21 @@ export const getReviews = (prodId) => async (dispatch) => {
     return dispatch({ type: "ERROR", payload: error });
   }
 };
+
+export const getReviewsB = (businessId) => async (dispatch) => {
+  try {
+    console.log(businessId);
+    const reviewList = await axios({
+      method: "GET",
+      url: `http://localhost:2000/review/business/${businessId}`,
+    });
+
+    return dispatch({ type: GET_REVIEW, payload: reviewList.data });
+  } catch (error) {
+    return dispatch({ type: "ERROR", payload: error });
+  }
+};
+
 
 export const postReviews = (reviewData) => async (dispatch) => {
   try {

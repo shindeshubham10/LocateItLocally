@@ -55,13 +55,13 @@ Method    PUT
 Router.put("/update",passport.authenticate("user"), async (req, res) => {
   try {
     
-    const { userId } = req.session.passport.user._doc;
+    const { _id } = req.session.passport.user._doc;
     const  userData  = req.body.userUpdatedata;
-    console.log(userId);
+    console.log(_id);
     console.log("Hurray");
     console.log(userData);
     const updateUserData = await UserModel.findByIdAndUpdate(
-      userId,
+      _id,
       {
         $set: userData,
       },

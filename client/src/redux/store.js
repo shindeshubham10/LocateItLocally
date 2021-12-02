@@ -9,9 +9,10 @@ import BAuthReducer from './reducers/businessauthreducer';
 import UserReducer from "./reducers/userreducer";
 import BusinessReducer from "./reducers/businessreducer";
 import { addProductDetailsReducer } from "./reducers/productReducers";
+import { getProductsofBusinessReducer } from "./reducers/productReducers";
+import { deleteProductsofBusinessReducer } from "./reducers/productReducers";
 
-
-
+import { updateProductDetailsReducer } from "./reducers/productReducers";
 
 const reducer = combineReducers({
     getProducts:getProductReducer,
@@ -21,6 +22,9 @@ const reducer = combineReducers({
     business:BusinessReducer,
     getProductDetails:getProductDetailsReducer,
     addProductDetailsReducer,
+    getProductsofBusinessReducer,
+    deleteProductsofBusinessReducer,
+    updateProductDetailsReducer 
 })
 
 const middleWare = [thunk];

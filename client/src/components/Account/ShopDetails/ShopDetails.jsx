@@ -7,6 +7,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ShopProducts from './ShopProducts';
 import Reviews from "./Reviews";
+import { useParams } from 'react-router';
+import { useEffect,useState } from 'react';
+import { getBusiness } from '../../../redux/actions/businessActions';
+import { useDispatch } from 'react-redux';
+import Map from './map.jsx';
 
 const names = [
     'JBL',
@@ -45,15 +50,18 @@ function TabPanel(props) {
     )
 }
 
-const item={
-    "name":"Adidas",
-    "desc":"We are dedicated to sell best quality products at reasonable prices.",
-    "addr":"New York City,New York, United States.",
-    "details":"Joined Since 2018 | Total Products 9",
-    "rating" : 4,
-}
+// const item={
+//     "name":"Adidas",
+//     "desc":"We are dedicated to sell best quality products at reasonable prices.",
+//     "addr":"New York City,New York, United States.",
+//     "details":"Joined Since 2018 | Total Products 9",
+//     "rating" : 4,
+// }
 
 function getStyles(name, personName, theme) {
+
+    
+
     return {
       fontWeight:
         personName.indexOf(name) === -1
@@ -224,7 +232,36 @@ const useStyles= makeStyles(theme=>({
   },
 }))
 
+const initialbusinessdata={
+
+    firstName:"",
+    lastName:"",
+    contactNumber:"",
+    name:"",
+    address:"",
+    website:"",
+    description:"",
+    
+    twitter:"",
+    facebook:"",
+    instagram:"",
+
+
+};
+
 const ShopDetails = () => {
+    const {id}=useParams();
+
+    const [sellerdata,setsellerdata]=useState(initialbusinessdata)
+    const dispatch=useDispatch();
+
+    useEffect(()=>{
+       dispatch(getBusiness(id)).then((item)=>console.log(setsellerdata(item.payload.business)));
+    //    console.log("I am her in useEffect of Product Detail");
+       
+    //    data.Products?console.log(data.Products.product.seller):console.log("Not taking it");
+    },[])
+
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
@@ -233,6 +270,9 @@ const ShopDetails = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    const getLatLong = (mapAddress) => {
+        return mapAddress?.split(",").map((item) => parseFloat(item));
+      };
     
 
   const [personName, setPersonName] = React.useState([]);
@@ -263,32 +303,32 @@ const ShopDetails = () => {
                         <li>
 
                             <Typography variant="h6" gutterBottom component="div" className={classes.text} >
-                                    {item.name}
+                                    {sellerdata.name}
                             </Typography>
                         </li>
                         <li>
 
                             <Typography variant="h8" gutterBottom component="div" className={classes.text} >
-                            {item.desc}
+                                  {sellerdata.description}
                             </Typography>
                         </li>
                         <li>
                             
                             <Typography variant="h8" gutterBottom component="div" className={classes.text} >
-                             {item.details}
+                             {/* {item.details} */}
                             </Typography>
                         </li>
                         <li>
                             
                             <Typography variant="h8" gutterBottom component="div" className={classes.text}>
-                            {item.addr}
+                            {sellerdata.address}
                             </Typography>
                         </li>
                         <li>
                             <ReactStars 
                                 count={5}
                                 size={mobileScreen?8:24}
-                                value={item.rating}   
+                                
                             />
                         </li>
                     </ul>
@@ -312,6 +352,7 @@ const ShopDetails = () => {
                     <Tab label="Description" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     <Tab label="Policy" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     <Tab label="Photos" className={ value===4 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+                    <Tab label="Map" className={ value===5 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     
                 </Tabs>
     
@@ -346,126 +387,137 @@ const ShopDetails = () => {
             {/* </Grid> */}
             </Box>
             <Box className={classes.mainBoxForFiltersandProducts}>
-            <Grid container spacing={2} className={classes.filterBox}>
             
-            
-                <Grid item lg={12} xs={12} md={12}>
-                    <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
-                    <Divider style={{ marginBottom: 30 }} />
-                </Grid>
-
-                {/** First Filter  */}
-                <Grid item lg={12} xs={6}>
-                    <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-                    <InputLabel id="Filter-Heading">Price</InputLabel>
-                    <Select
-                        labelId="Filter-Heading"
-                        id="filter-chip"
-                        multiple
-                        value={personName}
-                        onChange={handleChanges}
-                        input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                        renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                            {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                            ))}
-                        </Box>
-                        )}
-                        MenuProps={MenuProps}
-                    >
-                        {names.map((name) => (
-                        <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, personName, theme)}
-                        >
-                            {name}
-                        </MenuItem>
-                        ))}
-                    </Select>
-                    </FormControl>
-                </Grid>
-
-
-
-                {/** Second Filter */}
-                <Grid item lg={12} xs={6}>
-                    <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-                    <InputLabel id="Filter-Heading">Brand</InputLabel>
-                    <Select
-                        labelId="Filter-Heading"
-                        id="filter-chip"
-                        multiple
-                        value={personName}
-                        onChange={handleChanges}
-                        input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                        renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                            {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                            ))}
-                        </Box>
-                        )}
-                        MenuProps={MenuProps}
-                    >
-                        {names.map((name) => (
-                        <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, personName, theme)}
-                        >
-                            {name}
-                        </MenuItem>
-                        ))}
-                    </Select>
-                    </FormControl>
-                </Grid>
-
-
-                {/** Third Filter */}
-                <Grid item lg={12} xs={6}>
-                    <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-                    <InputLabel id="Filter-Heading">Price</InputLabel>
-                    <Select
-                        labelId="Filter-Heading"
-                        id="filter-chip"
-                        multiple
-                        value={personName}
-                        onChange={handleChanges}
-                        input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                        renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                            {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                            ))}
-                        </Box>
-                        )}
-                        MenuProps={MenuProps}
-                    >
-                        {names.map((name) => (
-                        <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, personName, theme)}
-                        >
-                            {name}
-                        </MenuItem>
-                        ))}
-                    </Select>
-                    </FormControl>
-                </Grid>
-
-
-                </Grid>
                 <Grid container className={classes.productContainer}>
                 <TabPanel value={value} index={0}>
+                <Grid container spacing={2} className={classes.filterBox}>
+            
+            
+            <Grid item lg={12} xs={12} md={12}>
+                <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
+                <Divider style={{ marginBottom: 30 }} />
+            </Grid>
+
+            {/** First Filter  */}
+            <Grid item lg={12} xs={6}>
+                <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+                <InputLabel id="Filter-Heading">Price</InputLabel>
+                <Select
+                    labelId="Filter-Heading"
+                    id="filter-chip"
+                    multiple
+                    value={personName}
+                    onChange={handleChanges}
+                    input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                    renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                        {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                        ))}
+                    </Box>
+                    )}
+                    MenuProps={MenuProps}
+                >
+                    {names.map((name) => (
+                    <MenuItem
+                        key={name}
+                        value={name}
+                        style={getStyles(name, personName, theme)}
+                    >
+                        {name}
+                    </MenuItem>
+                    ))}
+                </Select>
+                </FormControl>
+            </Grid>
+
+
+
+            {/** Second Filter */}
+            <Grid item lg={12} xs={6}>
+                <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+                <InputLabel id="Filter-Heading">Brand</InputLabel>
+                <Select
+                    labelId="Filter-Heading"
+                    id="filter-chip"
+                    multiple
+                    value={personName}
+                    onChange={handleChanges}
+                    input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                    renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                        {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                        ))}
+                    </Box>
+                    )}
+                    MenuProps={MenuProps}
+                >
+                    {names.map((name) => (
+                    <MenuItem
+                        key={name}
+                        value={name}
+                        style={getStyles(name, personName, theme)}
+                    >
+                        {name}
+                    </MenuItem>
+                    ))}
+                </Select>
+                </FormControl>
+            </Grid>
+
+
+            {/** Third Filter */}
+            <Grid item lg={12} xs={6}>
+                <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
+                <InputLabel id="Filter-Heading">Price</InputLabel>
+                <Select
+                    labelId="Filter-Heading"
+                    id="filter-chip"
+                    multiple
+                    value={personName}
+                    onChange={handleChanges}
+                    input={<OutlinedInput id="select-filter-chip" label="Chip" />}
+                    renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                        {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                        ))}
+                    </Box>
+                    )}
+                    MenuProps={MenuProps}
+                >
+                    {names.map((name) => (
+                    <MenuItem
+                        key={name}
+                        value={name}
+                        style={getStyles(name, personName, theme)}
+                    >
+                        {name}
+                    </MenuItem>
+                    ))}
+                </Select>
+                </FormControl>
+            </Grid>
+
+
+            </Grid>
                     
                             <ShopProducts />
                     
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Reviews />      
+                    
+                    <Reviews/>
+                </TabPanel>
+                <TabPanel value={value} index={5}>
+                    
+                    <Map
+                        title={sellerdata?.name}
+                        phno={`+91${sellerdata?.contactNumber}`}
+                        mapLocation={getLatLong(sellerdata?.mapLocation)}
+                        address={sellerdata?.address}
+                    />
                 </TabPanel>
                 </Grid> 
                 </Box>

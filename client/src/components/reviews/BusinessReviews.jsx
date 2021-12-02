@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import { Dialog,DialogTitle,DialogContent, Typography, Grid,Box ,TextField,Button,useMediaQuery,useTheme} from "@material-ui/core";
@@ -13,14 +12,14 @@ import {useDispatch} from "react-redux"
 import { postReviews } from "../../redux/actions/reviewActions";
 
 
-const UserReview = ({open,setopenReview}) => {
+const BusinessReview = ({open,setopenReview}) => {
 
 
     const [reviewData, setReviewData] = useState({
        
         reviewText:"",
-        isProductReview: true,
-        isBusinessReview: false,
+        isProductReview: false,
+        isBusinessReview: true,
         rating: 0,
       });
 
@@ -41,14 +40,14 @@ const UserReview = ({open,setopenReview}) => {
         dispatch(
           postReviews({
             ...reviewData,
-            product: id,
+            business: id,
           })
         ).then((data)=>data.type=="ERROR"?alert("Already Reviewed"):console.log("Reviewd"))
         setReviewData({
           
           reviewText: "",
           isProductReview: false,
-          isBusinessReview: false,
+          isBusinessReview: true,
           rating: 0,
         });
         handleOnClose();
@@ -114,7 +113,7 @@ return(
          
          {/**Heading Here */}
          <Grid item xs={12} md={7} lg={6} className={classes.heading}> 
-            <Typography style={{fontSize:30,fontFamily:['Monteserrat','sans-serif'],fontWeight:400,}}>Product Review</Typography> 
+            <Typography style={{fontSize:30,fontFamily:['Monteserrat','sans-serif'],fontWeight:400,}}>Business Review</Typography> 
          </Grid>
 
         {/** TextField Box Start Here */}
@@ -136,7 +135,7 @@ return(
           {/** TextField Box End Here */}
 
         <Grid item xs={12} md={7} lg={6}> 
-            <Typography style={{fontSize:15,fontFamily:['Monteserrat','sans-serif'],fontWeight:400,marginTop:5}}>Rate Product</Typography> 
+            <Typography style={{fontSize:15,fontFamily:['Monteserrat','sans-serif'],fontWeight:400,marginTop:5}}>Rate Business</Typography> 
          </Grid>
           <ReactStars
             count={5}
@@ -186,4 +185,4 @@ return(
 
 };
 
-export default UserReview;
+export default BusinessReview;

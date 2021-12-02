@@ -36,13 +36,13 @@ Router.get("/:_id", async (req, res) => {
 Router.put("/update", passport.authenticate("business"), async (req, res) => {
   try {
     // console.log(req.params);
-    const { businessId } = console.log(req.session.passport.user._doc);
+    const { _id } = console.log(req.session.passport.user._doc);
     const  businessData  = req.body.businessUpdatedata;
-    console.log(businessId);
+    console.log(_id);
     console.log("Hurray");
     console.log(businessData);
     const updateBusinessData = await BusinessModel.findByIdAndUpdate(
-      businessId,
+      _id,
       {
         $set: businessData,
       },

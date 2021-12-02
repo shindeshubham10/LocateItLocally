@@ -46,8 +46,63 @@ export const addProductDetails = (productData) => async (dispatch)=>{
         dispatch({ type: actions.ADD_PRODUCT_SUCCESS, payload: Product.data });
     } catch (error) {
         console.log("Error while addProduct");
-        dispatch({ type: actions.ADD_PRODUCT_FAILURE, payload: error.response });
+        dispatch({ type: actions.ADD_PRODUCT_FAILURE, payload: error});
     }
 }
+
+export const getProductsofbusiness = () => async (dispatch) => {
+
+    try {
+        console.log("Enter getProducts in axios ");
+        const products = await axios.get(`${backendUrl}/newProduct/business/getProductsofbusiness`);
+        console.log("Response in Product Actions ");
+        console.log(products);
+       return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_SUCCESS, payload: products.data });
+      
+
+    } catch (error) {
+        console.log("Error while getProducts");
+        return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_FAILURE, payload: error.response });
+    }
+};
+
+export const deleteProductsofbusiness = (productIDs) => async (dispatch) => {
+
+    try {
+        console.log(productIDs);
+        var payloaddata = {
+            product_id_list:productIDs
+        };
+        console.log("Enter deleteProducts in axios ");
+        const products = await axios({
+            method: "DELETE",
+            url: `${backendUrl}/newProduct/business/deleteProductsofbusiness`,
+            data: payloaddata,
+          });
+        console.log("Response in Product Actions ");
+        console.log(products);
+       return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_SUCCESS, payload: products.data });
+      
+
+    } catch (error) {
+        console.log("Error while getProducts");
+        return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_FAILURE, payload: error.response });
+    }
+};
+
+export const updateProduct = (productData,id) => async (dispatch) => {
+    try {
+      const Product = await axios({
+        method: "PUT",
+        url: `http://localhost:2000/newProduct/update/${id}`,
+        data:{ productUpdatedata:productData},
+      });
+  
+      return dispatch({ type: actions.UPDATE_PRODUCT_SUCCESS, payload: Product.data });
+    } catch (error) {
+      return dispatch({ type: actions.UPDATE_PRODUCT_FAILURE, payload: error });
+    }
+  };
+
 
 

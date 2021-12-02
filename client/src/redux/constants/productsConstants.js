@@ -12,4 +12,11 @@ export const ADD_PRODUCT_FAILURE="addproductfailure"
 export const UPDATE_PRODUCT_SUCCESS="updateproductsuccess"
 export const UPDATE_PRODUCT_FAILURE="updateproductfailure"
 
+export const GET_PRODUCTS_OF_BUSINESS_SUCCESS="getproductsofbusinesssuccess"
+export const GET_PRODUCTS_OF_BUSINESS_FAILURE="getproductsofbusinessfailure"
+
+export const DELETE_PRODUCTS_OF_BUSINESS_SUCCESS="deleteproductsofbusinesssuccess"
+export const DELETE_PRODUCTS_OF_BUSINESS_FAILURE="deleteproductsofbusinessfailure"
+
+
 
