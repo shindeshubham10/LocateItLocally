@@ -52,10 +52,10 @@ BODY      user data
 Access    Public
 Method    PUT  
 */
-Router.put("/update/:userId", async (req, res) => {
+Router.put("/update",passport.authenticate("user"), async (req, res) => {
   try {
-    console.log(req.params);
-    const { userId } = req.params;
+    
+    const { userId } = req.session.passport.user._doc;
     const  userData  = req.body.userUpdatedata;
     console.log(userId);
     console.log("Hurray");

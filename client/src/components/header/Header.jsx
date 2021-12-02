@@ -11,6 +11,7 @@ import Popover from '@mui/material/Popover';
 import AccountMenu from '../home/PopOverModals/AccountMenu';
 import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
+import {MapOutlined} from "@material-ui/icons"
 //import gravatar from "gravatar";
 
 import { useSelector,useDispatch } from 'react-redux';
@@ -154,7 +155,7 @@ const Header = (props) => {
         <AppBar className={classes.header}>
             <Toolbar >
                 
-                <img src={logo} alt="icon" className={classes.logoLg} />
+                <Link to="/"><img src={logo} alt="icon" className={classes.logoLg} /></Link>
                 
                 <Box className={classes.containerOptions}>
 
@@ -247,6 +248,7 @@ const Header = (props) => {
                    
                     <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
 
+                    <Link to='/cart'><MapOutlined className={classes.endicons} /></Link>
                     {/* <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link> */}
                   <ShoppingCartOutlinedIcon className={classes.endicons} onClick={()=>openReviewDailog()} />
                    

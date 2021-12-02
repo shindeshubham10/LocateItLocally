@@ -5,10 +5,14 @@ import {GET_BUSINESS,AUTH_BUSINESS,SELF,CLEAR_BUSINESS,UPDATE_BUSINESS} from "..
 
 export const getBusiness = (_id) => async (dispatch) => {
   try {
+
+    console.log("In getBusiness");
+    console.log(_id);
     const Business = await axios({
       method: "GET",
       url: `http://localhost:2000/business/${_id}`,
     });
+
 
     return dispatch({ type: GET_BUSINESS, payload: Business.data });
   } catch (error) {
@@ -16,11 +20,11 @@ export const getBusiness = (_id) => async (dispatch) => {
   }
 };
 
-export const updateBusiness = (_id,businessData) => async (dispatch) => {
+export const updateBusiness = (businessData) => async (dispatch) => {
   try {
     const Business = await axios({
       method: "PUT",
-      url: `http://localhost:2000/business/update/${_id}`,
+      url: `http://localhost:2000/business/update`,
       data:{ businessUpdatedata:businessData},
     });
 

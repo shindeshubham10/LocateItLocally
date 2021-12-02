@@ -10,11 +10,13 @@ import CallIcon from '../product/icon-call.png';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {ArrowForward} from "@material-ui/icons"
 import { Link } from 'react-router-dom';
 import { display } from '@mui/system';
 import { useSelector,useDispatch } from 'react-redux';
+import { getBusiness } from '../../redux/actions/businessActions';
+
 // Temporary importing dialog box
 import UserReview from '../reviews/UserReviews';
 
@@ -154,9 +156,37 @@ const itemData = [
     },
   ];
 
+const initialbusinessdata={
+
+    firstName:"",
+    lastName:"",
+    contactNumber:"",
+    name:"",
+    address:"",
+    website:"",
+    description:"",
+    
+    twitter:"",
+    facebook:"",
+    instagram:"",
+
+
+};
+
 const Product=({data})=>{
         
     //const {productData} = data;
+        const [sellerdata,setsellerdata]=useState(initialbusinessdata)
+        const dispatch=useDispatch();
+
+        useEffect(()=>{
+           data.Products && dispatch(getBusiness(data.Products.product.seller)).then((item)=>console.log(setsellerdata(item.payload.business)));
+        //    console.log("I am her in useEffect of Product Detail");
+           
+        //    data.Products?console.log(data.Products.product.seller):console.log("Not taking it");
+        },[data.Products])
+
+
     // const [Data,setaData] = useState(false);
 
     //const check = false;
@@ -206,6 +236,10 @@ const Product=({data})=>{
             const [openReview,setopenReview] = useState(false);
 
             const openReviewDailog = () =>{
+
+                if (!localStorage.LocateItLocallyUser) {
+                    return alert("Please sign in to post a review");
+                }
                 setopenReview(true);
             };
 
@@ -224,7 +258,7 @@ const Product=({data})=>{
             {
 
             
-         data.Products ?
+         data.Products && sellerdata?
            
             <Grid container className={classes.root}>                    
                     <ImageList 
@@ -322,12 +356,12 @@ const Product=({data})=>{
                         
                         
                         <Typography className={classes.sellerInfoHeading}>
-                            Seller Information  <Link to="/shopdetails"> <ArrowForward style={{marginLeft:"30px"}}/> </Link>
+                                Seller Information <Link to="/shopdetails"> <ArrowForward style={{marginLeft:"30px"}}/> </Link>
                         </Typography>
                     </Box>
                     <Box style={{marginLeft:10,marginTop:10,}}>
                         <Typography className={classes.sellerInfoDescription} >
-                            Ratnadeep Socielty Civil lines solapur 
+                        {sellerdata.name}
                         </Typography>
                     </Box>
                     </Box>
@@ -341,7 +375,7 @@ const Product=({data})=>{
                         </Box>
                         <Box style={{marginLeft:10,marginTop:10,}}>
                         <Typography className={classes.sellerInfoDescription}>
-                            Ratnadeep Socielty Civil lines solapur 
+                            {sellerdata.address}
                         </Typography>
                         </Box>
                         
@@ -384,7 +418,7 @@ const Product=({data})=>{
                             {/* <Grid container style={{height:'20px',width:'20px'}}><img src={CallIcon} alt='call-icon' /></Grid> */}
                             
                             <Typography  className={classes.sellerInfoDescription}>
-                                9309818227
+                                {sellerdata.contactNumber}
                             </Typography>
                         </Box>
 

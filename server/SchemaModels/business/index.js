@@ -7,28 +7,6 @@ import jwt from "jsonwebtoken";
 
 import bcrypt from "bcryptjs";
 
-const reviewSchema = new mongoose.Schema(
-    {
-      name: {
-        type: String,
-        required: true
-      },
-      comment: {
-        type: String,
-        required: true
-      },
-      rating: {
-        type: Number,
-        required: true
-      },
-    },
-    {
-      timestamps: true,
-    }
-  );
-
-
-
 
 const BusinessSchema = new mongoose.Schema({
 
@@ -93,9 +71,10 @@ const BusinessSchema = new mongoose.Schema({
       ref: "Images"
     },
     
-    reviews: [
-      reviewSchema
-    ]
+    reviews: {
+      type: mongoose.Types.ObjectId,
+      ref: "Reviews",
+    },
   
   
   

@@ -5,6 +5,7 @@ import cors from 'cors';     //Used for connecting to frontend
 import helmet from 'helmet'; //Used for security
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
 import passport from "passport";
 import googleAuthConfig from "./config/google.config.js";
 import routeConfig from './config/route.config.js';
@@ -29,7 +30,7 @@ import Wishlist from "./API/Wishlist/index.js"
 
 
 
-
+import Review from "./API/Reviews/index.js"
 
 
 
@@ -65,6 +66,11 @@ app.use('/business',Business);
 
 // wishlist APIs
 app.use('/wishlist',Wishlist);
+//Review APIs
+
+app.use('/review',Review);
+
+
 
 
 googleAuthConfig(passport);

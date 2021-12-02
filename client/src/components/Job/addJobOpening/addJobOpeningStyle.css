@@ -1,0 +1,66 @@
+.maindiv
+{
+    margin-top: 150px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.leftside
+{
+    padding-right: 20px;
+    padding-left: 30px;
+}
+.rightside
+{
+    padding-right: 30px;
+    padding-left: 20px;
+}
+
+.textfieldHeading
+{
+    font-family: 'Montserrat', sans-serif;
+    color: '#323232';
+}
+.mainheading
+{
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+.maincontent
+{
+    margin-top: 50px;
+}
+.submitbtndiv
+{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.divider
+{
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+}
+.divider
+{
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+    margin-left: 20px;
+
+}
+@media only screen and (max-width:380px)
+{
+    .maindiv
+    {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .rightside
+    {
+        padding-top: 20px;
+        padding-left: 30px;
+    }
+    .divider
+    {
+        margin-right: 20px;
+    }
+}
