@@ -3,7 +3,7 @@
 
 // // Database modal
 import { ProductModel } from "../../SchemaModels/products";
-import { getProductDetails, getProducts } from "../../Controllers/productController";
+import { getProductDetails, getProducts,getProductByCategory } from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -56,6 +56,7 @@ Method    GET
 // getProducts code is writteen in controller->productController file
 Router.get("/getProducts", getProducts);
 
+
 // /*
 // Route     /
 // Des       Get individual  details based on id
@@ -67,8 +68,19 @@ Router.get("/getProducts", getProducts);
 Router.get("/:_id",getProductDetails);
   
 
-//Add Products
+// Get Products Related to the Category or any property 
+ /*
+  Route      /
+   Des       Get Products based on category
+   Params    id
+   Access    Public
+   Method    GET
+   */
+Router.get("/Bycategory/:category",getProductByCategory);
 
+
+
+//Add Products
 Router.post("/add",async(req,res)=>{
 
         try {

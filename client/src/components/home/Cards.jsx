@@ -86,8 +86,8 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
 };
 const Cards = ({data}) => {
   const classes = useStyles();
-  const ProductData = data.Products;
-  console.log(ProductData);
+ // const ProductData = data.Products;
+  console.log(data);
   console.log("inside Card");
 
   //console.log("ID of the Product - ",ProductData._id);
@@ -110,8 +110,8 @@ const Cards = ({data}) => {
       >
           
           {
-                  ProductData ? 
-                  ProductData.map( details => (
+                  data ? 
+                  data.map( details => (
                         
                     <Link to={`productsDetails/${details._id}`}>
                       <ProductCard
