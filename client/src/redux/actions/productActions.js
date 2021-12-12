@@ -11,12 +11,12 @@ export const getProducts = () => async (dispatch) => {
         const { data } = await axios.get(`${backendUrl}/newProduct/getProducts`);
         console.log("Response in Product Actions ");
         console.log(data);
-        dispatch({ type: actions.GET_PRODUCT_SUCCESS, payload: data });
+        return dispatch({ type: actions.GET_PRODUCT_SUCCESS, payload: data });
       
 
     } catch (error) {
         console.log("Error while getProducts");
-        dispatch({ type: actions.GET_PRODUCT_FAILURE, payload: error.response });
+       return dispatch({ type: actions.GET_PRODUCT_FAILURE, payload: error.response });
     }
 };
 

@@ -13,7 +13,7 @@ import { getProductsofBusinessReducer } from "./reducers/productReducers";
 import { deleteProductsofBusinessReducer } from "./reducers/productReducers";
 
 import { updateProductDetailsReducer } from "./reducers/productReducers";
-import {addNewWishlistReducer,getWishlistReducer} from "./reducers/wishlistReducer";
+import {addNewWishlistReducer,getWishlistReducer,getProductsFromWishlist} from "./reducers/wishlistReducer";
 
 
 
@@ -27,10 +27,11 @@ const reducer = combineReducers({
     addProductDetailsReducer,
     getProductsofBusinessReducer,
     deleteProductsofBusinessReducer,
-    updateProductDetailsReducer 
+    updateProductDetailsReducer,
     wishlistData:addNewWishlistReducer,
     getWishlistReducer,
-    getProductByCategoryReducer
+    getProductByCategoryReducer,
+    getProductsFromWishlist
 })
 
 const middleWare = [thunk];

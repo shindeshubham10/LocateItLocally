@@ -6,7 +6,7 @@ import passport from 'passport';
 import { WishlistModel } from "../../SchemaModels/wishlist";
 
 // import controller 
-import { addToWishlist,getAllWishlists,addProductToWishlist } from "../../Controllers/wishlistController";
+import { addToWishlist,getAllWishlists,addProductToWishlist,getProductOfWishlist } from "../../Controllers/wishlistController";
 
 const Router = express.Router();
 
@@ -54,7 +54,7 @@ Params    none
 Access    Public
 Method    GET
 */
-//Router.get('/getProductofWIshlist',getProductOfWishlist);
+Router.get('/getProductofWishlist/:id',getProductOfWishlist);
 
 
 

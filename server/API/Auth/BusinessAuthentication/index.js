@@ -74,12 +74,18 @@ Access        Public
 Method        POST
 */
 
+
  router.post("/signin", async(req,res) => {
    try {
-     await ValidateSignin(req.body.credentials);
+
+    console.log("Business signup API enter ======= ");
+     let validatedResponse = await ValidateSignin(req.body.credentials);
+     console.log(" Below Validate ===== ");
+     console.log("Response from validation of signin ====" , validatedResponse);
     
     const user = await BusinessModel.findByEmailAndPassword(req.body.credentials);
     
+    console.log("Business error check = ",user);
     //JWT Auth Token
     const token = user.generateJwtToken();
 

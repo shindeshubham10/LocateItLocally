@@ -32,14 +32,18 @@ router.post("/signin", async (req, res) => {
   try {
 
     console.log("ffggg");
-    await ValidateSignin(req.body.credentials);
+   // await ValidateSignin(req.body.credentials);
     console.log("ffggg");
+    console.log("======== in user sign in API =========");
 
     const user = await UserModel.findByEmailAndPassword(req.body.credentials);
+    console.log("======== below  =========");
     console.log("ffggg");
     console.log(user);
 
     const token = user.generateJwtToken();
+
+    console.log("======== below token  =========");
 
     console.log(token);
     return res.status(200).json({ token, status: "success" });
