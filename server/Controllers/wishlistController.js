@@ -1,3 +1,4 @@
+import { ProductModel } from "../SchemaModels/products";
 import { WishlistModel } from "../SchemaModels/wishlist";
 
 
@@ -71,6 +72,24 @@ export const addToWishlist = async (req,res) => {
 
 
  };
+
+ export const getProductOfWishlist = async (req,res) => {
+    try {
+      console.log("Id from url = ",req.params);
+      const {id} = req.params;
+      const Wishlist = await WishlistModel.findById(id);
+
+      console.log("products from wishlist = ",Wishlist);
+      
+      const products = Wishlist.wishlistProducts;
+      console.log("products Product model = ",products);
+      const resultProducts = await ProductModel.find({_id:{$in:products}});
+      console.log("final result = ",resultProducts);
+      return res.json(resultProducts);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+ }
 
 
 

@@ -87,6 +87,57 @@ export const productDetails = [
 
 ];
 
+export const JobDetails = [
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.Salesman needed in CILAI cloth Shop.Salesman needed in CILAI cloth Shop.Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    },
+    {
+        title:'Salesman in cloth Shop',
+        description:'Salesman needed in CILAI cloth Shop.',
+        contact:'9821345634',
+        salary:'6000/-'
+    }
+]
+
 export const cartitems=[
     {
         img:"https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound2_79x79.jpg?v=1569164954",
@@ -135,9 +186,6 @@ export const CategoryOptions = [
     'TV and Accesories',
     'Mobiles Phones',
     'Electronics',
-    'Category 4',
-    'Category 5',
-    'Category 6',
 ];
 
 export const AccountOptions = [

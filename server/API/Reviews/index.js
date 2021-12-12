@@ -44,7 +44,7 @@ Router.post("/new", passport.authenticate("user"), async (req, res) => {
     const { reviewData } = req.body;
     if(reviewData.isProductReview===true)
     {
-      const review = await ReviewModel.find({ user:_id ,isProductReview:true });
+      const review = await ReviewModel.find({ user:_id ,product:reviewData.product, isProductReview:true });
       console.log(review);
       if(review.length!==0)
       {

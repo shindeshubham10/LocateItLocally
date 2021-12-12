@@ -31,7 +31,7 @@ import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profil
 import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
 import UpdateProduct from './components/BusinessOwner/Product_Management/UpdateProduct/update_product';
 import ShowProducts from './components/ShowProducts/showProducts';
-import addJobOpening from './components/Job/addJobOpening/addJobOpening';
+import AddJobOpening from './components/Job/addJobOpening/addJobOpening';
 
 import {
   BrowserRouter as Router,
@@ -48,7 +48,7 @@ import axios from "axios"
 import { getMyself } from './redux/actions/userActions';
 import { getMyBusiness } from './redux/actions/businessActions';
 import TemplateProvider from './templates/TemplateProvider';
-
+import SearchBarSection from './components/DemoSearch/SearchBarSection';
 
 // axios global settings
 if (localStorage.LocateItLocallyUser) {
@@ -84,7 +84,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
   useEffect(()=>{
       if(localStorage.LocateItLocallyUser)
     {
-      setchooseHeader(true);
+      //setchooseHeader(true);
       console.log("In doinhgghyhhgg");
       dispatch(getMyself());
 
@@ -92,6 +92,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
 
     if(localStorage.LocateItLocallyBusiness)
     {
+      setchooseHeader(true);
       console.log("In doinhgghyhhgg");
       dispatch(getMyBusiness());
     }
@@ -107,7 +108,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
     <TemplateProvider>
     <Router>
     
-     { chooseHeader ? <Header/> :  <BusinessHeader/> }
+     { chooseHeader ?  <BusinessHeader/>  :  <Header/>}
       
       
        <Switch >
@@ -134,8 +135,8 @@ const [chooseHeader,setchooseHeader] = useState(false);
         <Route exact path="/display_user_profile" component={display_user_profile} />
         <Route exact path="/allproducts/:options/" component={ShowProducts}/>
         <Route exact path="/allproducts" component={ShowProducts}/>
-        <Route exact path="/addjobopening" component={addJobOpening}/>
-        
+        <Route exact path="/addjobopening" component={AddJobOpening}/>
+        <Route exact path="/search" component={SearchBarSection}/>
       
       </Switch>
        <Footer/> 

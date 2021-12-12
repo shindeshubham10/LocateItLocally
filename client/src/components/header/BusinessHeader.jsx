@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useState } from 'react';
-import {AppBar,Toolbar,makeStyles,Box, Button} from '@material-ui/core';
+import {AppBar,Toolbar,makeStyles,Box, Button,Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -14,6 +14,7 @@ import logo from "../Logo/LocateItLocally Logo.png"
 import { useSelector,useDispatch } from 'react-redux';
 
 import { BusinesssignOut } from '../../redux/actions/businessauthActions';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
  
 const useStyle = makeStyles(theme => (
@@ -154,7 +155,7 @@ const dispatch = useDispatch();
                         Home
                     </Link>
                     
-                    <Link to='/' className={classes.txt}>
+                    <Link to='/businessdashboard' className={classes.txt}>
                         DashBoard
                     </Link>
 
@@ -179,12 +180,31 @@ const dispatch = useDispatch();
                   {
                     reduxState?.business?.firstName ?(
 
-                      <>
-                          <p>
-                              {reduxState.business.firstName}
-                              <button onClick={signOuthandler}>Sign Out</button>
-                          </p>
-                      </>
+                      // <>
+                      //     <p>
+                      //         {reduxState.business.firstName}
+                      //         <button onClick={signOuthandler}>Sign Out</button>
+                      //     </p>
+                      // </>
+                      <Box style={{display:'flex',direction:'row'}}>
+                          {/* <Box style={{display:'flex'}}> */}
+                              <Typography  style={{color:'#3498db', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem',marginTop:6,marginRight:4}}> {reduxState.business.firstName}</Typography>
+                              {/* {reduxState.user.firstName} */}
+                              {/* <button onClick={signOuthandler}>Sign Out</button> */}
+                              <Button 
+                                  size="medium"  
+                                  //className={classes.addProductButton} 
+                                  style={{color:'#e74c3c', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem'}}
+                                  onClick={()=>signOuthandler()}
+                            >LogOut</Button>
+
+                            <Link to='/owner_profile'>
+                              <AccountCircleIcon  sx={{color:'black',marginLeft:3}} fontSize='large'/>
+                            </Link>
+                             
+                           
+                          {/* </Box> */}
+                      </Box>
 
 
 

@@ -369,7 +369,7 @@ const Display_user_profile= () =>
                 wishlist.map((winame,index)=>(
                     console.log("In Tab Panel - ",winame.wishlistProducts),
                     <TabPanel key={winame.name} value={currentTab} index={index} >
-                        <All_wishlist_items data={winame.wishlistProducts}/>                       
+                        <All_wishlist_items data={winame}/>                       
                     </TabPanel>
                 )) : <div>wait....</div>
             }

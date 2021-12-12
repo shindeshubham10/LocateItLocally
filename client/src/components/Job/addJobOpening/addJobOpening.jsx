@@ -5,8 +5,9 @@ import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import './addJobOpeningStyle.css'
 
-function addJobOpening()
-{
+
+const AddJobOpening = () => {
+
 
     return(
         <div>
@@ -15,7 +16,7 @@ function addJobOpening()
         <Grid container  direction="row">
 
         <Grid>
-            <h1 className="mainheading">Add New Job Opening <AddBoxOutlined fontSize="large"/></h1>
+            <h2 className="mainheading">Add New Job Opening <AddBoxOutlined fontSize="medium"/></h2>
             <hr className="divider"></hr>
         </Grid>
         
@@ -131,7 +132,15 @@ function addJobOpening()
         </Grid>
 
         <Grid container className="submitbtndiv" justifyContent="center">
-            <Button variant="contained" style={{fontWeight:"bold"}}>Submit<ArrowCircleRightOutlinedIcon/></Button>
+           
+            <Button
+                variant="contained"
+                //className="submitButtonStyle"
+                style={{color:'white', backgroundColor: '#38495A', height:'7vh', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem'}}
+                
+                >
+                Add JOB<AddBoxOutlined fontSize="medium" style={{marginLeft:5}}/>
+                </Button>             
         </Grid>
 
         </Grid>    
@@ -139,6 +148,14 @@ function addJobOpening()
         </div>
         </div>
     );
+
+
 }
 
-export default addJobOpening;
+// function addJobOpening()
+// {
+
+    
+// }
+
+export default AddJobOpening;

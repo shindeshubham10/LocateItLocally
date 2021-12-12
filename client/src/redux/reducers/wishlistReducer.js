@@ -39,3 +39,23 @@ export const getWishlistReducer = (state = {wishlist:[]},action) => {
     }
 };
 
+export const getProductsFromWishlist = (state = {productsWishlist:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_PRODUCT_FROM_WISHLIST_SUCCESS:
+            return { ...state,
+                productsWishlist: action.payload, };
+        
+        case actionsType.GET_PRODUCT_FROM_WISHLIST_FAILURE:
+            return { ...state,
+                productsWishlist: action.payload, };
+        
+        default:
+            return state;
+    }
+};
+
+
+
+
