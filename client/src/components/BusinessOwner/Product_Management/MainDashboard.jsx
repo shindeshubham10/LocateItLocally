@@ -22,6 +22,7 @@ import { minWidth } from '@mui/system';
 import Newproduct from './AddNewProduct/new_product';
 
 import ViewAllProducts from './AllProducts/allProducts';
+import AllJobs from '../Job_Management/ViewAllJobs';
 
 
 const useStyle = makeStyles(theme => (
@@ -183,7 +184,7 @@ const MainDashboard= () => {
 
         <Tab label="Add Product" className={ value===0 ? classes.active_tabStyle : classes.default_tabStyle  } />
         <Tab label="All Products"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
-        <Tab label="Item Three" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+        <Tab label="Jobs" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Four" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Five" className={ value===4 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Six" className={ value===5 ? classes.active_tabStyle : classes.default_tabStyle  }/>
@@ -201,6 +202,9 @@ const MainDashboard= () => {
                 <TabPanel value={value} index={1}>
                     <ViewAllProducts/>        
                     </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <AllJobs/>        
+                </TabPanel>
             {/* </Grid> */}
             </Box>
             

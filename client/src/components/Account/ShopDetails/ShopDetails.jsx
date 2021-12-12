@@ -513,9 +513,7 @@ const ShopDetails = () => {
                 <TabPanel value={value} index={5}>
                     
                     <Map
-                        title={sellerdata?.name}
-                        phno={`+91${sellerdata?.contactNumber}`}
-                        mapLocation={getLatLong(sellerdata?.mapLocation)}
+                        
                         address={sellerdata?.address}
                     />
                 </TabPanel>

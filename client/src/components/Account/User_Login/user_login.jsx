@@ -48,7 +48,7 @@ const signInBusinessInitialValues = {
 
 
 
-function Login()
+function Login(props)
 {
   const classes=useStyles()
   const [user, setUser] = React.useState('customer');
@@ -82,6 +82,7 @@ function Login()
       }
       else
       {
+        console.log(props);
         setmove(true);
 
       }
@@ -97,14 +98,17 @@ function Login()
       console.log(response);
       if (!response)
       {
+
         setError(true);
         return;
       }
       else
       {
+       
         setmove(true);
 
       }
+
     
     };
 

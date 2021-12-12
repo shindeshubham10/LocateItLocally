@@ -13,7 +13,7 @@ import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
 import {MapOutlined} from "@material-ui/icons"
 //import gravatar from "gravatar";
-
+import { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { UsersignOut } from '../../redux/actions/userauthActions';
 
@@ -102,6 +102,9 @@ const useStyle = makeStyles(theme => (
 
 const Header = (props) => {
 
+  useEffect(()=>{
+      props.myProp(7);
+  },[])
 
   const dispatch=useDispatch();
   const reduxState=useSelector((global) => global.user.user);

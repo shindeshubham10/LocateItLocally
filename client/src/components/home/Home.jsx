@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProducts as ProductList } from '../../redux/actions/productActions';
 
 
-const Home = () => {
+const Home = (props) => {
 
     console.log("Inside home 1");
 
@@ -36,6 +36,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(ProductList());
         console.log("Inside dispatch");
+        props.myProp(2);
     }, [dispatch])
 
     return (

@@ -147,4 +147,21 @@ export const updateProduct = (productData,id) => async (dispatch) => {
   };
 
 
+  export const getProductsofbusinessbyID = (id) => async (dispatch) => {
+
+    try {
+        console.log("Enter getProducts in axios ");
+        const products = await axios.get(`${backendUrl}/newProduct/business/getProductsofbusinessbyId/${id}`);
+        console.log("Response in Product Actions ");
+        console.log(products);
+       return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_BYID_SUCCESS, payload: products.data });
+      
+
+    } catch (error) {
+        console.log("Error while getProducts");
+        return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_BYID_FAILURE, payload: error.response });
+    }
+};
+
+
 
