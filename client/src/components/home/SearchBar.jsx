@@ -10,7 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import * as opencage from 'opencage-api-client';
 
-import { useEffect} from 'react';
+
 
 import Popover from '@mui/material/Popover';
 import CategoryMenu from './PopOverModals/CategoryMenu';
@@ -171,39 +171,7 @@ const useStyles = makeStyles((theme) => ({
 }
 ));
 
-const getLocation = () => {
-  if (!navigator.geolocation) {
-    setStatus('Geolocation is not supported by your browser');
-  } else {
-    setStatus('Locating...');
-    const id=navigator.geolocation.watchPosition((position) => {
-      setStatus(null);
-      console.log(position);
-     const string=position.coords.latitude+","+position.coords.longitude;
-       opencage
-       .geocode({ key: '574f2e7a4cba478c9e03b38705c09f8c' , q:string })
-       .then(response => {
-         console.log(response);
-         setpincode(response.results[0].components.postcode);
-         
 
-         navigator.geolocation.clearWatch(id);
-       
-       
-        
-        
-       })
-       .catch(err => {
-         console.error(err);
-        
-       });
-    }, () => {
-      setStatus('Unable to retrieve your location');
-    },
-    { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
-    );
-  }
-}
 
 
 const HomeSearchBar=()=>{
@@ -211,6 +179,40 @@ const HomeSearchBar=()=>{
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
   const [pincode,setpincode]=useState("");
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      const id=navigator.geolocation.watchPosition((position) => {
+        setStatus(null);
+        console.log(position);
+       const string=position.coords.latitude+","+position.coords.longitude;
+         opencage
+         .geocode({ key: '574f2e7a4cba478c9e03b38705c09f8c' , q:string })
+         .then(response => {
+           console.log(response);
+           setpincode(response.results[0].components.postcode);
+           
+  
+           navigator.geolocation.clearWatch(id);
+         
+         
+          
+          
+         })
+         .catch(err => {
+           console.error(err);
+          
+         });
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      },
+      { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
+      );
+    }
+
 
 
   
