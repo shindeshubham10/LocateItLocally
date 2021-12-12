@@ -95,7 +95,7 @@ const Cards = ({data}) => {
       
       <Box className={classes.root} >
       
-       <Carousel 
+      <Carousel 
         
         swipeable={true}
         draggable={true}
@@ -135,7 +135,7 @@ const Cards = ({data}) => {
           
             
           
-        </Carousel> 
+        </Carousel>
         </Box>
             
 

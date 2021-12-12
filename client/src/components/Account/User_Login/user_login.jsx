@@ -16,6 +16,9 @@ import { BusinesssignIn } from "../../../redux/actions/businessauthActions";
 import { UsersignIn } from "../../../redux/actions/userauthActions";
 import {useDispatch} from "react-redux"
 
+import LoginSuccessDialog from '../../alertDialogs/loginSuccess';
+
+import LoginErrorDialog  from '../../alertDialogs/loginError';
 
 const useStyles=makeStyles(theme=>(
   {
@@ -63,6 +66,8 @@ function Login(props)
     const [signinState, setsigninState] = React.useState(signInInitialValues);
     const [signinbusinessState, setsigninbusinessState] = React.useState(signInBusinessInitialValues);
 
+    const [successDialog,setsuccessDialog] = React.useState(false);
+    const [errorDialog,seterrorsDialog] = React.useState(false);
     const [error,setError]=React.useState(false)
 
     const [move,setmove]=React.useState(false)
@@ -73,19 +78,24 @@ function Login(props)
   
     const signInUser = async () => {
       console.log("enter into sign in function");
-      let response=dispatch(UsersignIn(signinState))
-      console.log(response);
-      if (!response)
+      dispatch(UsersignIn(signinState)).then((validatedUserResponse)=>{
+        console.log("Response after  User login ==== ",validatedUserResponse);
+        if (validatedUserResponse.type=="ERROR")
       {
         setError(true);
+        seterrorsDialog(true);
         return;
       }
       else
       {
-        console.log(props);
-        setmove(true);
+       // setmove(true);
+       setsuccessDialog(true);
 
       }
+      
+      })
+      //console.log(response);
+      
        
     
     };
@@ -93,22 +103,40 @@ function Login(props)
     const signInBusiness = async () => {
       console.log("enter into function");
       //let response = await BusinessSignIn(signinbusinessState);
-      let response=dispatch(BusinesssignIn(signinbusinessState))
+      dispatch(BusinesssignIn(signinbusinessState)).then((validatedResponse)=>{
+        console.log("Response after login ==== ",validatedResponse);
+        console.log("Rsponse TYPE ========== ",validatedResponse.type);
 
-      console.log(response);
-      if (!response)
+        // validat.type == "success" ERROR
+      if (validatedResponse.type=="ERROR")
       {
-
+        seterrorsDialog(true);
         setError(true);
+      
         return;
       }
       else
       {
-       
-        setmove(true);
+        setsuccessDialog(true);
+        //setmove(true);
+        
 
       }
 
+
+      })
+
+      // console.log(response);
+      // if (!response)
+      // {
+      //   setError(true);
+      //   return;
+      // }
+      // else
+      // {
+      //   setmove(true);
+
+      // }
     
     };
 
@@ -123,7 +151,11 @@ function Login(props)
     };
 
     return(
-      move? <Redirect to='/' />:
+      move? <Redirect to={{
+        pathname: '/',
+        
+    }}
+/>:
         <div>
           <Grid container direction="row" className="main">
             
@@ -313,8 +345,12 @@ function Login(props)
               </Grid>
             </Grid>
           </Grid>
+          
           {/* Side bar box ends */} 
+          <LoginSuccessDialog successDialog={successDialog} setsuccessDialog={setsuccessDialog} />
+          <LoginErrorDialog errorDialog={errorDialog} seterrorDialog={seterrorsDialog} />
         </div>
+        
 
     );
 }

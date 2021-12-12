@@ -13,8 +13,9 @@ import { getProductsofBusinessReducer } from "./reducers/productReducers";
 import { deleteProductsofBusinessReducer } from "./reducers/productReducers";
 
 import { updateProductDetailsReducer } from "./reducers/productReducers";
-import {addNewWishlistReducer,getWishlistReducer} from "./reducers/wishlistReducer";
+
 import { addJobDetailsReducer,getJobsofBusinessReducer,deleteJobsofBusinessReducer, updateJobDetailsReducer} from "./reducers/jobreducer";
+import {addNewWishlistReducer,getWishlistReducer,getProductsFromWishlist} from "./reducers/wishlistReducer";
 
 
 import { getJobsofBusinessReducerbyID } from "./reducers/jobreducer";
@@ -22,6 +23,7 @@ import { getProductsofBusinessReducerbyID } from "./reducers/productReducers";
 
 
 const reducer = combineReducers({
+    addNewWishlistReducer,
     getProducts:getProductReducer,
     AuthReducer,
     BAuthReducer,
@@ -40,8 +42,14 @@ const reducer = combineReducers({
     deleteJobsofBusinessReducer,
     updateJobDetailsReducer,
     getJobsofBusinessReducerbyID,
-    getProductsofBusinessReducerbyID
+    getProductsofBusinessReducerbyID,
+    getProductsFromWishlist
 
+
+    
+   
+   
+    
 })
 
 const middleWare = [thunk];

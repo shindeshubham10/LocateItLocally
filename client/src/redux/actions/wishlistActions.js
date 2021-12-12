@@ -54,3 +54,19 @@ export const addProductInWishlist = (productID,wishlistID) => async (dispatch) =
       return dispatch({ type: "ERROR", payload: error });
     }
   };
+
+
+  export const getProductsFromWishlist = (wishlistID) => async (dispatch) => {
+    try {
+      console.log(wishlistID);
+      const ProductList = await axios({
+        method: "GET",
+        url: `http://localhost:2000/wishlist/getProductofWishlist/${wishlistID}`,
+      });
+  
+      return dispatch({ type: actions.GET_PRODUCT_FROM_WISHLIST_SUCCESS, payload: ProductList.data });
+    } catch (error) {
+      return dispatch({ type:actions.GET_PRODUCT_FROM_WISHLIST_FAILURE, payload: error });
+    }
+  };
+  

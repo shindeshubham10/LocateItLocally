@@ -50,7 +50,7 @@ import axios from "axios"
 import { getMyself } from './redux/actions/userActions';
 import { getMyBusiness } from './redux/actions/businessActions';
 import TemplateProvider from './templates/TemplateProvider';
-
+import SearchBarSection from './components/DemoSearch/SearchBarSection';
 
 // axios global settings
 if (localStorage.LocateItLocallyUser) {
@@ -87,7 +87,7 @@ const [isAuthenticated,setisAuthenticated]=useState(1);
   useEffect(()=>{
       if(localStorage.LocateItLocallyUser)
     {
-      setchooseHeader(true);
+      //setchooseHeader(true);
       console.log("In doinhgghyhhgg");
       dispatch(getMyself());
 
@@ -95,6 +95,7 @@ const [isAuthenticated,setisAuthenticated]=useState(1);
 
     if(localStorage.LocateItLocallyBusiness)
     {
+      setchooseHeader(true);
       console.log("In doinhgghyhhgg");
       dispatch(getMyBusiness());
     }
@@ -110,7 +111,7 @@ const [isAuthenticated,setisAuthenticated]=useState(1);
     <TemplateProvider>
     <Router>
     
-     { chooseHeader ? <Header myProp={setisAuthenticated}/> :  <BusinessHeader/> }
+     { chooseHeader ?  <BusinessHeader/>  :  <Header/>}
       
       
        <Switch >

@@ -7,8 +7,9 @@ import {AddBoxOutlined,LocationOnOutlined,DescriptionOutlined,AssignmentIndOutli
 
 import './addJobOpeningStyle.css'
 
-function addJobOpening()
-{
+
+const AddJobOpening = () => {
+
 
     return(
         <div>
@@ -17,7 +18,7 @@ function addJobOpening()
         <Grid container  direction="row">
 
         <Grid>
-            <h1 className="mainheading">Add New Job Opening <AddBoxOutlined fontSize="large"/></h1>
+            <h2 className="mainheading">Add New Job Opening <AddBoxOutlined fontSize="medium"/></h2>
             <hr className="divider"></hr>
         </Grid>
         
@@ -141,6 +142,14 @@ function addJobOpening()
         </div>
         </div>
     );
+
+
 }
 
-export default addJobOpening;
+// function addJobOpening()
+// {
+
+    
+// }
+
+export default AddJobOpening;

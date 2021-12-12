@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles, Box,Button } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Paper from '@material-ui/core/Paper';
@@ -9,14 +10,15 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import * as opencage from 'opencage-api-client';
 
-import { useEffect} from 'react';
+
 
 import Popover from '@mui/material/Popover';
 import CategoryMenu from './PopOverModals/CategoryMenu';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-
-
+import { getProducts as ProductList } from '../../redux/actions/productActions';
+import ProductCard from './ProductCard';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -170,50 +172,8 @@ const useStyles = makeStyles((theme) => ({
 ));
 
 
-const HomeSearchBar=()=>{
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [pincode,setpincode]=useState("");
+const HomeSearchBar=({setshowSearchedProduct})=>{
 
-
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    } else {
-      setStatus('Locating...');
-      const id=navigator.geolocation.watchPosition((position) => {
-        setStatus(null);
-        console.log(position);
-       const string=position.coords.latitude+","+position.coords.longitude;
-         opencage
-         .geocode({ key: '574f2e7a4cba478c9e03b38705c09f8c' , q:string })
-         .then(response => {
-           console.log(response);
-           setpincode(response.results[0].components.postcode);
-           
-
-           navigator.geolocation.clearWatch(id);
-         
-         
-          
-          
-         })
-         .catch(err => {
-           console.error(err);
-          
-         });
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      },
-      { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
-      );
-    }
-  }
-
-  useEffect(()=>{
-    getLocation();
-    console.log("Abbe sale");
     
     
 
@@ -232,7 +192,48 @@ const HomeSearchBar=()=>{
   };
   
   const open = Boolean(anchorEl);
- 
+
+  const getProducts = useSelector(state => state.getProducts);
+    console.log("Inside hone 2");
+    console.log("data from database type :", typeof (getProducts));
+    console.log(getProducts);
+    console.log(getProducts.Products);
+
+
+    const dispatch = useDispatch();
+
+   
+
+    const [showProducts,setshowProducts] = useState(false);
+
+    const [Products,setProducts] = useState([]);
+
+    const [search, setSearch] = useState("");
+
+    useEffect(() => {
+
+      dispatch(ProductList()).then((searchdata)=>{
+          console.log(searchdata);
+          setProducts(searchdata.payload);
+
+      });
+
+      //setshowSearchedProduct(false);
+      console.log("Inside dispatch");
+
+  }, [])
+
+    const filteredProducts = Products?.filter((product) => {
+        if (
+          product?.name.toLowerCase().includes(search) ||
+         
+          product?.category.toLowerCase().includes(search)
+        ) {
+          return product;
+        }
+      });
+
+
   const CategoryButton = styled(Button)(({ theme }) => ({
     borderTopLeftRadius:30,
     borderBottomLeftRadius:30,
@@ -263,15 +264,7 @@ const HomeSearchBar=()=>{
         >
             All Categories
         </Button> 
-        {/* <CategoryButton
-          startIcon={<ArrowDropDownIcon />}
-          variant="outlined"
-          aria-owns={open ? 'mouse-over-popover' : undefined}
-          aria-haspopup="true"
-          onMouseEnter={handlePopoverOpen}
-          onMouseLeave={handlePopoverClose}
-        >All Categories</CategoryButton> */}
-         
+       
 
         <Popover
           id="show-category-menu"
@@ -301,7 +294,18 @@ const HomeSearchBar=()=>{
             className={classes.inputProduct}
             placeholder="i'm searching for"
             inputProps={{ 'aria-label': 'im searching for' }}
-        
+            onChange={(e) => {
+              setSearch(e.target.value.toLowerCase());
+              setshowSearchedProduct(false);
+              if(e.target.value.length==0){
+                setshowProducts(false);
+                setshowSearchedProduct(true);
+              }else{
+                setshowProducts(true);
+                
+              }
+              
+            }}
         />
         
         <Divider className={classes.divider} orientation="vertical" />
@@ -324,7 +328,27 @@ const HomeSearchBar=()=>{
         
         </Paper>
 
-    </Box>
+    </Box> 
+    <div className="display">
+        { 
+         showProducts ?
+         filteredProducts.map((product) => (
+          <Link to={`productsDetails/${product._id}`}>
+          <ProductCard
+          //image={product.imageUrl}
+          category={product.category}
+          productname={product.name}
+          //productprice={productPrice}
+                
+          />
+          </Link>   
+
+        )) : <p>....</p>
+      } 
+    </div>
+    
+
+
     </>
     
   );

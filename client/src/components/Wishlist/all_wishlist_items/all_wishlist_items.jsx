@@ -15,6 +15,7 @@ import { EditOutlined } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProductDetails } from '../../../redux/actions/productActions';
+import { getProductsFromWishlist } from '../../../redux/actions/wishlistActions';
 
 
 const useStyle = makeStyles(theme => (
@@ -172,39 +173,23 @@ const All_wishlist_items = (wishlistProductData) => {
 
 
     const dispatch = useDispatch();
-    // if(productDetails){
-    //     setloading(false);
-    // }
+    
     const dummy = []; 
     console.log("Product ID in details page");
-    //console.log(match.params.id);
-    
+   
+    console.log("Id from another page props pass ======",wishlistProductData.data._id)
     useEffect(()=>{
-        wishlistProductData.data.map((eachP)=>(
-            console.log("dispatched item - ",eachP ),
-            dispatch(getProductDetails(eachP)).then((x)=>{
-               console.log(x.payload.product);
-               //setproductArray([...productArray,x.payload.product]);
-               //productArray.push(x.payload.product)
-               dummy.push(x.payload.product);
-               //console.log("dummy in map dispatch",dummy)
-             
-               console.log("Product Array in dispatch - ",productArray);
-               console.log("below setpeoducts")
-            })
-           
-        ))
-        //console.log("dummy - ",dummy);
-        setproductArray(dummy)
-        console.log("Product Array baher dispatch - ",productArray);
-     },[Y])
+
+        dispatch(getProductsFromWishlist(wishlistProductData.data._id)).then((dataP)=>{
+            console.log(dataP);
+            setproductArray(dataP.payload);
+        });
+
+     },[])
      
      console.log("Product Array  - ",productArray);
      
 
-     wishlistProductData.data.map((item)=>{console.log("Data from each item array - ",item)})
-
-    
     const productImage = null;
     // This is used for Category Selection of the form on the page
     const [currency, setCurrency] = React.useState('EUR'); 
