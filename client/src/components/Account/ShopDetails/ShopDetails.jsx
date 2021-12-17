@@ -10,6 +10,7 @@ import Reviews from "./Reviews";
 import { useParams } from 'react-router';
 import { useEffect,useState } from 'react';
 import { getBusiness } from '../../../redux/actions/businessActions';
+import { getJobsofbusinessbyID } from '../../../redux/actions/jobActions';
 import { useDispatch } from 'react-redux';
 import Map from './map.jsx';
 import ShowAllJobs from './showAllJobs.jsx';
@@ -254,10 +255,17 @@ const ShopDetails = () => {
     const {id}=useParams();
 
     const [sellerdata,setsellerdata]=useState(initialbusinessdata)
+    const [JobsBYBusiness,setJobsBYBusiness] = useState({});
     const dispatch=useDispatch();
+    const dispatch1 = useDispatch();
 
     useEffect(()=>{
        dispatch(getBusiness(id)).then((item)=>console.log(setsellerdata(item.payload.business)));
+
+       dispatch1(getJobsofbusinessbyID(id)).then((jobs)=>{
+        console.log(jobs.payload);
+        setJobsBYBusiness(jobs.payload);
+       })
     //    console.log("I am her in useEffect of Product Detail");
        
     //    data.Products?console.log(data.Products.product.seller):console.log("Not taking it");
@@ -515,7 +523,7 @@ const ShopDetails = () => {
                 </TabPanel>
 
                 <TabPanel value={value} index={3}>
-                    <ShowAllJobs/>
+                    <ShowAllJobs JobsBYBusiness={JobsBYBusiness}/>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
                     

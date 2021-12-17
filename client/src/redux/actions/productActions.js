@@ -164,4 +164,19 @@ export const updateProduct = (productData,id) => async (dispatch) => {
 };
 
 
+export const getProductsByLocation = (id) => async (dispatch) => {
+
+    try{
+        console.log("Enter getProducts by location axios ");
+        const productsByLocation = await axios.get(`${backendUrl}/newProduct/bysellerlocation/${id}`);
+        console.log("Response in Product Actions ");
+        console.log(productsByLocation);
+       return dispatch({ type: actions.GET_PRODUCTS_BY_LOCATION_SUCCESS, payload: productsByLocation.data });
+    }catch(error){
+        console.log("Error while getProducts by Location");
+        return dispatch({ type: actions.GET_PRODUCTS_BY_LOCATION_FAILURE, payload: error.response });
+    }
+}
+
+
 

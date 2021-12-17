@@ -9,7 +9,7 @@ import BAuthReducer from './reducers/businessauthreducer';
 import UserReducer from "./reducers/userreducer";
 import BusinessReducer from "./reducers/businessreducer";
 import { addProductDetailsReducer } from "./reducers/productReducers";
-import { getProductsofBusinessReducer } from "./reducers/productReducers";
+import { getProductsofBusinessReducer,getProductsOfBusinessByLocationReducer } from "./reducers/productReducers";
 import { deleteProductsofBusinessReducer } from "./reducers/productReducers";
 
 import { updateProductDetailsReducer } from "./reducers/productReducers";
@@ -43,7 +43,8 @@ const reducer = combineReducers({
     updateJobDetailsReducer,
     getJobsofBusinessReducerbyID,
     getProductsofBusinessReducerbyID,
-    getProductsFromWishlist
+    getProductsFromWishlist,
+    getProductsOfBusinessByLocationReducer
 
 
     

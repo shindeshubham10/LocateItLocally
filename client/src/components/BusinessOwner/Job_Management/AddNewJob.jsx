@@ -15,8 +15,9 @@ const initialData={
     jobTitle:"",
     description:"",
     vacancy:0,
-    annualPackage:0,
-    department:"",
+    monthlySalary:0,
+    contactNumber:"",
+    location:"",
 
 }
 
@@ -79,6 +80,7 @@ const AddJobOpening = () =>{
                 <Grid item>
                     <p className="textfieldHeading">Job Title</p>
                     <TextField
+                        
                         required
                         fullWidth
                         type="text"
@@ -124,17 +126,17 @@ const AddJobOpening = () =>{
                 </Grid>
 
                 <Grid item>
-                    <p className="textfieldHeading">Department</p>
+                    <p className="textfieldHeading">Monthly Salary</p>
                     <TextField
                         required
                         fullWidth
                         type="text"
-                        placeholder="Department*"
+                        placeholder="₹0000"
                         variant="outlined"
                         InputProps={{
                             endAdornment: <AssignmentIndOutlined/>
                         }}
-                        name="department"
+                        name="monthlySalary"
                         onChange={(e)=>handleInputChange(e)}
                     />            
                 </Grid>
@@ -148,14 +150,14 @@ const AddJobOpening = () =>{
             <Grid container direction="column" className="rightside" spacing={3}>
                 
                 <Grid item>
-                    <p className="textfieldHeading">Annual Package</p>
+                    <p className="textfieldHeading">Contact Number</p>
                     <TextField
                         required
                         fullWidth
                         type="text"
-                        placeholder="In Lakhs*"
+                        
                         variant="outlined"
-                        name="annualPackage"
+                        name="contactNumber"
                         onChange={(e)=>handleInputChange(e)}
                         // InputProps={{
                         //     endAdornment: <CurrencyRupeeOutlinedIcon/>
@@ -164,39 +166,35 @@ const AddJobOpening = () =>{
                 </Grid>
 
                 <Grid item>
-                    <p className="textfieldHeading">Location</p>
+                    <p className="textfieldHeading">Address</p>
                     <TextField
                         required
                         fullWidth
                         multiline
                         rows={4}
                         type="text"
-                        placeholder="Location*"
+                        placeholder="Enter Address"
                         variant="outlined"
+                        onChange={(e)=>handleInputChange(e)}
                         InputProps={{
                             endAdornment: <LocationOnOutlined/>
                         }}
+                        name="location"
                     />            
                 </Grid>
 
-                <Grid item>
-                    <p className="textfieldHeading">Interview Date</p>
-                    <TextField
-                        required
-                        type="date"
-                        placeholder="First Name*"
-                        variant="outlined"
-                    />            
-                </Grid>
 
             </Grid>
             </Grid>
         </Grid>
 
         <Grid container className="submitbtndiv" justifyContent="center">
-            <Button variant="contained" style={{fontWeight:"bold"}}
-            onClick={()=>addjob()}
+            <Button
+                variant="contained"
+                onClick={()=>addjob()}
+                style={{color:'white',  backgroundColor: '#38495A', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem',marginTop:10}}                
             >Submit</Button>
+                        
         </Grid>
 
         </Grid>    

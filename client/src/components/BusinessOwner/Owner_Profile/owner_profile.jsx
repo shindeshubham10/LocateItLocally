@@ -15,7 +15,7 @@ const businessInitialValues = {
     address:"",
     website:"",
     description:"",
-    
+    pincode:"",
     twitter:"",
     facebook:"",
     instagram:"",
@@ -122,7 +122,6 @@ function Owner_profile()
                         <TextField
                             required
                             type="text"
-                            label="last Name"
                             placeholder="Last Name*"
                             variant="outlined"
                             onChange={handleChange}
@@ -203,6 +202,20 @@ function Owner_profile()
                     </Grid>
 
                     <Grid item>
+                    <p>PinCode</p>
+                    <TextField
+                        required
+                        fullWidth
+                        type="text"
+                        placeholder="pincode*"
+                        variant="outlined"
+                        onChange={handleChange}
+                        defaultValue={reduxState.business.pincode}
+                        name="pincode"
+                    />
+                    </Grid>
+
+                    <Grid item>
                     <p>Business Discription</p>
                     <TextField
                         required
@@ -220,20 +233,7 @@ function Owner_profile()
 
                     <Grid item>
                     <Grid container direction="row" spacing="1">
-                        <Grid item lg={6}>
-                        <p>Twitter</p>
-                        <TextField
-                            required
-                            fullWidth
-                            type="url"
-                            placeholder="Twitter*"
-                            variant="outlined"
-                            onChange={handleChange}
-                            defaultValue={reduxState.business.twitter}
-                            name="twitter"
-                        />
-                        </Grid>
-
+                        
                         <Grid item lg={6}>
                         <p>Instagram</p>
                         <TextField

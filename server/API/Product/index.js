@@ -3,7 +3,7 @@
 
 // // Database modal
 import { ProductModel } from "../../SchemaModels/products";
-import { getProductDetails, getProducts,getProductByCategory } from "../../Controllers/productController";
+import { getProductDetails, getProducts,getProductByCategory,getProductsBySellerLoc } from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -188,6 +188,18 @@ Router.get("/business/getProductsofbusinessbyId/:id", async(req,res)=>{
 
 
 })
+
+
+/*
+Route     /bysellerlocation/:loc
+Des       Get Products by location (Location taken from business owner)
+Params    Location (pincode)
+Access    Public
+Method    GET
+*/
+Router.get("/bysellerlocation/:loc",getProductsBySellerLoc);
+
+
 
 
 

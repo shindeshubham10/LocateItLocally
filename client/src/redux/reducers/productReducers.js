@@ -137,3 +137,19 @@ export const updateProductDetailsReducer = (state = {product:{}},action) => {
             return state;
     }
 };
+
+export const getProductsOfBusinessByLocationReducer = (state = {productsByLocation:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_PRODUCTS_BY_LOCATION_SUCCESS:
+            return {...state, 
+                productsByLocation: action.payload };
+        
+        case actionsType.GET_PRODUCTS_BY_LOCATION_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};
