@@ -17,6 +17,7 @@ import CategoryMenu from './PopOverModals/CategoryMenu';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import { getProducts as ProductList } from '../../redux/actions/productActions';
+import { getProductsByLocation } from '../../redux/actions/productActions';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
 
@@ -174,7 +175,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const HomeSearchBar=()=>{
+const HomeSearchBar=({setshowSearchedProduct})=>{
+  const classes = useStyles();
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
@@ -213,12 +215,15 @@ const HomeSearchBar=()=>{
       );
     }
 
+    //return pincode;
+  }
+
 
 
   
 
   
-  const classes = useStyles();
+ 
 
   const [anchorEl, setAnchorEl] = useState();
 
@@ -241,11 +246,12 @@ const HomeSearchBar=()=>{
 
 
     const dispatch = useDispatch();
+    const dispatch1 = useDispatch();
 
    
 
     const [showProducts,setshowProducts] = useState(false);
-
+  //  const [showSearchedProduct,setshowSearchedProduct] = useState(false);
     const [Products,setProducts] = useState([]);
 
     const [search, setSearch] = useState("");
@@ -254,11 +260,19 @@ const HomeSearchBar=()=>{
 
       getLocation();
 
-      dispatch(ProductList()).then((searchdata)=>{
-          console.log(searchdata);
-          setProducts(searchdata.payload);
+      // dispatch(ProductList()).then((searchdata)=>{
+      //     console.log(searchdata);
+      //     setProducts(searchdata.payload);
 
-      });
+     // });
+
+      
+     pincode ? dispatch1(getProductsByLocation(pincode)).then((productsByLocation)=>{
+        console.log("In getProduct by location dispatch.....");
+        console.log(productsByLocation.payload.products);
+        setProducts(productsByLocation.payload.products);
+      }) : console.log("Thamb re pincode sathi----")
+
 
       //setshowSearchedProduct(false);
       console.log("Inside dispatch");
@@ -395,4 +409,6 @@ const HomeSearchBar=()=>{
     
   );
 }
+
+
 export default HomeSearchBar;

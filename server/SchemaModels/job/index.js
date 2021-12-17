@@ -14,10 +14,7 @@ const jobSchema = new mongoose.Schema(
             type: String,
             required:true
         },
-        jobLocation:
-        {
-            type:mongoose.Types.ObjectId,ref:"Business"
-        },
+        
         recruiter:
         {
             type:mongoose.Types.ObjectId,ref:"Business"
@@ -26,18 +23,14 @@ const jobSchema = new mongoose.Schema(
         {
             type:Number
         },
-        annualPackage:
+        monthlySalary:
         {
             type:Number,
             required:true
         },
-        interviewDate:
-        {
-            type:Date
-        },
-        department:
-        {
-            type:String
+        contactNumber:{
+            type: String,
+            required:true
         },
         location:
         {

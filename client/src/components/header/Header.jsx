@@ -103,9 +103,9 @@ const useStyle = makeStyles(theme => (
 
 const Header = (props) => {
 
-  useEffect(()=>{
-      props.myProp(7);
-  },[])
+  // useEffect(()=>{
+  //     props.myProp(7);
+  // },[])
 
   const dispatch=useDispatch();
   const reduxState=useSelector((global) => global.user.user);

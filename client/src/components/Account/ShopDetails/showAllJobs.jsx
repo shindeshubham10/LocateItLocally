@@ -111,10 +111,12 @@ const useStyle = makeStyles(theme => ({
 
 
 
-const ShowAllJobs = () => {
+const ShowAllJobs = ({JobsBYBusiness}) => {
 
   const classes = useStyle();
   const theme = useTheme();
+
+  JobsBYBusiness ? console.log("In show all jobs",JobsBYBusiness.jobs): console.log("Waittttt kar shubhyaaaaaa")
 
   const [personName, setPersonName] = React.useState([]);
 
@@ -128,14 +130,15 @@ const ShowAllJobs = () => {
     );
   };
   return (
+    JobsBYBusiness ? 
+   
     <>
-                   
-        {/** Following Box is for Product View - ProductContainer */}
+             
+       
        <>
-
-         {/** Pagination Component is built below. */}
+         
           <Pagination
-            data={JobDetails}
+            data={JobsBYBusiness.jobs}
             RenderComponent={IndividualJobCard} // here whole component is returned
             // flow of the component are - 
             // 1. IndividualProductCard is rendered
@@ -143,27 +146,28 @@ const ShowAllJobs = () => {
             pageLimit={5}
             dataLimit={4}
           />
-        </>
-        {/** ProductContainer - END */}
-        
-      
-           
-    </>
+        </> 
+         
+    </>  : <div>No Jobs Found</div>
+  
+  
   )
 };
 
 // So this function is used to provide ProductCard that we built previously. It will return that ProductCard with data on it
 function IndividualJobCard(props) {
   console.log(props);
-  const { title, description, contact, salary } = props.data;
-  console.log(title);
+  //const { title, description, contact, salary } = props.data;
+  const {jobTitle,description,contactNumber,monthlySalary,location} = props.data;
+  console.log(jobTitle);
   return (
     <>
         <JobCard
-          title={title}
+          title={jobTitle}
           description={description}
-          contact={contact}
-          salary={salary}
+          contact={contactNumber}
+          salary={monthlySalary}
+          location={location}
         />    
         <Divider style={{ marginTop: 40, marginBottom: 40 }} />
       </>
@@ -172,6 +176,7 @@ function IndividualJobCard(props) {
 
 // So this function is used for whole pagination purpose. Our component to be rendered is used in this function. Also Functionality for changing pages is also added..
 function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
+  console.log("data in pagination function ==== ",data);
   const [pages] = useState(Math.round(data.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
@@ -198,7 +203,7 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
    
      const startIndex = currentPage * dataLimit - dataLimit;
      const endIndex = startIndex + dataLimit;
-     return JobDetails.slice(startIndex, endIndex);
+     return data.slice(startIndex, endIndex);
   };
 
   const getPaginationGroup = () => {
@@ -208,7 +213,10 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
   };
   const classes = useStyle();
 
+   
+
   return (
+    data.length!=0 ? 
     <>
       {/* show the posts, 10 posts at a time */}
       {/** This is the actual data we want to show.  */}
@@ -259,8 +267,9 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
 
 
     
-    </>
+    </> : <><div>No Jobs Found..</div></>
   );
+  
 }
 
 export default ShowAllJobs;
