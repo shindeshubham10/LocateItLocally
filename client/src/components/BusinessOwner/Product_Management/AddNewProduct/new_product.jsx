@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addProductDetails } from '../../../../redux/actions/productActions';
 
 
-
+import { ProductCategories } from '../../../../constants/data';
 
 
 
@@ -205,15 +205,15 @@ const Newproduct = () => {
 
     const productImage = null;
     // This is used for Category Selection of the form on the page
-    const [currency, setCurrency] = React.useState('EUR'); 
+    const [category, setcategory] = React.useState(''); 
 
     const [error,seterror]=React.useState(false);
     const reduxState=useSelector((global) => global.business.business);
 
      console.log({reduxState});
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
+    const handleCategory = (event) => {
+        setcategory(event.target.value);
         handleInputChange(event);
     };
 
@@ -308,7 +308,7 @@ const Newproduct = () => {
                   //label="Email"
                   name="name"
                   size='medium'
-                  placeholder="test@test.com"
+                  placeholder="Eg : Round Neck T-Shirt"
                   onChange={(e)=>handleInputChange(e)}
                  
                      />
@@ -330,15 +330,15 @@ const Newproduct = () => {
                             variant="outlined"
                             name="category"
                             color="primary"
-                            value={currency}
-                            onChange={handleChange}
+                            value={category}
+                            onChange={handleCategory}
                            
                             size='medium'
                             placeholder="test@test.com"
                  
                         >
                                 
-                                {currencies.map((option) => (
+                                {ProductCategories.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                                 </MenuItem>
@@ -353,24 +353,21 @@ const Newproduct = () => {
                             <Box className={classes.forFirstColumnTextFields}>
                         <Typography className={classes.textFieldHeading} component="div" >Brand</Typography> 
                         <TextField className={classes.realTextField}
+                            id="outlined-multiline-static"
+                            //label="Multiline"
                             fullWidth
-                            required
-                            select
-                  variant="outlined"
-                  color="primary"
-                  value={currency}
-                  onChange={handleChange}
-                  size='medium'
-                  placeholder="test@test.com"
-                   name="brand"
-                        >
+                            placeholder='Eg : Cocacola'
+                            variant='outlined'
+                            name="brand"
+                            onChange={(e)=>handleInputChange(e)}
+                            />
                                 
-                                {currencies.map((option) => (
+                                {/* {currencies.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                                 </MenuItem>
-                            ))}
-                     </TextField>
+                            ))} */}
+                     
                         </Box>
                             </Grid>
 

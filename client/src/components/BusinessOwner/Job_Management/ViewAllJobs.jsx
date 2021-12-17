@@ -219,9 +219,9 @@ const AllJobs = () => {
                
                 <Grid item lg={12} xs={12}>
                     <List className={classes.productList}>
-                        
+
                         {
-                            
+                             
                             jobs?.map(eachItem => (
                                 
                                // List Item Start
@@ -292,7 +292,7 @@ const AllJobs = () => {
                                 </>
                               
                         // List Item End         
-                        ))
+                        )) 
                         }
                  
             </List> 
