@@ -2,6 +2,7 @@
 import { ProductModel } from "../SchemaModels/products";
 import {BusinessModel} from "../SchemaModels/business"
 
+import {BusinessModel} from "../SchemaModels/business"
 export const getProducts = async (req, res) => {
     try {
         console.log("Hello");
@@ -96,7 +97,6 @@ export const getProductsBySellerLoc= async(req,res) => {
     return res.status(500).json({ error: error.message });
   }
 }
-
 // export const getManyProductDetails = async(req,res)=>{
 
 //   try {

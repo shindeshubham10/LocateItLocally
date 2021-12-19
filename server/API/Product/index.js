@@ -77,6 +77,8 @@ Router.get("/:_id",getProductDetails);
    */
 Router.get("/Bycategory/:category",getProductByCategory);
 
+Router.get("/bysellerlocation/:loc",getProductsBySellerLoc);
+
 
 Router.post("/add",passport.authenticate("business"), async(req,res)=>{
 
