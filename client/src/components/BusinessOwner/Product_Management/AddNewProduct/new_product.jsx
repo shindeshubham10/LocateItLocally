@@ -15,9 +15,12 @@ import { addProductDetails } from '../../../../redux/actions/productActions';
 
 
 import { ProductCategories } from '../../../../constants/data';
+import { IKContext,IKImage,IKUpload } from 'imagekitio-react';
 
-
-
+// required parameter to fetch images
+const urlEndpoint = 'https://ik.imagekit.io/ol5ujroevjc/';
+const publicKey = 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=';
+const authenticationEndpoint = 'http://localhost:2000/imagekitAuth';
 
 const useStyle = makeStyles(theme => (
     {
@@ -148,24 +151,7 @@ const useStyle = makeStyles(theme => (
 
 
 
-const currencies = [
-    {
-      value: 'USD',
-      label: '$',
-    },
-    {
-      value: 'EUR',
-      label: '€',
-    },
-    {
-      value: 'BTC',
-      label: '฿',
-    },
-    {
-      value: 'JPY',
-      label: '¥',
-    },
-];
+
   
 const ProductAvailabilty = [
     {
@@ -187,10 +173,7 @@ const intialValues={
     price:0,
     countInStock:0,
     availability:"",
-    
-    
-
-
+    image:[],
 
 
 }
@@ -253,30 +236,51 @@ const Newproduct = () => {
     /***** Code For Uploading Image (use at the time of doing backend) */
     const [image, setImage] = React.useState([]);
 
-    const Imageset = (event) => {
-        // const reader = new FileReader();
-        // console.log(reader.result);
-        // reader.onload = () => {
-        //     if(reader.readyState===2){
-        //         setImage(reader.result);
-        //         console.log(reader.result);
-        //     } 
-        // }
+    //const [ProductImage,setProductImage] = React.useState([]);
 
-        // reader.readAsDataURL(event.target.files[0])
+    const onProfileImageError = err => {
+        console.log("Error", err);
+      };
+      
+      const onProfileImageSuccess = res => {
+        console.log("Success", res);
+        setImage([...image,res.url]);
+        console.log(image);
+        setproductdata({ ...productdata, image:[...image,res.url] });
+        console.log(productdata);
+        //setProfileImage(true);
+        //setProfileImageUrl(res.url);
+       /// setuserState({...userState,profilePicture:res.url});
+        //reduxState.user.profilePicture=res.url;
+    
+      };
 
-        // console.log(event.target.files[0]);
-        // // console.log(image);
-        // // console.log(URL.createObjectURL(event.target.files[0]));
-        // // setImage([...image,URL.createObjectURL(event.target.files[0])])
-        // setImage([...image,URL.createObjectURL(event.target.files[0])]);
-        // setproductdata({ ...productdata, image:[...image,image] });
-        // console.log(image);
-        // console.log(productdata);
+    // const Imageset = (event) => {
+    //     // const reader = new FileReader();
+    //     // console.log(reader.result);
+    //     // reader.onload = () => {
+    //     //     if(reader.readyState===2){
+    //     //         setImage(reader.result);
+    //     //         console.log(reader.result);
+    //     //     } 
+    //     // }
+
+    //     // reader.readAsDataURL(event.target.files[0])
+
+    //     // console.log(event.target.files[0]);
+    //     // // console.log(image);
+    //     // // console.log(URL.createObjectURL(event.target.files[0]));
+    //     // // setImage([...image,URL.createObjectURL(event.target.files[0])])
+    //     setImage([...image,URL.createObjectURL(event.target.files[0])]);
+    //     setproductdata({ ...productdata, image:[...image,image] });
+    //     console.log(image);
+    //     console.log(productdata);
         
 
 
-    }
+    // }
+
+    
    
 
     return (
@@ -456,7 +460,7 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                      <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {  image[0]?<img src={image[0]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+                                     {/* {  image[0]?<img src={image[0]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
 
                                                             <div>
                                                                 <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
@@ -469,7 +473,35 @@ const Newproduct = () => {
                                                                 </div>
                                                             </div>
                                                             </Typography>
-                                    }
+                                    } */}
+
+                           { 
+                           image[0]?<img src={image[0]}/> :
+                           <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                {/* <p>click to browse</p> */}
+                            <div>
+                            <IKUpload id='upload-image'
+                                
+                                fileName="userProfile-photo.png"
+                                onError={onProfileImageError}
+                                onSuccess={onProfileImageSuccess}
+                                folder={"/Products"}
+                                
+                            />
+                            <div className='label'>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                click to browse
+                                </label>
+                            </div>
+                            </div>
+                           
+                            </IKContext>}
+                           
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -486,11 +518,11 @@ const Newproduct = () => {
                                     <CardContent className={classes.imageCardContent}>
                                         <AddPhotoAlternateOutlinedIcon fontSize='large' style={ {color:'#C4C4C4'}}/>
                                 
-                                        {  image[1]?<img src={image[1]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+                                        {/* {  image[1]?<img src={image[1]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
 
                                             <div>
                                                 <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    onChange={Imageset} 
+                                                    //onChange={Imageset} 
                                                 />
                                                 <div className='label'>
                                                     <label htmlFor='upload-image' style={{color:'#064482'}}>
@@ -499,7 +531,39 @@ const Newproduct = () => {
                                                 </div>
                                             </div>
                                         </Typography>
-                                    }
+                                    } */}
+
+
+                        { 
+                           image[1]?<img src={image[1]}/> :
+                           <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                {/* <p>click to browse</p> */}
+                            <div>
+                            <IKUpload id='upload-image'
+                                
+                                fileName="userProfile-photo.png"
+                                onError={onProfileImageError}
+                                onSuccess={onProfileImageSuccess}
+                                folder={"/Products"}
+                                
+                            />
+                            <div className='label'>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                click to browse
+                                </label>
+                            </div>
+                            </div>
+                           
+                            </IKContext>
+                            
+                        }
+
+
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -515,20 +579,32 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                      <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {  image[2]?<img src={image[2]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-
-                                                <div>
-                                                    <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                        onChange={Imageset} 
-                                                    />
-                                                    <div className='label'>
-                                                        <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                            click to browse
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                </Typography>
-                                    }
+                                     { 
+                           image[2]?<img src={image[2]}/> :
+                           <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                {/* <p>click to browse</p> */}
+                            <div>
+                            <IKUpload id='upload-image'
+                                
+                                fileName="userProfile-photo.png"
+                                onError={onProfileImageError}
+                                onSuccess={onProfileImageSuccess}
+                                folder={"/Products"}
+                                
+                            />
+                            <div className='label'>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                click to browse
+                                </label>
+                            </div>
+                            </div>
+                           
+                            </IKContext>}
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -544,20 +620,33 @@ const Newproduct = () => {
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
                                      <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {  image[3]?<img src={image[3]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-
-                                                                    <div>
-                                                                        <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                                            onChange={Imageset} 
-                                                                        />
-                                                                        <div className='label'>
-                                                                            <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                                                click to browse
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    </Typography>
-                                        }
+                                     { 
+                                        image[3]?<img src={image[3]}/> :
+                                        <IKContext 
+                                            publicKey={publicKey} 
+                                            urlEndpoint={urlEndpoint} 
+                                            authenticationEndpoint={authenticationEndpoint} 
+                                        
+                                        >
+                                            {/* <p>click to browse</p> */}
+                                        <div>
+                                        <IKUpload id='upload-image'
+                                            
+                                            fileName="userProfile-photo.png"
+                                            onError={onProfileImageError}
+                                            onSuccess={onProfileImageSuccess}
+                                            folder={"/Products"}
+                                            
+                                        />
+                                        <div className='label'>
+                                            <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                            click to browse
+                                            </label>
+                                        </div>
+                                        </div>
+                                    
+                                        </IKContext>
+                                    }
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
