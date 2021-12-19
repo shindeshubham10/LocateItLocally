@@ -1,6 +1,7 @@
 
 import { ProductModel } from "../SchemaModels/products";
 
+import {BusinessModel} from "../SchemaModels/business"
 export const getProducts = async (req, res) => {
     try {
         console.log("Hello");
@@ -45,6 +46,56 @@ export const getProductByCategory = async(req,res) => {
   }
 }
 
+
+export const getProductsBySellerLoc= async(req,res) => {
+  
+  try {
+    //console.log(req.params);
+   // const { category } = req.query.category;
+   
+     const { loc } = req.params;
+   
+    console.log(loc);
+    
+   const sellers=await BusinessModel.find({"pincode":loc});
+   console.log(sellers);
+   if(!sellers)
+   {
+      return res.status(404).json({ error: "Seller Not Found" });
+
+   }
+   var products=[];
+  //  sellers?.map(async (sel)=>{
+  //           const prods= await ProductModel.find({seller:sel._id})
+  //           console.log(prods);
+  //           prods?.map((prod)=>products.push(prod))
+  //   })
+  //   console.log("Me bahsr aloy");
+  //   console.log(products);
+
+  for(const sel of sellers)
+  {
+    const prods= await ProductModel.find({seller:sel._id})
+    console.log(prods);
+    for(const x of prods)
+    {
+      products.push(x);
+    }
+
+  }
+
+    
+    if(products?.length!==0)
+    {
+      return res.json({ products }); 
+    }
+   
+
+   
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 // export const getManyProductDetails = async(req,res)=>{
 
 //   try {

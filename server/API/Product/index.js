@@ -4,6 +4,7 @@
 // // Database modal
 import { ProductModel } from "../../SchemaModels/products";
 import { getProductDetails, getProducts,getProductByCategory } from "../../Controllers/productController";
+import { getProductsBySellerLoc } from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -76,6 +77,8 @@ Router.get("/:_id",getProductDetails);
    Method    GET
    */
 Router.get("/Bycategory/:category",getProductByCategory);
+
+Router.get("/bysellerlocation/:loc",getProductsBySellerLoc);
 
 
 Router.post("/add",passport.authenticate("business"), async(req,res)=>{

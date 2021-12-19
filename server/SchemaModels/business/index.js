@@ -48,6 +48,9 @@ const BusinessSchema = new mongoose.Schema({
     address:{
       type:String,
     },
+    pincode:{
+      type:String,
+    },
     description:{
       type:String,
     },
@@ -75,6 +78,7 @@ const BusinessSchema = new mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: "Reviews",
     },
+
   
   
   
