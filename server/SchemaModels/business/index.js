@@ -69,11 +69,15 @@ const BusinessSchema = new mongoose.Schema({
     maplocation: {
       type:String,
     },
-    images:{
-      type: mongoose.Types.ObjectId,
-      ref: "Images"
+    profilePicture:{
+     type:String
     },
-    
+    Shopimages:[
+      {
+        type:String
+      }
+    ],
+  
     reviews: {
       type: mongoose.Types.ObjectId,
       ref: "Reviews",

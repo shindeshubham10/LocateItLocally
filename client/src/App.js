@@ -66,6 +66,11 @@ else if(localStorage.LocateItLocallyBusiness)
 
 }
 
+
+
+
+
+
 const useStyles=makeStyles(
   {
       main :{
@@ -100,6 +105,7 @@ const [isAuthenticated,setisAuthenticated]=useState(1);
       dispatch(getMyBusiness());
     }
 
+   
   },[isAuthenticated])
 
   

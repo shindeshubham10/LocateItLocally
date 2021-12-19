@@ -25,6 +25,9 @@ export const DELETE_PRODUCTS_OF_BUSINESS_FAILURE="deleteproductsofbusinessfailur
 export const GET_PRODUCTS_OF_BUSINESS_BYID_SUCCESS="getproductsofbusinessbyidsuccess"
 export const GET_PRODUCTS_OF_BUSINESS_BYID_FAILURE="getproductsofbusinessbyidfailure"
 
+export const GET_PRODUCTS_BY_LOCATION_SUCCESS="getproductByLocationsuccess"
+export const GET_PRODUCTS_BY_LOCATION_FAILURE="getproductsByLocationfailure"
+
 
 
 

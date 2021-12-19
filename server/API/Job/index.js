@@ -109,6 +109,7 @@ Router.get("/business/getJobsofbusinessbyId/:id", async(req,res)=>{
   try {
     console.log("jdbehjbfchhfcb");
     console.log("IN GET JOB");
+    console.log("In get job by id" , id);
     const {id}=req.params;
     
     const jobs = await JobModel.find({recruiter:id});

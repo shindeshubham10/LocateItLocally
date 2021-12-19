@@ -20,6 +20,7 @@
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
     "imagekit": "^3.2.3",
+    "imagekitio-react": "^1.1.0",
     "leaflet": "^1.7.1",
     "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-search-bar": "^1.0.0",

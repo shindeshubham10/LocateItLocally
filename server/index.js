@@ -37,8 +37,13 @@ import Review from "./API/Reviews/index.js"
 require("dotenv").config();
 
 const app=express();
+const ImageKit = require('imagekit');
 
-
+const imagekit = new ImageKit({
+  urlEndpoint: 'https://ik.imagekit.io/ol5ujroevjc/',
+  publicKey: 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=',
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY
+});
 
 
 
@@ -84,6 +89,8 @@ app.get("/",function(req,res){
 });
 */
 
+
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
   });
@@ -102,5 +109,24 @@ mongoose
   .then(() => {
     console.log("Database connected");
   });
+
+
+  app.get('/imagekitAuth', function (req, res) {
+    var result = imagekit.getAuthenticationParameters();
+    res.send(result);
+  });
+
+
+
+
+
+// // allow cross-origin requests
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", 
+//     "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
 
 

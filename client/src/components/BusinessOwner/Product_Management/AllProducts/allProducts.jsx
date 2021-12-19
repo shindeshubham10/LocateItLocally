@@ -243,9 +243,16 @@ const ViewAllProducts = () => {
                         <Grid item  style={{textAlign:'start',marginTop:'10px',marginLeft:'20px'}}>
                         <Typography className={classes.headingDescription} component="div" >All Products are Listed Down Below</Typography>
                         </Grid>
-                        <IconButton edge="end" aria-label="delete" onClick={deleteproducts}>
-                                    <DeleteIcon />
+                        {/* <IconButton edge="end" aria-label="delete" onClick={deleteproducts}>
+                                    <DeleteIcon style={{color:'#e74c3c'}} />
+                                  </IconButton> */}
+
+                        <Grid container item direction='row' alignItems='center' style={{marginTop:5}}>
+                        <IconButton  aria-label="delete"  onClick={deleteproducts}>
+                                    <DeleteIcon style={{color:'#e74c3c'}}/>
                                   </IconButton>
+                        <Typography style={{color:"#A1B3BA",fontFamily: ['Montserrat', 'sans-serif'],fontSize:'0.8rem'}}>*First Select Product to Delete</Typography>
+                        </Grid>
                        
                 <Divider className={classes.horizontalDivider} />
 

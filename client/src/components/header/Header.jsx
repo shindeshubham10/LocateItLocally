@@ -99,13 +99,7 @@ const useStyle = makeStyles(theme => (
     
 );
 
-
-
-const Header = (props) => {
-
-  useEffect(()=>{
-      props.myProp(7);
-  },[])
+const RenderHeader = () => {
 
   const dispatch=useDispatch();
   const reduxState=useSelector((global) => global.user.user);
@@ -275,6 +269,187 @@ const Header = (props) => {
 
         </>
     );
+};
+
+const Header = (props) => {
+
+  useEffect(()=>{
+      <RenderHeader/>
+  },[])
+  return(
+    <>
+     <RenderHeader/>
+    </>
+  )
+
+  // const dispatch=useDispatch();
+  // const reduxState=useSelector((global) => global.user.user);
+
+  // const signOuthandler=()=>{
+
+  //   dispatch(UsersignOut())
+  // }
+
+  // console.log({reduxState});
+
+  
+   
+
+  // const classes = useStyle();
+
+  // // UseState
+  // const [anchorEl, setAnchorEl] = useState(null);
+  
+  // // usestate for oprn review dialog
+  // const [openReview,setopenReview] = useState(false);
+
+  // const openReviewDailog = () =>{
+  //   setopenReview(true);
+  // }
+ 
+  
+  
+  // // This are the functions for handling Hover Events
+  // //For Open
+  // const handlePopoverOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+    
+  // };
+  
+  // // For Close
+  // const handlePopoverClose = () => {
+  //   setAnchorEl(null);
+  // };
+
+
+
+  
+
+  
+  // const open = Boolean(anchorEl);
+  
+
+  //   return (
+  //       <>
+  //       <AppBar className={classes.header}>
+  //           <Toolbar >
+                
+  //               <Link to="/"><img src={logo} alt="icon" className={classes.logoLg} /></Link>
+                
+  //               <Box className={classes.containerOptions}>
+
+  //                   <Link to='/' className={classes.txt}>
+  //                       Home
+  //                   </Link>
+                                        
+  //                   <Link to='/contact' className={classes.txt}>
+  //                       Contact
+  //                   </Link>
+  //                   <Link to='/about' className={classes.txt}>
+  //                       About Us
+  //                   </Link>
+                   
+
+                    
+  //               </Box>
+
+  //         <Box className={classes.endContainerIcons}>
+            
+  //               {/** Write extra properties for the icon - onClick(),onMouseOver() */}
+                
+
+  //                 {/** This is the PopOver Element which will be shown after hovering on button/icon */}
+
+  //                 {
+  //                   reduxState?.user?.firstName ?(
+
+  //                     <Box style={{display:'flex',direction:'row'}}>
+  //                         {/* <Box style={{display:'flex'}}> */}
+  //                             <Typography  style={{color:'#3498db', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem',marginTop:6,marginRight:4}}>{reduxState.user.firstName}</Typography>
+  //                             {/* {reduxState.user.firstName} */}
+  //                             {/* <button onClick={signOuthandler}>Sign Out</button> */}
+  //                             <Button 
+  //                                 size="medium"  
+  //                                 //className={classes.addProductButton} 
+  //                                 style={{color:'#e74c3c', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem'}}
+  //                                 onClick={()=>signOuthandler()}
+  //                           >LogOut</Button>
+
+  //                           <Link to='/user_profile'>
+  //                           	<AccountCircleIcon  sx={{color:'black',marginLeft:3}} fontSize='large'/>
+  //                           </Link>  
+                           
+                           
+  //                         {/* </Box> */}
+  //                     </Box>
+
+
+
+
+  //                   ):(
+
+  //                     <>
+
+  //                  <Link to='/login'>
+  //                         <PersonOutlineIcon
+  //                           aria-owns={open ? 'show-Account-menu' : undefined}
+  //                           aria-haspopup="true"
+  //                           className={classes.endicons}
+  //                           onClick={handlePopoverOpen}
+  //                           onMouseOver={handlePopoverOpen}
+                          
+  //                     />
+  //                </Link>
+
+                 
+  //                {/* <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link> */}
+
+                 
+  //                   </>
+
+                      
+  //                   )
+  //                 }
+
+  //                        <Popover
+  //                             id="show-Account-menu"
+                            
+  //                             open={open}
+  //                             anchorEl={anchorEl}
+  //                             onClose={handlePopoverClose}
+  //                             //onMouseOut={handlePopoverClose}
+  //                             anchorOrigin={{
+  //                               vertical: 'bottom',
+  //                               horizontal: 'left',
+  //                             }}
+  //                             disableRestoreFocus
+  //                           >
+  //                             <AccountMenu  /> {/** This item will be displayed after hovering */}
+  //                           </Popover>
+                  
+
+                   
+  //                   {/* <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
+
+  //                   <Link to='/cart'><MapOutlined className={classes.endicons} /></Link>
+                 
+  //                 <ShoppingCartOutlinedIcon className={classes.endicons} onClick={()=>openReviewDailog()} />
+  //                   */}
+                    
+                 
+
+
+  //           </Box>
+            
+  //           {/** This is the Drawer Component  */}
+  //               <GetDrawer />
+  
+  //           </Toolbar>
+  //       </AppBar>
+        
+
+  //       </>
+  //   );
 
 };
 
