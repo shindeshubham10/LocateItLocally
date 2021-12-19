@@ -17,10 +17,10 @@ Method    GET
 Router.get("/", passport.authenticate("user"), async (req, res) => {
    try {
     console.log(req.session.passport.user._doc);
-    const { email, firstName, contactNumber, lastName,_id,address,gender,twitter,facebook,instagram,birthdate} =
+    const { email, firstName, contactNumber, lastName,_id,address,gender,twitter,facebook,instagram,birthdate,profilePicture} =
        req.session.passport.user._doc;
       
-     return res.json({ user: {  email, firstName, contactNumber, lastName,_id,address,gender,twitter,facebook,instagram,birthdate} });
+     return res.json({ user: {  email, firstName, contactNumber, lastName,_id,address,gender,twitter,facebook,instagram,birthdate,profilePicture} });
    } catch (error) {     return res.status(500).json({ error: error.message });
    }
  });

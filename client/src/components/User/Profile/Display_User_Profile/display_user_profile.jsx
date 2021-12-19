@@ -16,6 +16,16 @@ import AddNewWishList from '../../../Wishlist/addNewWishlist';
 import { getWishlist } from '../../../../redux/actions/wishlistActions';
 import { getProductDetails } from '../../../../redux/actions/productActions';
 
+import { IKImage,IKContext,IKUpload} from 'imagekitio-react';
+
+
+// required parameter to fetch images
+const urlEndpoint = 'https://ik.imagekit.io/ol5ujroevjc/';
+const publicKey = 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=';
+const authenticationEndpoint = 'http://localhost:2000/imagekitAuth';
+
+
+
 
 const useStyle = makeStyles(theme => (
     {
@@ -154,6 +164,9 @@ const useStyle = makeStyles(theme => (
             fontColor:'black',
             backgroundColor: '#D0D7DA',
             borderRadius: 5,
+           },
+           imageUpload:{
+               display:'flex',
            }
     
     }
@@ -186,8 +199,8 @@ const Display_user_profile= () =>
     
 
     const [wishlist, setwishlist] = useState([]);
-
-    
+    const [ProfileImage,setProfileImage] = useState(false);
+    const [ProfileImageUrl,setProfileImageUrl] = useState("");
    
     const dispatch = useDispatch();
 
@@ -247,7 +260,16 @@ const Display_user_profile= () =>
   };
 
     
+  const onError = err => {
+    console.log("Error", err);
+  };
+  
+  const onSuccess = res => {
+    console.log("Success", res);
+    setProfileImage(true);
+    setProfileImageUrl(res.filePath);
 
+  };
 
     return(
         <div>
@@ -267,15 +289,20 @@ const Display_user_profile= () =>
 
             <Grid item lg={3} sm={3} xs={12} className="profile_picture">
             <Grid container justifyContent="center">
-                <label>
-                    <div >
-                        <img className="photo_upload" src={profileimg}/>
-                    </div>
-                    
-                    <input type="file" /> 
-                </label>
-
-
+               
+              
+                            <IKContext
+                            publicKey={publicKey} 
+                            urlEndpoint={urlEndpoint} 
+                            authenticationEndpoint={authenticationEndpoint} 
+                            >
+                            <IKImage  
+                                src={`${reduxState.user.profilePicture}?tr=r-max,cm-extract`}
+                               // src={ProfileImageUrl}
+                                
+                            /> 
+                            </IKContext>
+                
             </Grid>
             </Grid>
 

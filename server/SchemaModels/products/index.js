@@ -5,7 +5,11 @@ const productSchema = new mongoose.Schema(
     name: { type: String, required: true, unique: true },
     
     seller: { type: mongoose.Types.ObjectId, ref: 'Business' },
-    image: { type:mongoose.Types.ObjectId,ref:"Images" },
+    image: [
+      {
+        type:String
+      }
+    ],
     
     brand: { type: String, required: true },
     category: {type: String, required: true },

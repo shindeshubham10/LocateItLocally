@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {Grid,TextField,Box,Button,Typography, Paper} from '@material-ui/core';
 import "./owner_profile_style.css";
 
@@ -7,7 +7,9 @@ import {AccountCircle,ArrowForward} from "@material-ui/icons";
 import { borderRadius } from "@mui/system";
 import { useSelector,useDispatch } from 'react-redux';
 import { updateBusiness } from "../../../redux/actions/businessActions";
-
+import { IKImage,IKContext,IKUpload} from 'imagekitio-react';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from "@material-ui/core";
 const businessInitialValues = {
   
     
@@ -22,6 +24,12 @@ const businessInitialValues = {
 
 }
 
+// required parameter to fetch images
+const urlEndpoint = 'https://ik.imagekit.io/ol5ujroevjc/';
+const publicKey = 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=';
+const authenticationEndpoint = 'http://localhost:2000/imagekitAuth';
+
+
 function Owner_profile()
 {
     
@@ -31,11 +39,26 @@ function Owner_profile()
      console.log({reduxState});
 
     const [businessState, setbusinessState] = React.useState(reduxState.business);
-
+    const [ProfileImage,setProfileImage] = useState(false);
+    const [ProfileImageUrl,setProfileImageUrl] = useState("");
     
     const handleChange = (event) => {
         setbusinessState({ ...businessState, [event.target.name]: event.target.value });
         console.log(businessState);
+      };
+
+
+      const onProfileImageError = err => {
+        console.log("Error", err);
+      };
+      
+      const onProfileImageSuccess = res => {
+        console.log("Success", res);
+        setProfileImage(true);
+        setProfileImageUrl(res.url);
+        setbusinessState({...businessState,profilePicture:res.url});
+        //reduxState.user.profilePicture=res.url;
+    
       };
 
     const saveBusiness=()=>{
@@ -47,43 +70,170 @@ function Owner_profile()
     }
     return(
         <div>
-            <Grid container className="first">
-                <Grid item sx={{alignItems:"center",justify:"flex-end"}}>
-                    <Button 
-                        variant="contained"
-                        size="large"
-                        endIcon={<ArrowForward/>}
-                        style={{
-                            backgroundColor: "#38495A",
-                            color:"white",
-                            fontWeight:"bolder",
-                            
-                            borderRadius:"25px"
-                        }}
-                        onClick={saveBusiness}
-                    >Save</Button>
-                </Grid>
-            </Grid>
-        
-
-
-
-
+          
         <div className="p">
         { reduxState?.business?
         <Paper elevation={15} style={{borderRadius:"50px"}}>
             <Grid container direction="row" className="main" spacing="2">
+
+
+
+            <Grid container style={{justifyContent:"flex-end",marginBottom:"50px",marginRight:"15px"}}>
+                
+                    <Button 
+                            variant="contained"
+                            size="large"
+                            endIcon={<ArrowForward/>}
+                            style={{
+                                backgroundColor: "#38495A",
+                                color:"white",
+                                fontWeight:"bolder",
+                                borderRadius:"10px",
+                                
+                                
+                            }}
+                            onClick={saveBusiness}
+                    >Save</Button>
+                     
+                </Grid>
+
+
                 <Grid item lg={6} sm={6} xs={12} className="part1">
                 <Grid container direction="column" alignContent="center" spacing="3">
                     <Grid item>
                     <Grid container alignContent="center" direction="row">
                         <Grid item>
-                        <label htmlFor="photo-upload" className="custom-file-upload fas">
+                        
+                        {
+                            reduxState.business.profilePicture ?
+                           
+                            <Grid container direction="row">
+                            <label htmlFor="photo-upload" >
                             <div className="img-wrap img-upload" >
-                            <img for="photo-upload" src={src}/>
+                           
+                            <EditIcon for="photo-upload" style={{color:" #2980b9",cursor:'pointer'}}/>
+                            
+                            
                             </div>
-                            <input id="photo-upload" type="file" /> 
-                        </label>
+                            <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                
+                            <IKUpload id="photo-upload"
+                                
+                                fileName="OwnerProfile-photo.png"
+                                onError={onProfileImageError}
+                                onSuccess={onProfileImageSuccess}
+                                folder={"/BusinessOwner/Profile"}
+                                
+                            />
+                            </IKContext>
+                            </label>
+                        
+                            <IKContext
+                            publicKey={publicKey} 
+                            urlEndpoint={urlEndpoint} 
+                            authenticationEndpoint={authenticationEndpoint} 
+                            >
+                            
+                            
+                            {
+                                ProfileImageUrl ? 
+                                <IKImage  
+                                //src={`${reduxState.user.profilePicture}?tr=r-max,cm-extract`}
+                                src={`${ProfileImageUrl}?tr=r-max,cm-extract`}
+                                
+                            /> : 
+                            <IKImage  
+                                src={`${reduxState.business.profilePicture}?tr=r-max,cm-extract`}
+                               // src={ProfileImageUrl}
+                                
+                            /> 
+                        }
+                            
+                        
+                            </IKContext>
+                           
+                            {/* <img for="photo-upload" src={reduxState.user.profilePicture}/> */}
+                            </Grid>
+                            
+                            
+                            :
+                            <Grid container direction="row">
+
+                            {
+                             ProfileImageUrl ? 
+                            <Grid container direction="row">
+                            <label htmlFor="photo-upload" >
+                            <div className="img-wrap img-upload" >
+                            <EditIcon for="photo-upload" style={{color:" #2980b9",cursor:'pointer'}}/>
+                            </div>
+                            <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                
+                            <IKUpload id="photo-upload"
+                                
+                                fileName="OwnerProfile-photo.png"
+                                onError={onProfileImageError}
+                                onSuccess={onProfileImageSuccess}
+                                folder={"/BusinessOwner/Profile"}
+                                
+                            />
+                            </IKContext>
+                            </label>
+                            <IKContext
+                            publicKey={publicKey} 
+                            urlEndpoint={urlEndpoint} 
+                            authenticationEndpoint={authenticationEndpoint} 
+                            >
+                                <IKImage  
+                                //src={`${reduxState.user.profilePicture}?tr=r-max,cm-extract`}
+                                src={`${ProfileImageUrl}?tr=r-max,cm-extract`}
+                                
+                            /> 
+                            </IKContext> 
+                            </Grid>
+                             
+                            
+                            :
+                            <label>
+                            <div className="img-wrap img-upload" >
+                            <img for="photo-upload" src={src} style={{cursor:'pointer'}}/>
+                            <h5 style={{cursor:'pointer'}}>*click to upload image</h5>
+                            </div>
+
+                            <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                
+                            <IKUpload 
+                                
+                                fileName="userProfile-photo.png"
+                                onError={onProfileImageError}
+                                onSuccess={onProfileImageSuccess}
+                                folder={"/BusinessOwner/Profile"}
+                            />
+                            </IKContext>
+                            </label> 
+                        }
+                            </Grid>
+                            
+                            
+                            
+                
+              
+                        }
+
                         </Grid>
                     </Grid>
                     </Grid> 
