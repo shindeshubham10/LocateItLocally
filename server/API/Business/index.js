@@ -60,4 +60,29 @@ Router.put("/update", passport.authenticate("business"), async (req, res) => {
 });
 
 
+Router.get("/location/:loc",async(req,res)=>{
+
+          try 
+          {
+
+            console.log(req.params);
+            const {loc}=req.params;
+            console.log(loc);
+            const business=await BusinessModel.find({"pincode":loc});
+            console.log(business);
+            return res.json({ business });
+          } 
+          catch (error) 
+          {
+
+            return res.status(500).json({ error: error.message });
+          }
+
+
+
+          }
+
+
+);
+
 export default Router;

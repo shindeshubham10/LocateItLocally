@@ -175,48 +175,48 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const HomeSearchBar=({setshowSearchedProduct})=>{
+const HomeSearchBar=(props)=>{
   const classes = useStyles();
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [pincode,setpincode]=useState("");
+  // const [lat, setLat] = useState(null);
+  // const [lng, setLng] = useState(null);
+  // const [status, setStatus] = useState(null);
+  // const [pincode,setpincode]=useState("");
 
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    } else {
-      setStatus('Locating...');
-      const id=navigator.geolocation.watchPosition((position) => {
-        setStatus(null);
-        console.log(position);
-       const string=position.coords.latitude+","+position.coords.longitude;
-         opencage
-         .geocode({ key: '574f2e7a4cba478c9e03b38705c09f8c' , q:string })
-         .then(response => {
-           console.log(response);
-           setpincode(response.results[0].components.postcode);
+  // const getLocation = () => {
+  //   if (!navigator.geolocation) {
+  //     setStatus('Geolocation is not supported by your browser');
+  //   } else {
+  //     setStatus('Locating...');
+  //     const id=navigator.geolocation.watchPosition((position) => {
+  //       setStatus(null);
+  //       console.log(position);
+  //      const string=position.coords.latitude+","+position.coords.longitude;
+  //        opencage
+  //        .geocode({ key: '574f2e7a4cba478c9e03b38705c09f8c' , q:string })
+  //        .then(response => {
+  //          console.log(response);
+  //          setpincode(response.results[0].components.postcode);
            
   
-           navigator.geolocation.clearWatch(id);
+  //          navigator.geolocation.clearWatch(id);
          
          
           
           
-         })
-         .catch(err => {
-           console.error(err);
+  //        })
+  //        .catch(err => {
+  //          console.error(err);
           
-         });
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      },
-      { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
-      );
-    }
+  //        });
+  //     }, () => {
+  //       setStatus('Unable to retrieve your location');
+  //     },
+  //     { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
+  //     );
+  //   }
 
-    //return pincode;
-  }
+  //   //return pincode;
+  // }
 
 
 
@@ -258,16 +258,16 @@ const HomeSearchBar=({setshowSearchedProduct})=>{
 
     useEffect(() => {
 
-      getLocation();
+      //getLocation();
 
       // dispatch(ProductList()).then((searchdata)=>{
       //     console.log(searchdata);
       //     setProducts(searchdata.payload);
 
      // });
-
+      console.log(props.pincode);
       
-     pincode ? dispatch1(getProductsByLocation(pincode)).then((productsByLocation)=>{
+     props.pincode ? dispatch1(getProductsByLocation(props.pincode)).then((productsByLocation)=>{
         console.log("In getProduct by location dispatch.....");
         console.log(productsByLocation.payload.products);
         setProducts(productsByLocation.payload.products);
@@ -352,10 +352,10 @@ const HomeSearchBar=({setshowSearchedProduct})=>{
             inputProps={{ 'aria-label': 'im searching for' }}
             onChange={(e) => {
               setSearch(e.target.value.toLowerCase());
-              setshowSearchedProduct(false);
+              props.setshowSearchedProduct(false);
               if(e.target.value.length==0){
                 setshowProducts(false);
-                setshowSearchedProduct(true);
+                props.setshowSearchedProduct(true);
               }else{
                 setshowProducts(true);
                 
@@ -372,7 +372,7 @@ const HomeSearchBar=({setshowSearchedProduct})=>{
             className={classes.inputLocation}
             placeholder="Location"
             inputProps={{ 'aria-label': 'Location' }}
-            value={pincode}
+            value={props.pincode}
             
         />
           <ArrowDropDownIcon className={classes.arrowDropDown} />
