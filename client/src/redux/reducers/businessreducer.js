@@ -1,10 +1,10 @@
-import { GET_BUSINESS, SELF, CLEAR_BUSINESS,UPDATE_BUSINESS } from "../constants/businessconstants";
+import { GET_BUSINESS, SELF, CLEAR_BUSINESS,UPDATE_BUSINESS,GET_BUSINESS_BY_LOC } from "../constants/businessconstants";
 
 const INITIAL_STATE = {
   business: {},
 };
 
-const BusinessReducer = (state = INITIAL_STATE, action) => {
+export const BusinessReducer = (state = {business: {}}, action) => {
   switch (action.type) {
     case GET_BUSINESS:
       return {
@@ -26,6 +26,8 @@ const BusinessReducer = (state = INITIAL_STATE, action) => {
     case CLEAR_BUSINESS:
       return {};
 
+    
+
     default:
       return {
         ...state,
@@ -33,4 +35,20 @@ const BusinessReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default BusinessReducer;
+export const getBusinessByLocationReducer = (state = {business:[]},action) => {
+    
+  switch (action.type) {
+      
+      case GET_BUSINESS_BY_LOC:
+          return {...state, 
+              business: action.payload };
+      
+      
+
+      default:
+          return state;
+  }
+};
+
+
+

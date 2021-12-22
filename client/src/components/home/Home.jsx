@@ -6,16 +6,62 @@ import Headings from './Headings'
 //import { productDetails } from "../../constants/data";
 import Cards from './Cards';
 import Footer from '../footer/footer';
+import * as opencage from 'opencage-api-client';
 
 
 import MultiSlider from './MultiSlider';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts as ProductList } from '../../redux/actions/productActions';
 import { getMyself } from '../../redux/actions/userActions';
+import { getBusinessbylocation } from '../../redux/actions/businessActions';
 import { getMyBusiness } from '../../redux/actions/businessActions';
+
 import SearchBarSection from '../DemoSearch/SearchBarSection';
 import SellersInformationCard from './SellersInformation';
 const Home = () => {
+
+
+
+  const [pincode,setpincode]=useState("");
+  const [status, setStatus] = useState(null);
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      const id=navigator.geolocation.watchPosition((position) => {
+        setStatus(null);
+        console.log(position);
+       const string=position.coords.latitude+","+position.coords.longitude;
+         opencage
+         .geocode({ key: '574f2e7a4cba478c9e03b38705c09f8c' , q:string })
+         .then(response => {
+           console.log(response);
+           setpincode(response.results[0].components.postcode);
+           console.log(pincode);
+           
+  
+           navigator.geolocation.clearWatch(id);
+         
+         
+          
+          
+         })
+         .catch(err => {
+           console.error(err);
+          
+         });
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      },
+      { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
+      );
+    }
+
+    //return pincode;
+  }
+
 
     console.log("Inside home 1");
 
@@ -65,8 +111,13 @@ const Home = () => {
       }
 
 
+        getLocation();
+
+        console.log(pincode);
+        
 
 
+        dispatch(getBusinessbylocation(411002)).then((x)=>console.log(x));
         dispatch(ProductList());
         console.log("Inside dispatch");
     }, [dispatch])
@@ -79,7 +130,7 @@ const Home = () => {
     return (
       <div >
              {/* <HomeSearchBar/> */}
-             <HomeSearchBar  setshowSearchedProduct={setshowSearchedProduct}/>
+             <HomeSearchBar  setshowSearchedProduct={setshowSearchedProduct} pincode={pincode}/>
 
              {
                showSearchedProduct ? 
