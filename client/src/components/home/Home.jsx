@@ -14,6 +14,7 @@ import { getProducts as ProductList } from '../../redux/actions/productActions';
 import { getMyself } from '../../redux/actions/userActions';
 import { getMyBusiness } from '../../redux/actions/businessActions';
 import SearchBarSection from '../DemoSearch/SearchBarSection';
+import SellersInformationCard from './SellersInformation';
 const Home = () => {
 
     console.log("Inside home 1");
@@ -85,6 +86,8 @@ const Home = () => {
                <>
 
                 <Banner />
+                <Headings name="Sellers NearBy"/> 
+                <SellersInformationCard/>
                 <Headings name="NEW ARRIVALS"/> 
                 <Cards data={getProducts.Products}/> 
         

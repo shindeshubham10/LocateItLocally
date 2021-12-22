@@ -2,7 +2,7 @@
 import { ProductModel } from "../SchemaModels/products";
 import {BusinessModel} from "../SchemaModels/business"
 
-import {BusinessModel} from "../SchemaModels/business"
+
 export const getProducts = async (req, res) => {
     try {
         console.log("Hello");
