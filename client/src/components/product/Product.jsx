@@ -172,6 +172,7 @@ const initialbusinessdata={
     twitter:"",
     facebook:"",
     instagram:"",
+    rating:0,
 
 
 };

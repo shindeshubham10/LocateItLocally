@@ -250,6 +250,7 @@ const initialbusinessdata={
     twitter:"",
     facebook:"",
     instagram:"",
+    rating:0,
 
 
 };
@@ -344,8 +345,10 @@ const ShopDetails = () => {
                         <li>
                             <ReactStars 
                                 count={5}
-                                size={mobileScreen?8:24}
                                 value={sellerdata.rating}
+                                size={mobileScreen?8:24}
+                                
+                                
                                 
                             />
                         </li>

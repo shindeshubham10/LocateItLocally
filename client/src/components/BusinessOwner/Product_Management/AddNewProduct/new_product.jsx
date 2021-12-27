@@ -174,6 +174,8 @@ const intialValues={
     countInStock:0,
     availability:"",
     image:[],
+    rating:0,
+    
 
 
 }

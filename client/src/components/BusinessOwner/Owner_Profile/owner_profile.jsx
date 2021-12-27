@@ -21,6 +21,7 @@ const businessInitialValues = {
     twitter:"",
     facebook:"",
     instagram:"",
+    rating:0,
 
 }
 
