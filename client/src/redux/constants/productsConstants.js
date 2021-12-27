@@ -28,6 +28,13 @@ export const GET_PRODUCTS_OF_BUSINESS_BYID_FAILURE="getproductsofbusinessbyidfai
 export const GET_PRODUCTS_BY_LOCATION_SUCCESS="getproductByLocationsuccess"
 export const GET_PRODUCTS_BY_LOCATION_FAILURE="getproductsByLocationfailure"
 
+export const GET_LATEST_PRODUCTS_SUCCESS="getlatestproductsuccess"
+export const GET_LATEST_PRODUCTS_FAILURE="getlatestproductfailure"
+
+export const GET_TOP_PRODUCTS_SUCCESS="getlatestproductsuccess"
+export const GET_TOP_PRODUCTS_FAILURE="getlatestproductfailure"
+
+
 
 
 

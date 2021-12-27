@@ -8,20 +8,21 @@ import Cards from './Cards';
 import Footer from '../footer/footer';
 import * as opencage from 'opencage-api-client';
 
-
+import MapView from '../MapView';
 import MultiSlider from './MultiSlider';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts as ProductList } from '../../redux/actions/productActions';
 import { getMyself } from '../../redux/actions/userActions';
 import { getBusinessbylocation } from '../../redux/actions/businessActions';
 import { getMyBusiness } from '../../redux/actions/businessActions';
-
+import { getlatestProducts } from '../../redux/actions/productActions';
 import SearchBarSection from '../DemoSearch/SearchBarSection';
 import SellersInformationCard from './SellersInformation';
 const Home = () => {
 
 
-
+  const [latestproducts,setlatestproducts]=useState([])
+  const [sellerbyloc,setsellerbyloc]=useState([])
   const [pincode,setpincode]=useState("");
   const [status, setStatus] = useState(null);
   const [sellerInfo,setsellerInfo] = useState([]);
@@ -56,7 +57,7 @@ const Home = () => {
       }, () => {
         setStatus('Unable to retrieve your location');
       },
-      { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
+      { enableHighAccuracy: true }
       );
     }
 
@@ -125,6 +126,7 @@ const Home = () => {
           console.log("after setting ================ ",SellersInforamtion.payload.business);
         });
         dispatch(ProductList());
+        dispatch(getlatestProducts()).then((x)=>setlatestproducts(x.payload.products));
         console.log("Inside dispatch");
     }, [dispatch,dispatch1,pincode])
 
@@ -146,12 +148,14 @@ const Home = () => {
                 <Headings name="Sellers NearBy"/> 
                 <SellersInformationCard info={sellerInfo}/>
                 <Headings name="NEW ARRIVALS"/> 
-                <Cards data={getProducts.Products}/> 
+                <Cards data={latestproducts}/> 
         
                  <Headings name="TOP PRODUCTS"/> 
                  <MultiSlider/> 
                 <Headings name="TOP SELLERS"/> 
                 <Cards data={getProducts.Products}/> 
+                <MapView data={sellerbyloc}/>
+                
                </> : <>Your Searched Products</>
              }
              

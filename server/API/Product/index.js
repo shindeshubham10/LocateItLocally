@@ -3,7 +3,7 @@
 
 // // Database modal
 import { ProductModel } from "../../SchemaModels/products";
-import { getProductDetails, getProducts,getProductByCategory,getProductsBySellerLoc } from "../../Controllers/productController";
+import { getProductDetails, getProducts,getProductByCategory,getProductsBySellerLoc ,getlatestProducts,gettopProducts} from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -200,6 +200,11 @@ Access    Public
 Method    GET
 */
 Router.get("/bysellerlocation/:loc",getProductsBySellerLoc);
+
+Router.get("/getproducts/latest",getlatestProducts);
+
+Router.get("/getproducts/top",gettopProducts);
+
 
 
 

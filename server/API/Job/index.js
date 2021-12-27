@@ -21,6 +21,7 @@ Router.post("/add",passport.authenticate("business"), async(req,res)=>{
           console.log(_id);
           console.log(jobData);
           await JobModel.create({ ...jobData, recruiter: _id });
+          
           console.log("Jhala ka");
           console.log(jobData);
 

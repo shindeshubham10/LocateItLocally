@@ -97,6 +97,36 @@ export const getProductsBySellerLoc= async(req,res) => {
     return res.status(500).json({ error: error.message });
   }
 }
+//get latest products
+export const getlatestProducts=async(req,res)=>{
+
+    try{
+          const products=await ProductModel.find().sort({_id:-1}).limit(10);
+          return res.json({ products });
+    }
+    catch(error){
+
+      return res.status(500).json({ error: error.message });
+
+
+
+    }
+}
+//get top rated products
+export const gettopProducts=async(req,res)=>{
+
+  try{
+        const products=await ProductModel.find().sort({rating:-1}).limit(10);
+        return res.json({ products });
+  }
+  catch(error){
+
+    return res.status(500).json({ error: error.message });
+
+
+
+  }
+}
 // export const getManyProductDetails = async(req,res)=>{
 
 //   try {
