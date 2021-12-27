@@ -296,6 +296,7 @@ const Product=({data})=>{
                             count={5}
                             size={24}
                             activeColor="#ffd700"
+                            value={data.Products.product.rating}
                         />
                     <Typography style={{fontSize:25,fontFamily:['Monteserrat','sans-serif'],marginTop:10,fontWeight:400,}}>
                     { data.Products.product.name}
@@ -393,7 +394,7 @@ const Product=({data})=>{
                         <Box  style={{marginLeft:10,marginTop:10,}}>
                             <ReactStars
                                 count={5}
-                               
+                                value={sellerdata.rating}
                                 size={24}
                                 activeColor="#ffd700"
                             />

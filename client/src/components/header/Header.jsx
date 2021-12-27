@@ -274,8 +274,10 @@ const RenderHeader = () => {
 const Header = (props) => {
 
   useEffect(()=>{
-      <RenderHeader/>
-  },[])
+    console.log("Header Rendered Bro");
+      //<RenderHeader/>
+      
+  })
   return(
     <>
      <RenderHeader/>

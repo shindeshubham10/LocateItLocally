@@ -61,6 +61,9 @@ function Register()
   const [signupbusinessState, setsignupbusinessState] = React.useState(signUpBusinessInitialValues);
 
   const [error,seterror]=React.useState(false);
+
+  const [errorresponse,seterrorresponse]=React.useState("");
+
   const [move,setmove]=React.useState(false);
 
   const dispatch=useDispatch();
@@ -69,21 +72,35 @@ function Register()
     console.log("enter into function");
     //let data = JSON.stringify({ signupState });
     //let response = await UserSignUp(signupState);
-        let response=dispatch(UsersignUp(signupState))
-    console.log(response);
-    console.log("dfndncjndjk");
-    if (!response)
-    {
-      seterror(true);
+      dispatch(UsersignUp(signupState)).then((x)=>{
+
+        console.log(x);
+        if(x.type=="ERROR")
+        {
+          seterror(true);
+          seterrorresponse(x.payload.response.data.error);
+          setmove(false);
+
+        }
+        else
+        {
+            setmove(true)
+        }
+      })
+    // console.log(response);
+    // console.log("dfndncjndjk");
+    // if (!response)
+    // {
+    //   seterror(true);
      
-      return;
-    }
-    else
-    {
+    //   return;
+    // }
+    // else
+    // {
 
-      setmove(true);
+    //   setmove(true);
 
-    }
+    // }
          
   
   };
@@ -91,20 +108,23 @@ function Register()
   const signUpBusiness = async () => {
     console.log("enter into function");
     //let response = await BusinessSignUp(signupbusinessState);
-    let response=dispatch(BusinesssignUp(signupbusinessState))
-    console.log(response);
-    if (!response)
-    {
-      seterror(true);
-     
-      return;
-    }
-    else
-    {
 
-      setmove(true);
+    dispatch(BusinesssignUp (signupbusinessState)).then((x)=>{
 
-    }
+      console.log(x);
+      if(x.type=="ERROR")
+      {
+        seterror(true);
+        seterrorresponse(x.payload.response.data.error);
+        setmove(false);
+
+      }
+      else
+      {
+          setmove(true)
+      }
+    })
+    
   
   };
 
@@ -321,7 +341,7 @@ function Register()
                 </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
 
-                         {error && <Typography className={classes.error}>User Already Exist </Typography>}
+                         {error && <Typography className={classes.error}>{errorresponse}</Typography>}
 
                 </Grid>
 
@@ -446,6 +466,12 @@ function Register()
                     sx={{width:"45vh",padding:"5px"}}
                   />
                   </Grid> */}
+
+                      <Grid item lg={12} sm={12} xs={12} style={{justifyContent:"center",}}>
+
+                      {error && <Typography className={classes.error}>{errorresponse}</Typography>}
+
+                      </Grid>
                   </Grid>
                 </Grid>
               }

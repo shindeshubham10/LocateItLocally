@@ -43,11 +43,11 @@ const UserReview = ({open,setopenReview}) => {
             ...reviewData,
             product: id,
           })
-        ).then((data)=>data.type=="ERROR"?alert("Already Reviewed"):console.log("Reviewd"))
+        ).then((data)=>console.log(data))
         setReviewData({
           
           reviewText: "",
-          isProductReview: false,
+          isProductReview: true,
           isBusinessReview: false,
           rating: 0,
         });

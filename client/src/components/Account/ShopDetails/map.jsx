@@ -85,6 +85,7 @@ const Map=(props)=>{
                                     {props.address}
                                     </Popup>
                                 </Marker>
+                                
                             </MapContainer>
                             
                             :<div>Loading...</div>

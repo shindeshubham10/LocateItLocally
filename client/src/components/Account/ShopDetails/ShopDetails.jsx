@@ -337,6 +337,7 @@ const ShopDetails = () => {
                             <ReactStars 
                                 count={5}
                                 size={mobileScreen?8:24}
+                                value={sellerdata.rating}
                                 
                             />
                         </li>

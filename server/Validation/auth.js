@@ -14,6 +14,8 @@ const Schema = joi.object({
   
 });
 
+console.log(Schema.validateAsync(userData));
+
 return Schema.validateAsync(userData);
 
 };

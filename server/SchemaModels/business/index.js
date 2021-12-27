@@ -77,6 +77,10 @@ const BusinessSchema = new mongoose.Schema({
         type:String
       }
     ],
+
+    rating:{
+      type:Number
+    },
   
     reviews: {
       type: mongoose.Types.ObjectId,

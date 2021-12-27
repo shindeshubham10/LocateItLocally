@@ -14,6 +14,8 @@ import Cards from "../home/Cards";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProductDetails, getProductByCategory } from '../../redux/actions/productActions'
+
+import { getReviews } from '../../redux/actions/reviewActions'
 import { Typography } from '@mui/material'
 
 
@@ -23,6 +25,8 @@ const ProductDetails = ({match}) => {
     const [loading, setloading] = React.useState(false);
 
     const [categoryWiseProduct,setcategoryWiseProduct] = React.useState([]);
+
+    const [reviews,setreviews]=React.useState([]);
        
 
     const handleAlignment = (event, newAlignment) => {
@@ -52,6 +56,8 @@ const ProductDetails = ({match}) => {
                  
              });
         });
+
+        dispatch(getReviews(match.params.id)).then((data)=>console.log(data));
       
     },[dispatch,dispatch1])
 
