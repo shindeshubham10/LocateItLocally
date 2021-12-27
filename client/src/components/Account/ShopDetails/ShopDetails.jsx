@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import Map from './map.jsx';
 import ShowAllJobs from './showAllJobs.jsx';
 import ShowShopPhotos from './showPhotos';
+import Description from './ShopDescription';
 
 const names = [
     'JBL',
@@ -413,6 +414,9 @@ const ShopDetails = () => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Reviews/>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <Description data={sellerdata}/>
                 </TabPanel>
 
                 <TabPanel value={value} index={3}>

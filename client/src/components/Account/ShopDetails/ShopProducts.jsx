@@ -9,7 +9,8 @@ import { productDetails } from '../../../constants/data';
 //import { productDetails } from '../../constants/data'; 
 import ProductCard from '../../home/ProductCard';
 import { useTheme } from '@emotion/react';
-
+import { Link,Switch} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -79,7 +80,7 @@ const useStyle = makeStyles(theme => ({
         
     },
     productContainer: {
-        backgroundColor: 'green',
+        //backgroundColor: 'green',
         width: '100%',
         height: '100%',
         marginTop: 40,
@@ -97,7 +98,7 @@ const useStyle = makeStyles(theme => ({
         }
   },
   forProductCards: {
-    backgroundColor: 'orange',
+    //backgroundColor: 'orange',
     width:'90vw',
     //width: '100%',
 
@@ -160,7 +161,7 @@ const ShopProducts = ({productsData}) => {
           {
             productsData ? 
             <Pagination
-            data={productDetails}
+            data={productsData}
             RenderComponent={IndividualProductCard} // here whole component is returned
             // flow of the component are - 
             // 1. IndividualProductCard is rendered
@@ -180,25 +181,31 @@ const ShopProducts = ({productsData}) => {
 
 // So this function is used to provide ProductCard that we built previously. It will return that ProductCard with data on it
 function IndividualProductCard(props) {
-  //const { image, category, name, price,} = props.data;
-  const {imageUrl,productCategory,productName,productPrice} = props.data
+  const { image, category, name, price,_id} = props.data;
+  //const {imageUrl,productCategory,productName,productPrice} = props.data
  
   return (
     <>
-      {/* <ProductCard
+     
+      <Link to={`/productsDetails/${_id}`}>
+      <ProductCard
                   image={image[0]}
                   category={category}
                   productname={name}
                   productprice={price}
                             
-        />    */}
-         <ProductCard
+        />  
+      </Link>
+    
+      
+       
+         {/* <ProductCard
                   image={imageUrl}
                   category={productCategory}
                   productname={productName}
                   productprice={productPrice}
                             
-        />  
+        />   */}
         <Divider style={{ marginTop: 40, marginBottom: 40 }} />
       </>
   );
@@ -232,8 +239,8 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
    
      const startIndex = currentPage * dataLimit - dataLimit;
      const endIndex = startIndex + dataLimit;
-    // return data.slice(startIndex, endIndex);
-     return productDetails.slice(startIndex, endIndex);
+     return data.slice(startIndex, endIndex);
+     //return productDetails.slice(startIndex, endIndex);
   };
 
   const getPaginationGroup = () => {

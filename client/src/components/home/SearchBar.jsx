@@ -279,7 +279,7 @@ const HomeSearchBar=(props)=>{
       //setshowSearchedProduct(false);
       console.log("Inside dispatch");
 
-  }, [dispatch1])
+  }, [dispatch1,pincode])
 
     const filteredProducts = Products?.filter((product) => {
         if (

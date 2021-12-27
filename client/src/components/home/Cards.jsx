@@ -113,7 +113,7 @@ const Cards = ({data}) => {
                   data ? 
                   data.map( details => (
                         
-                    <Link to={`productsDetails/${details._id}`}>
+                    <Link to={`/productsDetails/${details._id}`}>
                       <ProductCard
                       image={details.image[0]}
                       category={details.category}

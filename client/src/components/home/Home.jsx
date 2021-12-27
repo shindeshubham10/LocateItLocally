@@ -134,7 +134,6 @@ const Home = () => {
 
 
 
-
     return (
       <div >
              {/* <HomeSearchBar/> */}
@@ -154,7 +153,7 @@ const Home = () => {
                  <MultiSlider/> 
                 <Headings name="TOP SELLERS"/> 
                 <Cards data={getProducts.Products}/> 
-                <MapView data={sellerbyloc}/>
+                {/* <MapView data={sellerbyloc}/> */}
                 
                </> : <>Your Searched Products</>
              }
