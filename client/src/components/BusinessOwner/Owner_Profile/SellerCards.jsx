@@ -23,7 +23,7 @@ const useStyle = makeStyles(theme=>({
 
 const SellerInfoCard=(props)=>{
 
-const {image,name,address,contact} = props;
+const {image,name,address,contact,rating} = props;
     const classes=useStyle();
 /** name address avatar contact number job avalability */
 
@@ -54,7 +54,7 @@ const {image,name,address,contact} = props;
                     </Grid>
                     <Grid container  >
                         <Grid item lg={12} >
-                        <Typography  style={{color:'#34495e', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem',marginTop:4,marginBottom:4}}>Job Availability : Yes/No</Typography>
+                        <Typography  style={{color:'#34495e', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem',marginTop:4,marginBottom:4}}>Rating : {rating}</Typography>
                         </Grid>
                         
                     </Grid>

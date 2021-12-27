@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Redux types
-import {GET_BUSINESS,AUTH_BUSINESS,SELF,CLEAR_BUSINESS,UPDATE_BUSINESS,GET_BUSINESS_BY_LOC} from "../constants/businessconstants.js"
+import {GET_BUSINESS,AUTH_BUSINESS,SELF,CLEAR_BUSINESS,UPDATE_BUSINESS,GET_BUSINESS_BY_LOC,GET_TOP_SELLERS_SUCCESS,GET_TOP_SELLERS_FAILURE} from "../constants/businessconstants.js"
 
 export const getBusiness = (_id) => async (dispatch) => {
   try {
@@ -67,6 +67,25 @@ export const getBusinessbylocation = (loc) => async (dispatch) => {
     return dispatch({ type: GET_BUSINESS_BY_LOC, payload: Business.data });
   } catch (error) {
     return dispatch({ type: "ERROR", payload: error });
+  }
+};
+
+export const gettopSellers = () => async (dispatch) => {
+
+  try {
+      console.log("Enter getProducts in axios ");
+      const sellers = await axios({
+        method: "GET",
+        url: `http://localhost:2000/business/getsellers/top`,
+      });
+      console.log("Response in Product Actions ");
+      console.log(sellers);
+      return dispatch({ type: GET_TOP_SELLERS_SUCCESS, payload:sellers.data });
+    
+
+  } catch (error) {
+      console.log("Error while getProducts");
+     return dispatch({ type: GET_TOP_SELLERS_FAILURE, payload: error.response });
   }
 };
 

@@ -121,7 +121,7 @@ const SellersInformationCard = ({info}) => {
                         name={details.name}
                         address={details.address}
                         contact={details.contactNumber}
-                    
+                        rating={details.rating}
                       />
                       </Link>
                       
