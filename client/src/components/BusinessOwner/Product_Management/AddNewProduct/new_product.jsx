@@ -238,11 +238,11 @@ const Newproduct = () => {
 
     //const [ProductImage,setProductImage] = React.useState([]);
 
-    const onProfileImageError = err => {
+    const onProductImageUploadError = err => {
         console.log("Error", err);
       };
       
-      const onProfileImageSuccess = res => {
+      const onProfileImageUploadSuccess = res => {
         console.log("Success", res);
         setImage([...image,res.url]);
         console.log(image);
@@ -459,24 +459,19 @@ const Newproduct = () => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                     <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {/* {  image[0]?<img src={image[0]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-
-                                                            <div>
-                                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                                    onChange={Imageset} 
-                                                                />
-                                                                <div className='label'>
-                                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                                        click to browse
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            </Typography>
-                                    } */}
+                                        
 
                            { 
-                           image[0]?<img src={image[0]}/> :
+                           image[0]?
+                        //    <img src={image[0]}/> 
+                           <IKContext 
+                            publicKey={publicKey} 
+                            urlEndpoint={urlEndpoint} 
+                            authenticationEndpoint={authenticationEndpoint}
+                           >
+                              <IKImage src={image[0]}/> 
+                           </IKContext>
+                           :
                            <IKContext 
                                 publicKey={publicKey} 
                                 urlEndpoint={urlEndpoint} 
@@ -487,14 +482,15 @@ const Newproduct = () => {
                             <div>
                             <IKUpload id='upload-image'
                                 
-                                fileName="userProfile-photo.png"
-                                onError={onProfileImageError}
-                                onSuccess={onProfileImageSuccess}
+                                fileName="productImage.png"
+                                onError={onProductImageUploadError}
+                                onSuccess={onProfileImageUploadSuccess}
                                 folder={"/Products"}
                                 
                             />
+                            <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
                             <div className='label'>
-                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
                                 click to browse
                                 </label>
                             </div>
@@ -516,24 +512,7 @@ const Newproduct = () => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                        <AddPhotoAlternateOutlinedIcon fontSize='large' style={ {color:'#C4C4C4'}}/>
-                                
-                                        {/* {  image[1]?<img src={image[1]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-
-                                            <div>
-                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    //onChange={Imageset} 
-                                                />
-                                                <div className='label'>
-                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                        click to browse
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </Typography>
-                                    } */}
-
-
+              
                         { 
                            image[1]?<img src={image[1]}/> :
                            <IKContext 
@@ -546,14 +525,15 @@ const Newproduct = () => {
                             <div>
                             <IKUpload id='upload-image'
                                 
-                                fileName="userProfile-photo.png"
-                                onError={onProfileImageError}
-                                onSuccess={onProfileImageSuccess}
+                                fileName="productImage.png"
+                                onError={onProductImageUploadError}
+                                onSuccess={onProfileImageUploadSuccess}
                                 folder={"/Products"}
                                 
                             />
+                             <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
                             <div className='label'>
-                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
                                 click to browse
                                 </label>
                             </div>
@@ -578,7 +558,7 @@ const Newproduct = () => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                     <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
+                                        
                                      { 
                            image[2]?<img src={image[2]}/> :
                            <IKContext 
@@ -587,18 +567,19 @@ const Newproduct = () => {
                                 authenticationEndpoint={authenticationEndpoint} 
                                
                             >
-                                {/* <p>click to browse</p> */}
+                               
                             <div>
                             <IKUpload id='upload-image'
                                 
-                                fileName="userProfile-photo.png"
-                                onError={onProfileImageError}
-                                onSuccess={onProfileImageSuccess}
+                                fileName="productImage.png"
+                                onError={onProductImageUploadError}
+                                onSuccess={onProfileImageUploadSuccess}
                                 folder={"/Products"}
                                 
                             />
+                            <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
                             <div className='label'>
-                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
                                 click to browse
                                 </label>
                             </div>
@@ -619,7 +600,7 @@ const Newproduct = () => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                     <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
+                                   
                                      { 
                                         image[3]?<img src={image[3]}/> :
                                         <IKContext 
@@ -628,19 +609,22 @@ const Newproduct = () => {
                                             authenticationEndpoint={authenticationEndpoint} 
                                         
                                         >
-                                            {/* <p>click to browse</p> */}
+                                           
                                         <div>
                                         <IKUpload id='upload-image'
                                             
-                                            fileName="userProfile-photo.png"
-                                            onError={onProfileImageError}
-                                            onSuccess={onProfileImageSuccess}
+                                            fileName="productImage.png"
+                                            onError={onProductImageUploadError}
+                                            onSuccess={onProfileImageUploadSuccess}
                                             folder={"/Products"}
                                             
                                         />
+                                        <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
                                         <div className='label'>
-                                            <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem'}}>
+                                            
+                                            <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
                                             click to browse
+                                            
                                             </label>
                                         </div>
                                         </div>

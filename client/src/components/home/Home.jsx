@@ -17,6 +17,7 @@ import { getBusinessbylocation } from '../../redux/actions/businessActions';
 import { getMyBusiness } from '../../redux/actions/businessActions';
 import { getlatestProducts } from '../../redux/actions/productActions';
 import SearchBarSection from '../DemoSearch/SearchBarSection';
+import SellersInformationCard from './SellersInformation';
 const Home = () => {
 
 
@@ -24,6 +25,7 @@ const Home = () => {
   const [sellerbyloc,setsellerbyloc]=useState([])
   const [pincode,setpincode]=useState("");
   const [status, setStatus] = useState(null);
+  const [sellerInfo,setsellerInfo] = useState([]);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -90,6 +92,7 @@ const Home = () => {
    
 
     const dispatch = useDispatch();
+    const dispatch1= useDispatch();
 
     useEffect(() => {
 
@@ -115,16 +118,19 @@ const Home = () => {
 
         console.log(pincode);
         
+      
 
-
-        dispatch(getBusinessbylocation(pincode.toString())).then((x)=>setsellerbyloc(x.payload.business));
+    dispatch1(getBusinessbylocation(pincode.toString())).then((SellersInforamtion)=>{
+          console.log(SellersInforamtion)
+          setsellerInfo(SellersInforamtion.payload.business);
+          console.log("after setting ================ ",SellersInforamtion.payload.business);
+        });
         dispatch(ProductList());
         dispatch(getlatestProducts()).then((x)=>setlatestproducts(x.payload.products));
         console.log("Inside dispatch");
-    }, [dispatch,pincode])
+    }, [dispatch,dispatch1,pincode])
 
     const [showSearchedProduct,setshowSearchedProduct] = useState(true);
-
 
 
 
@@ -138,6 +144,8 @@ const Home = () => {
                <>
 
                 <Banner />
+                <Headings name="Sellers NearBy"/> 
+                <SellersInformationCard info={sellerInfo}/>
                 <Headings name="NEW ARRIVALS"/> 
                 <Cards data={latestproducts}/> 
         
@@ -145,7 +153,7 @@ const Home = () => {
                  <MultiSlider/> 
                 <Headings name="TOP SELLERS"/> 
                 <Cards data={getProducts.Products}/> 
-                <MapView data={sellerbyloc}/>
+                {/* <MapView data={sellerbyloc}/> */}
                 
                </> : <>Your Searched Products</>
              }

@@ -7,7 +7,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Typography,useMediaQuery} from '@material-ui/core';
 
-import Reviews from './reviews';
+
 const useStyle = makeStyles(theme=>({
     
         
@@ -22,24 +22,27 @@ const Description = ({data}) => {
     const handleAlignment = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
+    data ? console.log(data) : console.log('fffffffffffffff');
     const content = <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident corrupti quod eligendi exercitationem iste laborum, voluptatem adipisci aliquam ex fuga?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates reprehenderit ut asperiores neque quos. Saepe, incidunt reprehenderit vel provident cum mollitia maxime corrupti vero voluptatem porro placeat quam iusto id fugiat modi repellat amet veniam optio exercitationem eum aliquam nisi? Quisquam tempore hic sed saepe repellendus atque debitis repudiandae maxime veritatis quae minus animi, ut a excepturi vero fuga? Commodi?</div>
     return (
         <Grid container >
             <Grid
-            item xs={12}
+            item xs={12} lg={12}
             sx={{
                 width: '100%',
                 minHeight:300,
-                backgroundColor: '#f3f3f3',
-                margin:"40px 20px",
+               backgroundColor: '#f3f3f3',
+                //backgroundColor: 'red',
+                margin:"40px 90px",
                 position:"relative",
                 border:"1px solid black",
                 borderRadius:"10px",
                 flexGrow:"1",
+                width:'70vw'
                 
             }}
             >
-            <Box 
+            {/* <Box 
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
@@ -65,15 +68,15 @@ const Description = ({data}) => {
                     </ToggleButton>
                     
                 </ToggleButtonGroup>  
-            </Box>
+            </Box> */}
+            {
+            data ? 
             <Grid sx={{textAlign:"center",margin:"60px 20px 20px 20px"}}>
-            { alignment=="A" && data.Products ?
-                <Typography> {data.Products.product.description}</Typography>
-            :
-             <Reviews/>
             
+                <Typography>{data.description}</Typography>
+            
+            </Grid> : <div>Description Loading..</div>
             }
-            </Grid>
           </Grid>
         </Grid>
     )

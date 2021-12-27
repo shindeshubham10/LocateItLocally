@@ -68,7 +68,9 @@ const useStyles=makeStyles(theme=>(
         boxForMainImage:{
             width:"100%",
             height: "100%",
-           
+            padding:10,
+            //backgroundColor:'green'
+
             
         },
         sellerInfoHeading: {
@@ -268,12 +270,12 @@ const Product=({data})=>{
                     sx={{ width: mobileScreen ? '70%' : 200, height: 300 }}
                     
                     >
-                        {itemData.map((item) => (
-                            <ImageListItem key={item.img}>
+                        {data.Products.product.image.map((item) => (
+                            <ImageListItem key={item}>
                             <img
-                                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
+                                src={item}
+                                //srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                alt='Product Images'
                                     loading="lazy"
                                     width={'100%'}
                                     height={'100%'}
@@ -284,7 +286,7 @@ const Product=({data})=>{
                     
                 <Grid item className={classes.gridForMainBigImage} >
                     <Box className={classes.boxForMainImage} >
-                        <img style={{width:"100%",height:"100%"}} src="https://cdn.shopify.com/s/files/1/0067/6429/8297/products/sound2_79x79.jpg?v=1569164954" alt=""/>
+                        <img style={{width:"100%",height:"100%",borderRadius:5}} src={data.Products.product.image[1]} alt=""/>
                     </Box>
                 </Grid>
                 <Grid item xs={12} lg={4} className={classes.productAllInformation}>
@@ -306,22 +308,16 @@ const Product=({data})=>{
                     ₹{ data.Products.product.price}
                    
                     </Typography>
-                    <Typography style={{marginTop:10,fontSize:20,fontWeight:400,fontFamily:['Open Sans','sans-serif']}}>
-                    Uses a dictionary of over combined with a handful of model sentence structures, to generate lorem Ipsum which looks reasonable.My name is  anthony gp
+                    <Typography style={{marginTop:10,marginBottom:20,fontSize:20,fontWeight:400,fontFamily:['Open Sans','sans-serif']}}>
+                   {data.Products.product.description}
                     </Typography>
                     
                     <Box>
-                        <List>
+                        {/* <List>
                             {
                                  features_.map(
                                     item =>(
                                         <ListItem key={item}>
-                                                {/* <ListItemIcon>
-                                                    <ArrowRight/>
-                                                </ListItemIcon>
-                                                <ListItemText style={{fontSize:15,fontWeight:400,fontFamily:['Roboto','sans-serif']}}>
-                                                    {item}
-                                                </ListItemText> */}
                                                 <ArrowRight/>
                                                 {item}
                                         </ListItem>
@@ -333,7 +329,7 @@ const Product=({data})=>{
                             }
                            
 
-                        </List>
+                        </List> */}
                     </Box>
                     
                    

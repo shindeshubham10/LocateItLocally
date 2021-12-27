@@ -51,7 +51,7 @@ import { getMyself } from './redux/actions/userActions';
 import { getMyBusiness } from './redux/actions/businessActions';
 import TemplateProvider from './templates/TemplateProvider';
 import SearchBarSection from './components/DemoSearch/SearchBarSection';
-
+import DemoCurrentLocation from './components/home/DemoCurrentLocation';
 // axios global settings
 if (localStorage.LocateItLocallyUser) {
   const { token } = JSON.parse(localStorage.LocateItLocallyUser);
@@ -146,6 +146,7 @@ const [isAuthenticated,setisAuthenticated]=useState(1);
         <Route exact path="/display_user_profile" component={display_user_profile} />
         <Route exact path="/allproducts/:options/" component={ShowProducts}/>
         <Route exact path="/allproducts" component={ShowProducts}/>
+        <Route exact path="/demolocation" component={DemoCurrentLocation}/>
       
         
       

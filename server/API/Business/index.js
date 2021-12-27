@@ -11,10 +11,10 @@ Router.get("/", passport.authenticate("business"), async (req, res) => {
   try {
     console.log(req);
    console.log(req.session.passport.user._doc);
-   const { email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name,pincode,profilePicture} =
+   const { email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name,pincode,profilePicture,Shopimages} =
       req.session.passport.user._doc;
      
-    return res.json({ business: {  email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name,pincode,profilePicture} });
+    return res.json({ business: {  email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name,pincode,profilePicture,Shopimages} });
   } catch (error) {     return res.status(500).json({ error: error.message });
   }
 });

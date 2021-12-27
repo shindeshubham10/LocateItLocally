@@ -83,7 +83,7 @@ const ProductDetails = ({match}) => {
        <>
             
             <Product data={productDetails}/> 
-            <Description />
+            <Description data={productDetails} />
             <Headings name="Related Products" />
             <Cards data={categoryWiseProduct}/> 
              <FAQ /> 
