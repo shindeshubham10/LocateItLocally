@@ -69,9 +69,11 @@ Router.post("/new", passport.authenticate("user"), async (req, res) => {
     if(reviewData.isProductReview===true)
     {
       console.log("Here Also");
-      const product = await ProductModel.find({ _id:reviewData.product});
+      const product = await ProductModel.findOne({ _id:reviewData.product});
       console.log(product);
-      var rate=(reviewData.rating)/2;
+      console.log(reviewData.rating);
+     
+      var rate=Math.round((reviewData.rating+product.rating)/2);
 
       const updateProductData = await ProductModel.findByIdAndUpdate(
         reviewData.product,
@@ -89,8 +91,8 @@ Router.post("/new", passport.authenticate("user"), async (req, res) => {
     }
     else
     {
-      const business = await BusinessModel.find({ _id:reviewData.business });
-      var rate=(reviewData.rating)/2;
+      const business = await BusinessModel.findOne({ _id:reviewData.business });
+      var rate=Math.round((reviewData.rating +business.rating)/2);
       const updateBusinessData = await BusinessModel.findByIdAndUpdate(
         reviewData.business,
         {
