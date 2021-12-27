@@ -12,7 +12,7 @@ const useStyle = makeStyles(theme=>({
     
         
 }))
-const Description = () => {
+const Description = ({data}) => {
 
     const classes=useStyle()
     const theme = useTheme();
@@ -60,9 +60,6 @@ const Description = () => {
                     <ToggleButton  sx={{borderTopLeftRadius:"20px",borderBottomLeftRadius:"20px",color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} value="A" >
                         Description 
                     </ToggleButton>
-                    <ToggleButton  value="B" sx={{color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} >
-                        Specification 
-                    </ToggleButton>
                     <ToggleButton  sx={{borderTopRightRadius:"20px",borderBottomRightRadius:"20px",paddingRight:"30px",color:'black',fontFamily:['Monteserrat','sans-serif'],fontWeight:600}} value="C" >
                         Review 
                     </ToggleButton>
@@ -70,13 +67,11 @@ const Description = () => {
                 </ToggleButtonGroup>  
             </Box>
             <Grid sx={{textAlign:"center",margin:"60px 20px 20px 20px"}}>
-            { alignment=="A"?
-                <Typography> {content} - Desc</Typography>
+            { alignment=="A" && data.Products ?
+                <Typography> {data.Products.product.description}</Typography>
             :
-            alignment=="B"?
-                <Typography> {content} - Specs </Typography>
-            :
-              <Reviews/>
+             <Reviews/>
+            
             }
             </Grid>
           </Grid>

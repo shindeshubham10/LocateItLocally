@@ -18,7 +18,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { UsersignOut } from '../../redux/actions/userauthActions';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
  
 const useStyle = makeStyles(theme => (
@@ -194,8 +194,12 @@ const RenderHeader = () => {
                                   onClick={()=>signOuthandler()}
                             >LogOut</Button>
 
+                            <Link to='/display_user_profile'>
+                            <DashboardIcon sx={{color:'black',marginLeft:3,marginTop:1}} fontSize='medium'/>
+                            </Link>
+                           
                             <Link to='/user_profile'>
-                            	<AccountCircleIcon  sx={{color:'black',marginLeft:3}} fontSize='large'/>
+                            	<AccountCircleIcon  sx={{color:'black',marginLeft:3,marginTop:1}} fontSize='medium'/>
                             </Link>  
                            
                            

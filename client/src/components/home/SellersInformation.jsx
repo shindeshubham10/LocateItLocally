@@ -86,12 +86,12 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
    
     onClick={() => onClick()} />; 
 };
-const SellersInformationCard = () => {
+const SellersInformationCard = ({info}) => {
   const classes = useStyles();
  // const ProductData = data.Products;
   //console.log(data);
   console.log("inside Card");
-
+  info ? console.log(info) : console.log("Wittttttttttttttttttttttttttttt");
   //console.log("ID of the Product - ",ProductData._id);
     return(
       
@@ -111,36 +111,32 @@ const SellersInformationCard = () => {
         />} 
       >
           
-          {/* {
-                  data ? 
-                  data.map( details => ( */}
-                        
-                    {/* <Link to={`productsDetails/${details._id}`}> */}
-                      <SellerInfoCard
-                    //   image={details.image}
-                    //   category={details.category}
-                    //   productname={details.name}
-                    //   productprice={details.price}
+          {
+                  info ? 
+                  info.map( details => (
+                  
+                      <Link to={`shopdetails/${details._id}`}>
+                        <SellerInfoCard
+                        image={details.profilePicture}
+                        name={details.name}
+                        address={details.address}
+                        contact={details.contactNumber}
+                    
+                      />
+                      </Link>
                       
-
-
-                      
-                    />
-                    <SellerInfoCard/>
-                    <SellerInfoCard/>
-                    <SellerInfoCard/>
-                    <SellerInfoCard/>
+                    
 
                     
-                    {/* </Link> */}
+                   
                 
-                  {/* ) ) 
-                //   : 
-                //   <Grid container justify="center">
-                //     <Typography style={{fontSize:20,}}>Loading....</Typography>
-                //   </Grid>
+                   ) ) 
+                  : 
+                  <Grid container justify="center">
+                    <Typography style={{fontSize:20,}}>Loading Sellers Data....</Typography>
+                  </Grid>
                     
-              //}  */}
+              }  
           
             
           

@@ -24,6 +24,7 @@ const Home = () => {
 
   const [pincode,setpincode]=useState("");
   const [status, setStatus] = useState(null);
+  const [sellerInfo,setsellerInfo] = useState([]);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -90,6 +91,7 @@ const Home = () => {
    
 
     const dispatch = useDispatch();
+    const dispatch1= useDispatch();
 
     useEffect(() => {
 
@@ -115,12 +117,16 @@ const Home = () => {
 
         console.log(pincode);
         
+      
 
-
-        dispatch(getBusinessbylocation(411002)).then((x)=>console.log(x));
+    dispatch1(getBusinessbylocation(pincode.toString())).then((SellersInforamtion)=>{
+          console.log(SellersInforamtion)
+          setsellerInfo(SellersInforamtion.payload.business);
+          console.log("after setting ================ ",SellersInforamtion.payload.business);
+        });
         dispatch(ProductList());
         console.log("Inside dispatch");
-    }, [dispatch])
+    }, [dispatch,dispatch1,pincode])
 
     const [showSearchedProduct,setshowSearchedProduct] = useState(true);
 
@@ -138,7 +144,7 @@ const Home = () => {
 
                 <Banner />
                 <Headings name="Sellers NearBy"/> 
-                <SellersInformationCard/>
+                <SellersInformationCard info={sellerInfo}/>
                 <Headings name="NEW ARRIVALS"/> 
                 <Cards data={getProducts.Products}/> 
         

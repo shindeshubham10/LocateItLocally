@@ -11,9 +11,11 @@ import { useParams } from 'react-router';
 import { useEffect,useState } from 'react';
 import { getBusiness } from '../../../redux/actions/businessActions';
 import { getJobsofbusinessbyID } from '../../../redux/actions/jobActions';
+import {getProductsofbusinessbyID} from '../../../redux/actions/productActions';
 import { useDispatch } from 'react-redux';
 import Map from './map.jsx';
 import ShowAllJobs from './showAllJobs.jsx';
+import ShowShopPhotos from './showPhotos';
 
 const names = [
     'JBL',
@@ -256,8 +258,10 @@ const ShopDetails = () => {
 
     const [sellerdata,setsellerdata]=useState(initialbusinessdata)
     const [JobsBYBusiness,setJobsBYBusiness] = useState({});
+    const [productsByPerBusiness,setproductsByPerBusiness] = useState([]);
     const dispatch=useDispatch();
     const dispatch1 = useDispatch();
+    const dispatch2=useDispatch();
 
     useEffect(()=>{
        dispatch(getBusiness(id)).then((item)=>console.log(setsellerdata(item.payload.business)));
@@ -267,7 +271,10 @@ const ShopDetails = () => {
         setJobsBYBusiness(jobs.payload);
        })
     //    console.log("I am her in useEffect of Product Detail");
-       
+    dispatch2(getProductsofbusinessbyID(id)).then((product)=>{
+        console.log(product);
+        setproductsByPerBusiness(product.payload.products);
+    }) 
     //    data.Products?console.log(data.Products.product.seller):console.log("Not taking it");
     },[])
 
@@ -368,11 +375,11 @@ const ShopDetails = () => {
             </Box>
             {/* <Grid container spacing={2}> 
             {/* <Grid container spacing={2}> */}
-            <TabPanel value={value} index={0}>
+            {/* <TabPanel value={value} index={0}>
                     <Typography gutterBottom component="div"  style={{color:' #34495e',fontFamily: ['Noto Sans', 'sans-serif'],fontSize:'1.5rem',}}  >
                     Check Out Our Products
                     </Typography>     
-            </TabPanel>
+            </TabPanel> */}
                
             
                 
@@ -398,125 +405,10 @@ const ShopDetails = () => {
             <Box className={classes.mainBoxForFiltersandProducts}>
             
                 <Grid container className={classes.productContainer}>
-                {/* <TabPanel value={value} index={0}>
-                <Grid container spacing={2} className={classes.filterBox}>
-            
-            
-            <Grid item lg={12} xs={12} md={12}>
-                <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
-                <Divider style={{ marginBottom: 30 }} />
-            </Grid> */}
-
-            {/** First Filter  */}
-            {/* <Grid item lg={12} xs={6}>
-                <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-                <InputLabel id="Filter-Heading">Price</InputLabel>
-                <Select
-                    labelId="Filter-Heading"
-                    id="filter-chip"
-                    multiple
-                    value={personName}
-                    onChange={handleChanges}
-                    input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                    renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                        {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                        ))}
-                    </Box>
-                    )}
-                    MenuProps={MenuProps}
-                >
-                    {names.map((name) => (
-                    <MenuItem
-                        key={name}
-                        value={name}
-                        style={getStyles(name, personName, theme)}
-                    >
-                        {name}
-                    </MenuItem>
-                    ))}
-                </Select>
-                </FormControl>
-            </Grid> */}
-
-
-
-            {/** Second Filter */}
-            {/* <Grid item lg={12} xs={6}>
-                <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-                <InputLabel id="Filter-Heading">Brand</InputLabel>
-                <Select
-                    labelId="Filter-Heading"
-                    id="filter-chip"
-                    multiple
-                    value={personName}
-                    onChange={handleChanges}
-                    input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                    renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                        {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                        ))}
-                    </Box>
-                    )}
-                    MenuProps={MenuProps}
-                >
-                    {names.map((name) => (
-                    <MenuItem
-                        key={name}
-                        value={name}
-                        style={getStyles(name, personName, theme)}
-                    >
-                        {name}
-                    </MenuItem>
-                    ))}
-                </Select>
-                </FormControl>
-            </Grid> */}
-
-
-            {/** Third Filter */}
-            {/* <Grid item lg={12} xs={6}>
-                <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
-                <InputLabel id="Filter-Heading">Price</InputLabel>
-                <Select
-                    labelId="Filter-Heading"
-                    id="filter-chip"
-                    multiple
-                    value={personName}
-                    onChange={handleChanges}
-                    input={<OutlinedInput id="select-filter-chip" label="Chip" />}
-                    renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                        {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                        ))}
-                    </Box>
-                    )}
-                    MenuProps={MenuProps}
-                >
-                    {names.map((name) => (
-                    <MenuItem
-                        key={name}
-                        value={name}
-                        style={getStyles(name, personName, theme)}
-                    >
-                        {name}
-                    </MenuItem>
-                    ))}
-                </Select>
-                </FormControl>
-            </Grid>
-
-
-            </Grid>
-                    
-                            <ShopProducts />
-                    
-                </TabPanel> */}
-                <TabPanel value={value} index={0}>  
-                    <ShopProducts />
+               
+                <TabPanel value={value} index={0}> 
+                
+                    <ShopProducts productsData={productsByPerBusiness}/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Reviews/>
@@ -524,6 +416,12 @@ const ShopDetails = () => {
 
                 <TabPanel value={value} index={3}>
                     <ShowAllJobs JobsBYBusiness={JobsBYBusiness}/>
+                </TabPanel>
+                <TabPanel value={value} index={4}>
+                <Typography component="div"  style={{color:' #34495e',fontFamily: ['Noto Sans', 'sans-serif'],fontSize:'1.5rem',marginBottom:10}}  >
+                    Check Out Some Photos of Shop
+                </Typography> 
+                    <ShowShopPhotos productsData={sellerdata.Shopimages}/>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
                     

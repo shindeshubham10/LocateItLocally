@@ -177,6 +177,8 @@ const useStyles = makeStyles((theme) => ({
 
 const HomeSearchBar=(props)=>{
   const classes = useStyles();
+  const {pincode} = props;
+  console.log(pincode);
   // const [lat, setLat] = useState(null);
   // const [lng, setLng] = useState(null);
   // const [status, setStatus] = useState(null);
@@ -267,7 +269,7 @@ const HomeSearchBar=(props)=>{
      // });
       console.log(props.pincode);
       
-     props.pincode ? dispatch1(getProductsByLocation(props.pincode)).then((productsByLocation)=>{
+     pincode ? dispatch1(getProductsByLocation(pincode)).then((productsByLocation)=>{
         console.log("In getProduct by location dispatch.....");
         console.log(productsByLocation.payload.products);
         setProducts(productsByLocation.payload.products);
@@ -277,7 +279,7 @@ const HomeSearchBar=(props)=>{
       //setshowSearchedProduct(false);
       console.log("Inside dispatch");
 
-  }, [])
+  }, [dispatch1])
 
     const filteredProducts = Products?.filter((product) => {
         if (
@@ -372,7 +374,7 @@ const HomeSearchBar=(props)=>{
             className={classes.inputLocation}
             placeholder="Location"
             inputProps={{ 'aria-label': 'Location' }}
-            value={props.pincode}
+            value={pincode}
             
         />
           <ArrowDropDownIcon className={classes.arrowDropDown} />
@@ -391,15 +393,15 @@ const HomeSearchBar=(props)=>{
          filteredProducts.map((product) => (
           <Link to={`productsDetails/${product._id}`}>
           <ProductCard
-          //image={product.imageUrl}
+          image={product.image[0]}
           category={product.category}
           productname={product.name}
-          //productprice={productPrice}
+          productprice={product.price}
                 
           />
           </Link>   
 
-        )) : <p>....</p>
+        )) : <p>..</p>
       } 
     </div>
     

@@ -17,7 +17,7 @@ const Reviews=()=>{
     const [Reviews, setReviews] = useState([]);
 
     const reduxState = useSelector(state=>state.getProductDetails);
-    console.log(reduxState.Products.product);
+   // console.log(reduxState.Products.product);
     const dispatch = useDispatch();
 
     useEffect(() => {

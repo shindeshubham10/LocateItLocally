@@ -9,7 +9,7 @@ import { productDetails } from '../../../constants/data';
 //import { productDetails } from '../../constants/data'; 
 import ProductCard from '../../home/ProductCard';
 import { useTheme } from '@emotion/react';
-
+import { IKImage,IKContext,IKUpload} from 'imagekitio-react';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -21,6 +21,11 @@ const MenuProps = {
     },
   },
 };
+
+// required parameter to fetch images
+const urlEndpoint = 'https://ik.imagekit.io/ol5ujroevjc/';
+const publicKey = 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=';
+const authenticationEndpoint = 'http://localhost:2000/imagekitAuth';
 
 const names = [
     'JBL',
@@ -79,38 +84,26 @@ const useStyle = makeStyles(theme => ({
         
     },
     productContainer: {
-        backgroundColor: 'green',
+        //backgroundColor: 'green',
         width: '100%',
         height: '100%',
         marginTop: 40,
         marginLeft: 30,
         marginRight: 20,
       paddingLeft: 20,
-      
       [theme.breakpoints.down('sm')]: {
-        marginLeft: 20,
+        marginLeft: 0,
         justifyContent: 'center',
-        border: '1px solid purple',
-        borderRadius:50,
-        marginRight:20,
-        width:'90vw'
+        border: '1px solid #A1B3BA',
+        borderRadius:8,
         }
   },
   forProductCards: {
-    backgroundColor: 'orange',
-    width:'90vw',
-    //width: '100%',
-
-
+    //backgroundColor: 'orange',
+    width: '100%',
 
     [theme.breakpoints.down('sm')]: {
       justifyContent:'center',
-      //backgroundColor:'red',
-      //width:'20vw'
-       marginLeft:40,
-       paddingLeft:65
-      //alignItems:'center'
-     
     }
     
   },
@@ -134,10 +127,11 @@ const useStyle = makeStyles(theme => ({
 
 
 
-const ShopProducts = ({productsData}) => {
+const ShowShopPhotos = ({productsData}) => {
 
   const classes = useStyle();
   const theme = useTheme();
+
   productsData ? console.log(productsData) : console.log('=====================')
   const [personName, setPersonName] = React.useState([]);
 
@@ -160,7 +154,7 @@ const ShopProducts = ({productsData}) => {
           {
             productsData ? 
             <Pagination
-            data={productDetails}
+            data={productsData}
             RenderComponent={IndividualProductCard} // here whole component is returned
             // flow of the component are - 
             // 1. IndividualProductCard is rendered
@@ -180,25 +174,28 @@ const ShopProducts = ({productsData}) => {
 
 // So this function is used to provide ProductCard that we built previously. It will return that ProductCard with data on it
 function IndividualProductCard(props) {
-  //const { image, category, name, price,} = props.data;
-  const {imageUrl,productCategory,productName,productPrice} = props.data
  
   return (
     <>
-      {/* <ProductCard
-                  image={image[0]}
-                  category={category}
-                  productname={name}
-                  productprice={price}
-                            
-        />    */}
-         <ProductCard
-                  image={imageUrl}
-                  category={productCategory}
-                  productname={productName}
-                  productprice={productPrice}
-                            
-        />  
+        
+        <IKContext
+            publicKey={publicKey} 
+            urlEndpoint={urlEndpoint} 
+            authenticationEndpoint={authenticationEndpoint} 
+        >
+        {/* <div style={{marginRight:100}}> */}
+        <IKImage style={{border:'3px solid #323232',marginRight:30}}
+            //src={`${reduxState.user.profilePicture}?tr=r-max,cm-extract`}
+             src={props.data}
+             loading="lazy"
+             lqip={{ active: true, quality: 20 }}
+            
+                                
+        />
+       {/* </div> */}
+          
+        </IKContext> 
+        
         <Divider style={{ marginTop: 40, marginBottom: 40 }} />
       </>
   );
@@ -232,8 +229,7 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
    
      const startIndex = currentPage * dataLimit - dataLimit;
      const endIndex = startIndex + dataLimit;
-    // return data.slice(startIndex, endIndex);
-     return productDetails.slice(startIndex, endIndex);
+     return data.slice(startIndex, endIndex);
   };
 
   const getPaginationGroup = () => {
@@ -247,20 +243,14 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
     <>
       {/* show the posts, 10 posts at a time */}
       {/** This is the actual data we want to show.  */}
-      {/* <Grid item lg={12} style={{backgroundColor:'red'}} > */}
-     
-      <Grid container className={classes.forProductCards}> 
+      <Grid container className={classes.forProductCards}>
           {getPaginatedData().map((d, idx) => (
            
-              <Grid item lg={3} xs={12} alignItems='center'> 
+              <Grid item lg={3}> 
               <RenderComponent key={idx} data={d} />
               </Grid> 
           ))}
-     </Grid> 
-     
-       
-      {/* </Grid> */}
-      
+         </Grid>
        
       
       <Grid container justifyContent='center'>
@@ -304,5 +294,5 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
   );
 }
 
-export default ShopProducts;
+export default ShowShopPhotos;
 

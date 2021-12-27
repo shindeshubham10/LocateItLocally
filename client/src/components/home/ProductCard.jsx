@@ -69,11 +69,12 @@ const useStyles = makeStyles((theme) => ({
             // width: '100%',
             // height: '60%',
             backgroundColor: '#8FD1D1',
-          
-            borderRadius: 10,
-            position: 'absolute',
-            top:20,
-            bottom:0,
+            //marginTop:20,
+            borderRadius: 5,
+            //position: 'absolute',
+            top:10,
+            height:'27vh',
+            bottom:30,
             left:0,
             right:0,
          
@@ -186,7 +187,7 @@ const ProductCard = (props) => {
                     
                     {/** Product Pricing */}
                     <Typography variant="h6"  className={classes.productPrice} component="div">
-                        {props.productprice}
+                    ₹{props.productprice}
                     </Typography>
                     </Box>
                     
