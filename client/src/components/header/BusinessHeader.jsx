@@ -160,11 +160,11 @@ const dispatch = useDispatch();
                     </Link>
 
                     <Link to='/' className={classes.txt}>
-                        Profile
+                        Contact
                     </Link>
                     
                     <Link to='/contact' className={classes.txt}>
-                        Jobs
+                        About us
                     </Link>
 
                     

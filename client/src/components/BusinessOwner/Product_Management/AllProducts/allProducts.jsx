@@ -285,7 +285,7 @@ const ViewAllProducts = () => {
                                                             
                                         {/** Show Image Start */}
                                         <ListItemAvatar>
-                                            <Avatar alt="Product Image" src={eachItem.imageUrl} style={ {width:'100px',height:'100px',}}/>
+                                            <Avatar alt="Product Image" src={eachItem.image[0]} style={ {width:'150px',height:'150px', }}/>
                                         </ListItemAvatar>
                                         {/** Show Image End */}           
                                         

@@ -1,4 +1,4 @@
-import { GET_BUSINESS, SELF, CLEAR_BUSINESS,UPDATE_BUSINESS,GET_BUSINESS_BY_LOC } from "../constants/businessconstants";
+import { GET_BUSINESS, SELF, CLEAR_BUSINESS,UPDATE_BUSINESS,GET_BUSINESS_BY_LOC ,GET_TOP_SELLERS_SUCCESS,GET_TOP_SELLERS_FAILURE} from "../constants/businessconstants";
 
 const INITIAL_STATE = {
   business: {},
@@ -44,6 +44,21 @@ export const getBusinessByLocationReducer = (state = {business:[]},action) => {
               business: action.payload };
       
       
+
+      default:
+          return state;
+  }
+};
+export const gettopSellers = (state = {topsellers:[]},action) => {
+    
+  switch (action.type) {
+      
+      case GET_TOP_SELLERS_SUCCESS:
+          return {...state, 
+              topsellers: action.payload };
+      
+      case GET_TOP_SELLERS_FAILURE:
+          return { Error: action.payload };
 
       default:
           return state;

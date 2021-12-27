@@ -85,4 +85,17 @@ Router.get("/location/:loc",async(req,res)=>{
 
 );
 
+Router.get("/getsellers/top",async(req,res)=>{
+
+  try{
+        const sellers=await BusinessModel.find().sort({rating:-1}).limit(10);
+        return res.json({ sellers });
+  }
+  catch(error){
+
+    return res.status(500).json({ error: error.message });
+  }
+}
+);
+
 export default Router;

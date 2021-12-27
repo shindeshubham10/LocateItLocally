@@ -22,6 +22,7 @@ import {getbusinessreviewReducer,getproductreviewReducer,postreviewReducer} from
 
 import { getJobsofBusinessReducerbyID } from "./reducers/jobreducer";
 import { getProductsofBusinessReducerbyID } from "./reducers/productReducers";
+import { gettopSellers } from "./reducers/businessreducer";
 
 
 const reducer = combineReducers({
@@ -54,7 +55,8 @@ const reducer = combineReducers({
     getProductsFromWishlist,
     getProductsOfBusinessByLocationReducer,
     getBusinessByLocationReducer,
-    gettopProducts
+    gettopProducts,
+    gettopSellers 
 
 
     
