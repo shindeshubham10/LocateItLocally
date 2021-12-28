@@ -12,6 +12,7 @@ import { useEffect,useState } from 'react';
 import { getBusiness } from '../../../redux/actions/businessActions';
 import { useDispatch } from 'react-redux';
 import Map from './map.jsx';
+import ShowAllJobs from './showAllJobs.jsx';
 
 const names = [
     'JBL',
@@ -302,13 +303,13 @@ const ShopDetails = () => {
                     <ul className={classes.list}>
                         <li>
 
-                            <Typography variant="h6" gutterBottom component="div" className={classes.text} >
+                            <Typography style={{color:' #34495e',fontFamily: ['Noto Sans', 'sans-serif'],fontSize:'2rem',}} gutterBottom component="div" className={classes.text} >
                                     {sellerdata.name}
                             </Typography>
                         </li>
                         <li>
 
-                            <Typography variant="h8" gutterBottom component="div" className={classes.text} >
+                            <Typography style={{color:' #34495e',fontFamily: ['Noto Sans', 'sans-serif'],fontSize:'1rem',}} gutterBottom component="div" className={classes.text} >
                                   {sellerdata.description}
                             </Typography>
                         </li>
@@ -320,7 +321,7 @@ const ShopDetails = () => {
                         </li>
                         <li>
                             
-                            <Typography variant="h8" gutterBottom component="div" className={classes.text}>
+                            <Typography style={{color:' #34495e',fontFamily: ['Noto Sans', 'sans-serif'],fontSize:'1.2rem',}} gutterBottom component="div" className={classes.text}>
                             {sellerdata.address}
                             </Typography>
                         </li>
@@ -350,7 +351,7 @@ const ShopDetails = () => {
                     <Tab label="Seller Products" className={ value===0 ? classes.active_tabStyle : classes.default_tabStyle  } />
                     <Tab label="Reviews"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     <Tab label="Description" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
-                    <Tab label="Policy" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+                    <Tab label="Jobs" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     <Tab label="Photos" className={ value===4 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     <Tab label="Map" className={ value===5 ? classes.active_tabStyle : classes.default_tabStyle  }/>
                     
@@ -360,8 +361,8 @@ const ShopDetails = () => {
             {/* <Grid container spacing={2}> 
             {/* <Grid container spacing={2}> */}
             <TabPanel value={value} index={0}>
-                    <Typography gutterBottom component="div" style={{fontFamily:"Montserrat,sans-serif",fontWeight:"700"}}  >
-                    Seller Products
+                    <Typography gutterBottom component="div"  style={{color:' #34495e',fontFamily: ['Noto Sans', 'sans-serif'],fontSize:'1.5rem',}}  >
+                    Check Out Our Products
                     </Typography>     
             </TabPanel>
                
@@ -389,17 +390,17 @@ const ShopDetails = () => {
             <Box className={classes.mainBoxForFiltersandProducts}>
             
                 <Grid container className={classes.productContainer}>
-                <TabPanel value={value} index={0}>
+                {/* <TabPanel value={value} index={0}>
                 <Grid container spacing={2} className={classes.filterBox}>
             
             
             <Grid item lg={12} xs={12} md={12}>
                 <Typography component="div" style={{ fontSize: '1.5rem', color: '#323232', fontFamily: ['Montserrat', 'sans-serif'], fontweight: 'medium', marginBottom: 20, }} >Filters</Typography>
                 <Divider style={{ marginBottom: 30 }} />
-            </Grid>
+            </Grid> */}
 
             {/** First Filter  */}
-            <Grid item lg={12} xs={6}>
+            {/* <Grid item lg={12} xs={6}>
                 <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
                 <InputLabel id="Filter-Heading">Price</InputLabel>
                 <Select
@@ -429,12 +430,12 @@ const ShopDetails = () => {
                     ))}
                 </Select>
                 </FormControl>
-            </Grid>
+            </Grid> */}
 
 
 
             {/** Second Filter */}
-            <Grid item lg={12} xs={6}>
+            {/* <Grid item lg={12} xs={6}>
                 <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
                 <InputLabel id="Filter-Heading">Brand</InputLabel>
                 <Select
@@ -464,11 +465,11 @@ const ShopDetails = () => {
                     ))}
                 </Select>
                 </FormControl>
-            </Grid>
+            </Grid> */}
 
 
             {/** Third Filter */}
-            <Grid item lg={12} xs={6}>
+            {/* <Grid item lg={12} xs={6}>
                 <FormControl sx={{ m: 1, width: '100%' }} className={classes.filterBody} >
                 <InputLabel id="Filter-Heading">Price</InputLabel>
                 <Select
@@ -505,17 +506,21 @@ const ShopDetails = () => {
                     
                             <ShopProducts />
                     
+                </TabPanel> */}
+                <TabPanel value={value} index={0}>  
+                    <ShopProducts />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    
                     <Reviews/>
+                </TabPanel>
+
+                <TabPanel value={value} index={3}>
+                    <ShowAllJobs/>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
                     
                     <Map
-                        title={sellerdata?.name}
-                        phno={`+91${sellerdata?.contactNumber}`}
-                        mapLocation={getLatLong(sellerdata?.mapLocation)}
+                        
                         address={sellerdata?.address}
                     />
                 </TabPanel>

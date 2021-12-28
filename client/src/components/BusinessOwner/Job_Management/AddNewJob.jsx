@@ -1,15 +1,65 @@
-import React from "react";
+
 import {Grid,TextField,Box,Button,Typography, Paper} from '@material-ui/core';
 import {AddBoxOutlined,LocationOnOutlined,DescriptionOutlined,AssignmentIndOutlined,WorkOutlineOutlined} from "@material-ui/icons";
 // import CurrencyRupeeOutlinedIcon from '@mui/icons-material';
 //import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
 
+import { addJobDetails } from "../../../redux/actions/jobActions";
 
 import './addJobOpeningStyle.css'
 
+const initialData={
 
-const AddJobOpening = () => {
+    jobTitle:"",
+    description:"",
+    vacancy:0,
+    annualPackage:0,
+    department:"",
 
+}
+
+const AddJobOpening = () =>{
+
+    console.log("Atleast here");
+   const dispatch=useDispatch();
+
+   const [jobdata,setjobdata]=useState(initialData);
+
+
+
+
+    
+
+    const handleInputChange = (event) => {
+        console.log("IDhar to aa");
+        setjobdata({ ...jobdata, [event.target.name]: event.target.value });
+        console.log(jobdata);
+      };
+
+   
+    
+
+    const addjob =  () => {
+
+        console.log("Helllllllllllllllllllllllllll");
+        console.log(jobdata);
+        console.log("enter into function");
+        // productdata.seller=reduxState.business._id;
+        dispatch(addJobDetails(jobdata)).then((data)=>console.log(data))
+        
+    //     console.log("dfndncjndjk");
+    //     if (!response)
+    //     {
+    //       seterror(true);
+         
+    //       return;
+    //     }
+    //    return;
+             
+      
+      };
 
     return(
         <div>
@@ -18,7 +68,7 @@ const AddJobOpening = () => {
         <Grid container  direction="row">
 
         <Grid>
-            <h2 className="mainheading">Add New Job Opening <AddBoxOutlined fontSize="medium"/></h2>
+            <h1 className="mainheading">Add New Job Opening <AddBoxOutlined fontSize="large"/></h1>
             <hr className="divider"></hr>
         </Grid>
         
@@ -34,6 +84,8 @@ const AddJobOpening = () => {
                         type="text"
                         placeholder="Job Title"
                         variant="outlined"
+                        name="jobTitle"
+                        onChange={(e)=>handleInputChange(e)}
                         InputProps={{
                             endAdornment: <WorkOutlineOutlined/>
                         }}
@@ -50,6 +102,8 @@ const AddJobOpening = () => {
                         type="text"
                         placeholder="Description*"
                         variant="outlined"
+                        name="description"
+                        onChange={(e)=>handleInputChange(e)}
                         InputProps={{
                             endAdornment: <DescriptionOutlined/>
                         }}
@@ -64,6 +118,8 @@ const AddJobOpening = () => {
                         type="number"
                         placeholder="Number of Vacancy*"
                         variant="outlined"
+                        name="vacancy"
+                        onChange={(e)=>handleInputChange(e)}
                     />            
                 </Grid>
 
@@ -78,6 +134,8 @@ const AddJobOpening = () => {
                         InputProps={{
                             endAdornment: <AssignmentIndOutlined/>
                         }}
+                        name="department"
+                        onChange={(e)=>handleInputChange(e)}
                     />            
                 </Grid>
 
@@ -97,6 +155,8 @@ const AddJobOpening = () => {
                         type="text"
                         placeholder="In Lakhs*"
                         variant="outlined"
+                        name="annualPackage"
+                        onChange={(e)=>handleInputChange(e)}
                         // InputProps={{
                         //     endAdornment: <CurrencyRupeeOutlinedIcon/>
                         // }}
@@ -134,7 +194,9 @@ const AddJobOpening = () => {
         </Grid>
 
         <Grid container className="submitbtndiv" justifyContent="center">
-            <Button variant="contained" style={{fontWeight:"bold"}}>Submit</Button>
+            <Button variant="contained" style={{fontWeight:"bold"}}
+            onClick={()=>addjob()}
+            >Submit</Button>
         </Grid>
 
         </Grid>    
@@ -142,14 +204,6 @@ const AddJobOpening = () => {
         </div>
         </div>
     );
-
-
 }
-
-// function addJobOpening()
-// {
-
-    
-// }
 
 export default AddJobOpening;

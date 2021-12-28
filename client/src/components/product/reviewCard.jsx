@@ -52,11 +52,11 @@ const ReviewCard=(props)=>{
                                     activeColor="#ffd700"
                                 />
                         }
-                        title={<Typography style={{fontFamily:'Monteserrat'}}>{user}</Typography>}
-                        subheader={<Typography style={{fontFamily:'Monteserrat'}}> {dayjs(props.createdAt).format("DD MMM YYYY")}</Typography>}
+                        title={<Typography style={{color:'black', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'0.9rem'}}>{user}</Typography>}
+                        subheader={<Typography style={{color:'black', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'0.9rem'}}> {dayjs(props.createdAt).format("DD MMM YYYY")}</Typography>}
                     />
                     <CardContent style={{fontFamily:'Monteserrat'}}>
-                            {props.reviewText}
+                        <Typography  style={{color:'black', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem'}}>{props.reviewText}</Typography>
                     </CardContent>
                         
                     

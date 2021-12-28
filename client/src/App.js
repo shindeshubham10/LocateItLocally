@@ -17,6 +17,8 @@ import Cart from './components/cart/Cart';
 import Favourites from './components/favourites/Favourites';
 import Register from './components/Account/User_Register/user_register';
 
+import updateJobOpening from './components/BusinessOwner/Job_Management/updatejob';
+
 
 import MainDashboard from './components/BusinessOwner/Product_Management/MainDashboard';
 import Login from './components/Account/User_Login/user_login.jsx';
@@ -31,7 +33,7 @@ import Owner_profile from './components/BusinessOwner/Owner_Profile/owner_profil
 import display_user_profile from './components/User/Profile/Display_User_Profile/display_user_profile';
 import UpdateProduct from './components/BusinessOwner/Product_Management/UpdateProduct/update_product';
 import ShowProducts from './components/ShowProducts/showProducts';
-import addJobOpening from './components/Job/addJobOpening/addJobOpening';
+import AddJobOpening from './components/BusinessOwner/Job_Management/AddNewJob';
 
 import {
   BrowserRouter as Router,
@@ -48,7 +50,7 @@ import axios from "axios"
 import { getMyself } from './redux/actions/userActions';
 import { getMyBusiness } from './redux/actions/businessActions';
 import TemplateProvider from './templates/TemplateProvider';
-
+import SearchBarSection from './components/DemoSearch/SearchBarSection';
 
 // axios global settings
 if (localStorage.LocateItLocallyUser) {
@@ -78,13 +80,14 @@ function App() {
   const dispatch=useDispatch();
 
 const [chooseHeader,setchooseHeader] = useState(false);
+const [isAuthenticated,setisAuthenticated]=useState(1);
 
 
 
   useEffect(()=>{
       if(localStorage.LocateItLocallyUser)
     {
-      setchooseHeader(true);
+      //setchooseHeader(true);
       console.log("In doinhgghyhhgg");
       dispatch(getMyself());
 
@@ -92,11 +95,12 @@ const [chooseHeader,setchooseHeader] = useState(false);
 
     if(localStorage.LocateItLocallyBusiness)
     {
+      setchooseHeader(true);
       console.log("In doinhgghyhhgg");
       dispatch(getMyBusiness());
     }
 
-  })
+  },[isAuthenticated])
 
   
 
@@ -107,12 +111,12 @@ const [chooseHeader,setchooseHeader] = useState(false);
     <TemplateProvider>
     <Router>
     
-     { chooseHeader ? <Header/> :  <BusinessHeader/> }
+     { chooseHeader ?  <BusinessHeader/>  :  <Header/>}
       
       
        <Switch >
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" component={() => (<Home myProp={setisAuthenticated} />)}  />
+      <Route exact path="/login" component={() => (<Login myProp={setisAuthenticated} />)} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/about" component={About} />
         <Route exact path="/cart" component={Cart} />
@@ -121,6 +125,8 @@ const [chooseHeader,setchooseHeader] = useState(false);
         <Route exact path="/login" component={Login} />
         <Route exact path="/businessdashboard" component={MainDashboard} />
         <Route exact path="/businessdashboard/product/update" component={UpdateProduct} />
+        <Route exact path="/businessdashboard/job/add" component={AddJobOpening}/>
+        <Route exact path="/businessdashboard/job/update" component={updateJobOpening}/>
         <Route exact path="/newProduct" component={Newproduct} />
         <Route exact path="/New Arrivals" component={User_profile} />
         <Route exact path="/productsDetails/:id" component={ProductDetails} />
@@ -134,7 +140,7 @@ const [chooseHeader,setchooseHeader] = useState(false);
         <Route exact path="/display_user_profile" component={display_user_profile} />
         <Route exact path="/allproducts/:options/" component={ShowProducts}/>
         <Route exact path="/allproducts" component={ShowProducts}/>
-        <Route exact path="/addjobopening" component={addJobOpening}/>
+      
         
       
       </Switch>

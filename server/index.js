@@ -29,7 +29,7 @@ import Business from "./API/Business/index.js"
 import Wishlist from "./API/Wishlist/index.js"
 
 
-
+import Job from "./API/Job/index.js"
 import Review from "./API/Reviews/index.js"
 
 
@@ -69,6 +69,8 @@ app.use('/wishlist',Wishlist);
 //Review APIs
 
 app.use('/review',Review);
+
+app.use('/job',Job);
 
 
 

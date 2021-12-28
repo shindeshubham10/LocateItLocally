@@ -13,9 +13,10 @@ import GetDrawer from '../home/DrawerComponent/Drawer.component';
 import logo from "../Logo/LocateItLocally Logo.png"
 import {MapOutlined} from "@material-ui/icons"
 //import gravatar from "gravatar";
-
+import { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { UsersignOut } from '../../redux/actions/userauthActions';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 
@@ -102,6 +103,9 @@ const useStyle = makeStyles(theme => (
 
 const Header = (props) => {
 
+  useEffect(()=>{
+      props.myProp(7);
+  },[])
 
   const dispatch=useDispatch();
   const reduxState=useSelector((global) => global.user.user);
@@ -162,11 +166,7 @@ const Header = (props) => {
                     <Link to='/' className={classes.txt}>
                         Home
                     </Link>
-                    
-                    <Link to='/' className={classes.txt}>
-                        Demo
-                    </Link>
-                    
+                                        
                     <Link to='/contact' className={classes.txt}>
                         Contact
                     </Link>
@@ -190,7 +190,7 @@ const Header = (props) => {
 
                       <Box style={{display:'flex',direction:'row'}}>
                           {/* <Box style={{display:'flex'}}> */}
-                              <Typography  style={{color:'#3498db', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem'}}>{reduxState.user.firstName}</Typography>
+                              <Typography  style={{color:'#3498db', fontFamily: ['Montserrat', 'sans-serif'],fontSize:'1rem',marginTop:6,marginRight:4}}>{reduxState.user.firstName}</Typography>
                               {/* {reduxState.user.firstName} */}
                               {/* <button onClick={signOuthandler}>Sign Out</button> */}
                               <Button 
@@ -199,6 +199,11 @@ const Header = (props) => {
                                   style={{color:'#e74c3c', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem'}}
                                   onClick={()=>signOuthandler()}
                             >LogOut</Button>
+
+                            <Link to='/user_profile'>
+                            	<AccountCircleIcon  sx={{color:'black',marginLeft:3}} fontSize='large'/>
+                            </Link>  
+                           
                            
                           {/* </Box> */}
                       </Box>
@@ -220,9 +225,12 @@ const Header = (props) => {
                           
                       />
                  </Link>
-                            
-                      
-                      </>
+
+                 
+                 {/* <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link> */}
+
+                 
+                    </>
 
                       
                     )
@@ -246,12 +254,12 @@ const Header = (props) => {
                   
 
                    
-                    <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
+                    {/* <Link to='/display_user_profile'><FavoriteBorderIcon className={classes.endicons} /></Link>
 
                     <Link to='/cart'><MapOutlined className={classes.endicons} /></Link>
-                    {/* <Link to='/cart'><ShoppingCartOutlinedIcon className={classes.endicons} /></Link> */}
+                 
                   <ShoppingCartOutlinedIcon className={classes.endicons} onClick={()=>openReviewDailog()} />
-                   
+                    */}
                     
                  
 

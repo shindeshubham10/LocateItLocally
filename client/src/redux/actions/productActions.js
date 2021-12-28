@@ -11,12 +11,12 @@ export const getProducts = () => async (dispatch) => {
         const { data } = await axios.get(`${backendUrl}/newProduct/getProducts`);
         console.log("Response in Product Actions ");
         console.log(data);
-        dispatch({ type: actions.GET_PRODUCT_SUCCESS, payload: data });
+        return dispatch({ type: actions.GET_PRODUCT_SUCCESS, payload: data });
       
 
     } catch (error) {
         console.log("Error while getProducts");
-        dispatch({ type: actions.GET_PRODUCT_FAILURE, payload: error.response });
+       return dispatch({ type: actions.GET_PRODUCT_FAILURE, payload: error.response });
     }
 };
 
@@ -145,6 +145,23 @@ export const updateProduct = (productData,id) => async (dispatch) => {
       return dispatch({ type: actions.UPDATE_PRODUCT_FAILURE, payload: error });
     }
   };
+
+
+  export const getProductsofbusinessbyID = (id) => async (dispatch) => {
+
+    try {
+        console.log("Enter getProducts in axios ");
+        const products = await axios.get(`${backendUrl}/newProduct/business/getProductsofbusinessbyId/${id}`);
+        console.log("Response in Product Actions ");
+        console.log(products);
+       return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_BYID_SUCCESS, payload: products.data });
+      
+
+    } catch (error) {
+        console.log("Error while getProducts");
+        return dispatch({ type: actions.GET_PRODUCTS_OF_BUSINESS_BYID_FAILURE, payload: error.response });
+    }
+};
 
 
 

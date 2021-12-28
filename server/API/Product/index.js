@@ -89,9 +89,9 @@ Router.post("/add",passport.authenticate("business"), async(req,res)=>{
           await ProductModel.create({ ...productData, seller: _id });
           console.log(productData);
 
-          res.status(200).json('Product saved successfully');
+          return res.status(200).json('Product saved successfully');
       } catch (error) {
-          res.status(500).json(error);
+          return res.status(500).json(error);
       }
 
 
@@ -112,9 +112,9 @@ Router.get("/business/getProductsofbusiness",passport.authenticate("business"), 
     console.log(products);
     
 
-    res.status(200).json({products});
+    return res.status(200).json({products});
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
 }
 
 
@@ -136,9 +136,9 @@ Router.delete("/business/deleteProductsofbusiness",passport.authenticate("busine
     await ProductModel.deleteMany({_id:{$in:req.body.product_id_list}})
     
 
-    res.status(200).json("Deleted SucessFully");
+    return res.status(200).json("Deleted SucessFully");
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
 }
 
 
@@ -167,6 +167,27 @@ Router.put("/update/:id",passport.authenticate("business"), async (req, res) => 
     return res.status(500).json({ error: error.message });
   }
 });
+
+
+//get products for users to see from a particular business owner
+Router.get("/business/getProductsofbusinessbyId/:id", async(req,res)=>{
+
+  try {
+    console.log("jdbehjbfchhfcb");
+    console.log("IN GET PROD");
+    const {id}=req.params;
+    
+    const products = await ProductModel.find({seller:id});
+    console.log(products);
+    
+
+    return res.status(200).json({products});
+  } catch (error) {
+    return res.status(500).json(error);
+}
+
+
+})
 
 
 

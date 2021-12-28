@@ -6,7 +6,7 @@ import passport from "passport";
 
 const Router=express.Router()
 
-// 
+// getMyBusiness
 Router.get("/", passport.authenticate("business"), async (req, res) => {
   try {
     console.log(req);
@@ -20,6 +20,8 @@ Router.get("/", passport.authenticate("business"), async (req, res) => {
 });
 
 
+
+//get business by ID
 Router.get("/:_id", async (req, res) => {
   try {
 
@@ -33,10 +35,12 @@ Router.get("/:_id", async (req, res) => {
   }
 });
 
+
+//used in business profile
 Router.put("/update", passport.authenticate("business"), async (req, res) => {
   try {
     // console.log(req.params);
-    const { _id } = console.log(req.session.passport.user._doc);
+    const { _id } = req.session.passport.user._doc;
     const  businessData  = req.body.businessUpdatedata;
     console.log(_id);
     console.log("Hurray");

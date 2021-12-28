@@ -22,6 +22,9 @@ export const GET_PRODUCTS_OF_BUSINESS_FAILURE="getproductsofbusinessfailure"
 export const DELETE_PRODUCTS_OF_BUSINESS_SUCCESS="deleteproductsofbusinesssuccess"
 export const DELETE_PRODUCTS_OF_BUSINESS_FAILURE="deleteproductsofbusinessfailure"
 
+export const GET_PRODUCTS_OF_BUSINESS_BYID_SUCCESS="getproductsofbusinessbyidsuccess"
+export const GET_PRODUCTS_OF_BUSINESS_BYID_FAILURE="getproductsofbusinessbyidfailure"
+
 
 
 

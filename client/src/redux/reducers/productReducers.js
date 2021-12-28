@@ -90,6 +90,22 @@ export const getProductsofBusinessReducer = (state = {products:[]},action) => {
     }
 };
 
+export const getProductsofBusinessReducerbyID = (state = {products:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_PRODUCTS_OF_BUSINESS_BYID_SUCCESS:
+            return {...state, 
+                products: action.payload };
+        
+        case actionsType.GET_PRODUCTS_OF_BUSINESS_BYID_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};
+
 export const deleteProductsofBusinessReducer = (state = {products:[]},action) => {
     
     switch (action.type) {

@@ -22,11 +22,7 @@ const jobSchema = new mongoose.Schema(
         {
             type:mongoose.Types.ObjectId,ref:"Business"
         },
-        applicant:
-        {
-            type:mongoose.Types.ObjectId,ref:"Users"
-        },
-        numberOfVacancy:
+        vacancy:
         {
             type:Number
         },
@@ -41,11 +37,11 @@ const jobSchema = new mongoose.Schema(
         },
         department:
         {
-            type:Text
+            type:String
         },
         location:
         {
-            type:Text
+            type:String
         }
 
     }
