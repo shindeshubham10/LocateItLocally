@@ -16,6 +16,7 @@ import { ValidateSignup , ValidateSignin} from "../../../Validation/auth";
 router.post("/signup", async (req, res) => {
   try {
     await ValidateSignup(req.body.credentials);
+    
 
     await UserModel.findByEmailAndPhone(req.body.credentials);
     const newUser = await UserModel.create(req.body.credentials);

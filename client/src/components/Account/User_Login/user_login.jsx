@@ -1,5 +1,6 @@
 import React from "react";
 import {Grid,TextField,Button,makeStyles,Typography} from '@material-ui/core';
+import App from "../../../App"
 import {ToggleButtonGroup,ToggleButton} from "@mui/material"
 import './user_login_style.css'
 import {Link} from 'react-router-dom';
@@ -151,11 +152,7 @@ function Login(props)
     };
 
     return(
-      move? <Redirect to={{
-        pathname: '/',
-        
-    }}
-/>:
+      move? <App/>:
         <div>
           <Grid container direction="row" className="main">
             

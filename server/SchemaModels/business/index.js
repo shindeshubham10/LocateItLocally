@@ -48,6 +48,9 @@ const BusinessSchema = new mongoose.Schema({
     address:{
       type:String,
     },
+    pincode:{
+      type:String,
+    },
     description:{
       type:String,
     },
@@ -66,15 +69,24 @@ const BusinessSchema = new mongoose.Schema({
     maplocation: {
       type:String,
     },
-    images:{
-      type: mongoose.Types.ObjectId,
-      ref: "Images"
+    profilePicture:{
+     type:String
     },
-    
+    Shopimages:[
+      {
+        type:String
+      }
+    ],
+
+    rating:{
+      type:Number
+    },
+  
     reviews: {
       type: mongoose.Types.ObjectId,
       ref: "Reviews",
     },
+
   
   
   

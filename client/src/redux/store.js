@@ -7,9 +7,9 @@ import {getProductReducer,getProductDetailsReducer,getProductByCategoryReducer} 
 import AuthReducer from './reducers/userAuthreducer';
 import BAuthReducer from './reducers/businessauthreducer';
 import UserReducer from "./reducers/userreducer";
-import BusinessReducer from "./reducers/businessreducer";
+import {BusinessReducer,getBusinessByLocationReducer} from "./reducers/businessreducer";
 import { addProductDetailsReducer } from "./reducers/productReducers";
-import { getProductsofBusinessReducer } from "./reducers/productReducers";
+import { getProductsofBusinessReducer,getProductsOfBusinessByLocationReducer ,getlatestProducts,gettopProducts} from "./reducers/productReducers";
 import { deleteProductsofBusinessReducer } from "./reducers/productReducers";
 
 import { updateProductDetailsReducer } from "./reducers/productReducers";
@@ -17,12 +17,21 @@ import { updateProductDetailsReducer } from "./reducers/productReducers";
 import { addJobDetailsReducer,getJobsofBusinessReducer,deleteJobsofBusinessReducer, updateJobDetailsReducer} from "./reducers/jobreducer";
 import {addNewWishlistReducer,getWishlistReducer,getProductsFromWishlist} from "./reducers/wishlistReducer";
 
+import {getbusinessreviewReducer,getproductreviewReducer,postreviewReducer} from "./reducers/reviewReducer";
+
 
 import { getJobsofBusinessReducerbyID } from "./reducers/jobreducer";
 import { getProductsofBusinessReducerbyID } from "./reducers/productReducers";
+import { gettopSellers } from "./reducers/businessreducer";
 
 
 const reducer = combineReducers({
+
+    getbusinessreviewReducer,
+    getproductreviewReducer,
+    postreviewReducer,
+    getlatestProducts,
+    
     addNewWishlistReducer,
     getProducts:getProductReducer,
     AuthReducer,
@@ -43,7 +52,11 @@ const reducer = combineReducers({
     updateJobDetailsReducer,
     getJobsofBusinessReducerbyID,
     getProductsofBusinessReducerbyID,
-    getProductsFromWishlist
+    getProductsFromWishlist,
+    getProductsOfBusinessByLocationReducer,
+    getBusinessByLocationReducer,
+    gettopProducts,
+    gettopSellers 
 
 
     

@@ -3,7 +3,7 @@
 
 // // Database modal
 import { ProductModel } from "../../SchemaModels/products";
-import { getProductDetails, getProducts,getProductByCategory } from "../../Controllers/productController";
+import { getProductDetails, getProducts,getProductByCategory,getProductsBySellerLoc ,getlatestProducts,gettopProducts} from "../../Controllers/productController";
 // import { BusinessModel } from "../../SchemaModels/business";
 // // validation
 // // import {
@@ -76,6 +76,8 @@ Router.get("/:_id",getProductDetails);
    Method    GET
    */
 Router.get("/Bycategory/:category",getProductByCategory);
+
+Router.get("/bysellerlocation/:loc",getProductsBySellerLoc);
 
 
 Router.post("/add",passport.authenticate("business"), async(req,res)=>{
@@ -188,6 +190,23 @@ Router.get("/business/getProductsofbusinessbyId/:id", async(req,res)=>{
 
 
 })
+
+
+/*
+Route     /bysellerlocation/:loc
+Des       Get Products by location (Location taken from business owner)
+Params    Location (pincode)
+Access    Public
+Method    GET
+*/
+Router.get("/bysellerlocation/:loc",getProductsBySellerLoc);
+
+Router.get("/getproducts/latest",getlatestProducts);
+
+Router.get("/getproducts/top",gettopProducts);
+
+
+
 
 
 

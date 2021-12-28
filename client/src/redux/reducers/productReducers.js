@@ -137,3 +137,51 @@ export const updateProductDetailsReducer = (state = {product:{}},action) => {
             return state;
     }
 };
+
+export const getProductsOfBusinessByLocationReducer = (state = {productsByLocation:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_PRODUCTS_BY_LOCATION_SUCCESS:
+            return {...state, 
+                productsByLocation: action.payload };
+        
+        case actionsType.GET_PRODUCTS_BY_LOCATION_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};
+
+export const getlatestProducts = (state = {latestproducts:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_LATEST_PRODUCTS_SUCCESS:
+            return {...state, 
+                latestproducts: action.payload };
+        
+        case actionsType.GET_LATEST_PRODUCTS_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};
+
+export const gettopProducts = (state = {topproducts:[]},action) => {
+    
+    switch (action.type) {
+        
+        case actionsType.GET_TOP_PRODUCTS_SUCCESS:
+            return {...state, 
+                latestproducts: action.payload };
+        
+        case actionsType.GET_TOP_PRODUCTS_FAILURE:
+            return { Error: action.payload };
+
+        default:
+            return state;
+    }
+};

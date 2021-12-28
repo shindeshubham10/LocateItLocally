@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Redux types
-import { GET_REVIEW, POST_REVIEW } from "../constants/reviewConstants";
+import { GET_REVIEW_PRODUCT,GET_REVIEW_BUSINESS, POST_REVIEW } from "../constants/reviewConstants";
 
 export const getReviews = (prodId) => async (dispatch) => {
   try {
@@ -10,7 +10,7 @@ export const getReviews = (prodId) => async (dispatch) => {
       url: `http://localhost:2000/review/product/${prodId}`,
     });
 
-    return dispatch({ type: GET_REVIEW, payload: reviewList.data });
+    return dispatch({ type: GET_REVIEW_PRODUCT, payload: reviewList.data });
   } catch (error) {
     return dispatch({ type: "ERROR", payload: error });
   }
@@ -24,7 +24,7 @@ export const getReviewsB = (businessId) => async (dispatch) => {
       url: `http://localhost:2000/review/business/${businessId}`,
     });
 
-    return dispatch({ type: GET_REVIEW, payload: reviewList.data });
+    return dispatch({ type: GET_REVIEW_BUSINESS, payload: reviewList.data });
   } catch (error) {
     return dispatch({ type: "ERROR", payload: error });
   }

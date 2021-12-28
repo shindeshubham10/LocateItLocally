@@ -170,7 +170,7 @@ const AllJobs = () => {
     };
     
     // checkBox Code End
-    const deleteproducts=()=>{
+    const deleteJob=()=>{
         console.log(todeleteIDs);
         dispatch(deleteJobsofbusiness(todeleteIDs)).then((x)=>{
             setRequestData({})
@@ -187,7 +187,7 @@ const AllJobs = () => {
     return (
         <div>  
             {/* <Grid container> */}
-            <Typography className={classes.mainHeading} component="div" >All Products</Typography>
+            <Typography className={classes.mainHeading} component="div" >All Added Jobs</Typography>
                         <Grid item  style={{textAlign:'start',marginTop:'10px',marginLeft:'20px'}}>
                         <Typography className={classes.headingDescription} component="div" >All Jobs are Listed Down Below</Typography>
                         </Grid>
@@ -196,15 +196,21 @@ const AllJobs = () => {
                                         pathname: "/businessdashboard/job/add", 
                                         
                                 }}>
-                                <Button>
-                                    ADD JOB
-                                </Button>
+                               <Button
+                                variant="contained"
+                              
+                                style={{color:'white',  backgroundColor: '#38495A', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem',marginTop:10}}
+                                
+                                >Add New Job</Button>
                         </Link>
 
-
-                        <IconButton  aria-label="delete" onClick={deleteproducts}>
-                                    <DeleteIcon />
+                        <Grid container item direction='row' alignItems='center' style={{marginTop:5}}>
+                        <IconButton  aria-label="delete" onClick={deleteJob}>
+                                    <DeleteIcon style={{color:'#e74c3c'}}/>
                                   </IconButton>
+                        <Typography style={{color:"#A1B3BA",fontFamily: ['Montserrat', 'sans-serif'],fontSize:'0.8rem'}}>*First Select Jobs to Delete</Typography>
+                        </Grid>
+                        
                        
                 <Divider className={classes.horizontalDivider} />
 
@@ -213,9 +219,9 @@ const AllJobs = () => {
                
                 <Grid item lg={12} xs={12}>
                     <List className={classes.productList}>
-                        
+
                         {
-                            
+                             
                             jobs?.map(eachItem => (
                                 
                                // List Item Start
@@ -248,12 +254,17 @@ const AllJobs = () => {
                                         </Grid>
                                         <Grid item lg={3} xs={12} >
                                         <ListItemText>
-                                                    <Typography className={classes.productContentStyle}>{eachItem.description}</Typography>
+                                                    <Typography className={classes.productContentStyle}>{eachItem.location}</Typography>
                                         </ListItemText>
                                         </Grid>
                                         <Grid item lg={3} xs={12}>
                                         <ListItemText>
                                                     <Typography className={classes.productContentStyle}>{eachItem.vacancy}</Typography>
+                                        </ListItemText>
+                                        </Grid>
+                                        <Grid item lg={3} xs={12}>
+                                        <ListItemText>
+                                                    <Typography className={classes.productContentStyle}>₹ {eachItem.monthlySalary}</Typography>
                                         </ListItemText>
                                         </Grid>
                                         <Grid item lg={3} xs={12}>
@@ -281,7 +292,7 @@ const AllJobs = () => {
                                 </>
                               
                         // List Item End         
-                        ))
+                        )) 
                         }
                  
             </List> 

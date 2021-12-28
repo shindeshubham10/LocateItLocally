@@ -11,10 +11,10 @@ Router.get("/", passport.authenticate("business"), async (req, res) => {
   try {
     console.log(req);
    console.log(req.session.passport.user._doc);
-   const { email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name} =
+   const { email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name,pincode,profilePicture,Shopimages,rating} =
       req.session.passport.user._doc;
      
-    return res.json({ business: {  email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name} });
+    return res.json({ business: {  email, firstName, contactNumber, lastName,_id,description,address,website,twitter,instagram,facebook,name,pincode,profilePicture,Shopimages,rating} });
   } catch (error) {     return res.status(500).json({ error: error.message });
   }
 });
@@ -59,5 +59,43 @@ Router.put("/update", passport.authenticate("business"), async (req, res) => {
   }
 });
 
+
+Router.get("/location/:loc",async(req,res)=>{
+
+          try 
+          {
+
+            console.log(req.params);
+            const {loc}=req.params;
+            console.log(loc);
+            const business=await BusinessModel.find({"pincode":loc});
+            console.log(business);
+            return res.json({ business });
+          } 
+          catch (error) 
+          {
+
+            return res.status(500).json({ error: error.message });
+          }
+
+
+
+          }
+
+
+);
+
+Router.get("/getsellers/top",async(req,res)=>{
+
+  try{
+        const sellers=await BusinessModel.find().sort({rating:-1}).limit(10);
+        return res.json({ sellers });
+  }
+  catch(error){
+
+    return res.status(500).json({ error: error.message });
+  }
+}
+);
 
 export default Router;

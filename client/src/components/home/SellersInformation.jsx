@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import "react-multi-carousel/lib/styles.css";
 import {AppBar,Toolbar,makeStyles,Typography,Box, Button,Grid} from '@material-ui/core'
 import ProductCard from "./ProductCard";
+import SellerInfoCard from '../BusinessOwner/Owner_Profile/SellerCards';
 import { FiChevronRight } from 'react-icons/fi';
 //import { productDetails } from "../../constants/data";
 
@@ -15,12 +16,12 @@ const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-    items: 5,
+    items: 4,
   
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 3,
       
     },
     tablet: {
@@ -38,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
      marginTop:20,
-     marginLeft: 60,
+     marginLeft: 100,
      marginRight: 60,
+     marginBottom:20,
      paddingLeft: 10,
      paddingRight:10,
     justifyContent:'center',
@@ -84,12 +86,12 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
    
     onClick={() => onClick()} />; 
 };
-const Cards = ({data}) => {
+const SellersInformationCard = ({info}) => {
   const classes = useStyles();
  // const ProductData = data.Products;
-  console.log(data);
+  //console.log(data);
   console.log("inside Card");
-
+  info ? console.log(info) : console.log("Wittttttttttttttttttttttttttttt");
   //console.log("ID of the Product - ",ProductData._id);
     return(
       
@@ -110,28 +112,31 @@ const Cards = ({data}) => {
       >
           
           {
-                  data ? 
-                  data.map( details => (
-                        
-                    <Link to={`/productsDetails/${details._id}`}>
-                      <ProductCard
-                      image={details.image[0]}
-                      category={details.category}
-                      productname={details.name}
-                      productprice={details.price}
+                  info ? 
+                  info.map( details => (
+                  
+                      <Link to={`shopdetails/${details._id}`}>
+                        <SellerInfoCard
+                        image={details.profilePicture}
+                        name={details.name}
+                        address={details.address}
+                        contact={details.contactNumber}
+                        rating={details.rating}
+                      />
+                      </Link>
                       
+                    
 
-
-                      
-                    />
-                    </Link>
+                    
+                   
                 
-                  ) ) : 
+                   ) ) 
+                  : 
                   <Grid container justify="center">
-                    <Typography style={{fontSize:20,}}>Loading....</Typography>
+                    <Typography style={{fontSize:20,}}>Loading Sellers Data....</Typography>
                   </Grid>
                     
-              } 
+              }  
           
             
           
@@ -147,4 +152,4 @@ const Cards = ({data}) => {
 
 }
 
-export default Cards;
+export default SellersInformationCard;

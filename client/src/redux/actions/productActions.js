@@ -164,4 +164,51 @@ export const updateProduct = (productData,id) => async (dispatch) => {
 };
 
 
+export const getProductsByLocation = (id) => async (dispatch) => {
+
+    try{
+        console.log("Enter getProducts by location axios ");
+        const productsByLocation = await axios.get(`${backendUrl}/newProduct/bysellerlocation/${id}`);
+        console.log("Response in Product Actions ");
+        console.log(productsByLocation);
+       return dispatch({ type: actions.GET_PRODUCTS_BY_LOCATION_SUCCESS, payload: productsByLocation.data });
+    }catch(error){
+        console.log("Error while getProducts by Location");
+        return dispatch({ type: actions.GET_PRODUCTS_BY_LOCATION_FAILURE, payload: error.response });
+    }
+}
+
+export const getlatestProducts = () => async (dispatch) => {
+
+    try {
+        console.log("Enter getProducts in axios ");
+        const products = await axios.get(`${backendUrl}/newProduct/getproducts/latest`);
+        console.log("Response in Product Actions ");
+        console.log(products);
+        return dispatch({ type: actions.GET_LATEST_PRODUCTS_SUCCESS, payload:products.data });
+      
+
+    } catch (error) {
+        console.log("Error while getProducts");
+       return dispatch({ type: actions.GET_LATEST_PRODUCTS_FAILURE, payload: error.response });
+    }
+};
+
+export const gettopProducts = () => async (dispatch) => {
+
+    try {
+        console.log("Enter getProducts in axios ");
+        const products = await axios.get(`${backendUrl}/newProduct/getproducts/top`);
+        console.log("Response in Product Actions ");
+        console.log(products);
+        return dispatch({ type: actions.GET_TOP_PRODUCTS_SUCCESS, payload:products.data });
+      
+
+    } catch (error) {
+        console.log("Error while getProducts");
+       return dispatch({ type: actions.GET_TOP_PRODUCTS_FAILURE, payload: error.response });
+    }
+};
+
+
 

@@ -160,44 +160,118 @@ const Rightarrow = () => {
 )
 };
 
-const MultiSlider=()=>{
+const MultiSlider=({firstHalf,secondHalf})=>{
 
     const classes=useStyles();
-
+   // data ? console.log(data.length/2) : console.log("'''''''''''''")
+   firstHalf && secondHalf ? console.log(firstHalf,secondHalf) : console.log("first halfffffffffffff")
+    const [data1,setdata] = useState([]);
+    //const [firstHalf,setfirstHalf] = useState([]);
+    //const [secondHalf,setsecondHalf] = useState([]);
+    //data ? setfirstHalf(data.splice(0,Math.ceil(data.length/2))) : console.log("first halffffffff")
+    //data ? setdata(data) : console.log("not settingggg");
+    //if(data){
+            // const half = Math.ceil(data1.length / 2);
+            // setfirstHalf(data1.slice(0, half))   
+            // setsecondHalf(data1.slice(-half)) 
+    //}
     return(
+        
         <>
+        
         <Box className={classes.root}>
-            <Box className={classes.firstbox}>
-                <Carousel responsive={responsive} infinite={true} className={classes.LgCarousal} >
+            {
+                
+                <Box className={classes.firstbox}>
+              { 
+              firstHalf && secondHalf ? 
+              <>
+              <Carousel responsive={responsive} infinite={true} className={classes.LgCarousal} >
                     {
-                       productDetails.map( details => (
+                        firstHalf.map( details => (
                             
                         <Box className={classes.ForLGScren}>
-
-                               <ProductCard
-                                   image={details.imageUrl}
-                                   category={details.productCategory}
-                                   productname={details.productName}
-                                   productprice={details.productPrice}
-                               
-                               />
-                               <ProductCard
-                                  image={details.imageUrl}
-                                  category={details.productCategory}
-                                  productname={details.productName}
-                                  productprice={details.productPrice}
+                                
+                               {/* {
+                                   firstHalf.map(details=> ( */}
+                                    <ProductCard
+                                    image={details.image[0]}
+                                    category={details.category}
+                                    productname={details.name}
+                                    productprice={details.price}
+                                
+                                />
+                                ))
                                    
-                               />
-                              
+                               {/* } */}
+                               {/* {
+                                   secondHalf.map(details=>(
+                                    <ProductCard
+                                    image={details.image[0]}
+                                    category={details.category}
+                                    productname={details.name}
+                                    productprice={details.price}
+                                     
+                                 />
+                                   ))
+                                   
+                               }
+                               */}
 
                         </Box> 
+                        
                             
-                        ))
+                         ))
                         
                     }
                 </Carousel>
 
-                <Carousel
+                <Carousel responsive={responsive} infinite={true} className={classes.LgCarousal} >
+                    {
+                        secondHalf.map( details => (
+                            
+                        <Box className={classes.ForLGScren}>
+                                
+                               {/* {
+                                   firstHalf.map(details=> ( */}
+                                    <ProductCard
+                                    image={details.image[0]}
+                                    category={details.category}
+                                    productname={details.name}
+                                    productprice={details.price}
+                                
+                                />
+                                ))
+                                   
+                               {/* } */}
+                               {/* {
+                                   secondHalf.map(details=>(
+                                    <ProductCard
+                                    image={details.image[0]}
+                                    category={details.category}
+                                    productname={details.name}
+                                    productprice={details.price}
+                                     
+                                 />
+                                   ))
+                                   
+                               }
+                               */}
+
+                        </Box> 
+                        
+                            
+                         ))
+                        
+                    }
+                </Carousel>
+                
+              </> : <div>..............</div>
+              
+                }
+
+               
+                    <Carousel
                     responsive={responsive}
                     infinite={true}
                     className={classes.MdCarousal}
@@ -222,10 +296,12 @@ const MultiSlider=()=>{
                                 
                         ) )
                     }
-                </Carousel>
+                </Carousel> 
 
 
-            </Box>
+            </Box> 
+            
+            }
             <Box className={classes.secondbox}>
                     <Bigcard className={classes.bigcard}/>
             </Box>

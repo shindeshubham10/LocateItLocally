@@ -13,8 +13,9 @@ const initialData={
     jobTitle:"",
     description:"",
     vacancy:0,
-    annualPackage:0,
-    department:"",
+    monthlySalary:0,
+    contactNumber:"",
+    location:"",
 
 }
 
@@ -93,7 +94,7 @@ function UpdateJobOpening(props)
                         type="text"
                         placeholder="Description*"
                         variant="outlined"
-                        defaultValue={props.location.description}
+                        defaultValue={props.location.state.description}
                         name="description"
                         InputProps={{
                             endAdornment: <DescriptionOutlined/>
@@ -111,20 +112,21 @@ function UpdateJobOpening(props)
                         placeholder="Number of Vacancy*"
                         variant="outlined"
                         name="vacancy"
-                        defaultValue={props.location.vacancy}
+                        defaultValue={props.location.state.vacancy}
                         onChange={(e)=>handleInputChange(e)}
                     />            
                 </Grid>
 
                 <Grid item>
-                    <p className="textfieldHeading">Department</p>
+                    <p className="textfieldHeading">Monthly Salary</p>
                     <TextField
                         required
                         fullWidth
                         type="text"
-                        placeholder="Department*"
+                        placeholder="Salary"
                         variant="outlined"
-                        name="department"
+                        name="monthlySalary"
+                        defaultValue={props.location.state.monthlySalary}
                         InputProps={{
                             endAdornment: <AssignmentIndOutlined/>
                         }}
@@ -141,15 +143,15 @@ function UpdateJobOpening(props)
             <Grid container direction="column" className="rightside" spacing={3}>
                 
                 <Grid item>
-                    <p className="textfieldHeading">Annual Package</p>
+                    <p className="textfieldHeading">Contact Number</p>
                     <TextField
                         required
                         fullWidth
                         type="text"
-                        placeholder="In Lakhs*"
+                        
                         variant="outlined"
-                        name="annualPackage"
-                        defaultValue={props.location.annualPackage}
+                        name="contactNumber"
+                        defaultValue={props.location.state.contactNumber}
                         onChange={(e)=>handleInputChange(e)}
                         // InputProps={{
                         //     endAdornment: <CurrencyRupeeOutlinedIcon/>
@@ -158,7 +160,7 @@ function UpdateJobOpening(props)
                 </Grid>
 
                 <Grid item>
-                    <p className="textfieldHeading">Location</p>
+                    <p className="textfieldHeading">Address</p>
                     <TextField
                         required
                         fullWidth
@@ -168,20 +170,11 @@ function UpdateJobOpening(props)
                         placeholder="Location*"
                         variant="outlined"
                         name="location"
+                        defaultValue={props.location.state.location}
                         InputProps={{
                             endAdornment: <LocationOnOutlined/>
                         }}
                         onChange={(e)=>handleInputChange(e)}
-                    />            
-                </Grid>
-
-                <Grid item>
-                    <p className="textfieldHeading">Interview Date</p>
-                    <TextField
-                        required
-                        type="date"
-                        placeholder="First Name*"
-                        variant="outlined"
                     />            
                 </Grid>
 
@@ -190,7 +183,12 @@ function UpdateJobOpening(props)
         </Grid>
 
         <Grid container className="submitbtndiv" justifyContent="center">
-            <Button variant="contained" style={{fontWeight:"bold"}} onClick={updatejob}>Submit</Button>
+         
+            <Button
+                variant="contained"
+                onClick={updatejob}
+                style={{color:'white',  backgroundColor: '#38495A', fontFamily: ['Montserrat', 'sans-serif'],fontSize: '1rem',marginTop:10}}                
+            >Update</Button>
         </Grid>
 
         </Grid>    

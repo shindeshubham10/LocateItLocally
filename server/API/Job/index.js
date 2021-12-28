@@ -21,6 +21,7 @@ Router.post("/add",passport.authenticate("business"), async(req,res)=>{
           console.log(_id);
           console.log(jobData);
           await JobModel.create({ ...jobData, recruiter: _id });
+          
           console.log("Jhala ka");
           console.log(jobData);
 
@@ -109,6 +110,7 @@ Router.get("/business/getJobsofbusinessbyId/:id", async(req,res)=>{
   try {
     console.log("jdbehjbfchhfcb");
     console.log("IN GET JOB");
+    console.log("In get job by id" , id);
     const {id}=req.params;
     
     const jobs = await JobModel.find({recruiter:id});
@@ -119,8 +121,6 @@ Router.get("/business/getJobsofbusinessbyId/:id", async(req,res)=>{
   } catch (error) {
     return res.status(500).json(error);
 }
-
-
 })
 
 

@@ -13,10 +13,16 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProduct} from '../../../../redux/actions/productActions';
 
+import { ProductCategories } from '../../../../constants/data';
 
 
 
+import { IKContext,IKImage,IKUpload } from 'imagekitio-react';
 
+// required parameter to fetch images
+const urlEndpoint = 'https://ik.imagekit.io/ol5ujroevjc/';
+const publicKey = 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=';
+const authenticationEndpoint = 'http://localhost:2000/imagekitAuth';
 
 
 const useStyle = makeStyles(theme => (
@@ -52,9 +58,10 @@ const useStyle = makeStyles(theme => (
             marginTop: 20,
         },
         containerForTwoVerticalGrids: {
-            //marginLeft: 50,
+            marginRight: 10,
+            marginLeft: 10,
             marginTop: 30,
-           // marginRight: 50,
+            
             //backgroundColor: 'green',
             
             [theme.breakpoints.down('sm')]: {
@@ -75,7 +82,9 @@ const useStyle = makeStyles(theme => (
             
         },
         SecondVerticalGrid: {
+           
             marginBottom: 40,
+            paddingRight:20
             //backgroundColor: 'red',
         },
         
@@ -211,8 +220,8 @@ const UpdateProduct = (props) => {
     const [error,seterror]=React.useState(false);
     
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
+    const handleCategory = (event) => {
+        setcategory(event.target.value);
         handleInputChange(event);
     };
 
@@ -224,6 +233,9 @@ const UpdateProduct = (props) => {
     }
 
     const [productdata, setproductdata] = React.useState(intialValues);
+    
+    // This is used for Category Selection of the form on the page
+    const [category, setcategory] = React.useState(''); 
 
     const handleInputChange = (event) => {
         setproductdata({ ...productdata, [event.target.name]: event.target.value });
@@ -276,14 +288,30 @@ const UpdateProduct = (props) => {
 
 
     }
+    const onProductImageUploadError = err => {
+        console.log("Error", err);
+      };
+      
+      const onProfileImageUploadSuccess = res => {
+        console.log("Success", res);
+        setImage([...image,res.url]);
+        console.log(image);
+        setproductdata({ ...productdata, image:[...image,res.url] });
+        console.log(productdata);
+        //setProfileImage(true);
+        //setProfileImageUrl(res.url);
+       /// setuserState({...userState,profilePicture:res.url});
+        //reduxState.user.profilePicture=res.url;
+    
+      };
    
 
     return (
         <div>  
             {/* <Grid container> */}
-            <Typography className={classes.mainHeading} component="div" >Add New Products</Typography>
+            <Typography className={classes.mainHeading} component="div" >Update Product Details</Typography>
                         <Grid item  style={{textAlign:'start',marginTop:'10px',marginLeft:'20px'}}>
-                        <Typography className={classes.headingDescription} component="div" >New Products can be added here. When adding products here, do not ignore to fill all the required fields completely and follow up product adding rules</Typography>
+                        <Typography className={classes.headingDescription} component="div" >Update Product information. When updating products here, do not ignore to fill all the required fields completely</Typography>
                         </Grid>
                        
                 <Divider className={classes.horizontalDivider} />
@@ -330,15 +358,15 @@ const UpdateProduct = (props) => {
                             variant="outlined"
                             name="category"
                             color="primary"
-                            value={currency}
-                            onChange={handleChange}
-                            defaultValue={props.location.category}
+                            value={category}
+                            onChange={handleCategory}
+                            defaultValue={props.location.state.category}
                             size='medium'
-                            placeholder="test@test.com"
+                            placeholder="Eg- Clothing"
                  
                         >
                                 
-                                {currencies.map((option) => (
+                                {ProductCategories.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                                 </MenuItem>
@@ -348,29 +376,27 @@ const UpdateProduct = (props) => {
 
                       {/*** for brand and quantity */}  
                         <Grid container direction='row' columnSpacing={{ xs: 1 }}>
-                            {/** For Brand */}
-                            <Grid items xs={6} md={7} lg={7}>
+                           {/** For Brand */}
+                           <Grid items xs={6} md={7} lg={7}>
                             <Box className={classes.forFirstColumnTextFields}>
                         <Typography className={classes.textFieldHeading} component="div" >Brand</Typography> 
                         <TextField className={classes.realTextField}
+                            id="outlined-multiline-static"
+                            //label="Multiline"
                             fullWidth
-                            required
-                            select
-                  variant="outlined"
-                  color="primary"
-                  value={currency}
-                  onChange={handleChange}
-                  size='medium'
-                  placeholder="test@test.com"
-                   name="brand"
-                        >
+                            placeholder='Eg : Cocacola'
+                            variant='outlined'
+                            name="brand"
+                            defaultValue={props.location.state.brand}
+                            onChange={(e)=>handleInputChange(e)}
+                            />
                                 
-                                {currencies.map((option) => (
+                                {/* {currencies.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                                 </MenuItem>
-                            ))}
-                     </TextField>
+                            ))} */}
+                     
                         </Box>
                             </Grid>
 
@@ -382,6 +408,7 @@ const UpdateProduct = (props) => {
                                         type="number"
                                         variant="outlined"
                                         name="countInStock"
+                                        defaultValue={props.location.state.countInStock}
                             InputLabelProps={{
                                 shrink: true,
 
@@ -407,7 +434,7 @@ const UpdateProduct = (props) => {
                             fullWidth
                             multiline
                             rows={4}
-                            defaultValue="Description"
+                            defaultValue={props.location.state.description}
                             variant='outlined'
                             name="description"
                             onChange={(e)=>handleInputChange(e)}
@@ -432,6 +459,7 @@ const UpdateProduct = (props) => {
                   size='medium'
                   placeholder="₹1000"
                   name="price"
+                  defaultValue={props.location.state.price}
                 onChange={(e)=>handleInputChange(e)}
                  
                      />
@@ -451,28 +479,43 @@ const UpdateProduct = (props) => {
                         <Typography className={classes.textFieldInstructions} component="div" >Upload at least four images of your product. Pay attention to the quality of the pictures you add.</Typography>
                         </Grid>
 
-                    {/** This grid is for 4 image boxes (upload images) */}    
-                        <Grid container direction='row' spacing={2} style={{marginBottom:'30px'}}>
+                   {/** This grid is for 4 image boxes (upload images) */}    
+                   <Grid container direction='row' spacing={2} style={{marginBottom:'30px'}}>
                             
                             {/** For 1st Image */}
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                     <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {  image[0]?<img src={image[0]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+                                        
 
-                                                            <div>
-                                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                                    onChange={Imageset} 
-                                                                />
-                                                                <div className='label'>
-                                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                                        click to browse
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            </Typography>
-                                    }
+                           { 
+                           image[0]?<img src={image[0]}/> :
+                           <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                {/* <p>click to browse</p> */}
+                            <div>
+                            <IKUpload id='upload-image'
+                                
+                                fileName="productImage.png"
+                                onError={onProductImageUploadError}
+                                onSuccess={onProfileImageUploadSuccess}
+                                folder={"/Products"}
+                                
+                            />
+                            <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
+                            <div className='label'>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
+                                click to browse
+                                </label>
+                            </div>
+                            </div>
+                           
+                            </IKContext>}
+                           
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -487,22 +530,38 @@ const UpdateProduct = (props) => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                        <AddPhotoAlternateOutlinedIcon fontSize='large' style={ {color:'#C4C4C4'}}/>
+              
+                        { 
+                           image[1]?<img src={image[1]}/> :
+                           <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                                {/* <p>click to browse</p> */}
+                            <div>
+                            <IKUpload id='upload-image'
                                 
-                                        {  image[1]?<img src={image[1]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
+                                fileName="productImage.png"
+                                onError={onProductImageUploadError}
+                                onSuccess={onProfileImageUploadSuccess}
+                                folder={"/Products"}
+                                
+                            />
+                             <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
+                            <div className='label'>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
+                                click to browse
+                                </label>
+                            </div>
+                            </div>
+                           
+                            </IKContext>
+                            
+                        }
 
-                                            <div>
-                                                <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                    onChange={Imageset} 
-                                                />
-                                                <div className='label'>
-                                                    <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                        click to browse
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </Typography>
-                                    }
+
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -517,21 +576,34 @@ const UpdateProduct = (props) => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                     <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {  image[2]?<img src={image[2]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-
-                                                <div>
-                                                    <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                        onChange={Imageset} 
-                                                    />
-                                                    <div className='label'>
-                                                        <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                            click to browse
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                </Typography>
-                                    }
+                                        
+                                     { 
+                           image[2]?<img src={image[2]}/> :
+                           <IKContext 
+                                publicKey={publicKey} 
+                                urlEndpoint={urlEndpoint} 
+                                authenticationEndpoint={authenticationEndpoint} 
+                               
+                            >
+                               
+                            <div>
+                            <IKUpload id='upload-image'
+                                
+                                fileName="productImage.png"
+                                onError={onProductImageUploadError}
+                                onSuccess={onProfileImageUploadSuccess}
+                                folder={"/Products"}
+                                
+                            />
+                            <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
+                            <div className='label'>
+                                <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
+                                click to browse
+                                </label>
+                            </div>
+                            </div>
+                           
+                            </IKContext>}
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -546,21 +618,37 @@ const UpdateProduct = (props) => {
                             <Grid item xs={6} lg={6} md={6}>
                                 <Card className={classes.boxForUploadImage}>
                                     <CardContent className={classes.imageCardContent}>
-                                     <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>   
-                                     {  image[3]?<img src={image[3]} alt="" />:<Typography className={classes.imageUploadInstructions} component="div" >Drop your images here or select
-
-                                                                    <div>
-                                                                        <input type='file' name='image-upload' id='upload-image' accept='image/*' className={classes.chooseimageButton}
-                                                                            onChange={Imageset} 
-                                                                        />
-                                                                        <div className='label'>
-                                                                            <label htmlFor='upload-image' style={{color:'#064482'}}>
-                                                                                click to browse
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    </Typography>
-                                        }
+                                   
+                                     { 
+                                        image[3]?<img src={image[3]}/> :
+                                        <IKContext 
+                                            publicKey={publicKey} 
+                                            urlEndpoint={urlEndpoint} 
+                                            authenticationEndpoint={authenticationEndpoint} 
+                                        
+                                        >
+                                           
+                                        <div>
+                                        <IKUpload id='upload-image'
+                                            
+                                            fileName="productImage.png"
+                                            onError={onProductImageUploadError}
+                                            onSuccess={onProfileImageUploadSuccess}
+                                            folder={"/Products"}
+                                            
+                                        />
+                                        <AddPhotoAlternateOutlinedIcon fontSize='large'  style={ {color:'#C4C4C4'}}/>  
+                                        <div className='label'>
+                                            
+                                            <label htmlFor='upload-image' style={{color:'#064482',fontSize:'1rem',cursor:'pointer'}}>
+                                            click to browse
+                                            
+                                            </label>
+                                        </div>
+                                        </div>
+                                    
+                                        </IKContext>
+                                    }
                                     </CardContent>
                                     {/* <CardMedia
                                     component="img"
@@ -614,11 +702,11 @@ const UpdateProduct = (props) => {
                                         className={classes.addProductButton}
                                         style={{color:'white', fontFamily: ['Montserrat', 'sans-serif'],fontSize: mobileScreen ? '0.7rem' : '1rem'}}
                                         onClick={()=>updateproduct()}
-                                    >Add Product</Button>
+                                    >Update Product</Button>
                                 </Box>
                             
                             </Grid> {/** 1st button */}
-                            <Grid item xs={6} md={6} lg={6}>
+                            {/* <Grid item xs={6} md={6} lg={6}>
                                 <Box className={classes.boxForButtons}>
                                     <Button
                                         variant="outlined"
@@ -627,7 +715,8 @@ const UpdateProduct = (props) => {
                                     >Save Product</Button>
                                 </Box>
                             
-                            </Grid> {/** 2nd button */}
+                            </Grid>  */}
+                            {/** 2nd button */}
 
                         </Grid>   {/** Buttons Container End */}
                         

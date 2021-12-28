@@ -1,15 +1,15 @@
 import React from 'react';
 import '../../ShowProducts/pagination_Style.css';
 import { useState,useEffect} from 'react';
-import {  makeStyles} from '@material-ui/core';
-import { Grid, Divider } from '@material-ui/core';
+import { IconButton, makeStyles} from '@material-ui/core';
+import { Box, Grid, Divider,TextField } from '@material-ui/core';
+import SearchIcon from '@mui/icons-material/Search';
 
-import { JobDetails } from '../../../constants/data';
-
-
-import JobCard from './JobCard';
+import { productDetails } from '../../../constants/data'; 
+//import { productDetails } from '../../constants/data'; 
+import ProductCard from '../../home/ProductCard';
 import { useTheme } from '@emotion/react';
-
+import { IKImage,IKContext,IKUpload} from 'imagekitio-react';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -22,7 +22,23 @@ const MenuProps = {
   },
 };
 
+// required parameter to fetch images
+const urlEndpoint = 'https://ik.imagekit.io/ol5ujroevjc/';
+const publicKey = 'public_uyc/OZswmVYeM7rvj19wIBHmFaM=';
+const authenticationEndpoint = 'http://localhost:2000/imagekitAuth';
 
+const names = [
+    'JBL',
+    'BOAT',
+    'ScullCandy',
+    'BOAT Wireless',
+    'BOAT Airpods',
+    'INTEX',
+    'BOAT Wireless',
+    'BOAT Wireless',
+    'BOAT Wireless',
+    'BOAT Wireless',
+];
   
 function getStyles(name, personName, theme) {
     return {
@@ -111,13 +127,12 @@ const useStyle = makeStyles(theme => ({
 
 
 
-const ShowAllJobs = ({JobsBYBusiness}) => {
+const ShowShopPhotos = ({productsData}) => {
 
   const classes = useStyle();
   const theme = useTheme();
 
-  JobsBYBusiness ? console.log("In show all jobs",JobsBYBusiness.jobs): console.log("Waittttt kar shubhyaaaaaa")
-
+  productsData ? console.log(productsData) : console.log('=====================')
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -130,45 +145,57 @@ const ShowAllJobs = ({JobsBYBusiness}) => {
     );
   };
   return (
-    JobsBYBusiness ? 
-   
-    <>
-             
-       
+    <>     
+        {/** Following Box is for Product View - ProductContainer */}
+      
        <>
-         
-          <Pagination
-            data={JobsBYBusiness.jobs}
-            RenderComponent={IndividualJobCard} // here whole component is returned
+          
+         {/** Pagination Component is built below. */}
+          {
+            productsData ? 
+            <Pagination
+            data={productsData}
+            RenderComponent={IndividualProductCard} // here whole component is returned
             // flow of the component are - 
             // 1. IndividualProductCard is rendered
             // 2. Then in Pagination Function this whole component is Rendered in Map() container name = forProductCard
             pageLimit={5}
-            dataLimit={4}
-          />
-        </> 
-         
-    </>  : <div>No Jobs Found</div>
-  
-  
+            dataLimit={8}
+          /> : <div>Wait for pagination</div>
+        }
+        </>
+        {/** ProductContainer - END */}
+        
+      
+           
+    </>
   )
 };
 
 // So this function is used to provide ProductCard that we built previously. It will return that ProductCard with data on it
-function IndividualJobCard(props) {
-  console.log(props);
-  //const { title, description, contact, salary } = props.data;
-  const {jobTitle,description,contactNumber,monthlySalary,location} = props.data;
-  console.log(jobTitle);
+function IndividualProductCard(props) {
+ 
   return (
     <>
-        <JobCard
-          title={jobTitle}
-          description={description}
-          contact={contactNumber}
-          salary={monthlySalary}
-          location={location}
-        />    
+        
+        <IKContext
+            publicKey={publicKey} 
+            urlEndpoint={urlEndpoint} 
+            authenticationEndpoint={authenticationEndpoint} 
+        >
+        {/* <div style={{marginRight:100}}> */}
+        <IKImage style={{border:'3px solid #323232',marginRight:30}}
+            //src={`${reduxState.user.profilePicture}?tr=r-max,cm-extract`}
+             src={props.data}
+             loading="lazy"
+             lqip={{ active: true, quality: 20 }}
+            
+                                
+        />
+       {/* </div> */}
+          
+        </IKContext> 
+        
         <Divider style={{ marginTop: 40, marginBottom: 40 }} />
       </>
   );
@@ -176,7 +203,6 @@ function IndividualJobCard(props) {
 
 // So this function is used for whole pagination purpose. Our component to be rendered is used in this function. Also Functionality for changing pages is also added..
 function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
-  console.log("data in pagination function ==== ",data);
   const [pages] = useState(Math.round(data.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
@@ -213,17 +239,14 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
   };
   const classes = useStyle();
 
-   
-
   return (
-    data.length!=0 ? 
     <>
       {/* show the posts, 10 posts at a time */}
       {/** This is the actual data we want to show.  */}
       <Grid container className={classes.forProductCards}>
           {getPaginatedData().map((d, idx) => (
            
-              <Grid item lg={12}> 
+              <Grid item lg={3}> 
               <RenderComponent key={idx} data={d} />
               </Grid> 
           ))}
@@ -267,10 +290,9 @@ function Pagination({ data,RenderComponent, pageLimit, dataLimit }) {
 
 
     
-    </> : <><div>No Jobs Found..</div></>
+    </>
   );
-  
 }
 
-export default ShowAllJobs;
+export default ShowShopPhotos;
 

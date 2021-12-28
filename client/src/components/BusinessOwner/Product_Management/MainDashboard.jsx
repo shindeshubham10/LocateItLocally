@@ -23,7 +23,7 @@ import Newproduct from './AddNewProduct/new_product';
 
 import ViewAllProducts from './AllProducts/allProducts';
 import AllJobs from '../Job_Management/ViewAllJobs';
-
+import AddShopPhotos from './ShopPhotos/addNewPhotos'
 
 const useStyle = makeStyles(theme => (
     {
@@ -185,7 +185,7 @@ const MainDashboard= () => {
         <Tab label="Add Product" className={ value===0 ? classes.active_tabStyle : classes.default_tabStyle  } />
         <Tab label="All Products"  className={ value===1 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Jobs" className={ value===2 ? classes.active_tabStyle : classes.default_tabStyle  }/>
-        <Tab label="Item Four" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
+        <Tab label="Shop Photos" className={ value===3 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Five" className={ value===4 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Six" className={ value===5 ? classes.active_tabStyle : classes.default_tabStyle  }/>
         <Tab label="Item Seven" className={ value===6 ? classes.active_tabStyle : classes.default_tabStyle  }/>
@@ -204,6 +204,9 @@ const MainDashboard= () => {
                     </TabPanel>
                 <TabPanel value={value} index={2}>
                     <AllJobs/>        
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    <AddShopPhotos/>        
                 </TabPanel>
             {/* </Grid> */}
             </Box>

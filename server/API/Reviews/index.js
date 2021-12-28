@@ -1,6 +1,7 @@
 import express from "express"
 import passport from "passport"
 import {ProductModel} from "../../SchemaModels/products"
+import { BusinessModel } from "../../SchemaModels/business"
 import {ReviewModel} from "../../SchemaModels/review"
 
 const Router=express.Router()
@@ -42,8 +43,10 @@ Router.post("/new", passport.authenticate("user"), async (req, res) => {
     console.log(req.body);
     const { _id } = req.session.passport.user._doc;
     const { reviewData } = req.body;
+    console.log(reviewData);
     if(reviewData.isProductReview===true)
     {
+      console.log("Here");
       const review = await ReviewModel.find({ user:_id ,product:reviewData.product, isProductReview:true });
       console.log(review);
       if(review.length!==0)
@@ -60,6 +63,44 @@ Router.post("/new", passport.authenticate("user"), async (req, res) => {
       {
         throw new Error("Business already reviewed");
       }
+
+    }
+
+    if(reviewData.isProductReview===true)
+    {
+      console.log("Here Also");
+      const product = await ProductModel.findOne({ _id:reviewData.product});
+      console.log(product);
+      console.log(reviewData.rating);
+     
+      var rate=Math.round((reviewData.rating+product.rating)/2);
+
+      const updateProductData = await ProductModel.findByIdAndUpdate(
+        reviewData.product,
+        {
+          $set: {rating:rate},
+        },
+        { new: true }
+      );
+
+      console.log(updateProductData);
+
+
+      
+
+    }
+    else
+    {
+      const business = await BusinessModel.findOne({ _id:reviewData.business });
+      var rate=Math.round((reviewData.rating +business.rating)/2);
+      const updateBusinessData = await BusinessModel.findByIdAndUpdate(
+        reviewData.business,
+        {
+          $set: {rating:rate},
+        },
+        { new: true }
+      );
+      
 
     }
 
